@@ -7,7 +7,7 @@ articles:
   Session_2_Tidy_spatial_analyses: Session_2_Tidy_spatial_analyses.html
   Session_3_imaging_assays: Session_3_imaging_assays.html
   Solutions: Solutions.html
-last_built: 2025-04-16T14:51Z
+last_built: 2025-04-16T15:17Z
 urls:
-  reference: https://tidyomics.github.io/tidySpatialWorkshop2025/reference
-  article: https://tidyomics.github.io/tidySpatialWorkshop2025/articles
+  reference: https://tidyomics.github.io/tidySpatialWorkshop/reference
+  article: https://tidyomics.github.io/tidySpatialWorkshop/articles

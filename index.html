@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>tidySpatialWorkshop2025 • tidySpatialWorkshop2025</title>
+<title>tidySpatialWorkshop • tidySpatialWorkshop</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="tidySpatialWorkshop2025">
+<script src="pkgdown.js"></script><meta property="og:title" content="tidySpatialWorkshop">
 <meta property="og:description" content="Workshop materials for learning tidy analysis of spatial transcriptomics data. Includes example datasets and vignettes demonstrating the use of tidyomics tools for spatial data analysis, covering both sequencing-based and imaging-based spatial transcriptomics.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -32,7 +32,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">tidySpatialWorkshop2025</a>
+        <a class="navbar-link" href="index.html">tidySpatialWorkshop</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.18.5</span>
       </span>
     </div>
@@ -69,7 +69,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/tidyomics/tidySpatialWorkshop2025" class="external-link">
+  <a href="https://github.com/tidyomics/tidySpatialWorkshop" class="external-link">
     <span class="fa fa-github"></span>
 
   </a>
@@ -87,7 +87,7 @@
       </header><div class="row">
   <div class="contents col-md-9">
 <div class="section level1">
-<div class="page-header"><h1 id="tidyspatialworkshop2025">tidySpatialWorkshop2025<a class="anchor" aria-label="anchor" href="#tidyspatialworkshop2025"></a>
+<div class="page-header"><h1 id="tidyspatialworkshop">tidySpatialWorkshop<a class="anchor" aria-label="anchor" href="#tidyspatialworkshop"></a>
 </h1></div>
 <!-- badges: start -->
 
@@ -102,7 +102,7 @@
 <div class="section level2">
 <h2 id="syllabus">Syllabus<a class="anchor" aria-label="anchor" href="#syllabus"></a>
 </h2>
-<p>Material <a href="https://tidyomics.github.io/tidySpatialWorkshop2025/">web page</a></p>
+<p>Material <a href="https://tidyomics.github.io/tidySpatialWorkshop/">web page</a></p>
 <p>More details on the workshop are below.</p>
 </div>
 <div class="section level2">
@@ -117,7 +117,7 @@
 <pre><code><span></span>
 <span><span class="co"># Install workshop package</span></span>
 <span><span class="co">#install.packages('BiocManager')</span></span>
-<span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"tidyomics/tidySpatialWorkshop2025"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"tidyomics/tidySpatialWorkshop"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># In May 2025, the following packages should be installed from github repositories, to use the latest features. In case you have them pre installed, run the following command</span></span>
 <span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html" class="external-link">install</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lmweber/ggspavis"</span>,</span>
@@ -131,21 +131,21 @@
 <span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"ggcorrplot"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Then build the vignettes</span></span>
-<span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"tidyomics/tidySpatialWorkshop2025"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span>, force<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"tidyomics/tidySpatialWorkshop"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span>, force<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># To view vignette</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidyomics/tidySpatialWorkshop2025" class="external-link">tidySpatialWorkshop2025</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidyomics/tidySpatialWorkshop" class="external-link">tidySpatialWorkshop</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/vignette.html" class="external-link">vignette</a></span><span class="op">(</span><span class="st">"Introduction"</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="interactive-execution-of-the-vignettes">Interactive execution of the vignettes<a class="anchor" aria-label="anchor" href="#interactive-execution-of-the-vignettes"></a>
 </h2>
-<p>From command line, and enter the tidySpatialWorkshop2025 directory.</p>
+<p>From command line, and enter the tidySpatialWorkshop directory.</p>
 <pre><code># Open the command line
-git clone git@github.com:tidyomics/tidySpatialWorkshop2025.git
+git clone git@github.com:tidyomics/tidySpatialWorkshop.git
 </code></pre>
-<p>Alternatively download the <a href="https://github.com/tidyomics/tidySpatialWorkshop2025/archive/refs/heads/devel.zip" class="external-link">git zipped package</a>. Uncompress it. And enter the directory.</p>
-<p>To run the code, you could then copy and paste the code from the workshop vignette or <a href="https://github.com/tidyomics/tidySpatialWorkshop2025/blob/devel/vignettes/Session_1_sequencing_assays.Rmd" class="external-link">R markdown file</a> into a new R Markdown file on your computer.</p>
+<p>Alternatively download the <a href="https://github.com/tidyomics/tidySpatialWorkshop/archive/refs/heads/devel.zip" class="external-link">git zipped package</a>. Uncompress it. And enter the directory.</p>
+<p>To run the code, you could then copy and paste the code from the workshop vignette or <a href="https://github.com/tidyomics/tidySpatialWorkshop/blob/devel/vignettes/Session_1_sequencing_assays.Rmd" class="external-link">R markdown file</a> into a new R Markdown file on your computer.</p>
 </div>
 <div class="section level2">
 <h2 id="workshop-description">Workshop Description<a class="anchor" aria-label="anchor" href="#workshop-description"></a>
@@ -203,8 +203,8 @@ git clone git@github.com:tidyomics/tidySpatialWorkshop2025.git
     <div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/tidyomics/tidySpatialWorkshop2025/" class="external-link">Browse source code</a></li>
-<li><a href="https://github.com/tidyomics/tidySpatialWorkshop2025/issues" class="external-link">Report a bug</a></li>
+<li><a href="https://github.com/tidyomics/tidySpatialWorkshop/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/tidyomics/tidySpatialWorkshop/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
@@ -220,7 +220,7 @@ git clone git@github.com:tidyomics/tidySpatialWorkshop2025.git
 <div class="citation">
 <h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li><a href="authors.html#citation">Citing tidySpatialWorkshop2025</a></li>
+<li><a href="authors.html#citation">Citing tidySpatialWorkshop</a></li>
 </ul>
 </div>
 
@@ -236,7 +236,7 @@ git clone git@github.com:tidyomics/tidySpatialWorkshop2025.git
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://zenodo.org/badge/latestdoi/379767139" class="external-link"><img src="https://zenodo.org/badge/379767139.svg" alt="DOI"></a></li>
-<li><a href="https://github.com/tidyomics/tidySpatialWorkshop2025/actions/workflows/basic_checks.yaml" class="external-link"><img src="https://github.com/tidyomics/tidySpatialWorkshop2025/actions/workflows/basic_checks.yaml/badge.svg" alt="Check, build, and push image"></a></li>
+<li><a href="https://github.com/tidyomics/tidySpatialWorkshop/actions/workflows/basic_checks.yaml" class="external-link"><img src="https://github.com/tidyomics/tidySpatialWorkshop/actions/workflows/basic_checks.yaml/badge.svg" alt="Check, build, and push image"></a></li>
 </ul>
 </div>
 
