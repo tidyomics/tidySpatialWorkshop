@@ -1,6 +1,6 @@
 Package: tidySpatialWorkshop225
 Title: Workshop Materials for Tidy Spatial Analysis
-Version: 0.18.0
+Version: 0.18.1
 Authors@R: c(
     person("Stefano", "Mangiola", email = "mangiola.s@wehi.edu.au", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-7474-836X")),
@@ -60,7 +60,8 @@ Suggests:
     rmarkdown,
     here,
     igraph,
-    magick
+    magick,
+    scatterpie
 VignetteBuilder: knitr
 URL: https://github.com/tidyomics/tidySpatialWorkshop225
 BugReports: https://github.com/tidyomics/tidySpatialWorkshop225/issues
