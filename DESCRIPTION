@@ -1,76 +1,69 @@
-Package: tidySpatialWorkshop2024
-Title: Tidy genomic and transcriptomic single-cell analyses
-Version: 0.17.0
-Authors@R: 
-    c(
-    person(given = "Stefano",
-           family = "Mangiola",
-           role = c("aut", "cre"),
-           email = "mangiola.s@wehi.edu.au",
-           comment = c(ORCID = "0000-0001-7474-836X"))
-	   )
-Description: Workflow for BioC conference showing tidy genomic
-    and transcriptomic analyses, for a single-cell RNA-seq
-    application
+Package: tidySpatialWorkshop2025
+Title: Workshop Materials for Tidy Spatial Analysis
+Version: 0.18.5
+Authors@R: c(
+    person("Stefano", "Mangiola", email = "mangiola.s@wehi.edu.au", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0001-7474-836X")),
+    person("Luciano", "Martelotto", email = "luciano.martelotto@adelaide.edu.au", role = "aut")
+    )
+Description: Workshop materials for learning tidy analysis of spatial transcriptomics data. 
+    Includes example datasets and vignettes demonstrating the use of tidyomics tools for 
+    spatial data analysis, covering both sequencing-based and imaging-based spatial transcriptomics.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 LazyDataCompression: xz
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
+biocViews: 
+    Spatial,
+    Transcriptomics,
+    SingleCell,
+    Software,
+    Visualization
 Depends:
-    Biobase,
-    R (>= 4.4.0)
+    R (>= 4.3.0)
 Imports:
-    Banksy,
-    colorspace,
-    cowplot,
-    CuratedAtlasQueryR (>= 1.1.3),
-    dittoSeq,
-    dplyr,
-    ExperimentHub,
-    ggalt,
-    ggplot2,
-    ggspavis (>= 1.9.10),
-    glue,
-    here,
-    HDF5Array,
-    hoodscanR,
-    magrittr,
-    MoleculeExperiment,
-    plotly,
-    purrr,
-    RColorBrewer,
-    scater,
-    scico,
-    scran,
     SpatialExperiment,
-    spatialLIBD,
-    stringr,
-    SubcellularSpatialData,
-    tidybulk (>= 1.17.2),
-    tidySingleCellExperiment (>= 1.15.2),
     tidySpatialExperiment,
-    tidySummarizedExperiment (>= 1.15.0),
-    tidyverse,
-    SPOTlight,
-    Seurat,
-    ggcorrplot
+    tidySummarizedExperiment,
+    tidySingleCellExperiment,
+    ggplot2,
+    dplyr,
+    tidyr,
+    stringr,
+    purrr,
+    glue,
+    scuttle,
+    scater,
+    scran,
+    methods
 Suggests:
+    plotly,
+    colorspace,
+    dittoSeq,
+    ggspavis,
+    RColorBrewer,
+    spatialLIBD,
+    ExperimentHub,
+    Banksy,
+    Seurat,
+    cowplot,
+    scRNAseq,
+    SPOTlight,
+    SubcellularSpatialData,
+    forcats,
+    tibble,
+    hoodscanR,
+    scico,
+    MoleculeExperiment,
     knitr,
-    markdown,
     rmarkdown,
-    pkgdown
-Biarch: true
-Remotes: 
-    lawremi/rtracklayer,
-    lmweber/ggspavis,
-    stemangiola/tidySummarizedExperiment,
-    william-hutchison/tidySpatialExperiment,
-    stemangiola/tidybulk,
-    stemangiola/tidygate,
-    stemangiola/CuratedAtlasQueryR
-URL: https://tidyomics.github.io/tidySpatialWorkshop2024
-BugReports: https://github.com/tidyomics/tidySpatialWorkshop2024/issues/new/choose
+    here,
+    igraph,
+    magick,
+    scatterpie,
+    ggcorrplot
 VignetteBuilder: knitr
-DockerImage: ghcr.io/tidyomics/tidySpatialWorkshop2024:latest
+URL: https://github.com/tidyomics/tidySpatialWorkshop2025
+BugReports: https://github.com/tidyomics/tidySpatialWorkshop2025/issues

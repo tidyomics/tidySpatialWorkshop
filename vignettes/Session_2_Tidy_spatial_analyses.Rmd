@@ -3,7 +3,7 @@ title: "Tidy spatial analyses"
 author:
   - Stefano Mangiola, South Australian immunoGENomics Cancer Institute^[<mangiola.stefano@adelaide.edu.au>], Walter and Eliza Hall Institute^[<mangiola.s at wehi.edu.au>]
 output: rmarkdown::html_vignette
-# bibliography: "`r file.path(system.file(package='tidySpatialWorkshop2024', 'vignettes'), 'tidyomics.bib')`"
+# bibliography: "`r file.path(system.file(package='tidySpatialWorkshop2025', 'vignettes'), 'tidyomics.bib')`"
 vignette: >
   %\VignetteIndexEntry{Tidy spatial analyses}
   %\VignetteEncoding{UTF-8}
@@ -24,12 +24,12 @@ library(here)
 
 A good introduction of `tidyomics` can be found here
 
-[tidySpatialWorkshop2024](https://github.com/tidyomics/tidySpatialWorkshop2024) 
+[tidySpatialWorkshop2025](https://github.com/tidyomics/tidySpatialWorkshop2025) 
 [tidy transcriptomic manifesto](https://tidyomics.github.io/tidyomicsBlog/post/2021-07-07-tidy-transcriptomics-manifesto/)
 
 `tidyomics` is an interoperable software ecosystem that bridges Bioconductor and the tidyverse. `tidyomics` is installable with a single homonymous meta-package. This ecosystem includes three new packages: tidySummarizedExperiment, tidySingleCellExperiment, and tidySpatialExperiment, and five publicly available R packages: `plyranges`, `nullranges`, `tidyseurat`, `tidybulk`, `tidytof`. Importantly, `tidyomics` leaves the original data containers and methods unaltered, ensuring compatibility with existing software, maintainability and long-term Bioconductor support. 
 
-`tidyomics` is presented in "The tidyomics ecosystem: Enhancing omic data analyses" [Hutchison and Keyes et al., 2024](https://www.biorxiv.org/content/10.1101/2023.09.10.557072v1)
+`tidyomics` is presented in "The tidyomics ecosystem: Enhancing omic data analyses" [Hutchison and Keyes et al., 2025](https://www.biorxiv.org/content/10.1101/2023.09.10.557072v1)
 
 ```{r, echo=FALSE, out.width="700px"}
 knitr::include_graphics(here("inst/images/tidyomics.png"))
@@ -50,7 +50,7 @@ let's make sure we get the latest packages available on github
 
 ```{r, eval=FALSE}
 
-# In May 2024, the following packages should be installed from github repositories, to use the latest features. In case you have them pre installed, run the following command
+# In May 2025, the following packages should be installed from github repositories, to use the latest features. In case you have them pre installed, run the following command
 BiocManager::install(c("lmweber/ggspavis", 
                        "stemangiola/tidySummarizedExperiment", 
                         "stemangiola/tidySingleCellExperiment", 
@@ -114,7 +114,7 @@ rownames(spatialCoords(spatial_data)) = colnames(spatial_data) # Bug?
 spatial_data
 ```
 ::: {.note}
-If `ExperimentHub` should not work. The `spatial_data` object from the previous code block can be downloaded from [Zenodo - 10.5281/zenodo.11233385](https://zenodo.org/records/11233385/files/tidySpatialWorkshop2024_spatial_data.rds?download=1)
+If `ExperimentHub` should not work. The `spatial_data` object from the previous code block can be downloaded from [Zenodo - 10.5281/zenodo.11233385](https://zenodo.org/records/11233385/files/tidySpatialWorkshop2025_spatial_data.rds?download=1)
 :::
 
 ### 1. tidySpatialExperiment package
@@ -335,34 +335,52 @@ This capability is powered by `tidygate`. We show how you can visualise your dat
 Let's draw an arbitrary gate interactively
 
 ```{r, eval=FALSE}
-spatial_data_gated = 
+spatial_data = 
   spatial_data |> 
   
   # Filter one sample
   filter(in_tissue, sample_id=="151673") |> 
   
   # Gate based on tissue morphology
-  tidySpatialExperiment::gate_spatial(alpha = 0.1) 
+  tidySpatialExperiment::gate(alpha = 0.1, colour = "spatialLIBD") 
+
+spatial_data_gated = tidygate_env$gates
 ```
 
+You can reload a pre-made gate for reproducibility
 
-`tidySpatialExperiment` added a `.gate` column to the `SpatialExperiment` object. We can see this column in its tibble abstraction.
+```{r}
+data(spatial_data_gated)
 
-```{r, eval=FALSE}
-spatial_data_gated |> select(.cell, .gate)
+spatial_data = 
+  spatial_data |> 
+  
+  # Filter one sample
+  filter(in_tissue, sample_id=="151673") |> 
+  
+  # Gate based on tissue morphology
+  tidySpatialExperiment::gate(alpha = 0.1, colour = "spatialLIBD", programmatic_gates = tidySpatialWorkshop2025::spatial_data_gated) 
+
+```
+
+`tidySpatialExperiment` added a `.gated` column to the `SpatialExperiment` object. We can see this column in its tibble abstraction.
+
+```{r}
+
+spatial_data |> select(.cell, .gated)
 ```
 
 We can count how many pixels we selected with simple `tidyverse` grammar
 
-```{r, eval=FALSE}
-spatial_data_gated |> count(.gate)
+```{r}
+spatial_data |> count(.gated)
 ```
 
 To have a visual feedback of our selection we can plot the slide annotating by our newly created column.
 
-```{r, eval=FALSE, fig.width=7, fig.height=8}
-spatial_data_gated |> 
-  ggspavis::plotVisium(annotate = ".gate")
+```{r, fig.width=7, fig.height=8}
+spatial_data |> 
+  ggspavis::plotVisium(annotate = ".gated")
 ```
 
 
@@ -372,9 +390,9 @@ knitr::include_graphics(here("inst/images/tidySPE_gate.png"))
 
 We can also filter, for further analyses
 
-```{r, eval=FALSE}
-spatial_data_gated |> 
-  filter(.gate)
+```{r}
+spatial_data |> 
+  filter(.gated == 1)
 ```
 
 ::: {.note}

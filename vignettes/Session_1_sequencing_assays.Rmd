@@ -3,7 +3,7 @@ title: "Sequencing assays"
 author:
   - Stefano Mangiola, South Australian immunoGENomics Cancer Institute^[<mangiola.stefano@adelaide.edu.au>], Walter and Eliza Hall Institute^[<mangiola.s at wehi.edu.au>]
 output: rmarkdown::html_vignette
-# bibliography: "`r file.path(system.file(package='tidySpatialWorkshop2024', 'vignettes'), 'tidyomics.bib')`"
+# bibliography: "`r file.path(system.file(package='tidySpatialWorkshop2025', 'vignettes'), 'tidyomics.bib')`"
 vignette: >
   %\VignetteIndexEntry{Sequencing assays}
   %\VignetteEncoding{UTF-8}
@@ -134,7 +134,7 @@ library(scran)
 
 In this section, we explore the handling and processing of spatial transcriptomics data using the `spatialLIBD` and `ExperimentHub` packages. The following R code block retrieves a specific dataset from the `ExperimentHub`, a Bioconductor project designed to manage and distribute large biological data sets. The code efficiently fetches the data, removes any existing dimensional reductions, and filters the dataset to include only selected samples. This approach is essential for analysing spatial patterns in gene expression across multiple samples, and the code below exemplifies how to manipulate these datasets in preparation for further analysis. This process is adapted from the `Banksy` package's vignette, which provides advanced methods for multi-sample spatial transcriptomics.
 
-Maynard and Torres et al., doi: [10.1038/s41593-020-00787-0](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8095368/)
+Maynard and Torres et al., doi: [10.1038/s41593-020-00787-0](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8095368/), [tutorial](https://www.bioconductor.org/packages/release/data/experiment/vignettes/spatialLIBD/inst/doc/spatialLIBD.html) 
 
 ```{r, message=FALSE, warning=FALSE}
 library(spatialLIBD)
@@ -569,7 +569,7 @@ Overview of the algorithm
 
 - \* Combine these three matrices by direct product
 
-[Singhal et al., 2024](https://www.nature.com/articles/s41588-024-01664-3)
+[Singhal et al., 2025](https://www.nature.com/articles/s41588-024-01664-3)
 
 [Material source](https://bioconductor.org/packages/release/bioc/vignettes/Banksy/inst/doc/multi-sample.html)
 
@@ -760,56 +760,46 @@ SPOTlight uses a seeded non-negative matrix factorization regression, initialize
 
 #### Producing the reference for single-cell databases
 
-[CuratedAtlasQuery](https://stemangiola.github.io/CuratedAtlasQueryR/) is a query interface that allow the programmatic exploration and retrieval of the harmonised, curated and reannotated CELLxGENE single-cell human cell atlas. Data can be retrieved at cell, sample, or dataset levels based on filtering criteria.
+[cellNexus](https://stemangiola.github.io/cellNexus/) is a query interface that allow the programmatic exploration and retrieval of the harmonised, curated and reannotated CELLxGENE single-cell human cell atlas. Data can be retrieved at cell, sample, or dataset levels based on filtering criteria.
 
-Harmonised data is stored in the ARDC Nectar Research Cloud, and most CuratedAtlasQuery functions interact with Nectar via web requests, so a network connection is required for most functionality.
+Harmonised data is stored in the ARDC Nectar Research Cloud, and most cellNexus functions interact with Nectar via web requests, so a network connection is required for most functionality.
 
-Mangiola et al., 2024 doi [doi.org/10.1101/2023.06.08.542671](https://www.biorxiv.org/content/10.1101/2023.06.08.542671v3)
+Mangiola et al., 2025 doi [doi.org/10.1101/2023.06.08.542671](https://www.biorxiv.org/content/10.1101/2023.06.08.542671v3)
 
 ```{r, echo=FALSE, out.width="700px"}
 knitr::include_graphics(here("inst/images/curated_atlas_query.png"))
 ```
 
+
+
+
+
 ```{r, message=FALSE, warning=FALSE,  fig.width=3, fig.height=3}
 # Get reference
-library(CuratedAtlasQueryR)
-library(HDF5Array)
+library(scRNAseq)
+brain_reference <- fetchDataset("zhong-prefrontal-2018", "2023-12-22")
 
-tmp_file_path = tempfile()
+brain_reference = 
+  brain_reference |> 
+  scuttle::aggregateAcrossCells(ids = paste(brain_reference$sample, brain_reference$cell_types, sep = "_")) 
 
-brain_reference =
-  
-  # Query metadata across 30M cells
-  get_metadata() |>
-  
-  # Filter your data of interest
-  dplyr::filter(tissue_harmonised=="brain", disease == "normal", organism == "Mus musculus") |> 
-  
-  # Collect pseudobulk as SummarizedExperiment
-  get_pseudobulk() |> 
-  
-  # Normalise for Spotlight
-  scuttle::logNormCounts() |> 
-  
-  # Save for fast reading
-  HDF5Array::saveHDF5SummarizedExperiment(tmp_file_path, replace = TRUE)
+brain_reference = brain_reference[, brain_reference |> assay() |> colSums() > 0]
+brain_reference = brain_reference[, !brain_reference$cell_types |> is.na()]
+
+brain_reference = 
+  brain_reference |> 
+  logNormCounts()
 ```
 
 ```{r, message=FALSE}
-library(HDF5Array)
-
-brain_reference = HDF5Array::loadHDF5SummarizedExperiment(tmp_file_path)
-
-my_metadata = colData(brain_reference)
-
-knitr::kable(head(my_metadata), format = "html")
+knitr::kable(head(colData(brain_reference)), format = "html")
 ```
 
 These are the cell types included in our reference, and the number of pseudobulk samples we have for each cell type.
 
 ```{r}
 
-table(brain_reference$cell_type_harmonised)
+table(brain_reference$cell_types)
 
 ```
 
@@ -817,14 +807,9 @@ These are the number of samples we have for each of the three data sets.
 
 ```{r}
 
-table(brain_reference$dataset_id)
+table(brain_reference$sample)
 ```
 
-The `collection_id` can be used to gather information on the cell database. e.g. <https://cellxgene.cziscience.com/collections/><collection_id>
-
-```{r}
-table(brain_reference$collection_id)
-```
 
 Now, we identify the variable genes within each dataset, to not capture technical effects, and identify the union of variable genes for further analysis.
 
@@ -861,7 +846,7 @@ This function represents a simpler and more intuitive summary of the differences
 ```{r}
 mgs <- scran::scoreMarkers(
   brain_reference, 
-  groups = brain_reference$cell_type_harmonised,
+  groups = brain_reference$cell_types,
   
   # Omit mitochondrial genes and keep all the genes in spatial
   subset.row = 
@@ -897,7 +882,7 @@ library(SPOTlight)
 res <- SPOTlight(
   x = brain_reference |> assay("logcounts"),
   y = spatial_data_gene_name |> assay("logcounts"),
-  groups = brain_reference$cell_type_harmonised,
+  groups = brain_reference$cell_types,
   group_id = "cluster",
   mgs = mgs_df,
   hvg =  intersect(hvg_CAQ, rownames(spatial_data_gene_name)),
@@ -960,29 +945,19 @@ plotCorrelationMatrix(res$mat)
 
 
 ::: {.note}
-**Exercise 1.3**
+**Exercise 1.4**
 
 Rather than looking at the correlation matrix, overall, let's observe whether the correlation structure amongst cell types is consistent across samples. Do you think it's consistent or noticeably different?
 :::
 
 
 ```{r}
-
-lapply(res_spatialLIBD, function(x) plotCorrelationMatrix(as.matrix(x[,-10]))) 
-```
-
-::: {.note}
-**Exercise 1.4**
-
-Now let's observe whether the correlation structure is consistent across spatial regions, irrespectively of the sample of origin. Do you think they are consistent or noticably different?
-:::
-
-```{r}
 res_spatialLIBD = split(data.frame(res$mat), colData(spatial_data_gene_name)$spatialLIBD ) 
 
 lapply(res_spatialLIBD, function(x) plotCorrelationMatrix(as.matrix(x[,-10]))) 
-
 ```
+
+
 
 ::: {.note}
 **Exercise 1.5**
