@@ -4,7 +4,7 @@ author:
   - Stefano Mangiola, South Australian immunoGENomics Cancer Institute^[<mangiola.stefano@adelaide.edu.au>], Walter and Eliza Hall Institute^[<mangiola.s at wehi.edu.au>]
   - Luciano Martellotto, Adelaide Centre for Epigenetics, South Australian immunoGENomics Cancer Institute^[<luciano.martelotto@adelaide.edu.au>]
 output: rmarkdown::html_vignette
-# bibliography: "`r file.path(system.file(package='tidySpatialWorkshop2024', 'bibliography'), 'bibliography.bib')`"
+# bibliography: "`r file.path(system.file(package='tidySpatialWorkshop225', 'bibliography'), 'bibliography.bib')`"
 vignette: >
   %\VignetteIndexEntry{Introduction to Spatial omic analyses}
   %\VignetteEncoding{UTF-8}
@@ -34,6 +34,7 @@ knitr::opts_chunk$set(echo = TRUE, cache = FALSE)
 ## Workshop partner: Physalia
 
 ```{r, echo=FALSE, out.width="700px"}
+library(here)
 knitr::include_graphics(here("inst/images/physalia-min.png"))
 ```
 
@@ -53,7 +54,7 @@ knitr::include_graphics(here("inst/images/physalia-min.png"))
 
 You can view the material at the workshop webpage
 
-[here](https://tidyomics.github.io/tidySpatialWorkshop2024/articles/main.html).
+[here](https://tidyomics.github.io/tidySpatialWorkshop225/articles/main.html).
 
 ## Workshop package installation 
 
@@ -65,9 +66,9 @@ Bioconductor 3.19.
 
 # Install workshop package
 #install.packages('BiocManager')
-BiocManager::install("tidyomics/tidySpatialWorkshop2024", dependencies = TRUE)
+BiocManager::install("tidyomics/tidySpatialWorkshop225", dependencies = TRUE)
 
-# In May 2024, the following packages should be installed from github repositories, to use the latest features. In case you have them pre installed, run the following command
+# In May 225, the following packages should be installed from github repositories, to use the latest features. In case you have them pre installed, run the following command
 BiocManager::install(c("lmweber/ggspavis", 
                        "stemangiola/tidySummarizedExperiment", 
                        "william-hutchison/tidySpatialExperiment", 
@@ -79,24 +80,24 @@ BiocManager::install(c("lmweber/ggspavis",
 BiocManager::install("ggcorrplot")
     
 # Then build the vignettes
-BiocManager::install("tidyomics/tidySpatialWorkshop2024", build_vignettes = TRUE, force=TRUE)
+BiocManager::install("tidyomics/tidySpatialWorkshop225", build_vignettes = TRUE, force=TRUE)
 
 # To view vignette
-library(tidySpatialWorkshop2024)
+library(tidySpatialWorkshop225)
 vignette("Introduction")
 ```
 
 ## Interactive execution of the vignettes
 
-From command line, and enter the tidySpatialWorkshop2024 directory.
+From command line, and enter the tidySpatialWorkshop225 directory.
 
 ```
 # Open the command line
-git clone git@github.com:tidyomics/tidySpatialWorkshop2024.git
+git clone git@github.com:tidyomics/tidySpatialWorkshop225.git
 
 ```
 
-Alternatively download the [git zipped package](https://github.com/tidyomics/tidySpatialWorkshop2024/archive/refs/heads/devel.zip). Uncompress it. And enter the directory. 
+Alternatively download the [git zipped package](https://github.com/tidyomics/tidySpatialWorkshop225/archive/refs/heads/devel.zip). Uncompress it. And enter the directory. 
 
 # Announcements
 

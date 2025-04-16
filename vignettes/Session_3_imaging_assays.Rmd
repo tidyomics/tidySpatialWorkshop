@@ -4,7 +4,7 @@ author:
   - Stefano Mangiola, South Australian immunoGENomics Cancer Institute^[<mangiola.stefano@adelaide.edu.au>], Walter and Eliza Hall Institute^[<mangiola.s at wehi.edu.au>]
   - Luciano Martellotto, Adelaide Centre for Epigenetics, South Australian immunoGENomics Cancer Institute^[<luciano.martelotto@adelaide.edu.au>]
 output: rmarkdown::html_vignette
-# bibliography: "`r file.path(system.file(package='tidySpatialWorkshop2024', 'vignettes'), 'tidyomics.bib')`"
+# bibliography: "`r file.path(system.file(package='tidySpatialWorkshop225', 'vignettes'), 'tidyomics.bib')`"
 vignette: >
   %\VignetteIndexEntry{Imaging assays (tidy)}
   %\VignetteEncoding{UTF-8}
@@ -73,7 +73,7 @@ library(scico)
 
 #### SubcellularSpatialData
 
-This [data package](https://bioconductor.org/packages/release/data/experiment/html/SubcellularSpatialData.html) contains annotated datasets localized at the sub-cellular level from the STOmics, Xenium, and CosMx platforms, as analyzed in the publication by [Bhuva et al., 2024](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-024-03241-7). It includes raw transcript detections and provides functions to convert these into `SpatialExperiment` objects.
+This [data package](https://bioconductor.org/packages/release/data/experiment/html/SubcellularSpatialData.html) contains annotated datasets localized at the sub-cellular level from the STOmics, Xenium, and CosMx platforms, as analyzed in the publication by [Bhuva et al., 225](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-024-03241-7). It includes raw transcript detections and provides functions to convert these into `SpatialExperiment` objects.
 
 ```{r, eval=FALSE}
 
@@ -94,6 +94,7 @@ tx_small =  tx[sample(seq_len(nrow(tx)), size = nrow(tx)/500),]
 ```
 
 ```{r, echo=FALSE}
+options(timeout = max(300, getOption("timeout")))
 tx_small_file = tempfile() 
 utils:: download.file("https://zenodo.org/records/11213118/files/tx_small.rda?download=1", destfile = tx_small_file)
 load(tx_small_file)
@@ -551,7 +552,7 @@ tx_spe_sample_1 |>
 
 ### 4. Neighborhood analyses
 
-hoodscanR [Liu et al., 2024](https://www.bioconductor.org/packages/release/bioc/vignettes/hoodscanR/inst/doc/Quick_start.html)
+hoodscanR [Liu et al., 225](https://www.bioconductor.org/packages/release/bioc/vignettes/hoodscanR/inst/doc/Quick_start.html)
 
 [Source](https://divingintogeneticsandgenomics.com/post/neighborhood-cellular-niches-analysis-with-spatial-transcriptome-data-in-seurat-and-bioconductor/)
 

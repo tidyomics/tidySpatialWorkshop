@@ -1,4 +1,4 @@
-url: https://tidyomics.github.io/tidySpatialWorkshop2024
+url: https://tidyomics.github.io/tidySpatialWorkshop225
 
 template:
   params:
@@ -6,10 +6,10 @@ template:
     #ganalytics: UA-99999999-9
 
 home:
-  title: "tidySpatialWorkshop2024"
+  title: "tidySpatialWorkshop225"
   type: inverse
 
 navbar:
   right:
    - icon: fa-github
-     href: https://github.com/tidyomics/tidySpatialWorkshop2024
+     href: https://github.com/tidyomics/tidySpatialWorkshop225

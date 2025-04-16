@@ -1,8 +1,8 @@
-# tidySpatialWorkshop2024
+# tidySpatialWorkshop225
 
 <!-- badges: start -->
 [![DOI](https://zenodo.org/badge/379767139.svg)](https://zenodo.org/badge/latestdoi/379767139)
-[![Check, build, and push image](https://github.com/tidyomics/tidySpatialWorkshop2024/actions/workflows/basic_checks.yaml/badge.svg)](https://github.com/tidyomics/tidySpatialWorkshop2024/actions/workflows/basic_checks.yaml)
+[![Check, build, and push image](https://github.com/tidyomics/tidySpatialWorkshop225/actions/workflows/basic_checks.yaml/badge.svg)](https://github.com/tidyomics/tidySpatialWorkshop225/actions/workflows/basic_checks.yaml)
 <!-- badges: end -->
 
 ## Instructor names and contact information
@@ -12,7 +12,7 @@
 
 ## Syllabus
 
-Material [web page](https://tidyomics.github.io/tidySpatialWorkshop2024/)
+Material [web page](https://tidyomics.github.io/tidySpatialWorkshop225/)
 
 More details on the workshop are below.
 
@@ -33,9 +33,9 @@ Bioconductor 3.19.
 
 # Install workshop package
 #install.packages('BiocManager')
-BiocManager::install("tidyomics/tidySpatialWorkshop2024", dependencies = TRUE)
+BiocManager::install("tidyomics/tidySpatialWorkshop225", dependencies = TRUE)
 
-# In May 2024, the following packages should be installed from github repositories, to use the latest features. In case you have them pre installed, run the following command
+# In May 225, the following packages should be installed from github repositories, to use the latest features. In case you have them pre installed, run the following command
 BiocManager::install(c("lmweber/ggspavis", 
                        "stemangiola/tidySummarizedExperiment", 
                        "william-hutchison/tidySpatialExperiment", 
@@ -47,28 +47,28 @@ BiocManager::install(c("lmweber/ggspavis",
 BiocManager::install("ggcorrplot")
     
 # Then build the vignettes
-BiocManager::install("tidyomics/tidySpatialWorkshop2024", build_vignettes = TRUE, force=TRUE)
+BiocManager::install("tidyomics/tidySpatialWorkshop225", build_vignettes = TRUE, force=TRUE)
 
 # To view vignette
-library(tidySpatialWorkshop2024)
+library(tidySpatialWorkshop225)
 vignette("Introduction")
 ```
 
 ## Interactive execution of the vignettes
 
-From command line, and enter the tidySpatialWorkshop2024 directory.
+From command line, and enter the tidySpatialWorkshop225 directory.
 
 ```
 # Open the command line
-git clone git@github.com:tidyomics/tidySpatialWorkshop2024.git
+git clone git@github.com:tidyomics/tidySpatialWorkshop225.git
 
 ```
 
-Alternatively download the [git zipped package](https://github.com/tidyomics/tidySpatialWorkshop2024/archive/refs/heads/devel.zip). Uncompress it. And enter the directory. 
+Alternatively download the [git zipped package](https://github.com/tidyomics/tidySpatialWorkshop225/archive/refs/heads/devel.zip). Uncompress it. And enter the directory. 
 
 
 To run the code, you could then copy and paste the code from the workshop vignette or 
-[R markdown file](https://github.com/tidyomics/tidySpatialWorkshop2024/blob/devel/vignettes/Session_1_sequencing_assays.Rmd)
+[R markdown file](https://github.com/tidyomics/tidySpatialWorkshop225/blob/devel/vignettes/Session_1_sequencing_assays.Rmd)
 into a new R Markdown file on your computer. 
 
 ## Workshop Description

@@ -3,7 +3,7 @@ title: "Sequencing assays"
 author:
   - Stefano Mangiola, South Australian immunoGENomics Cancer Institute^[<mangiola.stefano@adelaide.edu.au>], Walter and Eliza Hall Institute^[<mangiola.s at wehi.edu.au>]
 output: rmarkdown::html_vignette
-# bibliography: "`r file.path(system.file(package='tidySpatialWorkshop2024', 'vignettes'), 'tidyomics.bib')`"
+# bibliography: "`r file.path(system.file(package='tidySpatialWorkshop225', 'vignettes'), 'tidyomics.bib')`"
 vignette: >
   %\VignetteIndexEntry{Sequencing assays}
   %\VignetteEncoding{UTF-8}
@@ -121,6 +121,67 @@ ggspavis::plotSpots(spatial_data, annotate = "is_endothelial_oligodendrocyte") +
 theme(legend.position = "none") +
   labs(title = "endothelial + oligodendrocyte")
 
+```
+
+**Excercise 1.6**
+:::
+
+```{r, message=FALSE, warning=FALSE,  fig.width=3, fig.height=3, eval=FALSE}
+# Get reference
+library(cellNexus)
+library(HDF5Array)
+
+tmp_file_path = tempfile()
+
+DelayedArray::setAutoBlockSize(size=1e9)
+
+brain_reference =
+  
+  # Query metadata across 30M cells
+  get_metadata() |>
+  
+  # Filter your data of interest
+  dplyr::filter(tissue=="dorsolateral prefrontal cortex", disease == "normal") |> 
+  
+  # Collect pseudobulk as SummarizedExperiment
+  get_pseudobulk() |> 
+  
+  # Normalise for Spotlight
+  scuttle::logNormCounts() |> 
+  
+  # Save for fast reading
+  HDF5Array::saveHDF5SummarizedExperiment(tmp_file_path, replace = TRUE, verbose = TRUE)
+```
+
+```{r, message=FALSE, eval=FALSE}
+library(HDF5Array)
+
+brain_reference = HDF5Array::loadHDF5SummarizedExperiment(tmp_file_path)
+
+my_metadata = colData(brain_reference)
+
+knitr::kable(head(my_metadata), format = "html")
+```
+
+These are the cell types included in our reference, and the number of pseudobulk samples we have for each cell type.
+
+```{r, eval=FALSE}
+
+table(brain_reference$cell_types)
+
+```
+
+These are the number of samples we have for each of the three data sets.
+
+```{r, eval=FALSE}
+
+table(brain_reference$dataset_id)
+```
+
+The `collection_id` can be used to gather information on the cell database. e.g. <https://cellxgene.cziscience.com/collections/><collection_id>
+
+```{r, eval=FALSE}
+table(brain_reference$collection_id)
 ```
 
 
@@ -394,7 +455,7 @@ The raw and smoothed cluster labels are stored in the `colData` slot of each `Si
 
 Visualising Clusters and Annotations on Spatial Coordinates: We utilise the ggspavis package to visually map BANKSY clusters and manual annotations onto the spatial coordinates of the dataset, providing a comprehensive visual overview of spatial and clustering data relationships.
 
-```{r multi-sample-spatial, eval=TRUE, fig.width=3, fig.height=3}
+```{r multi-sample-spatial, eval=TRUE, fig.width=3, fig.height=3, eval=FALSE}
 # Use scater:::.get_palette('tableau10medium')
 
  ggspavis::plotSpots(

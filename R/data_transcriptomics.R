@@ -82,3 +82,28 @@
 #' @format GRanges object
 #' @usage data(pbmc_h3k4me3_hg38)
 "pbmc_h3k4me3_hg38"
+
+#' Pre-made gate for spatial transcriptomics data
+#'
+#' A gate object created using tidygate for the spatial transcriptomics workshop.
+#' This gate was drawn on sample "151673" to select specific regions of interest
+#' based on tissue morphology. The gate is used to demonstrate reproducible
+#' spatial filtering in the workshop materials.
+#'
+#' @format A gate object compatible with tidygate and tidySpatialExperiment::gate()
+#'
+#' @source Created during the Tidy Spatial Workshop 225 using interactive gating
+#'   on Visium spatial transcriptomics data from the spatialLIBD package
+#'
+#' @examples
+#' data(spatial_data_gated)
+#' 
+#' # Use the gate with tidySpatialExperiment
+#' spatial_data |>
+#'   filter(in_tissue, sample_id=="151673") |>
+#'   tidySpatialExperiment::gate(
+#'     alpha = 0.1,
+#'     colour = "spatialLIBD",
+#'     programmatic_gates = spatial_data_gated
+#'   )
+"spatial_data_gated"
