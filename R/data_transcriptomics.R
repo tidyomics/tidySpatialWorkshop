@@ -98,3 +98,26 @@
 #' @usage data(spatial_data_gated)
 #' 
 "spatial_data_gated"
+
+#' Small region subset of Xenium spatial transcriptomics data
+#'
+#' A subset of Xenium spatial transcriptomics data containing molecules from a small
+#' region (x between 3700-4200 and y between 5000-5500) for demonstration purposes.
+#' This data is derived from the SubcellularSpatialData package's mouse brain dataset.
+#'
+#' @format A data frame containing single-molecule spatial transcriptomics data with the following columns:
+#' \describe{
+#'   \item{x}{x-coordinate of the molecule}
+#'   \item{y}{y-coordinate of the molecule}
+#'   \item{gene}{gene name}
+#'   \item{cell}{cell identifier, may be NA for molecules not assigned to cells}
+#'   \item{sample_id}{sample identifier}
+#'   \item{region}{annotated tissue region}
+#' }
+#'
+#' @source Data derived from SubcellularSpatialData package (EH8230 in ExperimentHub),
+#'   filtered to a small region for demonstration purposes.
+#'   Original data from Xenium V1 FF Mouse Brain MultiSection.
+#' @usage data(tx_small_region)
+
+"tx_small_region"
