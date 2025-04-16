@@ -12,24 +12,12 @@ Created during the Tidy Spatial Workshop 2025 using interactive gating
 on Visium spatial transcriptomics data from the spatialLIBD package
 }
 \usage{
-spatial_data_gated
+data(spatial_data_gated)
 }
 \description{
 A gate object created using tidygate for the spatial transcriptomics workshop.
 This gate was drawn on sample "151673" to select specific regions of interest
 based on tissue morphology. The gate is used to demonstrate reproducible
 spatial filtering in the workshop materials.
-}
-\examples{
-data(spatial_data_gated)
-
-# Use the gate with tidySpatialExperiment
-spatial_data |>
-  filter(in_tissue, sample_id=="151673") |>
-  tidySpatialExperiment::gate(
-    alpha = 0.1,
-    colour = "spatialLIBD",
-    programmatic_gates = spatial_data_gated
-  )
 }
 \keyword{datasets}
