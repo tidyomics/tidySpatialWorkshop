@@ -61,7 +61,7 @@
       <a href="../articles/Session_3_imaging_assays.html">Imaging assays (tidy)</a>
     </li>
     <li>
-      <a href="../articles/Solutions.html">Sequencing assays</a>
+      <a href="../articles/Solutions.html">Solutions to exercises</a>
     </li>
   </ul>
 </li>
@@ -93,7 +93,7 @@ Institute<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
 </h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/tidyomics/tidySpatialWorkshop2025/blob/devel/vignettes/Session_1_sequencing_assays.Rmd" class="external-link"><code>vignettes/Session_1_sequencing_assays.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tidyomics/tidySpatialWorkshop2025/blob/improve_vignettes/vignettes/Session_1_sequencing_assays.Rmd" class="external-link"><code>vignettes/Session_1_sequencing_assays.Rmd</code></a></small>
       <div class="hidden name"><code>Session_1_sequencing_assays.Rmd</code></div>
 
     </div>
@@ -101,102 +101,114 @@ Institute<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
     
     
 <div class="section level2">
-<h2 id="session-1-spatial-analyses-of-sequencing-data">Session 1: Spatial analyses of sequencing data<a class="anchor" aria-label="anchor" href="#session-1-spatial-analyses-of-sequencing-data"></a>
+<h2 id="session-1-spatial-analysis-of-sequencing-data">Session 1: Spatial Analysis of Sequencing Data<a class="anchor" aria-label="anchor" href="#session-1-spatial-analysis-of-sequencing-data"></a>
 </h2>
 <p>Web rendering: <a href="https://rpubs.com/mangiolas/1186971" class="external-link uri">https://rpubs.com/mangiolas/1186971</a></p>
+<div class="section level3">
+<h3 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h3>
+<p>This workshop introduces spatial transcriptomics analysis using the
+Bioconductor framework, with a particular focus on the
+<code>SpatialExperiment</code> package. Participants will learn
+essential concepts and practical skills for analyzing spatially-resolved
+genomic data.</p>
 <div class="section level4">
-<h4 id="objective">Objective<a class="anchor" aria-label="anchor" href="#objective"></a>
+<h4 id="learning-objectives">Learning Objectives<a class="anchor" aria-label="anchor" href="#learning-objectives"></a>
 </h4>
-<p>Introduce the Bioconductor framework with a focus on the
-<code>SpatialExperiment</code> package. Guide participants through
-installation, data acquisition, and basic data manipulation and
-visualisation.</p>
+<p>By the end of this session, participants will be able to: -
+Understand the fundamentals of spatial transcriptomics data analysis -
+Work with the <code>SpatialExperiment</code> package and related tools -
+Perform basic data manipulation and visualization of spatial data -
+Apply quality control measures to spatial transcriptomics data - Conduct
+dimensionality reduction and clustering analyses - Interpret spatial
+patterns in gene expression data</p>
 </div>
 <div class="section level4">
-<h4 id="session-structure">Session Structure<a class="anchor" aria-label="anchor" href="#session-structure"></a>
+<h4 id="prerequisites">Prerequisites<a class="anchor" aria-label="anchor" href="#prerequisites"></a>
 </h4>
-<p><strong>Introduction to Bioconductor</strong></p>
-<p>What is Bioconductor? Its role in spatial omics analysis.</p>
-<p><strong>Getting Started with SpatialExperiment</strong></p>
-<p>Installation of <code>SpatialExperiment</code> and dependencies.
-Overview of the package’s capabilities.</p>
-<p><strong>Downloading Example Dataset</strong></p>
-<p>Step-by-step guide on acquiring a sample dataset. Explanation of
-dataset characteristics.</p>
-<p><strong>Data Visualisation and Manipulation</strong></p>
-<p>Basic visualisation techniques. Manipulating spatial omics data using
-<code>SpatialExperiment</code>.</p>
-<p><strong>Exercises and Q&amp;A</strong></p>
-<p>Q&amp;A session for clarifications and deeper insights.</p>
+<ul>
+<li>Basic knowledge of R programming</li>
+<li>Familiarity with genomic data concepts</li>
+<li>Understanding of basic statistical methods</li>
+</ul>
+</div>
+</div>
+<div class="section level3">
+<h3 id="introduction-to-bioconductor">Introduction to Bioconductor<a class="anchor" aria-label="anchor" href="#introduction-to-bioconductor"></a>
+</h3>
+<p>Bioconductor is an open-source, open-development software project
+built on the R programming language. It provides powerful tools for
+analyzing and comprehending high-throughput genomic data.</p>
+<div class="section level4">
+<h4 id="key-features">Key Features<a class="anchor" aria-label="anchor" href="#key-features"></a>
+</h4>
+<ol style="list-style-type: decimal">
+<li>
+<strong>Comprehensive Package Ecosystem</strong>
+<ul>
+<li>Over 2,000 software packages</li>
+<li>Specialized tools for various types of genomic data</li>
+<li>Integration capabilities across different data types</li>
+</ul>
+</li>
+<li>
+<strong>Quality Standards</strong>
+<ul>
+<li>Rigorous peer review process</li>
+<li>Consistent documentation</li>
+<li>Regular version updates</li>
+</ul>
+</li>
+<li>
+<strong>Community Support</strong>
+<ul>
+<li>Active developer community</li>
+<li>Extensive documentation</li>
+<li>Regular workshops and conferences</li>
+</ul>
+</li>
+</ol>
 </div>
 <div class="section level4">
-<h4 id="introduction-to-bioconductor">1. Introduction to Bioconductor<a class="anchor" aria-label="anchor" href="#introduction-to-bioconductor"></a>
+<h4 id="spatial-omics-analysis-in-bioconductor">Spatial Omics Analysis in Bioconductor<a class="anchor" aria-label="anchor" href="#spatial-omics-analysis-in-bioconductor"></a>
 </h4>
-<p>In this section of our R Markdown workshop, we delve into the world
-of Bioconductor and its significance in spatial omics analysis.
-Understanding Bioconductor is fundamental for anyone venturing into the
-complex and fascinating field of bioinformatics, especially in analysing
-spatially resolved data.</p>
-<p><strong>What is Bioconductor?</strong></p>
-<p>Bioconductor is a pioneering software project that specialises in the
-analysis and comprehension of genomic data. It is an open-source,
-open-development platform primarily based on the R statistical
-programming language.</p>
-<p><strong>The key features of Bioconductor include:</strong></p>
+<p>Spatial omics analysis combines traditional genomic data with spatial
+information, enabling researchers to understand gene expression patterns
+within their tissue context. Bioconductor provides several specialized
+tools for this purpose:</p>
 <ul>
-<li><p><strong>Extensive Range of Packages:</strong> Bioconductor offers
-a vast collection of packages specifically designed to analyse
-high-throughput genomic data. This includes genomics, transcriptomics,
-proteomics and other high-throughput data domains</p></li>
-<li><p><strong>Community-Driven Development:</strong> Bioconductor is
-developed by a global community of scientists and programmers, ensuring
-it stays at the forefront of genomic research and
-bioinformatics.</p></li>
-<li><p><strong>Reproducible Research:</strong> It emphasises
-reproducibility and provides tools that facilitate the sharing of data,
-code, and research workflows.</p></li>
+<li>Dedicated spatial analysis packages</li>
+<li>Integration with existing genomic analysis workflows</li>
+<li>Visualization tools for spatial data</li>
+<li>Statistical methods for spatial patterns</li>
 </ul>
-<p><strong>Bioconductor’s role in Spatial Omics Analysis</strong></p>
-<p>This emerging field combines traditional omics data (like genomics
-and transcriptomics) with spatial context. This means understanding how
-the expression of genes varies across different physical locations
-within a tissue or cell. How Bioconductor contributes to this field:</p>
+<div class="section level5">
+<h5 id="support-resources">Support Resources<a class="anchor" aria-label="anchor" href="#support-resources"></a>
+</h5>
 <ul>
-<li><p><strong>Specialised Packages:</strong> Bioconductor offers
-packages tailored for spatial omics analysis. These packages can handle
-spatially resolved transcriptomics data, enabling researchers to analyse
-and visualize the spatial distribution of gene expression.</p></li>
-<li><p><strong>Data Management:</strong> It provides robust solutions
-for managing complex and large datasets typical in spatial omics,
-ensuring efficient data handling and processing.</p></li>
-<li><p><strong>Statistical Analysis Tools:</strong> Bioconductor
-contains a range of statistical tools specifically designed for the
-unique challenges of spatial data analysis, such as accounting for
-spatial autocorrelation and integrating spatial and non-spatial
-data.</p></li>
-<li><p><strong>Visualisation Capabilities:</strong> With its advanced
-graphical functionalities, Bioconductor aids in creating insightful
-visual representations of spatial omics data, which is crucial for
-understanding spatial patterns in gene expression.</p></li>
+<li>Slack channel: #community-bioc</li>
+<li>Support forum: <a href="https://support.bioconductor.org/" class="external-link uri">https://support.bioconductor.org/</a>
+</li>
 </ul>
-<p>Slack channel: #community-bioc Support forum: <a href="https://support.bioconductor.org/" class="external-link uri">https://support.bioconductor.org/</a></p>
 <p>In the following sections of this workshop, we will explore practical
 examples and dive deeper into how Bioconductor is used in spatial omics
 analyses, including hands-on coding examples. Stay tuned for an engaging
 journey through spatial omics with Bioconductor!</p>
 </div>
+</div>
 <div class="section level4">
 <h4 id="getting-started-with-spatialexperiment">2. Getting Started with SpatialExperiment<a class="anchor" aria-label="anchor" href="#getting-started-with-spatialexperiment"></a>
 </h4>
-<p>To begin working with <code>SpatialExperiment</code>, it’s essential
-to install the necessary packages from Bioconductor, using the
-<code>BiocManager</code> package. This setup ensures that you have the
-required tools to manage and analyse spatial omics data effectively.</p>
-<p><code>SpatialExperiment</code> defines an S4 class designed to hold
-data from spatial-omics experiments. This class builds on the
-<code>SingleCellExperiment</code> by adding functionality to store and
-access extra information from both spot-based and cell-based platforms,
-such as spatial coordinates, images, and their metadata.</p>
+<p>The <code>SpatialExperiment</code> package provides a robust
+framework for handling spatial transcriptomics data. It extends the
+<code>SingleCellExperiment</code> class by adding functionality specific
+to spatial data:</p>
+<ul>
+<li>Storage of spatial coordinates</li>
+<li>Management of tissue images</li>
+<li>Integration of spot-based and cell-based data</li>
+<li>Specialized methods for spatial analysis</li>
+</ul>
 <p>Righelli et al. doi: <a href="https://academic.oup.com/bioinformatics/article/38/11/3128/6575443?login=false" class="external-link">10.1093/bioinformatics/btac299</a></p>
 <pre><code><span><span class="co">## here() starts at /__w/tidySpatialWorkshop/tidySpatialWorkshop</span></span></code></pre>
 <p><img src="..%2Finst%2Fimages%2FspatialExperimentClass.png" width="700px"></p>
@@ -211,9 +223,16 @@ such as spatial coordinates, images, and their metadata.</p>
 <div class="section level4">
 <h4 id="downloading-example-dataset">3. Downloading Example Dataset<a class="anchor" aria-label="anchor" href="#downloading-example-dataset"></a>
 </h4>
-<p>Once the packages are installed, we will guide you through the
-process of working with spatial omics data using the
-<code>SpatialExperiment</code> package.</p>
+<p>We’ll work with data from the <code>spatialLIBD</code> package, which
+contains spatial transcriptomics data from human dorsolateral prefrontal
+cortex. This dataset provides an excellent example for learning spatial
+analysis techniques as it includes:</p>
+<ul>
+<li>Multiple tissue sections</li>
+<li>Known anatomical layers</li>
+<li>Rich molecular information</li>
+<li>High-quality imaging data</li>
+</ul>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load the SpatialExperiment package</span></span>
 <span></span>
@@ -2042,11 +2061,10 @@ contained within the spatial dataset.</p>
 <div class="section level4">
 <h4 id="data-visualisation-and-manipulation">4. Data Visualisation and Manipulation<a class="anchor" aria-label="anchor" href="#data-visualisation-and-manipulation"></a>
 </h4>
-<p>Understanding the spatial arrangement of your data is fundamental.
-We’ll demonstrate straightforward methods to visualise spatial data,
-helping you appreciate the underlying spatial patterns and
-distributions.</p>
-<p>We will use <code>ggpavis</code> package to visualise the data.</p>
+<p>Spatial transcriptomics data requires specialized visualization
+approaches to understand both molecular and spatial aspects
+simultaneously. The <code>ggspavis</code> package provides powerful
+tools for this purpose:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># image data</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/SpatialExperiment/man/SpatialExperiment-methods.html" class="external-link">imgData</a></span><span class="op">(</span><span class="va">spatial_data</span><span class="op">)</span></span></code></pre></div>
@@ -2060,25 +2078,29 @@ distributions.</p>
 <code class="sourceCode R"><span><span class="co"># Simple visualization of spatial data</span></span>
 <span><span class="fu">ggspavis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotSpots.html" class="external-link">plotSpots</a></span><span class="op">(</span><span class="va">spatial_data</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">sample_id</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-10-1.png" width="288"></p>
-<p>Enhance the visualisation by annotating the plots to provide more
-context within the spatial data.</p>
-<p>Layers = L1-6, white matter = WM</p>
+<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-10-1.png" width="576"></p>
+<p>We can enhance our understanding by adding layer annotations. In this
+dataset, layers L1-6 represent different cortical layers, while WM
+indicates white matter:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># plot spots with annotation</span></span>
+<code class="sourceCode R"><span><span class="co"># Plot spots with anatomical annotations</span></span>
 <span><span class="fu">ggspavis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotSpots.html" class="external-link">plotSpots</a></span><span class="op">(</span></span>
 <span>  <span class="va">spatial_data</span>, </span>
 <span>  annotate <span class="op">=</span> <span class="st">"spatialLIBD"</span></span>
 <span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">sample_id</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-11-1.png" width="288"></p>
+<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-11-1.png" width="576"></p>
 <p>Explore additional visualisation features offered by the Visium
 platform, exposing the H&amp;E (hematoxylin and eosin) image.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">ggspavis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotVisium.html" class="external-link">plotVisium</a></span><span class="op">(</span><span class="va">spatial_data</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-12-1.png" width="288"></p>
+<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-12-1.png" width="576"></p>
 <p>This visualisation focuses on specific tissue features within the
-dataset, emphasising areas of interest.</p>
+dataset, emphasising areas of interest. 1. <strong>Mitochondrial
+Content</strong>: High mitochondrial gene expression often indicates
+stressed or dying cells 2. <strong>Library Size</strong>: Total RNA
+content per spot 3. <strong>Number of Detected Genes</strong>: Diversity
+of gene expression per spot</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">ggspavis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotVisium.html" class="external-link">plotVisium</a></span><span class="op">(</span></span>
 <span>  <span class="va">spatial_data</span>, </span>
@@ -2086,7 +2108,7 @@ dataset, emphasising areas of interest.</p>
 <span>  highlight <span class="op">=</span> <span class="st">"in_tissue"</span></span>
 <span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">sample_id</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-13-1.png" width="288"></p>
+<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-13-1.png" width="576"></p>
 </div>
 <div class="section level4">
 <h4 id="quality-control-and-filtering">5. Quality control and filtering<a class="anchor" aria-label="anchor" href="#quality-control-and-filtering"></a>
@@ -2155,23 +2177,23 @@ the distribution and quality of the remaining dataset.</p>
 <code class="sourceCode R"><span><span class="co">## Add threshold in colData</span></span>
 <span><span class="fu">colData</span><span class="op">(</span><span class="va">spatial_data</span><span class="op">)</span><span class="op">$</span><span class="va">qc_mitochondrial_transcription</span> <span class="op">&lt;-</span> <span class="va">qc_mitochondrial_transcription</span></span>
 <span></span>
-<span><span class="co">## Check for putative spatial pattern of removed spots</span></span>
+<span><span class="co">## Visualize spatial pattern of filtered spots</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotSpotQC.html" class="external-link">plotSpotQC</a></span><span class="op">(</span></span>
 <span>  <span class="va">spatial_data</span>, </span>
 <span>  plot_type <span class="op">=</span> <span class="st">"spot"</span>,  </span>
-<span>  annotate <span class="op">=</span> <span class="st">"qc_mitochondrial_transcription"</span>, </span>
+<span>  annotate <span class="op">=</span> <span class="st">"qc_mitochondrial_transcription"</span></span>
 <span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">sample_id</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-18-1.png" width="288"></p>
+<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-18-1.png" width="576"></p>
 </div>
 <div class="section level5">
-<h5 id="library-size">Library size<a class="anchor" aria-label="anchor" href="#library-size"></a>
+<h5 id="library-size-analysis">Library Size Analysis<a class="anchor" aria-label="anchor" href="#library-size-analysis"></a>
 </h5>
 <p>This analysis focuses on examining the distribution of library sizes
 across different spots. It uses a histogram and density plot to
 visualise the range and commonality of library sizes in the dataset.</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## Density and histogram of library sizes</span></span>
+<code class="sourceCode R"><span><span class="co">## Visualize library size distribution</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fu">colData</span><span class="op">(</span><span class="va">spatial_data</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sum</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html" class="external-link">geom_histogram</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html" class="external-link">after_stat</a></span><span class="op">(</span><span class="va">density</span><span class="op">)</span><span class="op">)</span>, bins <span class="op">=</span> <span class="fl">60</span><span class="op">)</span> <span class="op">+</span></span>
@@ -2180,7 +2202,7 @@ visualise the range and commonality of library sizes in the dataset.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Library size"</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Density"</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-19-1.png" width="288"></p>
+<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-19-1.png" width="576"></p>
 <p>Setting Library Size Threshold: After examining the library sizes, a
 threshold is applied to identify spots with library sizes below 700,
 which are considered for potential exclusion from further analysis.</p>
@@ -2208,7 +2230,7 @@ on this criterion.</p>
 <span>  annotate <span class="op">=</span> <span class="st">"qc_total_counts"</span>, </span>
 <span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">sample_id</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-21-1.png" width="288"></p>
+<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-21-1.png" width="576"></p>
 </div>
 <div class="section level5">
 <h5 id="detected-genes">Detected genes<a class="anchor" aria-label="anchor" href="#detected-genes"></a>
@@ -2226,7 +2248,7 @@ across the dataset.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Number of genes with &gt; 0 counts"</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Density"</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-22-1.png" width="288"></p>
+<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-22-1.png" width="576"></p>
 <p>Setting Gene Expression Threshold: This block applies a threshold to
 identify spots with fewer than 500 detected genes, considering these for
 exclusion to ensure data quality.</p>
@@ -2253,7 +2275,7 @@ examined.</p>
 <span>  annotate <span class="op">=</span> <span class="st">"qc_detected_genes"</span>, </span>
 <span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">sample_id</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-24-1.png" width="288"></p>
+<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-24-1.png" width="576"></p>
 <p>Exploring the Relationship Between Library Size and Number of Genes
 Detected: This analysis explores the correlation between library size
 and the number of genes detected in each spot, providing insights into
@@ -2268,7 +2290,7 @@ data quality and sequencing depth.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Library size"</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Number of genes with &gt; 0 counts"</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-25-1.png" width="288"></p>
+<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-25-1.png" width="576"></p>
 </div>
 <div class="section level5">
 <h5 id="combined-filtering">Combined filtering<a class="anchor" aria-label="anchor" href="#combined-filtering"></a>
@@ -2287,7 +2309,7 @@ are then reviewed to ensure comprehensive quality control.</p>
 <span>  annotate <span class="op">=</span> <span class="st">"discard"</span>, </span>
 <span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">sample_id</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-26-1.png" width="288"></p>
+<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-26-1.png" width="576"></p>
 <p>The final step in data preprocessing involves removing all spots
 identified as low-quality based on the previously applied thresholds,
 refining the dataset for subsequent analyses.</p>
@@ -2323,7 +2345,7 @@ and clinical applications.</p>
 <span><span class="co"># Visualisation</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">dec</span><span class="op">$</span><span class="va">mean</span>, <span class="va">dec</span><span class="op">$</span><span class="va">total</span>, xlab <span class="op">=</span> <span class="st">"Mean log-expression"</span>, ylab <span class="op">=</span> <span class="st">"Variance"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html" class="external-link">curve</a></span><span class="op">(</span><span class="fu">metadata</span><span class="op">(</span><span class="va">dec</span><span class="op">)</span><span class="op">$</span><span class="fu">trend</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"blue"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-28-1.png" width="288"></p>
+<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-28-1.png" width="576"></p>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get top variable genes </span></span>
 <span><span class="va">dec</span> <span class="op">=</span> <span class="fu">scran</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/scran/man/modelGeneVar.html" class="external-link">modelGeneVar</a></span><span class="op">(</span><span class="va">spatial_data</span>, subset.row <span class="op">=</span> <span class="va">genes</span>, block <span class="op">=</span> <span class="va">spatial_data</span><span class="op">$</span><span class="va">sample_id</span><span class="op">)</span> </span>
@@ -2384,7 +2406,7 @@ samples, and we don’t see grouping driven by sample_id.</p>
 <span><span class="va">spatial_data</span> <span class="op">&lt;-</span> <span class="fu">scater</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/scater/man/runUMAP.html" class="external-link">runUMAP</a></span><span class="op">(</span><span class="va">spatial_data</span>, dimred <span class="op">=</span> <span class="st">"PCA"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">scater</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/scater/man/plot_reddim.html" class="external-link">plotUMAP</a></span><span class="op">(</span><span class="va">spatial_data</span>, colour_by <span class="op">=</span> <span class="st">"sample_id"</span>, point_size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> </span></code></pre></div>
-<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-30-1.png" width="288"></p>
+<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-30-1.png" width="576"></p>
 <div class="note">
 <p><strong>Exercise 1.1</strong></p>
 <p>Visualise where the two macro clusters are located spatially. We will
@@ -2449,7 +2471,7 @@ map onto the physical tissue sections for context.</p>
 <span><span class="fu">scater</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/scater/man/plot_reddim.html" class="external-link">plotUMAP</a></span><span class="op">(</span><span class="va">spatial_data</span>, colour_by <span class="op">=</span> <span class="st">"label"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html" class="external-link">scale_color_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Paired"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Scale for <span style="color: #00BB00;">colour</span> is already present.</span></span>
 <span><span class="co">## Adding another scale for <span style="color: #00BB00;">colour</span>, which will replace the existing scale.</span></span></code></pre>
-<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-32-1.png" width="288"></p>
+<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-32-1.png" width="576"></p>
 <p>Those two clusters group the white matter from the rest of the
 layers.</p>
 <div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
@@ -2459,7 +2481,7 @@ layers.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html" class="external-link">scale_color_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Paired"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Scale for <span style="color: #00BB00;">colour</span> is already present.</span></span>
 <span><span class="co">## Adding another scale for <span style="color: #00BB00;">colour</span>, which will replace the existing scale.</span></span></code></pre>
-<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-33-1.png" width="288"></p>
+<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-33-1.png" width="576"></p>
 <p>As for comparison, we show the manually annotated regions. We can see
 that while the single cell style clustering catchers, the overall
 tissue, architecture, a lot of details are not retrieved. We clusters
@@ -2472,7 +2494,7 @@ might represent specific cell types within morphological regions.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">libd_layer_colors</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Scale for <span style="color: #00BB00;">colour</span> is already present.</span></span>
 <span><span class="co">## Adding another scale for <span style="color: #00BB00;">colour</span>, which will replace the existing scale.</span></span></code></pre>
-<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-34-1.png" width="288"></p>
+<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-34-1.png" width="576"></p>
 </div>
 <div class="section level5">
 <h5 id="spatially-aware-clustering">Spatially-aware clustering<a class="anchor" aria-label="anchor" href="#spatially-aware-clustering"></a>
@@ -2748,7 +2770,7 @@ relationships.</p>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">sample_id</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"BANKSY clusters"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Session_1_sequencing_assays_files/figure-html/multi-sample-spatial-1.png" width="288"></p>
+<p><img src="Session_1_sequencing_assays_files/figure-html/multi-sample-spatial-1.png" width="576"></p>
 <div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span> <span class="fu">ggspavis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotSpots.html" class="external-link">plotSpots</a></span><span class="op">(</span></span>
 <span>   <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">cbind</span>, <span class="va">spatial_data_list</span><span class="op">)</span>, </span>
@@ -2758,7 +2780,7 @@ relationships.</p>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">sample_id</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"BANKSY clusters"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Session_1_sequencing_assays_files/figure-html/multi-sample-spatial-2.png" width="288"></p>
+<p><img src="Session_1_sequencing_assays_files/figure-html/multi-sample-spatial-2.png" width="576"></p>
 <div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">ggspavis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotSpots.html" class="external-link">plotSpots</a></span><span class="op">(</span><span class="va">spatial_data</span>, annotate <span class="op">=</span> <span class="st">"spatialLIBD"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">sample_id</span><span class="op">)</span> <span class="op">+</span></span>
@@ -2767,7 +2789,7 @@ relationships.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"spatialLIBD regions"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Scale for <span style="color: #00BB00;">colour</span> is already present.</span></span>
 <span><span class="co">## Adding another scale for <span style="color: #00BB00;">colour</span>, which will replace the existing scale.</span></span></code></pre>
-<p><img src="Session_1_sequencing_assays_files/figure-html/multi-sample-spatial-3.png" width="288"></p>
+<p><img src="Session_1_sequencing_assays_files/figure-html/multi-sample-spatial-3.png" width="576"></p>
 <div class="note">
 <p><strong>Exercise 1.2</strong></p>
 <p>We have applied cluster smoothing using <code>smoothLabels</code>.
@@ -3277,7 +3299,7 @@ spatial heterogeneity.</p>
 <span>  scatterpie_alpha <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  pie_scale <span class="op">=</span> <span class="fl">0.4</span></span>
 <span><span class="op">)</span> </span></code></pre></div>
-<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-52-1.png" width="288"></p>
+<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-52-1.png" width="576"></p>
 <p>Let’s visualise without pit’syte_cell and endothelial cells, which
 oclet’sa lot of the visual spectrum.</p>
 <div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
@@ -3291,7 +3313,7 @@ oclet’sa lot of the visual spectrum.</p>
 <span><span class="op">)</span> </span></code></pre></div>
 <pre><code><span><span class="co">## Found more than one class "package_version" in cache; using the first, from namespace 'SeuratObject'</span></span></code></pre>
 <pre><code><span><span class="co">## Also defined by 'alabaster.base'</span></span></code></pre>
-<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-53-1.png" width="288"></p>
+<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-53-1.png" width="576"></p>
 <p>Let’s also exclude without muscle_cell, which occupy a lot of the
 visual spectrum.</p>
 <div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
@@ -3305,13 +3327,13 @@ visual spectrum.</p>
 <span><span class="op">)</span> </span></code></pre></div>
 <pre><code><span><span class="co">## Found more than one class "package_version" in cache; using the first, from namespace 'SeuratObject'</span></span></code></pre>
 <pre><code><span><span class="co">## Also defined by 'alabaster.base'</span></span></code></pre>
-<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-54-1.png" width="288"></p>
+<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-54-1.png" width="576"></p>
 <p>No, let’s look at the correlation matrices to see which cell type are
 most often occurring rather than mutually exclusive within our data
 set.</p>
 <div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/SPOTlight/man/plotCorrelationMatrix.html" class="external-link">plotCorrelationMatrix</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">mat</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-55-1.png" width="288"></p>
+<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-55-1.png" width="576"></p>
 </div>
 <div class="section level5">
 <h5 id="excercise">Excercise<a class="anchor" aria-label="anchor" href="#excercise"></a>
@@ -3499,6 +3521,7 @@ cells</li>
   border-radius: 10px;
 }
 </style>
+</div>
 </div>
 </div>
 </div>
