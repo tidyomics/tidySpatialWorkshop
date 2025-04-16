@@ -954,7 +954,7 @@ Rather than looking at the correlation matrix, overall, let's observe whether th
 :::
 
 
-```{r}
+```{r, fig.width=6, fig.height=6}
 res_spatialLIBD = split(data.frame(res$mat), colData(spatial_data_gene_name)$spatialLIBD ) 
 
 lapply(res_spatialLIBD, function(x) plotCorrelationMatrix(as.matrix(x[,-10]))) 
