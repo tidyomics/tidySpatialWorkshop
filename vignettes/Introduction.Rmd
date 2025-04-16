@@ -4,7 +4,7 @@ author:
   - Stefano Mangiola, South Australian immunoGENomics Cancer Institute^[<mangiola.stefano@adelaide.edu.au>], Walter and Eliza Hall Institute^[<mangiola.s at wehi.edu.au>]
   - Luciano Martellotto, Adelaide Centre for Epigenetics, South Australian immunoGENomics Cancer Institute^[<luciano.martelotto@adelaide.edu.au>]
 output: rmarkdown::html_vignette
-# bibliography: "`r file.path(system.file(package='tidySpatialWorkshop2025', 'bibliography'), 'bibliography.bib')`"
+# bibliography: "`r file.path(system.file(package='tidySpatialWorkshop', 'bibliography'), 'bibliography.bib')`"
 vignette: >
   %\VignetteIndexEntry{Introduction to Spatial omic analyses}
   %\VignetteEncoding{UTF-8}
@@ -54,7 +54,7 @@ knitr::include_graphics(here("inst/images/physalia-min.png"))
 
 You can view the material at the workshop webpage
 
-[here](https://tidyomics.github.io/tidySpatialWorkshop2025/articles/main.html).
+[here](https://tidyomics.github.io/tidySpatialWorkshop/articles/main.html).
 
 ## Workshop package installation 
 
@@ -72,21 +72,21 @@ BiocManager::install("tidyomics/tidySpatialWorkshop", dependencies = TRUE)
 BiocManager::install("tidyomics/tidySpatialWorkshop", build_vignettes = TRUE, force=TRUE)
 
 # To view vignette
-library(tidySpatialWorkshop2025)
+library(tidySpatialWorkshop)
 vignette("Introduction")
 ```
 
 ## Interactive execution of the vignettes
 
-From command line, and enter the tidySpatialWorkshop2025 directory.
+From command line, and enter the tidySpatialWorkshop directory.
 
 ```
 # Open the command line
-git clone git@github.com:tidyomics/tidySpatialWorkshop2025.git
+git clone git@github.com:tidyomics/tidySpatialWorkshop.git
 
 ```
 
-Alternatively download the [git zipped package](https://github.com/tidyomics/tidySpatialWorkshop2025/archive/refs/heads/devel.zip). Uncompress it. And enter the directory. 
+Alternatively download the [git zipped package](https://github.com/tidyomics/tidySpatialWorkshop/archive/refs/heads/devel.zip). Uncompress it. And enter the directory. 
 
 # Announcements
 

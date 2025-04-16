@@ -1,4 +1,4 @@
-Package: tidySpatialWorkshop2025
+Package: tidySpatialWorkshop
 Title: Workshop Materials for Tidy Spatial Analysis
 Version: 0.18.5
 Authors@R: c(
@@ -65,5 +65,5 @@ Suggests:
     scatterpie,
     ggcorrplot
 VignetteBuilder: knitr
-URL: https://github.com/tidyomics/tidySpatialWorkshop2025
-BugReports: https://github.com/tidyomics/tidySpatialWorkshop2025/issues
+URL: https://github.com/tidyomics/tidySpatialWorkshop
+BugReports: https://github.com/tidyomics/tidySpatialWorkshop/issues

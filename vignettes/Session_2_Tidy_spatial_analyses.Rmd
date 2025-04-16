@@ -3,7 +3,7 @@ title: "Tidy spatial analyses"
 author:
   - Stefano Mangiola, South Australian immunoGENomics Cancer Institute^[<mangiola.stefano@adelaide.edu.au>], Walter and Eliza Hall Institute^[<mangiola.s at wehi.edu.au>]
 output: rmarkdown::html_vignette
-# bibliography: "`r file.path(system.file(package='tidySpatialWorkshop2025', 'vignettes'), 'tidyomics.bib')`"
+# bibliography: "`r file.path(system.file(package='tidySpatialWorkshop', 'vignettes'), 'tidyomics.bib')`"
 vignette: >
   %\VignetteIndexEntry{Tidy spatial analyses}
   %\VignetteEncoding{UTF-8}
@@ -24,7 +24,7 @@ library(here)
 
 A good introduction of `tidyomics` can be found here
 
-[tidySpatialWorkshop2025](https://github.com/tidyomics/tidySpatialWorkshop2025) 
+[tidySpatialWorkshop](https://github.com/tidyomics/tidySpatialWorkshop) 
 [tidy transcriptomic manifesto](https://tidyomics.github.io/tidyomicsBlog/post/2021-07-07-tidy-transcriptomics-manifesto/)
 
 `tidyomics` is an interoperable software ecosystem that bridges Bioconductor and the tidyverse. `tidyomics` is installable with a single homonymous meta-package. This ecosystem includes three new packages: tidySummarizedExperiment, tidySingleCellExperiment, and tidySpatialExperiment, and five publicly available R packages: `plyranges`, `nullranges`, `tidyseurat`, `tidybulk`, `tidytof`. Importantly, `tidyomics` leaves the original data containers and methods unaltered, ensuring compatibility with existing software, maintainability and long-term Bioconductor support. 
@@ -114,7 +114,7 @@ rownames(spatialCoords(spatial_data)) = colnames(spatial_data) # Bug?
 spatial_data
 ```
 ::: {.note}
-If `ExperimentHub` should not work. The `spatial_data` object from the previous code block can be downloaded from [Zenodo - 10.5281/zenodo.11233385](https://zenodo.org/records/11233385/files/tidySpatialWorkshop2025_spatial_data.rds?download=1)
+If `ExperimentHub` should not work. The `spatial_data` object from the previous code block can be downloaded from [Zenodo - 10.5281/zenodo.11233385](https://zenodo.org/records/11233385/files/tidySpatialWorkshop_spatial_data.rds?download=1)
 :::
 
 ### 1. tidySpatialExperiment package
@@ -359,7 +359,7 @@ spatial_data =
   filter(in_tissue, sample_id=="151673") |> 
   
   # Gate based on tissue morphology
-  tidySpatialExperiment::gate(alpha = 0.1, colour = "spatialLIBD", programmatic_gates = tidySpatialWorkshop2025::spatial_data_gated) 
+  tidySpatialExperiment::gate(alpha = 0.1, colour = "spatialLIBD", programmatic_gates = tidySpatialWorkshop::spatial_data_gated) 
 
 ```
 
