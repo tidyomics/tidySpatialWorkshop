@@ -95,15 +95,6 @@
 #' @source Created during the Tidy Spatial Workshop 2025 using interactive gating
 #'   on Visium spatial transcriptomics data from the spatialLIBD package
 #'
-#' @examples
-#' data(spatial_data_gated)
+#' @usage data(spatial_data_gated)
 #' 
-#' # Use the gate with tidySpatialExperiment
-#' spatial_data |>
-#'   filter(in_tissue, sample_id=="151673") |>
-#'   tidySpatialExperiment::gate(
-#'     alpha = 0.1,
-#'     colour = "spatialLIBD",
-#'     programmatic_gates = spatial_data_gated
-#'   )
 "spatial_data_gated"
