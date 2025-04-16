@@ -8,7 +8,7 @@
 A gate object compatible with tidygate and tidySpatialExperiment::gate()
 }
 \source{
-Created during the Tidy Spatial Workshop 225 using interactive gating
+Created during the Tidy Spatial Workshop 2025 using interactive gating
 on Visium spatial transcriptomics data from the spatialLIBD package
 }
 \usage{
