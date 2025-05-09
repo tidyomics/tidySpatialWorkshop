@@ -35,23 +35,12 @@ Bioconductor 3.19.
 #install.packages('BiocManager')
 BiocManager::install("tidyomics/tidySpatialWorkshop", dependencies = TRUE)
 
-# In May 2025, the following packages should be installed from github repositories, to use the latest features. In case you have them pre installed, run the following command
-BiocManager::install(c("lmweber/ggspavis", 
-                       "stemangiola/tidySummarizedExperiment", 
-                       "william-hutchison/tidySpatialExperiment", 
-                       "stemangiola/tidybulk", 
-                       "stemangiola/tidygate", 
-                       "stemangiola/CuratedAtlasQueryR"), 
-                     update = FALSE)
-                     
-BiocManager::install("ggcorrplot")
-    
 # Then build the vignettes
 BiocManager::install("tidyomics/tidySpatialWorkshop", build_vignettes = TRUE, force=TRUE)
 
 # To view vignette
 library(tidySpatialWorkshop)
-vignette("Introduction")
+vignette("Session_1_sequencing_assays")
 ```
 
 ## Interactive execution of the vignettes
