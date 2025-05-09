@@ -17,8 +17,6 @@ knitr::opts_chunk$set(echo = TRUE, cache = FALSE)
 
 # Session 1: Spatial Analysis of Sequencing Data
 
-Web rendering: https://rpubs.com/mangiolas/1186971
-
 ## Overview
 
 This workshop introduces spatial transcriptomics analysis using the Bioconductor framework, with a particular focus on the `SpatialExperiment` package. Participants will learn essential concepts and practical skills for analyzing spatially-resolved genomic data.
@@ -221,7 +219,7 @@ ggspavis::plotSpots(
 Explore additional visualisation features offered by the Visium platform, exposing the H&E (hematoxylin and eosin) image.
 
 ```{r, fig.width=6, fig.height=6}
-ggspavis::plotVisium(spatial_data)
+ggspavis::plotVisium(spatial_data, point_size = 0.5)
 ```
 
 This visualisation focuses on specific tissue features within the dataset, emphasising areas of interest.
@@ -233,7 +231,8 @@ This visualisation focuses on specific tissue features within the dataset, empha
 ggspavis::plotVisium(
   spatial_data, 
   annotate = "spatialLIBD", 
-  highlight = "in_tissue"
+  highlight = "in_tissue", 
+  point_size =0.5
 ) + 
   facet_wrap(~sample_id)
 
@@ -763,19 +762,7 @@ SPOTlight uses a seeded non-negative matrix factorization regression, initialize
 
 #### Producing the reference for single-cell databases
 
-[cellNexus](https://stemangiola.github.io/cellNexus/) is a query interface that allow the programmatic exploration and retrieval of the harmonised, curated and reannotated CELLxGENE single-cell human cell atlas. Data can be retrieved at cell, sample, or dataset levels based on filtering criteria.
-
-Harmonised data is stored in the ARDC Nectar Research Cloud, and most cellNexus functions interact with Nectar via web requests, so a network connection is required for most functionality.
-
-Mangiola et al., 2025 doi [doi.org/10.1101/2023.06.08.542671](https://www.biorxiv.org/content/10.1101/2023.06.08.542671v3)
-
-```{r, echo=FALSE, out.width="700px"}
-knitr::include_graphics(here("inst/images/curated_atlas_query.png"))
-```
-
-
-
-
+Here, we retrieve and prepare a single-cell RNA reference. The dataset in question, zhong-prefrontal-2018, originates from a study by Zhong et al. (2018), which offers a comprehensive single-cell transcriptomic survey of the human prefrontal cortex during development . Utilising the scRNAseq package, the dataset is fetched and subsequently processed to aggregate counts across cells sharing the same sample and cell type, thereby reducing data complexity and enhancing interpretability. Further filtering steps ensure the removal of empty columns and entries with missing cell type annotations. Finally, the logNormCounts function from the scuttle package is applied to perform log-normalisation, a crucial step for mitigating technical variability and preparing the data for accurate comparative analyses .
 
 ```{r, message=FALSE, warning=FALSE,  fig.width=6, fig.height=6}
 # Get reference
@@ -942,6 +929,9 @@ No, let's look at the correlation matrices to see which cell type are most often
 
 plotCorrelationMatrix(res$mat)
 ```
+```{r}
+mat_df = as.data.frame(res$mat)
+```
 
 #### Excercise
 
@@ -954,35 +944,111 @@ Rather than looking at the correlation matrix, overall, let's observe whether th
 :::
 
 
-```{r, fig.width=6, fig.height=6}
-res_spatialLIBD = split(data.frame(res$mat), colData(spatial_data_gene_name)$spatialLIBD ) 
-
-lapply(res_spatialLIBD, function(x) plotCorrelationMatrix(as.matrix(x[,-10]))) 
-```
-
-
-
 ::: {.note}
 **Exercise 1.5**
 
-Some of the most positive correlations involve the endothelial cells with Oligodendrocytes and Leptomeningeal cells.
+## Exercise 1.5 (adapted to your current cell types)
 
-Leptomeningeal cells refer to the cells that make up the leptomeninges, which consist of two of the three layers olet's meninges surrounding the brain and spinal cord: the arachnoid mater and the pia mater. These layers play a critical role in protecting the central nervous system and assisting in various physiological processes.
+Some of the most positive correlations in the new matrix are seen between:
 
-Oligodendrocytes are a type of glial cell in the central nervous system (CNS) of vertebrates, including humans and mouse. These cells are crucial for the formation and maintenance of the myelin sheath, a fatty layer that encases the axons of many neurons.
+- **Microglia** and **Neurons**  
+- **Astrocytes** and **Stem.cells**
 
-Let's try to visualise the pixel where these cell types most occur.
+> **Microglia** are the resident immune cells of the central nervous system, constantly surveying the parenchyma and clearing debris.  
+> **Neurons** are the electrically excitable cells that transmit and process information via synaptic connections.  
+> **Astrocytes** are star-shaped glia that support neuronal metabolism, regulate extracellular ions and neurotransmitter uptake.  
+> **Stem.cells** denote undifferentiated progenitors capable of self-renewal and differentiation into multiple neural lineages.
 
+Let us now **visualise** where these pairs of cell types most co-occur in your spatial map. For **each** pair, carry out the following:
 
-- Label pixel that have > 10% (> 0.1) endothelial_cell and leptomeningeal_cell
-- Label pixels that have > 40% (> 0.4) across these two cells
-- Plot pixels colouring by the new label
+1. **Label** any pixel where both cell types exceed 10 % abundance (i.e. > 0.1).  
+2. **Label** any pixel where the _sum_ of their abundances exceeds 40 % (i.e. > 0.4).  
+3. **Plot** the spatial coordinates of all pixels, **colouring** them by this new label (for example:  
+   - `0` = neither condition met  
+   - `1` = both abundances > 0.1  
+   - `2` = summed abundance > 0.4  
+
+You should end up with two analogous visualisations:
+
+- **Microglia + Neurons**  
+- **Astrocytes + Stem.cells**
+
+Feel free to reuse your previous code, simply substituting the cell-type columns and updating the thresholds as above.
 
 :::
 
-```{r}
-mat_df = as.data.frame(res$mat)
+
+
+#### Bonus - Alternative reference from the Human Cell Atlas - using cellNexus
+
+[cellNexus](https://stemangiola.github.io/cellNexus/) is a query interface that allow the programmatic exploration and retrieval of the harmonised, curated and reannotated CELLxGENE single-cell human cell atlas. Data can be retrieved at cell, sample, or dataset levels based on filtering criteria.
+
+Harmonised data is stored in the ARDC Nectar Research Cloud, and most cellNexus functions interact with Nectar via web requests, so a network connection is required for most functionality.
+
+Mangiola et al., 2025 doi [doi.org/10.1101/2023.06.08.542671](https://www.biorxiv.org/content/10.1101/2023.06.08.542671v3)
+
+```{r, echo=FALSE, out.width="700px"}
+knitr::include_graphics(here("inst/images/curated_atlas_query.png"))
 ```
+
+
+```{r, eval = FALSE, message=FALSE, warning=FALSE,  fig.width=3, fig.height=3}
+# Get reference
+library(cellNexus)
+library(HDF5Array)
+
+tmp_file_path = tempfile()
+
+brain_reference =
+  
+  # Query metadata across 30M cells
+  get_metadata() |>
+  
+  # Filter your data of interest
+  dplyr::filter(tissue_groups=="cerebral lobes and cortical areas", disease == "Normal") |> 
+  
+  # Collect pseudobulk as SummarizedExperiment
+  get_pseudobulk() |> 
+  
+  # Normalise for Spotlight
+  scuttle::logNormCounts() |> 
+  
+  # Save for fast reading
+  HDF5Array::saveHDF5SummarizedExperiment(tmp_file_path, replace = TRUE)
+```
+
+```{r, eval = FALSE, message=FALSE}
+library(HDF5Array)
+
+brain_reference = HDF5Array::loadHDF5SummarizedExperiment(tmp_file_path)
+
+my_metadata = colData(brain_reference)
+
+knitr::kable(head(my_metadata), format = "html")
+```
+
+These are the cell types included in our reference, and the number of pseudobulk samples we have for each cell type.
+
+```{r, eval = FALSE}
+
+table(brain_reference$cell_type_harmonised)
+
+```
+
+These are the number of samples we have for each of the three data sets.
+
+```{r, eval = FALSE}
+
+table(brain_reference$dataset_id)
+```
+
+The `collection_id` can be used to gather information on the cell database. e.g. <https://cellxgene.cziscience.com/collections/><collection_id>
+
+```{r, eval = FALSE}
+table(brain_reference$collection_id)
+```
+
+
 
 **Session Information**
 
