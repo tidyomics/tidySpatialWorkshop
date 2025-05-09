@@ -1155,8 +1155,8 @@ nucleous segmentation as well.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span><span class="va">me</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/gc.html" class="external-link">gc</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##            used  (Mb) gc trigger  (Mb) max used  (Mb)</span></span>
-<span><span class="co">## Ncells 10461767 558.8   17727552 946.8 17727552 946.8</span></span>
-<span><span class="co">## Vcells 44277274 337.9   75001323 572.3 50349219 384.2</span></span></code></pre>
+<span><span class="co">## Ncells 10494841 560.5   16692141 891.5 16692141 891.5</span></span>
+<span><span class="co">## Vcells 44349764 338.4   71488748 545.5 50279380 383.7</span></span></code></pre>
 <p>We can organise our large data frame containing single molecules into
 a more efficient <code>MoleculeExperiment</code>.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
@@ -1216,8 +1216,8 @@ data frame</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span><span class="va">tx_small_me</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/gc.html" class="external-link">gc</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##            used  (Mb) gc trigger  (Mb) max used  (Mb)</span></span>
-<span><span class="co">## Ncells 10463705 558.9   17727552 946.8 17727552 946.8</span></span>
-<span><span class="co">## Vcells 35237788 268.9   75001323 572.3 62606158 477.7</span></span></code></pre>
+<span><span class="co">## Ncells 10496776 560.6   16692141 891.5 16692141 891.5</span></span>
+<span><span class="co">## Vcells 35310273 269.4   71488748 545.5 62678734 478.3</span></span></code></pre>
 <div class="section level5">
 <h5 id="a-preview-of-a-zoomed-in-section-of-the-tissue">A preview of a zoomed in section of the tissue<a class="anchor" aria-label="anchor" href="#a-preview-of-a-zoomed-in-section-of-the-tissue"></a>
 </h5>
@@ -1260,8 +1260,8 @@ cells.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span><span class="va">tx_small_region</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/gc.html" class="external-link">gc</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##            used  (Mb) gc trigger  (Mb) max used  (Mb)</span></span>
-<span><span class="co">## Ncells 10488936 560.2   17727552 946.8 17727552 946.8</span></span>
-<span><span class="co">## Vcells 20476425 156.3   60001059 457.8 74983910 572.1</span></span></code></pre>
+<span><span class="co">## Ncells 10520285 561.9   16692141 891.5 16692141 891.5</span></span>
+<span><span class="co">## Vcells 20544672 156.8   71488748 545.5 71488745 545.5</span></span></code></pre>
 <div class="note">
 <p><strong>Exercise 3.1</strong></p>
 <p>We want to understand how much data we are discarding, that does not
@@ -1783,9 +1783,9 @@ cluster using <code>plotProbDist.</code></p>
 <p><strong>Session Information</strong></p>
 <div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## R Under development (unstable) (2025-03-08 r87910)</span></span>
+<pre><code><span><span class="co">## R version 4.5.0 (2025-04-11)</span></span>
 <span><span class="co">## Platform: x86_64-pc-linux-gnu</span></span>
-<span><span class="co">## Running under: Ubuntu 24.04.1 LTS</span></span>
+<span><span class="co">## Running under: Ubuntu 24.04.2 LTS</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Matrix products: default</span></span>
 <span><span class="co">## BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 </span></span>
@@ -1807,21 +1807,21 @@ cluster using <code>plotProbDist.</code></p>
 <span><span class="co">## [8] base     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## other attached packages:</span></span>
-<span><span class="co">##  [1] MoleculeExperiment_1.7.0        scico_1.5.0                    </span></span>
-<span><span class="co">##  [3] hoodscanR_1.5.2                 tidySpatialExperiment_1.3.0    </span></span>
-<span><span class="co">##  [5] SpatialExperiment_1.17.0        tidySummarizedExperiment_1.17.0</span></span>
-<span><span class="co">##  [7] ttservice_0.4.1                 tidySingleCellExperiment_1.17.0</span></span>
-<span><span class="co">##  [9] SubcellularSpatialData_1.3.0    ExperimentHub_2.15.0           </span></span>
-<span><span class="co">## [11] AnnotationHub_3.15.0            BiocFileCache_2.15.1           </span></span>
-<span><span class="co">## [13] dbplyr_2.5.0                    scran_1.35.0                   </span></span>
-<span><span class="co">## [15] scater_1.35.4                   scuttle_1.17.0                 </span></span>
-<span><span class="co">## [17] SingleCellExperiment_1.29.2     SummarizedExperiment_1.37.0    </span></span>
-<span><span class="co">## [19] Biobase_2.67.0                  GenomicRanges_1.59.1           </span></span>
-<span><span class="co">## [21] GenomeInfoDb_1.43.4             IRanges_2.41.3                 </span></span>
-<span><span class="co">## [23] S4Vectors_0.45.4                BiocGenerics_0.53.6            </span></span>
-<span><span class="co">## [25] generics_0.1.3                  MatrixGenerics_1.19.1          </span></span>
+<span><span class="co">##  [1] MoleculeExperiment_1.9.0        scico_1.5.0                    </span></span>
+<span><span class="co">##  [3] hoodscanR_1.7.0                 tidySpatialExperiment_1.5.0    </span></span>
+<span><span class="co">##  [5] SpatialExperiment_1.19.0        tidySummarizedExperiment_1.19.0</span></span>
+<span><span class="co">##  [7] ttservice_0.4.1                 tidySingleCellExperiment_1.19.0</span></span>
+<span><span class="co">##  [9] SubcellularSpatialData_1.5.0    ExperimentHub_2.99.0           </span></span>
+<span><span class="co">## [11] AnnotationHub_3.99.1            BiocFileCache_2.99.0           </span></span>
+<span><span class="co">## [13] dbplyr_2.5.0                    scran_1.37.0                   </span></span>
+<span><span class="co">## [15] scater_1.37.0                   scuttle_1.19.0                 </span></span>
+<span><span class="co">## [17] SingleCellExperiment_1.31.0     SummarizedExperiment_1.39.0    </span></span>
+<span><span class="co">## [19] Biobase_2.69.0                  GenomicRanges_1.61.0           </span></span>
+<span><span class="co">## [21] GenomeInfoDb_1.45.3             IRanges_2.43.0                 </span></span>
+<span><span class="co">## [23] S4Vectors_0.47.0                BiocGenerics_0.55.0            </span></span>
+<span><span class="co">## [25] generics_0.1.3                  MatrixGenerics_1.21.0          </span></span>
 <span><span class="co">## [27] matrixStats_1.5.0               RColorBrewer_1.1-3             </span></span>
-<span><span class="co">## [29] ggspavis_1.13.0                 dittoSeq_1.19.0                </span></span>
+<span><span class="co">## [29] ggspavis_1.15.0                 dittoSeq_1.21.0                </span></span>
 <span><span class="co">## [31] colorspace_2.1-1                tibble_3.2.1                   </span></span>
 <span><span class="co">## [33] forcats_1.0.0                   stringr_1.5.1                  </span></span>
 <span><span class="co">## [35] glue_1.8.0                      purrr_1.0.4                    </span></span>
@@ -1832,49 +1832,49 @@ cluster using <code>plotProbDist.</code></p>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
 <span><span class="co">##   [1] RcppAnnoy_0.0.22         splines_4.5.0            later_1.4.2             </span></span>
 <span><span class="co">##   [4] bitops_1.0-9             filelock_1.0.3           lifecycle_1.0.4         </span></span>
-<span><span class="co">##   [7] doParallel_1.0.17        edgeR_4.5.10             rprojroot_2.0.4         </span></span>
-<span><span class="co">##  [10] lattice_0.22-7           magrittr_2.0.3           limma_3.63.13           </span></span>
-<span><span class="co">##  [13] sass_0.4.10              rmarkdown_2.29           jquerylib_0.1.4         </span></span>
-<span><span class="co">##  [16] yaml_2.3.10              metapod_1.15.0           httpuv_1.6.16           </span></span>
-<span><span class="co">##  [19] ggside_0.3.1             cowplot_1.1.3            DBI_1.2.3               </span></span>
-<span><span class="co">##  [22] abind_1.4-8              RCurl_1.98-1.17          rappdirs_0.3.3          </span></span>
-<span><span class="co">##  [25] circlize_0.4.16          GenomeInfoDbData_1.2.14  ggrepel_0.9.6           </span></span>
+<span><span class="co">##   [7] httr2_1.1.2              doParallel_1.0.17        edgeR_4.7.2             </span></span>
+<span><span class="co">##  [10] rprojroot_2.0.4          lattice_0.22-7           magrittr_2.0.3          </span></span>
+<span><span class="co">##  [13] limma_3.65.0             sass_0.4.10              rmarkdown_2.29          </span></span>
+<span><span class="co">##  [16] jquerylib_0.1.4          yaml_2.3.10              metapod_1.17.0          </span></span>
+<span><span class="co">##  [19] httpuv_1.6.16            ggside_0.3.1             cowplot_1.1.3           </span></span>
+<span><span class="co">##  [22] DBI_1.2.3                abind_1.4-8              RCurl_1.98-1.17         </span></span>
+<span><span class="co">##  [25] rappdirs_0.3.3           circlize_0.4.16          ggrepel_0.9.6           </span></span>
 <span><span class="co">##  [28] irlba_2.3.5.1            terra_1.8-42             pheatmap_1.0.12         </span></span>
-<span><span class="co">##  [31] dqrng_0.4.1              pkgdown_2.1.1            codetools_0.2-20        </span></span>
-<span><span class="co">##  [34] DelayedArray_0.33.6      shape_1.4.6.1            tidyselect_1.2.1        </span></span>
-<span><span class="co">##  [37] UCSC.utils_1.3.1         farver_2.1.2             ScaledMatrix_1.15.0     </span></span>
+<span><span class="co">##  [31] dqrng_0.4.1              pkgdown_2.1.2            codetools_0.2-20        </span></span>
+<span><span class="co">##  [34] DelayedArray_0.35.1      shape_1.4.6.1            tidyselect_1.2.1        </span></span>
+<span><span class="co">##  [37] UCSC.utils_1.5.0         farver_2.1.2             ScaledMatrix_1.17.0     </span></span>
 <span><span class="co">##  [40] viridis_0.6.5            jsonlite_2.0.0           GetoptLong_1.0.5        </span></span>
-<span><span class="co">##  [43] BiocNeighbors_2.1.3      ellipsis_0.3.2           iterators_1.0.14        </span></span>
-<span><span class="co">##  [46] ggridges_0.5.6           systemfonts_1.2.2        foreach_1.5.2           </span></span>
+<span><span class="co">##  [43] BiocNeighbors_2.3.0      ellipsis_0.3.2           iterators_1.0.14        </span></span>
+<span><span class="co">##  [46] ggridges_0.5.6           systemfonts_1.2.3        foreach_1.5.2           </span></span>
 <span><span class="co">##  [49] tools_4.5.0              ragg_1.4.0               Rcpp_1.0.14             </span></span>
-<span><span class="co">##  [52] gridExtra_2.3            SparseArray_1.7.7        xfun_0.52               </span></span>
-<span><span class="co">##  [55] mgcv_1.9-3               EBImage_4.49.0           withr_3.0.2             </span></span>
-<span><span class="co">##  [58] BiocManager_1.30.25      fastmap_1.2.0            bluster_1.17.0          </span></span>
+<span><span class="co">##  [52] gridExtra_2.3            SparseArray_1.9.0        xfun_0.52               </span></span>
+<span><span class="co">##  [55] mgcv_1.9-3               EBImage_4.51.0           withr_3.0.2             </span></span>
+<span><span class="co">##  [58] BiocManager_1.30.25      fastmap_1.2.0            bluster_1.19.0          </span></span>
 <span><span class="co">##  [61] fansi_1.0.6              digest_0.6.37            rsvd_1.0.5              </span></span>
-<span><span class="co">##  [64] R6_2.6.1                 mime_0.13                textshaping_1.0.0       </span></span>
-<span><span class="co">##  [67] Cairo_1.6-2              jpeg_0.1-11              RSQLite_2.3.9           </span></span>
-<span><span class="co">##  [70] utf8_1.2.4               data.table_1.17.0        httr_1.4.7              </span></span>
-<span><span class="co">##  [73] htmlwidgets_1.6.4        S4Arrays_1.7.3           uwot_0.2.3              </span></span>
+<span><span class="co">##  [64] R6_2.6.1                 mime_0.13                textshaping_1.0.1       </span></span>
+<span><span class="co">##  [67] Cairo_1.6-2              jpeg_0.1-11              RSQLite_2.3.11          </span></span>
+<span><span class="co">##  [70] utf8_1.2.5               data.table_1.17.0        httr_1.4.7              </span></span>
+<span><span class="co">##  [73] htmlwidgets_1.6.4        S4Arrays_1.9.0           uwot_0.2.3              </span></span>
 <span><span class="co">##  [76] pkgconfig_2.0.3          gtable_0.3.6             blob_1.2.4              </span></span>
-<span><span class="co">##  [79] ComplexHeatmap_2.23.1    XVector_0.47.2           htmltools_0.5.8.1       </span></span>
-<span><span class="co">##  [82] fftwtools_0.9-11         clue_0.3-66              scales_1.3.0            </span></span>
+<span><span class="co">##  [79] ComplexHeatmap_2.25.0    XVector_0.49.0           htmltools_0.5.8.1       </span></span>
+<span><span class="co">##  [82] fftwtools_0.9-11         clue_0.3-66              scales_1.4.0            </span></span>
 <span><span class="co">##  [85] png_0.1-8                knitr_1.50               rjson_0.2.23            </span></span>
 <span><span class="co">##  [88] nlme_3.1-168             curl_6.2.2               GlobalOptions_0.1.2     </span></span>
-<span><span class="co">##  [91] cachem_1.1.0             BiocVersion_3.21.1       parallel_4.5.0          </span></span>
-<span><span class="co">##  [94] vipor_0.4.7              AnnotationDbi_1.69.1     desc_1.4.3              </span></span>
+<span><span class="co">##  [91] cachem_1.1.0             BiocVersion_3.22.0       parallel_4.5.0          </span></span>
+<span><span class="co">##  [94] vipor_0.4.7              AnnotationDbi_1.71.0     desc_1.4.3              </span></span>
 <span><span class="co">##  [97] pillar_1.10.2            grid_4.5.0               vctrs_0.6.5             </span></span>
-<span><span class="co">## [100] RANN_2.6.2               promises_1.3.2           BiocSingular_1.23.0     </span></span>
-<span><span class="co">## [103] beachmat_2.23.7          xtable_1.8-4             cluster_2.1.8.1         </span></span>
+<span><span class="co">## [100] RANN_2.6.2               promises_1.3.2           BiocSingular_1.25.0     </span></span>
+<span><span class="co">## [103] beachmat_2.25.0          xtable_1.8-4             cluster_2.1.8.1         </span></span>
 <span><span class="co">## [106] beeswarm_0.4.0           evaluate_1.0.3           magick_2.8.6            </span></span>
-<span><span class="co">## [109] cli_3.6.4                locfit_1.5-9.12          compiler_4.5.0          </span></span>
+<span><span class="co">## [109] cli_3.6.5                locfit_1.5-9.12          compiler_4.5.0          </span></span>
 <span><span class="co">## [112] rlang_1.1.6              crayon_1.5.3             labeling_0.4.3          </span></span>
 <span><span class="co">## [115] fs_1.6.6                 ggbeeswarm_0.7.2         stringi_1.8.7           </span></span>
-<span><span class="co">## [118] viridisLite_0.4.2        BiocParallel_1.41.5      munsell_0.5.1           </span></span>
-<span><span class="co">## [121] Biostrings_2.75.4        lazyeval_0.2.2           tiff_0.1-12             </span></span>
-<span><span class="co">## [124] Matrix_1.7-3             sparseMatrixStats_1.19.0 bit64_4.6.0-1           </span></span>
-<span><span class="co">## [127] KEGGREST_1.47.1          statmod_1.5.0            shiny_1.10.0            </span></span>
-<span><span class="co">## [130] tidygate_1.0.14          igraph_2.1.4             memoise_2.0.1           </span></span>
-<span><span class="co">## [133] bslib_0.9.0              bit_4.6.0</span></span></code></pre>
+<span><span class="co">## [118] viridisLite_0.4.2        BiocParallel_1.43.0      Biostrings_2.77.0       </span></span>
+<span><span class="co">## [121] lazyeval_0.2.2           tiff_0.1-12              Matrix_1.7-3            </span></span>
+<span><span class="co">## [124] sparseMatrixStats_1.21.0 bit64_4.6.0-1            KEGGREST_1.49.0         </span></span>
+<span><span class="co">## [127] statmod_1.5.0            shiny_1.10.0             tidygate_1.0.14         </span></span>
+<span><span class="co">## [130] igraph_2.1.4             memoise_2.0.1            bslib_0.9.0             </span></span>
+<span><span class="co">## [133] bit_4.6.0</span></span></code></pre>
 <p><strong>References</strong></p>
 <style type="text/css">
 .note {
@@ -1912,7 +1912,7 @@ cluster using <code>plotProbDist.</code></p>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
 </div>
 
       </footer>

@@ -1,5 +1,5 @@
-pandoc: 3.6.3
-pkgdown: 2.1.1
+pandoc: 3.6.4
+pkgdown: 2.1.2
 pkgdown_sha: ~
 articles:
   Introduction: Introduction.html
@@ -7,7 +7,7 @@ articles:
   Session_2_Tidy_spatial_analyses: Session_2_Tidy_spatial_analyses.html
   Session_3_imaging_assays: Session_3_imaging_assays.html
   Solutions: Solutions.html
-last_built: 2025-04-16T15:17Z
+last_built: 2025-05-09T11:01Z
 urls:
   reference: https://tidyomics.github.io/tidySpatialWorkshop/reference
   article: https://tidyomics.github.io/tidySpatialWorkshop/articles
