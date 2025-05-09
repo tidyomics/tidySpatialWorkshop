@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tidy spatial analyses • tidySpatialWorkshop2025</title>
+<title>Tidy spatial analyses • tidySpatialWorkshop</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
@@ -31,7 +31,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">tidySpatialWorkshop2025</a>
+        <a class="navbar-link" href="../index.html">tidySpatialWorkshop</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.18.5</span>
       </span>
     </div>
@@ -68,7 +68,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/tidyomics/tidySpatialWorkshop2025" class="external-link">
+  <a href="https://github.com/tidyomics/tidySpatialWorkshop" class="external-link">
     <span class="fa fa-github"></span>
 
   </a>
@@ -93,7 +93,7 @@ Institute<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
 </h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/tidyomics/tidySpatialWorkshop2025/blob/devel/vignettes/Session_2_Tidy_spatial_analyses.Rmd" class="external-link"><code>vignettes/Session_2_Tidy_spatial_analyses.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tidyomics/tidySpatialWorkshop/blob/improve_vignettes/vignettes/Session_2_Tidy_spatial_analyses.Rmd" class="external-link"><code>vignettes/Session_2_Tidy_spatial_analyses.Rmd</code></a></small>
       <div class="hidden name"><code>Session_2_Tidy_spatial_analyses.Rmd</code></div>
 
     </div>
@@ -103,8 +103,31 @@ Institute<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
 <div class="section level2">
 <h2 id="session-2-tidying-spatial-data">Session 2: Tidying spatial data<a class="anchor" aria-label="anchor" href="#session-2-tidying-spatial-data"></a>
 </h2>
-<p>A good introduction of <code>tidyomics</code> can be found here</p>
-<p><a href="https://github.com/tidyomics/tidySpatialWorkshop2025" class="external-link">tidySpatialWorkshop2025</a>
+<div class="section level3">
+<h3 id="introduction-to-tidyomics">Introduction to tidyomics<a class="anchor" aria-label="anchor" href="#introduction-to-tidyomics"></a>
+</h3>
+<p><code>tidyomics</code> represents a significant advancement in
+bioinformatics analysis by bridging the gap between Bioconductor and the
+tidyverse ecosystem. This integration provides several key benefits:</p>
+<ol style="list-style-type: decimal">
+<li>
+<strong>Unified Analysis Framework</strong>: Combines the power of
+Bioconductor’s specialized biological data structures with tidyverse’s
+intuitive data manipulation</li>
+<li>
+<strong>Maintained Compatibility</strong>: Preserves original data
+containers and methods, ensuring long-term support</li>
+<li>
+<strong>Enhanced Workflow Efficiency</strong>: Enables streamlined
+analysis pipelines using familiar tidyverse syntax</li>
+</ol>
+<p>The ecosystem includes several specialized packages: -
+<code>tidySummarizedExperiment</code>: For bulk RNA-seq analysis -
+<code>tidySingleCellExperiment</code>: For single-cell data -
+<code>tidySpatialExperiment</code>: For spatial transcriptomics -
+Additional tools: <code>plyranges</code>, <code>nullranges</code>,
+<code>tidyseurat</code>, <code>tidybulk</code>, <code>tidytof</code></p>
+<p><a href="https://github.com/tidyomics/tidySpatialWorkshop" class="external-link">tidySpatialWorkshop</a>
 <a href="https://tidyomics.github.io/tidyomicsBlog/post/2021-07-07-tidy-transcriptomics-manifesto/" class="external-link">tidy
 transcriptomic manifesto</a></p>
 <p><code>tidyomics</code> is an interoperable software ecosystem that
@@ -137,8 +160,8 @@ and Keyes et al., 2025</a></p>
 <span>                       <span class="st">"stemangiola/tidybulk"</span>, </span>
 <span>                       <span class="st">"stemangiola/tidygate"</span><span class="op">)</span>, </span>
 <span>                     update <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p><strong>Then please restart your R session</strong> to make sure the
-packages we will load will be the ones we intalled mode recently.</p>
+<p><strong>Important:</strong> Please restart your R session after
+installation to ensure the updated packages are loaded correctly.</p>
 <p>Let’s load the libraries needed for this session</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/drighelli/SpatialExperiment" class="external-link">SpatialExperiment</a></span><span class="op">)</span></span>
@@ -201,10 +224,23 @@ gather spatial transcriptomics data.</p>
 <div class="note">
 <p>If <code>ExperimentHub</code> should not work. The
 <code>spatial_data</code> object from the previous code block can be
-downloaded from <a href="https://zenodo.org/records/11233385/files/tidySpatialWorkshop2025_spatial_data.rds?download=1" class="external-link">Zenodo
+downloaded from <a href="https://zenodo.org/records/11233385/files/tidySpatialWorkshop_spatial_data.rds?download=1" class="external-link">Zenodo
 - 10.5281/zenodo.11233385</a></p>
 </div>
 </div>
+</div>
+<div class="section level3">
+<h3 id="working-with-tidyspatialexperiment">Working with tidySpatialExperiment<a class="anchor" aria-label="anchor" href="#working-with-tidyspatialexperiment"></a>
+</h3>
+<p>The <code>tidySpatialExperiment</code> package creates a bridge
+between <code>SpatialExperiment</code> objects and the tidyverse
+ecosystem. It provides:</p>
+<ol style="list-style-type: decimal">
+<li>A tidy data view of <code>SpatialExperiment</code> objects</li>
+<li>Compatible dplyr, tidyr, ggplot and plotly functions</li>
+<li>Seamless integration with existing SpatialExperiment
+functionality</li>
+</ol>
 <div class="section level4">
 <h4 id="tidyspatialexperiment-package">1. tidySpatialExperiment package<a class="anchor" aria-label="anchor" href="#tidyspatialexperiment-package"></a>
 </h4>
@@ -715,7 +751,7 @@ regions of interest using an intuitive tidy grammar. From <a href="https://bioco
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">in_tissue</span>, <span class="va">sample_id</span><span class="op">==</span><span class="st">"151673"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  </span>
 <span>  <span class="co"># Gate based on tissue morphology</span></span>
-<span>  <span class="fu">tidySpatialExperiment</span><span class="fu">::</span><span class="fu">gate</span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.1</span>, colour <span class="op">=</span> <span class="st">"spatialLIBD"</span>, programmatic_gates <span class="op">=</span> <span class="fu">tidySpatialWorkshop2025</span><span class="fu">::</span><span class="va"><a href="../reference/spatial_data_gated.html">spatial_data_gated</a></span><span class="op">)</span> </span></code></pre></div>
+<span>  <span class="fu">tidySpatialExperiment</span><span class="fu">::</span><span class="fu">gate</span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.1</span>, colour <span class="op">=</span> <span class="st">"spatialLIBD"</span>, programmatic_gates <span class="op">=</span> <span class="fu">tidySpatialWorkshop</span><span class="fu">::</span><span class="va"><a href="../reference/spatial_data_gated.html">spatial_data_gated</a></span><span class="op">)</span> </span></code></pre></div>
 <p><code>tidySpatialExperiment</code> added a <code>.gated</code> column
 to the <code>SpatialExperiment</code> object. We can see this column in
 its tibble abstraction.</p>
@@ -1421,7 +1457,7 @@ et al., 2021</a>.)</p>
 <span><span class="co">##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            </span></span>
 <span><span class="co">## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       </span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## time zone: UTC</span></span>
+<span><span class="co">## time zone: Etc/UTC</span></span>
 <span><span class="co">## tzcode source: system (glibc)</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## attached base packages:</span></span>
@@ -1449,77 +1485,77 @@ et al., 2021</a>.)</p>
 <span><span class="co">## [35] here_1.0.1                     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
-<span><span class="co">##   [1] splines_4.5.0                  later_1.4.2                   </span></span>
-<span><span class="co">##   [3] BiocIO_1.19.0                  bitops_1.0-9                  </span></span>
-<span><span class="co">##   [5] filelock_1.0.3                 tibble_3.2.1                  </span></span>
-<span><span class="co">##   [7] XML_3.99-0.18                  lifecycle_1.0.4               </span></span>
-<span><span class="co">##   [9] httr2_1.1.2                    edgeR_4.7.2                   </span></span>
-<span><span class="co">##  [11] doParallel_1.0.17              rprojroot_2.0.4               </span></span>
-<span><span class="co">##  [13] MASS_7.3-65                    lattice_0.22-7                </span></span>
-<span><span class="co">##  [15] magrittr_2.0.3                 limma_3.65.0                  </span></span>
-<span><span class="co">##  [17] sass_0.4.10                    rmarkdown_2.29                </span></span>
-<span><span class="co">##  [19] jquerylib_0.1.4                yaml_2.3.10                   </span></span>
-<span><span class="co">##  [21] metapod_1.17.0                 httpuv_1.6.16                 </span></span>
-<span><span class="co">##  [23] ggside_0.3.1                   sessioninfo_1.2.3             </span></span>
-<span><span class="co">##  [25] cowplot_1.1.3                  DBI_1.2.3                     </span></span>
-<span><span class="co">##  [27] RColorBrewer_1.1-3             golem_0.5.1                   </span></span>
-<span><span class="co">##  [29] abind_1.4-8                    RCurl_1.98-1.17               </span></span>
-<span><span class="co">##  [31] rappdirs_0.3.3                 circlize_0.4.16               </span></span>
-<span><span class="co">##  [33] ggrepel_0.9.6                  irlba_2.3.5.1                 </span></span>
-<span><span class="co">##  [35] pheatmap_1.0.12                dqrng_0.4.1                   </span></span>
-<span><span class="co">##  [37] pkgdown_2.1.2                  codetools_0.2-20              </span></span>
-<span><span class="co">##  [39] DelayedArray_0.35.1            DT_0.33                       </span></span>
-<span><span class="co">##  [41] tidyselect_1.2.1               shape_1.4.6.1                 </span></span>
-<span><span class="co">##  [43] UCSC.utils_1.5.0               farver_2.1.2                  </span></span>
-<span><span class="co">##  [45] ScaledMatrix_1.17.0            viridis_0.6.5                 </span></span>
-<span><span class="co">##  [47] shinyWidgets_0.9.0             GenomicAlignments_1.45.0      </span></span>
-<span><span class="co">##  [49] jsonlite_2.0.0                 GetoptLong_1.0.5              </span></span>
-<span><span class="co">##  [51] BiocNeighbors_2.3.0            ellipsis_0.3.2                </span></span>
-<span><span class="co">##  [53] ggridges_0.5.6                 iterators_1.0.14              </span></span>
-<span><span class="co">##  [55] systemfonts_1.2.3              foreach_1.5.2                 </span></span>
-<span><span class="co">##  [57] tools_4.5.0                    ragg_1.4.0                    </span></span>
-<span><span class="co">##  [59] Rcpp_1.0.14                    gridExtra_2.3                 </span></span>
-<span><span class="co">##  [61] SparseArray_1.9.0              mgcv_1.9-3                    </span></span>
-<span><span class="co">##  [63] xfun_0.52                      withr_3.0.2                   </span></span>
-<span><span class="co">##  [65] BiocManager_1.30.25            fastmap_1.2.0                 </span></span>
-<span><span class="co">##  [67] fansi_1.0.6                    bluster_1.19.0                </span></span>
-<span><span class="co">##  [69] digest_0.6.37                  rsvd_1.0.5                    </span></span>
-<span><span class="co">##  [71] R6_2.6.1                       mime_0.13                     </span></span>
-<span><span class="co">##  [73] textshaping_1.0.1              RSQLite_2.3.11                </span></span>
-<span><span class="co">##  [75] tidySpatialWorkshop2025_0.18.5 config_0.3.2                  </span></span>
-<span><span class="co">##  [77] utf8_1.2.5                     data.table_1.17.0             </span></span>
-<span><span class="co">##  [79] rtracklayer_1.69.0             httr_1.4.7                    </span></span>
-<span><span class="co">##  [81] htmlwidgets_1.6.4              S4Arrays_1.9.0                </span></span>
-<span><span class="co">##  [83] pkgconfig_2.0.3                gtable_0.3.6                  </span></span>
-<span><span class="co">##  [85] blob_1.2.4                     ComplexHeatmap_2.25.0         </span></span>
-<span><span class="co">##  [87] XVector_0.49.0                 htmltools_0.5.8.1             </span></span>
-<span><span class="co">##  [89] clue_0.3-66                    scales_1.4.0                  </span></span>
-<span><span class="co">##  [91] png_0.1-8                      attempt_0.3.1                 </span></span>
-<span><span class="co">##  [93] knitr_1.50                     rjson_0.2.23                  </span></span>
-<span><span class="co">##  [95] nlme_3.1-168                   curl_6.2.2                    </span></span>
-<span><span class="co">##  [97] cachem_1.1.0                   GlobalOptions_0.1.2           </span></span>
-<span><span class="co">##  [99] BiocVersion_3.22.0             parallel_4.5.0                </span></span>
-<span><span class="co">## [101] vipor_0.4.7                    AnnotationDbi_1.71.0          </span></span>
-<span><span class="co">## [103] restfulr_0.0.15                desc_1.4.3                    </span></span>
-<span><span class="co">## [105] pillar_1.10.2                  grid_4.5.0                    </span></span>
-<span><span class="co">## [107] vctrs_0.6.5                    promises_1.3.2                </span></span>
-<span><span class="co">## [109] BiocSingular_1.25.0            beachmat_2.25.0               </span></span>
-<span><span class="co">## [111] xtable_1.8-4                   cluster_2.1.8.1               </span></span>
-<span><span class="co">## [113] beeswarm_0.4.0                 paletteer_1.6.0               </span></span>
-<span><span class="co">## [115] evaluate_1.0.3                 magick_2.8.6                  </span></span>
-<span><span class="co">## [117] Rsamtools_2.25.0               cli_3.6.5                     </span></span>
-<span><span class="co">## [119] locfit_1.5-9.12                compiler_4.5.0                </span></span>
-<span><span class="co">## [121] rlang_1.1.6                    crayon_1.5.3                  </span></span>
-<span><span class="co">## [123] labeling_0.4.3                 rematch2_2.1.2                </span></span>
-<span><span class="co">## [125] fs_1.6.6                       ggbeeswarm_0.7.2              </span></span>
-<span><span class="co">## [127] stringi_1.8.7                  viridisLite_0.4.2             </span></span>
-<span><span class="co">## [129] BiocParallel_1.43.0            Biostrings_2.77.0             </span></span>
-<span><span class="co">## [131] lazyeval_0.2.2                 Matrix_1.7-3                  </span></span>
-<span><span class="co">## [133] benchmarkme_1.0.8              bit64_4.6.0-1                 </span></span>
-<span><span class="co">## [135] KEGGREST_1.49.0                statmod_1.5.0                 </span></span>
-<span><span class="co">## [137] shiny_1.10.0                   tidygate_1.0.14               </span></span>
-<span><span class="co">## [139] igraph_2.1.4                   memoise_2.0.1                 </span></span>
-<span><span class="co">## [141] bslib_0.9.0                    benchmarkmeData_1.0.4         </span></span>
+<span><span class="co">##   [1] splines_4.5.0              later_1.4.2               </span></span>
+<span><span class="co">##   [3] BiocIO_1.19.0              bitops_1.0-9              </span></span>
+<span><span class="co">##   [5] filelock_1.0.3             tibble_3.2.1              </span></span>
+<span><span class="co">##   [7] XML_3.99-0.18              tidySpatialWorkshop_0.18.5</span></span>
+<span><span class="co">##   [9] lifecycle_1.0.4            httr2_1.1.2               </span></span>
+<span><span class="co">##  [11] edgeR_4.7.2                doParallel_1.0.17         </span></span>
+<span><span class="co">##  [13] rprojroot_2.0.4            MASS_7.3-65               </span></span>
+<span><span class="co">##  [15] lattice_0.22-7             magrittr_2.0.3            </span></span>
+<span><span class="co">##  [17] limma_3.65.0               sass_0.4.10               </span></span>
+<span><span class="co">##  [19] rmarkdown_2.29             jquerylib_0.1.4           </span></span>
+<span><span class="co">##  [21] yaml_2.3.10                metapod_1.17.0            </span></span>
+<span><span class="co">##  [23] httpuv_1.6.16              ggside_0.3.1              </span></span>
+<span><span class="co">##  [25] sessioninfo_1.2.3          cowplot_1.1.3             </span></span>
+<span><span class="co">##  [27] DBI_1.2.3                  RColorBrewer_1.1-3        </span></span>
+<span><span class="co">##  [29] golem_0.5.1                abind_1.4-8               </span></span>
+<span><span class="co">##  [31] RCurl_1.98-1.17            rappdirs_0.3.3            </span></span>
+<span><span class="co">##  [33] circlize_0.4.16            ggrepel_0.9.6             </span></span>
+<span><span class="co">##  [35] irlba_2.3.5.1              pheatmap_1.0.12           </span></span>
+<span><span class="co">##  [37] dqrng_0.4.1                pkgdown_2.1.2             </span></span>
+<span><span class="co">##  [39] codetools_0.2-20           DelayedArray_0.35.1       </span></span>
+<span><span class="co">##  [41] DT_0.33                    tidyselect_1.2.1          </span></span>
+<span><span class="co">##  [43] shape_1.4.6.1              UCSC.utils_1.5.0          </span></span>
+<span><span class="co">##  [45] farver_2.1.2               ScaledMatrix_1.17.0       </span></span>
+<span><span class="co">##  [47] viridis_0.6.5              shinyWidgets_0.9.0        </span></span>
+<span><span class="co">##  [49] GenomicAlignments_1.45.0   jsonlite_2.0.0            </span></span>
+<span><span class="co">##  [51] GetoptLong_1.0.5           BiocNeighbors_2.3.0       </span></span>
+<span><span class="co">##  [53] ellipsis_0.3.2             ggridges_0.5.6            </span></span>
+<span><span class="co">##  [55] iterators_1.0.14           systemfonts_1.2.3         </span></span>
+<span><span class="co">##  [57] foreach_1.5.2              tools_4.5.0               </span></span>
+<span><span class="co">##  [59] ragg_1.4.0                 Rcpp_1.0.14               </span></span>
+<span><span class="co">##  [61] gridExtra_2.3              SparseArray_1.9.0         </span></span>
+<span><span class="co">##  [63] mgcv_1.9-3                 xfun_0.52                 </span></span>
+<span><span class="co">##  [65] withr_3.0.2                BiocManager_1.30.25       </span></span>
+<span><span class="co">##  [67] fastmap_1.2.0              fansi_1.0.6               </span></span>
+<span><span class="co">##  [69] bluster_1.19.0             digest_0.6.37             </span></span>
+<span><span class="co">##  [71] rsvd_1.0.5                 R6_2.6.1                  </span></span>
+<span><span class="co">##  [73] mime_0.13                  textshaping_1.0.1         </span></span>
+<span><span class="co">##  [75] RSQLite_2.3.11             config_0.3.2              </span></span>
+<span><span class="co">##  [77] utf8_1.2.5                 data.table_1.17.0         </span></span>
+<span><span class="co">##  [79] rtracklayer_1.69.0         httr_1.4.7                </span></span>
+<span><span class="co">##  [81] htmlwidgets_1.6.4          S4Arrays_1.9.0            </span></span>
+<span><span class="co">##  [83] pkgconfig_2.0.3            gtable_0.3.6              </span></span>
+<span><span class="co">##  [85] blob_1.2.4                 ComplexHeatmap_2.25.0     </span></span>
+<span><span class="co">##  [87] XVector_0.49.0             htmltools_0.5.8.1         </span></span>
+<span><span class="co">##  [89] clue_0.3-66                scales_1.4.0              </span></span>
+<span><span class="co">##  [91] png_0.1-8                  attempt_0.3.1             </span></span>
+<span><span class="co">##  [93] knitr_1.50                 rjson_0.2.23              </span></span>
+<span><span class="co">##  [95] nlme_3.1-168               curl_6.2.2                </span></span>
+<span><span class="co">##  [97] cachem_1.1.0               GlobalOptions_0.1.2       </span></span>
+<span><span class="co">##  [99] BiocVersion_3.22.0         parallel_4.5.0            </span></span>
+<span><span class="co">## [101] vipor_0.4.7                AnnotationDbi_1.71.0      </span></span>
+<span><span class="co">## [103] restfulr_0.0.15            desc_1.4.3                </span></span>
+<span><span class="co">## [105] pillar_1.10.2              grid_4.5.0                </span></span>
+<span><span class="co">## [107] vctrs_0.6.5                promises_1.3.2            </span></span>
+<span><span class="co">## [109] BiocSingular_1.25.0        beachmat_2.25.0           </span></span>
+<span><span class="co">## [111] xtable_1.8-4               cluster_2.1.8.1           </span></span>
+<span><span class="co">## [113] beeswarm_0.4.0             paletteer_1.6.0           </span></span>
+<span><span class="co">## [115] evaluate_1.0.3             magick_2.8.6              </span></span>
+<span><span class="co">## [117] Rsamtools_2.25.0           cli_3.6.5                 </span></span>
+<span><span class="co">## [119] locfit_1.5-9.12            compiler_4.5.0            </span></span>
+<span><span class="co">## [121] rlang_1.1.6                crayon_1.5.3              </span></span>
+<span><span class="co">## [123] labeling_0.4.3             rematch2_2.1.2            </span></span>
+<span><span class="co">## [125] fs_1.6.6                   ggbeeswarm_0.7.2          </span></span>
+<span><span class="co">## [127] stringi_1.8.7              viridisLite_0.4.2         </span></span>
+<span><span class="co">## [129] BiocParallel_1.43.0        Biostrings_2.77.0         </span></span>
+<span><span class="co">## [131] lazyeval_0.2.2             Matrix_1.7-3              </span></span>
+<span><span class="co">## [133] benchmarkme_1.0.8          bit64_4.6.0-1             </span></span>
+<span><span class="co">## [135] KEGGREST_1.49.0            statmod_1.5.0             </span></span>
+<span><span class="co">## [137] shiny_1.10.0               tidygate_1.0.14           </span></span>
+<span><span class="co">## [139] igraph_2.1.4               memoise_2.0.1             </span></span>
+<span><span class="co">## [141] bslib_0.9.0                benchmarkmeData_1.0.4     </span></span>
 <span><span class="co">## [143] bit_4.6.0</span></span></code></pre>
 <p><strong>References</strong></p>
 <style type="text/css">
@@ -1531,6 +1567,7 @@ et al., 2021</a>.)</p>
   border-radius: 10px;
 }
 </style>
+</div>
 </div>
 </div>
 </div>

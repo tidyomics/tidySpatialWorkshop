@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Solutions to exercises • tidySpatialWorkshop2025</title>
+<title>Solutions to exercises • tidySpatialWorkshop</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
@@ -31,7 +31,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">tidySpatialWorkshop2025</a>
+        <a class="navbar-link" href="../index.html">tidySpatialWorkshop</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.18.5</span>
       </span>
     </div>
@@ -68,7 +68,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/tidyomics/tidySpatialWorkshop2025" class="external-link">
+  <a href="https://github.com/tidyomics/tidySpatialWorkshop" class="external-link">
     <span class="fa fa-github"></span>
 
   </a>
@@ -93,7 +93,7 @@ Institute<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
 </h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/tidyomics/tidySpatialWorkshop2025/blob/devel/vignettes/Solutions.Rmd" class="external-link"><code>vignettes/Solutions.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tidyomics/tidySpatialWorkshop/blob/improve_vignettes/vignettes/Solutions.Rmd" class="external-link"><code>vignettes/Solutions.Rmd</code></a></small>
       <div class="hidden name"><code>Solutions.Rmd</code></div>
 
     </div>
@@ -153,28 +153,31 @@ Institute<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
 <p><strong>Excercise 1.5</strong></p>
 </div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">is_endothelial_leptomeningeal</span> <span class="op">=</span> <span class="va">mat_df</span><span class="op">$</span><span class="va">endothelial_cell</span> <span class="op">&gt;</span><span class="fl">0.1</span> <span class="op">&amp;</span> <span class="va">mat_df</span><span class="op">$</span><span class="va">leptomeningeal_cell</span><span class="op">&gt;</span><span class="fl">0.1</span> <span class="op">&amp;</span> <span class="va">mat_df</span><span class="op">$</span><span class="va">endothelial_cell</span> <span class="op">+</span> <span class="va">mat_df</span><span class="op">$</span><span class="va">leptomeningeal_cell</span> <span class="op">&gt;</span> <span class="fl">0.4</span> </span>
+<code class="sourceCode R"><span><span class="co"># 1. Microglia + Neurons</span></span>
+<span><span class="va">is_microglia_neuron</span> <span class="op">&lt;-</span> <span class="va">mat_df</span><span class="op">$</span><span class="va">Microglia</span> <span class="op">&gt;</span> <span class="fl">0.1</span> <span class="op">&amp;</span></span>
+<span>                       <span class="va">mat_df</span><span class="op">$</span><span class="va">Neurons</span>   <span class="op">&gt;</span> <span class="fl">0.1</span> <span class="op">&amp;</span></span>
+<span>                       <span class="op">(</span><span class="va">mat_df</span><span class="op">$</span><span class="va">Microglia</span> <span class="op">+</span> <span class="va">mat_df</span><span class="op">$</span><span class="va">Neurons</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0.4</span></span>
+<span><span class="va">spatial_data</span><span class="op">$</span><span class="va">is_microglia_neuron</span> <span class="op">&lt;-</span> <span class="va">is_microglia_neuron</span></span>
 <span></span>
-<span><span class="va">spatial_data</span><span class="op">$</span><span class="va">is_endothelial_leptomeningeal</span> <span class="op">=</span> <span class="va">is_endothelial_leptomeningeal</span></span>
-<span></span>
-<span><span class="fu">ggspavis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotSpots.html" class="external-link">plotSpots</a></span><span class="op">(</span><span class="va">spatial_data</span>, annotate <span class="op">=</span> <span class="st">"is_endothelial_leptomeningeal"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">sample_id</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TRUE"</span><span class="op">=</span> <span class="st">"red"</span>, <span class="st">"FALSE"</span> <span class="op">=</span> <span class="st">"grey"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"endothelial + leptomeningeal"</span><span class="op">)</span></span>
+<span><span class="fu">ggspavis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotSpots.html" class="external-link">plotSpots</a></span><span class="op">(</span><span class="va">spatial_data</span>, annotate <span class="op">=</span> <span class="st">"is_microglia_neuron"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">sample_id</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TRUE"</span> <span class="op">=</span> <span class="st">"red"</span>, <span class="st">"FALSE"</span> <span class="op">=</span> <span class="st">"grey"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Microglia + Neurons"</span><span class="op">)</span></span>
 <span></span>
 <span></span>
+<span><span class="co"># 2. Astrocytes + Stem cells</span></span>
+<span><span class="co"># note the space in the column name — use backticks</span></span>
+<span><span class="va">is_astrocyte_stem</span> <span class="op">&lt;-</span> <span class="va">mat_df</span><span class="op">$</span><span class="va">Astrocytes</span>     <span class="op">&gt;</span> <span class="fl">0.1</span> <span class="op">&amp;</span></span>
+<span>                     <span class="va">mat_df</span><span class="op">$</span><span class="va">`Stem cells`</span>   <span class="op">&gt;</span> <span class="fl">0.1</span> <span class="op">&amp;</span></span>
+<span>                     <span class="op">(</span><span class="va">mat_df</span><span class="op">$</span><span class="va">Astrocytes</span> <span class="op">+</span> <span class="va">mat_df</span><span class="op">$</span><span class="va">`Stem cells`</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0.4</span></span>
+<span><span class="va">spatial_data</span><span class="op">$</span><span class="va">is_astrocyte_stem</span> <span class="op">&lt;-</span> <span class="va">is_astrocyte_stem</span></span>
 <span></span>
-<span></span>
-<span><span class="va">is_endothelial_oligodendrocytes</span> <span class="op">=</span> <span class="va">mat_df</span><span class="op">$</span><span class="va">endothelial_cell</span> <span class="op">&gt;</span><span class="fl">0.1</span> <span class="op">&amp;</span> <span class="va">mat_df</span><span class="op">$</span><span class="va">oligodendrocyte</span><span class="op">&gt;</span><span class="fl">0.05</span> <span class="op">&amp;</span> <span class="va">mat_df</span><span class="op">$</span><span class="va">endothelial_cell</span>  <span class="op">+</span> <span class="va">mat_df</span><span class="op">$</span><span class="va">oligodendrocyte</span> <span class="op">&gt;</span> <span class="fl">0.4</span> </span>
-<span></span>
-<span><span class="va">spatial_data</span><span class="op">$</span><span class="va">is_endothelial_oligodendrocyte</span> <span class="op">=</span> <span class="va">is_endothelial_oligodendrocytes</span></span>
-<span></span>
-<span><span class="fu">ggspavis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotSpots.html" class="external-link">plotSpots</a></span><span class="op">(</span><span class="va">spatial_data</span>, annotate <span class="op">=</span> <span class="st">"is_endothelial_oligodendrocyte"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">sample_id</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TRUE"</span><span class="op">=</span> <span class="st">"blue"</span>, <span class="st">"FALSE"</span> <span class="op">=</span> <span class="st">"grey"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"endothelial + oligodendrocyte"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">ggspavis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotSpots.html" class="external-link">plotSpots</a></span><span class="op">(</span><span class="va">spatial_data</span>, annotate <span class="op">=</span> <span class="st">"is_astrocyte_stem"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">sample_id</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TRUE"</span> <span class="op">=</span> <span class="st">"blue"</span>, <span class="st">"FALSE"</span> <span class="op">=</span> <span class="st">"grey"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Astrocytes + Stem cells"</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Excercise 1.6</strong> :::</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get reference</span></span>

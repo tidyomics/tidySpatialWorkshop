@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sequencing assays • tidySpatialWorkshop2025</title>
+<title>Sequencing assays • tidySpatialWorkshop</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
@@ -31,7 +31,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">tidySpatialWorkshop2025</a>
+        <a class="navbar-link" href="../index.html">tidySpatialWorkshop</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.18.5</span>
       </span>
     </div>
@@ -68,7 +68,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/tidyomics/tidySpatialWorkshop2025" class="external-link">
+  <a href="https://github.com/tidyomics/tidySpatialWorkshop" class="external-link">
     <span class="fa fa-github"></span>
 
   </a>
@@ -93,7 +93,7 @@ Institute<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
 </h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/tidyomics/tidySpatialWorkshop2025/blob/devel/vignettes/Session_1_sequencing_assays.Rmd" class="external-link"><code>vignettes/Session_1_sequencing_assays.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tidyomics/tidySpatialWorkshop/blob/improve_vignettes/vignettes/Session_1_sequencing_assays.Rmd" class="external-link"><code>vignettes/Session_1_sequencing_assays.Rmd</code></a></small>
       <div class="hidden name"><code>Session_1_sequencing_assays.Rmd</code></div>
 
     </div>
@@ -103,7 +103,6 @@ Institute<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
 <div class="section level2">
 <h2 id="session-1-spatial-analysis-of-sequencing-data">Session 1: Spatial Analysis of Sequencing Data<a class="anchor" aria-label="anchor" href="#session-1-spatial-analysis-of-sequencing-data"></a>
 </h2>
-<p>Web rendering: <a href="https://rpubs.com/mangiolas/1186971" class="external-link uri">https://rpubs.com/mangiolas/1186971</a></p>
 <div class="section level3">
 <h3 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h3>
@@ -2093,7 +2092,7 @@ indicates white matter:</p>
 <p>Explore additional visualisation features offered by the Visium
 platform, exposing the H&amp;E (hematoxylin and eosin) image.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">ggspavis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotVisium.html" class="external-link">plotVisium</a></span><span class="op">(</span><span class="va">spatial_data</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">ggspavis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotVisium.html" class="external-link">plotVisium</a></span><span class="op">(</span><span class="va">spatial_data</span>, point_size <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-12-1.png" width="576"></p>
 <p>This visualisation focuses on specific tissue features within the
 dataset, emphasising areas of interest. 1. <strong>Mitochondrial
@@ -2105,7 +2104,8 @@ of gene expression per spot</p>
 <code class="sourceCode R"><span><span class="fu">ggspavis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotVisium.html" class="external-link">plotVisium</a></span><span class="op">(</span></span>
 <span>  <span class="va">spatial_data</span>, </span>
 <span>  annotate <span class="op">=</span> <span class="st">"spatialLIBD"</span>, </span>
-<span>  highlight <span class="op">=</span> <span class="st">"in_tissue"</span></span>
+<span>  highlight <span class="op">=</span> <span class="st">"in_tissue"</span>, </span>
+<span>  point_size <span class="op">=</span><span class="fl">0.5</span></span>
 <span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">sample_id</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-13-1.png" width="576"></p>
@@ -2817,16 +2817,18 @@ squares.</p>
 <div class="section level5">
 <h5 id="producing-the-reference-for-single-cell-databases">Producing the reference for single-cell databases<a class="anchor" aria-label="anchor" href="#producing-the-reference-for-single-cell-databases"></a>
 </h5>
-<p><a href="https://stemangiola.github.io/cellNexus/" class="external-link">cellNexus</a> is a
-query interface that allow the programmatic exploration and retrieval of
-the harmonised, curated and reannotated CELLxGENE single-cell human cell
-atlas. Data can be retrieved at cell, sample, or dataset levels based on
-filtering criteria.</p>
-<p>Harmonised data is stored in the ARDC Nectar Research Cloud, and most
-cellNexus functions interact with Nectar via web requests, so a network
-connection is required for most functionality.</p>
-<p>Mangiola et al., 2025 doi <a href="https://www.biorxiv.org/content/10.1101/2023.06.08.542671v3" class="external-link">doi.org/10.1101/2023.06.08.542671</a></p>
-<p><img src="../inst/images/curated_atlas_query.png" width="700px"></p>
+<p>Here, we retrieve and prepare a single-cell RNA reference. The
+dataset in question, zhong-prefrontal-2018, originates from a study by
+Zhong et al. (2018), which offers a comprehensive single-cell
+transcriptomic survey of the human prefrontal cortex during development
+. Utilising the scRNAseq package, the dataset is fetched and
+subsequently processed to aggregate counts across cells sharing the same
+sample and cell type, thereby reducing data complexity and enhancing
+interpretability. Further filtering steps ensure the removal of empty
+columns and entries with missing cell type annotations. Finally, the
+logNormCounts function from the scuttle package is applied to perform
+log-normalisation, a crucial step for mitigating technical variability
+and preparing the data for accurate comparative analyses .</p>
 <div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get reference</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">scRNAseq</span><span class="op">)</span></span>
@@ -3299,7 +3301,7 @@ spatial heterogeneity.</p>
 <span>  scatterpie_alpha <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  pie_scale <span class="op">=</span> <span class="fl">0.4</span></span>
 <span><span class="op">)</span> </span></code></pre></div>
-<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-52-1.png" width="576"></p>
+<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-51-1.png" width="576"></p>
 <p>Let’s visualise without pit’syte_cell and endothelial cells, which
 oclet’sa lot of the visual spectrum.</p>
 <div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
@@ -3313,7 +3315,7 @@ oclet’sa lot of the visual spectrum.</p>
 <span><span class="op">)</span> </span></code></pre></div>
 <pre><code><span><span class="co">## Found more than one class "package_version" in cache; using the first, from namespace 'SeuratObject'</span></span></code></pre>
 <pre><code><span><span class="co">## Also defined by 'alabaster.base'</span></span></code></pre>
-<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-53-1.png" width="576"></p>
+<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-52-1.png" width="576"></p>
 <p>Let’s also exclude without muscle_cell, which occupy a lot of the
 visual spectrum.</p>
 <div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
@@ -3327,13 +3329,15 @@ visual spectrum.</p>
 <span><span class="op">)</span> </span></code></pre></div>
 <pre><code><span><span class="co">## Found more than one class "package_version" in cache; using the first, from namespace 'SeuratObject'</span></span></code></pre>
 <pre><code><span><span class="co">## Also defined by 'alabaster.base'</span></span></code></pre>
-<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-54-1.png" width="576"></p>
+<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-53-1.png" width="576"></p>
 <p>No, let’s look at the correlation matrices to see which cell type are
 most often occurring rather than mutually exclusive within our data
 set.</p>
 <div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/SPOTlight/man/plotCorrelationMatrix.html" class="external-link">plotCorrelationMatrix</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">mat</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-55-1.png" width="576"></p>
+<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-54-1.png" width="576"></p>
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mat_df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">mat</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level5">
 <h5 id="excercise">Excercise<a class="anchor" aria-label="anchor" href="#excercise"></a>
@@ -3345,57 +3349,128 @@ whether the correlation structure amongst cell types is consistent
 across samples. Do you think it’s consistent or noticeably
 different?</p>
 </div>
-<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">res_spatialLIBD</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/split.html" class="external-link">split</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">mat</span><span class="op">)</span>, <span class="fu">colData</span><span class="op">(</span><span class="va">spatial_data_gene_name</span><span class="op">)</span><span class="op">$</span><span class="va">spatialLIBD</span> <span class="op">)</span> </span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">res_spatialLIBD</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/pkg/SPOTlight/man/plotCorrelationMatrix.html" class="external-link">plotCorrelationMatrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span>,<span class="op">-</span><span class="fl">10</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
-<pre><code><span><span class="co">## $L1</span></span></code></pre>
-<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-56-1.png" width="576"></p>
-<pre><code><span><span class="co">## </span></span>
-<span><span class="co">## $L2</span></span></code></pre>
-<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-56-2.png" width="576"></p>
-<pre><code><span><span class="co">## </span></span>
-<span><span class="co">## $L3</span></span></code></pre>
-<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-56-3.png" width="576"></p>
-<pre><code><span><span class="co">## </span></span>
-<span><span class="co">## $L4</span></span></code></pre>
-<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-56-4.png" width="576"></p>
-<pre><code><span><span class="co">## </span></span>
-<span><span class="co">## $L5</span></span></code></pre>
-<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-56-5.png" width="576"></p>
-<pre><code><span><span class="co">## </span></span>
-<span><span class="co">## $L6</span></span></code></pre>
-<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-56-6.png" width="576"></p>
-<pre><code><span><span class="co">## </span></span>
-<span><span class="co">## $WM</span></span></code></pre>
-<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-56-7.png" width="576"></p>
 <div class="note">
 <p><strong>Exercise 1.5</strong></p>
-<p>Some of the most positive correlations involve the endothelial cells
-with Oligodendrocytes and Leptomeningeal cells.</p>
-<p>Leptomeningeal cells refer to the cells that make up the
-leptomeninges, which consist of two of the three layers olet’s meninges
-surrounding the brain and spinal cord: the arachnoid mater and the pia
-mater. These layers play a critical role in protecting the central
-nervous system and assisting in various physiological processes.</p>
-<p>Oligodendrocytes are a type of glial cell in the central nervous
-system (CNS) of vertebrates, including humans and mouse. These cells are
-crucial for the formation and maintenance of the myelin sheath, a fatty
-layer that encases the axons of many neurons.</p>
-<p>Let’s try to visualise the pixel where these cell types most
-occur.</p>
+<div class="section level3">
+<h3 id="exercise-1-5-adapted-to-your-current-cell-types">Exercise 1.5 (adapted to your current cell types)<a class="anchor" aria-label="anchor" href="#exercise-1-5-adapted-to-your-current-cell-types"></a>
+</h3>
+<p>Some of the most positive correlations in the new matrix are seen
+between:</p>
 <ul>
-<li>Label pixel that have &gt; 10% (&gt; 0.1) endothelial_cell and
-leptomeningeal_cell</li>
-<li>Label pixels that have &gt; 40% (&gt; 0.4) across these two
-cells</li>
-<li>Plot pixels colouring by the new label</li>
+<li>
+<strong>Microglia</strong> and <strong>Neurons</strong><br>
+</li>
+<li>
+<strong>Astrocytes</strong> and <strong>Stem.cells</strong>
+</li>
 </ul>
+<blockquote>
+<p><strong>Microglia</strong> are the resident immune cells of the
+central nervous system, constantly surveying the parenchyma and clearing
+debris.<br><strong>Neurons</strong> are the electrically excitable cells that
+transmit and process information via synaptic connections.<br><strong>Astrocytes</strong> are star-shaped glia that support neuronal
+metabolism, regulate extracellular ions and neurotransmitter
+uptake.<br><strong>Stem.cells</strong> denote undifferentiated progenitors capable
+of self-renewal and differentiation into multiple neural lineages.</p>
+</blockquote>
+<p>Let us now <strong>visualise</strong> where these pairs of cell types
+most co-occur in your spatial map. For <strong>each</strong> pair, carry
+out the following:</p>
+<ol style="list-style-type: decimal">
+<li>
+<strong>Label</strong> any pixel where both cell types exceed 10 %
+abundance (i.e. &gt; 0.1).<br>
+</li>
+<li>
+<strong>Label</strong> any pixel where the <em>sum</em> of their
+abundances exceeds 40 % (i.e. &gt; 0.4).<br>
+</li>
+<li>
+<strong>Plot</strong> the spatial coordinates of all pixels,
+<strong>colouring</strong> them by this new label (for example:
+<ul>
+<li>
+<code>0</code> = neither condition met<br>
+</li>
+<li>
+<code>1</code> = both abundances &gt; 0.1<br>
+</li>
+<li>
+<code>2</code> = summed abundance &gt; 0.4</li>
+</ul>
+</li>
+</ol>
+<p>You should end up with two analogous visualisations:</p>
+<ul>
+<li>
+<strong>Microglia + Neurons</strong><br>
+</li>
+<li><strong>Astrocytes + Stem.cells</strong></li>
+</ul>
+<p>Feel free to reuse your previous code, simply substituting the
+cell-type columns and updating the thresholds as above.</p>
 </div>
-<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mat_df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">mat</span><span class="op">)</span></span></code></pre></div>
+</div>
+</div>
+<div class="section level5">
+<h5 id="bonus---alternative-reference-from-the-human-cell-atlas---using-cellnexus">Bonus - Alternative reference from the Human Cell Atlas - using
+cellNexus<a class="anchor" aria-label="anchor" href="#bonus---alternative-reference-from-the-human-cell-atlas---using-cellnexus"></a>
+</h5>
+<p><a href="https://stemangiola.github.io/cellNexus/" class="external-link">cellNexus</a> is a
+query interface that allow the programmatic exploration and retrieval of
+the harmonised, curated and reannotated CELLxGENE single-cell human cell
+atlas. Data can be retrieved at cell, sample, or dataset levels based on
+filtering criteria.</p>
+<p>Harmonised data is stored in the ARDC Nectar Research Cloud, and most
+cellNexus functions interact with Nectar via web requests, so a network
+connection is required for most functionality.</p>
+<p>Mangiola et al., 2025 doi <a href="https://www.biorxiv.org/content/10.1101/2023.06.08.542671v3" class="external-link">doi.org/10.1101/2023.06.08.542671</a></p>
+<p><img src="../inst/images/curated_atlas_query.png" width="700px"></p>
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Get reference</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">cellNexus</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/HDF5Array" class="external-link">HDF5Array</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">tmp_file_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">brain_reference</span> <span class="op">=</span></span>
+<span>  </span>
+<span>  <span class="co"># Query metadata across 30M cells</span></span>
+<span>  <span class="fu">get_metadata</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  </span>
+<span>  <span class="co"># Filter your data of interest</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">tissue_groups</span><span class="op">==</span><span class="st">"cerebral lobes and cortical areas"</span>, <span class="va">disease</span> <span class="op">==</span> <span class="st">"Normal"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  </span>
+<span>  <span class="co"># Collect pseudobulk as SummarizedExperiment</span></span>
+<span>  <span class="fu">get_pseudobulk</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  </span>
+<span>  <span class="co"># Normalise for Spotlight</span></span>
+<span>  <span class="fu">scuttle</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/scuttle/man/logNormCounts.html" class="external-link">logNormCounts</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  </span>
+<span>  <span class="co"># Save for fast reading</span></span>
+<span>  <span class="fu">HDF5Array</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/HDF5Array/man/saveHDF5SummarizedExperiment.html" class="external-link">saveHDF5SummarizedExperiment</a></span><span class="op">(</span><span class="va">tmp_file_path</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/HDF5Array" class="external-link">HDF5Array</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">brain_reference</span> <span class="op">=</span> <span class="fu">HDF5Array</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/HDF5Array/man/saveHDF5SummarizedExperiment.html" class="external-link">loadHDF5SummarizedExperiment</a></span><span class="op">(</span><span class="va">tmp_file_path</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">my_metadata</span> <span class="op">=</span> <span class="fu">colData</span><span class="op">(</span><span class="va">brain_reference</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">my_metadata</span><span class="op">)</span>, format <span class="op">=</span> <span class="st">"html"</span><span class="op">)</span></span></code></pre></div>
+<p>These are the cell types included in our reference, and the number of
+pseudobulk samples we have for each cell type.</p>
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">brain_reference</span><span class="op">$</span><span class="va">cell_type_harmonised</span><span class="op">)</span></span></code></pre></div>
+<p>These are the number of samples we have for each of the three data
+sets.</p>
+<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">brain_reference</span><span class="op">$</span><span class="va">dataset_id</span><span class="op">)</span></span></code></pre></div>
+<p>The <code>collection_id</code> can be used to gather information on
+the cell database. e.g. <a href="https://cellxgene.cziscience.com/collections/" class="external-link uri">https://cellxgene.cziscience.com/collections/</a><collection_id></collection_id></p>
+<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">brain_reference</span><span class="op">$</span><span class="va">collection_id</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Session Information</strong></p>
-<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## R version 4.5.0 (2025-04-11)</span></span>
 <span><span class="co">## Platform: x86_64-pc-linux-gnu</span></span>
@@ -3413,7 +3488,7 @@ cells</li>
 <span><span class="co">##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            </span></span>
 <span><span class="co">## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       </span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## time zone: UTC</span></span>
+<span><span class="co">## time zone: Etc/UTC</span></span>
 <span><span class="co">## tzcode source: system (glibc)</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## attached base packages:</span></span>
