@@ -144,6 +144,10 @@ Maynard and Torres et al., doi: [10.1038/s41593-020-00787-0](https://www.ncbi.nl
 library(spatialLIBD)
 library(ExperimentHub)
 
+# To avoid error for SPE loading 
+# https://support.bioconductor.org/p/9161859/#9161863
+setClassUnion("ExpData", c("matrix", "SummarizedExperiment"))
+
 spatial_data <- 
   ExperimentHub::ExperimentHub() |> 
   spatialLIBD::fetch_data( eh = _, type = "spe")

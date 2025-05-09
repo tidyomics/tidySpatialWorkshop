@@ -77,7 +77,11 @@ This [data package](https://bioconductor.org/packages/release/data/experiment/ht
 
 ```{r, eval=FALSE}
 
-eh = ExperimentHub(cache = "/vast/scratch/users/mangiola.s")
+# To avoid error for SPE loading 
+# https://support.bioconductor.org/p/9161859/#9161863
+setClassUnion("ExpData", c("matrix", "SummarizedExperiment"))
+
+eh = ExperimentHub()
 query(eh, "SubcellularSpatialData")
 
 # Brain Mouse data
@@ -94,6 +98,10 @@ tx_small =  tx[sample(seq_len(nrow(tx)), size = nrow(tx)/500),]
 ```
 
 ```{r, echo=FALSE}
+# To avoid error for SPE loading 
+# https://support.bioconductor.org/p/9161859/#9161863
+setClassUnion("ExpData", c("matrix", "SummarizedExperiment"))
+
 options(timeout = max(300, getOption("timeout")))
 tx_small_file = tempfile() 
 utils:: download.file("https://zenodo.org/records/11213118/files/tx_small.rda?download=1", destfile = tx_small_file)
