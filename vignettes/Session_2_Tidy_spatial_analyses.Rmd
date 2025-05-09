@@ -24,7 +24,6 @@ library(here)
 
 ## Introduction to tidyomics
 
-
 `tidyomics` represents a significant advancement in bioinformatics analysis by bridging the gap between Bioconductor and the tidyverse ecosystem. This integration provides several key benefits:
 
 1. **Unified Analysis Framework**: Combines the power of Bioconductor's specialized biological data structures with tidyverse's intuitive data manipulation
