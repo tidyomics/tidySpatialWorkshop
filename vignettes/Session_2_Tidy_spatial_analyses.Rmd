@@ -22,7 +22,19 @@ library(here)
 
 # Session 2: Tidying spatial data
 
-A good introduction of `tidyomics` can be found here
+## Introduction to tidyomics
+
+`tidyomics` represents a significant advancement in bioinformatics analysis by bridging the gap between Bioconductor and the tidyverse ecosystem. This integration provides several key benefits:
+
+1. **Unified Analysis Framework**: Combines the power of Bioconductor's specialized biological data structures with tidyverse's intuitive data manipulation
+2. **Maintained Compatibility**: Preserves original data containers and methods, ensuring long-term support
+3. **Enhanced Workflow Efficiency**: Enables streamlined analysis pipelines using familiar tidyverse syntax
+
+The ecosystem includes several specialized packages:
+- `tidySummarizedExperiment`: For bulk RNA-seq analysis
+- `tidySingleCellExperiment`: For single-cell data
+- `tidySpatialExperiment`: For spatial transcriptomics
+- Additional tools: `plyranges`, `nullranges`, `tidyseurat`, `tidybulk`, `tidytof`
 
 [tidySpatialWorkshop](https://github.com/tidyomics/tidySpatialWorkshop) 
 [tidy transcriptomic manifesto](https://tidyomics.github.io/tidyomicsBlog/post/2021-07-07-tidy-transcriptomics-manifesto/)
@@ -61,7 +73,7 @@ BiocManager::install(c("lmweber/ggspavis",
 
 ```
 
-**Then please restart your R session** to make sure the packages we will load will be the ones we intalled mode recently. 
+**Important:** Please restart your R session after installation to ensure the updated packages are loaded correctly.
 
 Let's load the libraries needed for this session
 
@@ -116,6 +128,14 @@ spatial_data
 ::: {.note}
 If `ExperimentHub` should not work. The `spatial_data` object from the previous code block can be downloaded from [Zenodo - 10.5281/zenodo.11233385](https://zenodo.org/records/11233385/files/tidySpatialWorkshop_spatial_data.rds?download=1)
 :::
+
+## Working with tidySpatialExperiment
+
+The `tidySpatialExperiment` package creates a bridge between `SpatialExperiment` objects and the tidyverse ecosystem. It provides:
+
+1. A tidy data view of `SpatialExperiment` objects
+2. Compatible dplyr, tidyr, ggplot and plotly functions
+3. Seamless integration with existing SpatialExperiment functionality
 
 ### 1. tidySpatialExperiment package
 
@@ -726,7 +746,7 @@ Here, we will show how to use ad-hoc spatial visualisation, as well as `ggplot` 
 
 #### Ad-hoc visualisation: Plotting the regions
 
-Let’s visualise the regions that spatialLIBD labelled across three Visium 10X samples.
+Let's visualise the regions that spatialLIBD labelled across three Visium 10X samples.
 
 ```{r, fig.width=7, fig.height=8}
 spatial_data_filtered |> 
