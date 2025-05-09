@@ -4,7 +4,7 @@ author:
   - Stefano Mangiola, South Australian immunoGENomics Cancer Institute^[<mangiola.stefano@adelaide.edu.au>], Walter and Eliza Hall Institute^[<mangiola.s at wehi.edu.au>]
   - Luciano Martellotto, Adelaide Centre for Epigenetics, South Australian immunoGENomics Cancer Institute^[<luciano.martelotto@adelaide.edu.au>]
 output: rmarkdown::html_vignette
-# bibliography: "`r file.path(system.file(package='tidySpatialWorkshop2025', 'bibliography'), 'bibliography.bib')`"
+# bibliography: "`r file.path(system.file(package='tidySpatialWorkshop', 'bibliography'), 'bibliography.bib')`"
 vignette: >
   %\VignetteIndexEntry{Introduction to Spatial omic analyses}
   %\VignetteEncoding{UTF-8}
@@ -54,7 +54,7 @@ knitr::include_graphics(here("inst/images/physalia-min.png"))
 
 You can view the material at the workshop webpage
 
-[here](https://tidyomics.github.io/tidySpatialWorkshop2025/articles/main.html).
+[here](https://tidyomics.github.io/tidySpatialWorkshop/index.html).
 
 ## Workshop package installation 
 
@@ -72,24 +72,25 @@ BiocManager::install("tidyomics/tidySpatialWorkshop", dependencies = TRUE)
 BiocManager::install("tidyomics/tidySpatialWorkshop", build_vignettes = TRUE, force=TRUE)
 
 # To view vignette
-library(tidySpatialWorkshop2025)
+library(tidySpatialWorkshop)
 vignette("Introduction")
 ```
 
 ## Interactive execution of the vignettes
 
-From command line, and enter the tidySpatialWorkshop2025 directory.
+From command line, and enter the tidySpatialWorkshop directory.
 
 ```
 # Open the command line
-git clone git@github.com:tidyomics/tidySpatialWorkshop2025.git
+git clone git@github.com:tidyomics/tidySpatialWorkshop.git
 
 ```
 
-Alternatively download the [git zipped package](https://github.com/tidyomics/tidySpatialWorkshop2025/archive/refs/heads/devel.zip). Uncompress it. And enter the directory. 
+Alternatively download the [git zipped package](https://github.com/tidyomics/tidySpatialWorkshop/archive/refs/heads/devel.zip). Uncompress it. And enter the directory. 
 
 # Announcements
 
+Tidyomics is now published in (Nature Methods)[https://www.nature.com/articles/s41592-024-02299-2]. And availabel for (free) here[https://www.biorxiv.org/content/10.1101/2023.09.10.557072v3].
 
 # Introduction to Spatial Omics
 
@@ -100,35 +101,65 @@ sequencing in experimental and analytical contexts.
 
 ### Workshop Structure
 
-#### 1. Welcome and Introduction
+#### Day 1
 
--   Overview of the workshop.
--   Goals for Day 1.
+##### 1. Welcome and Introduction
 
-#### 2. What is Spatial Omics?
+-   Introduction of the instructor
+-   Introduction of the crowd
+-   Overview and goals of the workshop.
+
+##### 2. What is Spatial Omics?
 
 -   Definition and significance in modern biology.
 -   Key applications and impact.
-
-#### 3. Technologies in Spatial Omics
-
 -   Overview of different spatial omics technologies.
 -   Comparison of imaging-based vs sequencing-based approaches.
 
-#### 4. Sequencing Spatial Omics
+##### 3. Sequencing Spatial Omics
 
 -   Detailed comparison of methodologies.
 -   Experimental design considerations.
 -   Data analysis challenges and solutions.
 
-#### 5. Overview of Analysis Frameworks
+##### 5. Analysis of sequencing based spatial data
 
--   Introduction to various analysis frameworks.
--   Brief mention of 'tidy' data principles in spatial omics.
+-   Getting Started with SpatialExperiment.
+-   Data Visualisation and Manipulation.
+-   Quality control and filtering.
+-   Dimensionality reduction.
+-   Spatial Clustering.
+-   Deconvolution of pixel-based spatial data.
 
-#### 6. Wrap-Up and Q&A
+#### Day 2
 
--   Summarize key takeaways.
--   Open floor for questions and discussions.
+##### 1. Introduction to tidyomics
+
+-   Use tidyverse on spatial, single-cell, pseudobulk and bulk genomic data   
+
+##### 2. Working with tidySpatialExperiment
+
+-   tidySpatialExperiment package
+-   Tidyverse commands
+-   Advanced filtering/gating and pseudobulk
+-   Work with features
+-   Summarisation/aggregation
+-   tidyfying your workflow
+-   Visualisation
+
+#### Day 3
+
+##### 1. Imaging Spatial Omics
+
+-   Detailed comparison of methodologies.
+-   Experimental design considerations.
+-   Data analysis challenges and solutions.
+
+##### 2. Spatial analyses of imaging data
+
+-   Working with imaging-based data in Bioconductor with MoleculeExperiment
+-   Aggregation and analysis
+-   Clustering
+-   Neighborhood analyses
 
 

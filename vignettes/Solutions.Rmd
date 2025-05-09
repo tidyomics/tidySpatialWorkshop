@@ -3,9 +3,9 @@ title: "Solutions to exercises"
 author:
   - Stefano Mangiola, South Australian immunoGENomics Cancer Institute^[<mangiola.stefano@adelaide.edu.au>], Walter and Eliza Hall Institute^[<mangiola.s at wehi.edu.au>]
 output: rmarkdown::html_vignette
-# bibliography: "`r file.path(system.file(package='tidySpatialWorkshop2025', 'vignettes'), 'tidyomics.bib')`"
+# bibliography: "`r file.path(system.file(package='tidySpatialWorkshop', 'vignettes'), 'tidyomics.bib')`"
 vignette: >
-  %\VignetteIndexEntry{Sequencing assays}
+  %\VignetteIndexEntry{Solutions to exercises}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 ---
@@ -96,31 +96,31 @@ lapply(res_spatialLIBD, function(x) plotCorrelationMatrix(as.matrix(x[,-10])))
 
 ```{r, fig.width=7, fig.height=8, eval=FALSE}
 
+# 1. Microglia + Neurons
+is_microglia_neuron <- mat_df$Microglia > 0.1 &
+                       mat_df$Neurons   > 0.1 &
+                       (mat_df$Microglia + mat_df$Neurons) > 0.4
+spatial_data$is_microglia_neuron <- is_microglia_neuron
+
+ggspavis::plotSpots(spatial_data, annotate = "is_microglia_neuron") +
+  facet_wrap(~sample_id) +
+  scale_color_manual(values = c("TRUE" = "red", "FALSE" = "grey")) +
+  theme(legend.position = "none") +
+  labs(title = "Microglia + Neurons")
 
 
-is_endothelial_leptomeningeal = mat_df$endothelial_cell >0.1 & mat_df$leptomeningeal_cell>0.1 & mat_df$endothelial_cell + mat_df$leptomeningeal_cell > 0.4 
+# 2. Astrocytes + Stem cells
+# note the space in the column name — use backticks
+is_astrocyte_stem <- mat_df$Astrocytes     > 0.1 &
+                     mat_df$`Stem cells`   > 0.1 &
+                     (mat_df$Astrocytes + mat_df$`Stem cells`) > 0.4
+spatial_data$is_astrocyte_stem <- is_astrocyte_stem
 
-spatial_data$is_endothelial_leptomeningeal = is_endothelial_leptomeningeal
-
-ggspavis::plotSpots(spatial_data, annotate = "is_endothelial_leptomeningeal") +
-    facet_wrap(~sample_id) +
-  scale_color_manual(values = c("TRUE"= "red", "FALSE" = "grey"))
-theme(legend.position = "none") +
-  labs(title = "endothelial + leptomeningeal")
-
-
-
-
-is_endothelial_oligodendrocytes = mat_df$endothelial_cell >0.1 & mat_df$oligodendrocyte>0.05 & mat_df$endothelial_cell  + mat_df$oligodendrocyte > 0.4 
-
-spatial_data$is_endothelial_oligodendrocyte = is_endothelial_oligodendrocytes
-
-ggspavis::plotSpots(spatial_data, annotate = "is_endothelial_oligodendrocyte") +
-    facet_wrap(~sample_id) +
-  scale_color_manual(values = c("TRUE"= "blue", "FALSE" = "grey"))
-theme(legend.position = "none") +
-  labs(title = "endothelial + oligodendrocyte")
-
+ggspavis::plotSpots(spatial_data, annotate = "is_astrocyte_stem") +
+  facet_wrap(~sample_id) +
+  scale_color_manual(values = c("TRUE" = "blue", "FALSE" = "grey")) +
+  theme(legend.position = "none") +
+  labs(title = "Astrocytes + Stem cells")
 ```
 
 **Excercise 1.6**

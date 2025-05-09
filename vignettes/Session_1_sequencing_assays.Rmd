@@ -3,7 +3,7 @@ title: "Sequencing assays"
 author:
   - Stefano Mangiola, South Australian immunoGENomics Cancer Institute^[<mangiola.stefano@adelaide.edu.au>], Walter and Eliza Hall Institute^[<mangiola.s at wehi.edu.au>]
 output: rmarkdown::html_vignette
-# bibliography: "`r file.path(system.file(package='tidySpatialWorkshop2025', 'vignettes'), 'tidyomics.bib')`"
+# bibliography: "`r file.path(system.file(package='tidySpatialWorkshop', 'vignettes'), 'tidyomics.bib')`"
 vignette: >
   %\VignetteIndexEntry{Sequencing assays}
   %\VignetteEncoding{UTF-8}
@@ -16,8 +16,6 @@ knitr::opts_chunk$set(echo = TRUE, cache = FALSE)
 ```
 
 # Session 1: Spatial Analysis of Sequencing Data
-
-Web rendering: https://rpubs.com/mangiolas/1186971
 
 ## Overview
 
@@ -38,6 +36,57 @@ By the end of this session, participants will be able to:
 - Basic knowledge of R programming
 - Familiarity with genomic data concepts
 - Understanding of basic statistical methods
+
+## Experimental technologies
+
+**Spatial-omics** encompasses a suite of powerful methods that reveal not only which genes are active in a tissue but also exactly where those genes are switched on. One widely used strategy involves laying a thin slice of tissue onto a specially prepared glass slide that carries an array of microscopic “spots,” each spot marked with its own unique molecular barcode. As the tissue is gently broken down, the messenger RNA molecules released from each cell adhere to the underlying spots and pick up that spot’s barcode. By sequencing the barcodes together with the captured RNA, researchers can reconstruct a two-dimensional map of gene expression. For example, the Visium platform from 10x Genomics uses this barcoded-surface approach to chart gene activity across tumour biopsies, helping oncologists to identify pockets of treatment-resistant cells within a cancerous mass.
+
+An alternative method, known as **combinatorial FISH** (fluorescence in situ hybridisation), skips the need for physical barcodes by using fluorescent probes that bind directly to RNA molecules within intact tissue. Each probe is tagged with a small coloured label, and by carrying out multiple rounds of staining, imaging and probe removal, a unique sequence of coloured dots is generated for each target gene. It’s akin to reading a barcode of coloured spots: once the entire sequence of images has been captured, computational decoding reveals which gene each pattern corresponds to and pinpoints its exact location. This technique underlies MERFISH (Multiplexed Error-Robust FISH), which neuroscientists often employ to map hundreds of genes simultaneously in brain sections, illuminating the molecular identities of different neuronal subtypes.
+
+**In-situ sequencing** offers yet another route to spatially resolved transcriptomics by performing the sequencing reactions directly within fixed tissue sections. Rather than relying on pre-made probes, this approach uses a series of enzymatic ligation or polymerisation steps to read out the RNA sequence base by base. At each cycle, fluorescently labelled reagents indicate which nucleotide (A, C, G or T) has been incorporated, and repeated imaging across multiple cycles yields short sequence reads in situ. Once these reads are matched to a reference genome, they reveal precisely where specific transcripts lie. Developmental biologists have harnessed this method—pioneered by technologies such as Fluorescent In Situ Sequencing (FISSEQ)—to follow gene expression patterns during embryo formation, tracking how cells differentiate according to their spatial context.
+
+```{r, echo=FALSE, out.width="700px"}
+library(here)
+
+knitr::include_graphics(here("inst/images/three_technologies.png"))
+```
+
+The **Visium CytAssist** platform from 10x Genomics brings the power of spatial transcriptomics into a streamlined, sequencing-based workflow. At its heart lies a standard glass slide bearing an 11 mm by 11 mm capture area patterned with roughly 14 000 microscopic spots (or 5 000 spots on a smaller 6.5 mm by 6.5 mm format). Each spot is densely coated with millions of identical oligonucleotides, each bearing a unique spatial barcode, a unique molecular identifier (UMI) and a poly(dT) tail designed to bind the polyadenylated tails of mRNA. When a fresh‐frozen or FFPE tissue section is mounted onto this slide, RNA molecules released during permeabilisation will hybridise to these oligos, effectively “stamping” each transcript with its precise tissue coordinates.
+
+The CytAssist instrument automates the critical steps of permeabilisation, RNA digestion and probe release. Rather than capturing native transcripts directly, Visium employs probe hybridisation: a comprehensive set of probes tiles the entire transcriptome (v2 chemistry covers some 18 000 human or 19 000 mouse genes), binding selectively to their target RNAs. Once the tissue has been permeabilised, these probes are enzymatically released and immediately recaptured by the underlying barcoded array. A short extension reaction then attaches the probe insert to the spatial barcode and UMI, before a denaturation step frees the complete construct for library preparation.
+
+Sequencing libraries are configured so that Read 1 decodes the slide’s spatial barcode and the UMI, while Read 2 reads into the ligated probe insert, revealing the gene identity. To ensure robust detection of both abundant and rare messages, Visium recommends a minimum of 25 000 read‐pairs per covered spot. Optional immunofluorescence staining can be performed in parallel, providing morphological and protein‐level context alongside the transcriptomic data.
+
+In practice, Visium CytAssist has found widespread use across many fields. Cancer researchers have applied it to map immune cell infiltration and stromal niches within melanoma or breast carcinoma biopsies. Developmental biologists use it to chart gene expression gradients in embryonic tissues, revealing how cells acquire distinct identities in different locations. Even neuroscientists have begun to dissect the molecular architecture of brain regions, linking spatial patterns of gene activity with anatomy and function. By combining a turnkey instrument with a comprehensive probe set and high‐throughput sequencing, Visium offers an accessible route to the spatial “geography” of gene expression in virtually any tissue.
+
+```{r, echo=FALSE, out.width="700px"}
+library(here)
+
+knitr::include_graphics(here("inst/images/visium.png"))
+```
+
+The **Visium HD** system represents a next-generation leap in spatial transcriptomics, offering subcellular resolution on a standard CytAssist instrument. Instead of discrete 55 µm spots, the Visium HD slide presents a continuous lawn of capture oligonucleotides across a 6.5 mm × 6.5 mm area, each oligo bearing a unique spatial barcode and UMI. These barcodes are patterned in a fine grid of 2 µm × 2 µm squares, which are digitally binned into 8 µm × 8 µm “pixels” for data analysis. In practice, this means that gene expression can be mapped at roughly one-cell or even subcellular scale—more than a six-fold improvement in resolution compared with the original Visium array.
+
+As with the standard Visium workflow, fresh-frozen or FFPE tissue sections are first stained (H&E or immunofluorescence, if desired) and imaged for morphological context. The CytAssist then automates permeabilisation, RNA digestion and probe‐release steps: a comprehensive probe set tiles the entire transcriptome, binding each target mRNA; released probes are recaptured by the underlying barcoded oligo lawn; and a short extension reaction fuses the probe insert to its spatial barcode and UMI. After denaturation frees these constructs, they undergo library preparation and high-throughput sequencing. Read 1 decodes the spatial barcode and UMI, while Read 2 reads into the probe insert to identify the gene. To cover the full 6.5 mm capture area at HD resolution, Visium HD recommends approximately 275 million read-pairs per run.
+
+```{r, echo=FALSE, out.width="700px"}
+library(here)
+
+knitr::include_graphics(here("inst/images/visiumhd.png"))
+```
+
+**BGI’s STOmics** system brings spatial transcriptomics onto DNA nanoball (DNB) patterned chips that can cover areas from a few square millimetres right up to an entire microscope slide, offering both enormous scale and subcellular resolution. The process begins with the creation of a dense array of molecular “nanoballs,” each just 220 nm across and stamped onto the chip in a precise grid. During chip manufacture, each nanoball is endowed with three key elements: a poly-T tail for capturing polyadenylated mRNA, a unique molecular identifier (UMI) to count individual transcripts, and a coordinate identifier (CID) that records its exact X–Y position on the array.
+
+Once a freshly frozen or paraformaldehyde-fixed tissue section has been mounted and (optionally) stained for nuclei or protein markers, the chip is brought into contact with the specimen so that mRNA diffuses down into the nanoball layer and hybridises to the poly-T oligos. Reverse transcription then converts these captured RNAs into complementary DNA, preserving both their sequence information and spatial tag. Library construction and high-throughput sequencing follow much as in conventional RNA-seq, but every read now carries the CID and UMI, which bioinformatics pipelines use to reconstruct a high-density map of gene expression.
+
+The sheer density of the DNB pattern—over 25 000 spots per 100 µm² in the highest-resolution formats—means that STOmics can detect transcripts at nearly subcellular scale, revealing fine-grained differences in gene activity within single cells or across tiny tissue niches. At the same time, chip formats up to 174 cm² in area allow researchers to profile entire organs or large tissue biopsies in one run, without stitching together multiple fields of view. In practice, developmental biologists have used this platform to survey gene expression across whole zebrafish embryos, while tumour biologists have mapped the spatial organisation of immune infiltrates in large cancer resections. By marrying nanometre-scale resolution with slide-wide coverage, BGI’s STOmics empowers scientists to explore biological landscapes from the level of subcellular compartments all the way up to entire tissue architectures.
+
+```{r, echo=FALSE, out.width="700px"}
+library(here)
+
+knitr::include_graphics(here("inst/images/stomics.png"))
+```
+
 
 ## Introduction to Bioconductor
 
@@ -146,6 +195,10 @@ Maynard and Torres et al., doi: [10.1038/s41593-020-00787-0](https://www.ncbi.nl
 library(spatialLIBD)
 library(ExperimentHub)
 
+# To avoid error for SPE loading 
+# https://support.bioconductor.org/p/9161859/#9161863
+setClassUnion("ExpData", c("matrix", "SummarizedExperiment"))
+
 spatial_data <- 
   ExperimentHub::ExperimentHub() |> 
   spatialLIBD::fetch_data( eh = _, type = "spe")
@@ -221,7 +274,7 @@ ggspavis::plotSpots(
 Explore additional visualisation features offered by the Visium platform, exposing the H&E (hematoxylin and eosin) image.
 
 ```{r, fig.width=6, fig.height=6}
-ggspavis::plotVisium(spatial_data)
+ggspavis::plotVisium(spatial_data, point_size = 0.5)
 ```
 
 This visualisation focuses on specific tissue features within the dataset, emphasising areas of interest.
@@ -233,7 +286,8 @@ This visualisation focuses on specific tissue features within the dataset, empha
 ggspavis::plotVisium(
   spatial_data, 
   annotate = "spatialLIBD", 
-  highlight = "in_tissue"
+  highlight = "in_tissue", 
+  point_size =0.5
 ) + 
   facet_wrap(~sample_id)
 
@@ -763,19 +817,7 @@ SPOTlight uses a seeded non-negative matrix factorization regression, initialize
 
 #### Producing the reference for single-cell databases
 
-[cellNexus](https://stemangiola.github.io/cellNexus/) is a query interface that allow the programmatic exploration and retrieval of the harmonised, curated and reannotated CELLxGENE single-cell human cell atlas. Data can be retrieved at cell, sample, or dataset levels based on filtering criteria.
-
-Harmonised data is stored in the ARDC Nectar Research Cloud, and most cellNexus functions interact with Nectar via web requests, so a network connection is required for most functionality.
-
-Mangiola et al., 2025 doi [doi.org/10.1101/2023.06.08.542671](https://www.biorxiv.org/content/10.1101/2023.06.08.542671v3)
-
-```{r, echo=FALSE, out.width="700px"}
-knitr::include_graphics(here("inst/images/curated_atlas_query.png"))
-```
-
-
-
-
+Here, we retrieve and prepare a single-cell RNA reference. The dataset in question, zhong-prefrontal-2018, originates from a study by Zhong et al. (2018), which offers a comprehensive single-cell transcriptomic survey of the human prefrontal cortex during development . Utilising the scRNAseq package, the dataset is fetched and subsequently processed to aggregate counts across cells sharing the same sample and cell type, thereby reducing data complexity and enhancing interpretability. Further filtering steps ensure the removal of empty columns and entries with missing cell type annotations. Finally, the logNormCounts function from the scuttle package is applied to perform log-normalisation, a crucial step for mitigating technical variability and preparing the data for accurate comparative analyses .
 
 ```{r, message=FALSE, warning=FALSE,  fig.width=6, fig.height=6}
 # Get reference
@@ -942,6 +984,9 @@ No, let's look at the correlation matrices to see which cell type are most often
 
 plotCorrelationMatrix(res$mat)
 ```
+```{r}
+mat_df = as.data.frame(res$mat)
+```
 
 #### Excercise
 
@@ -954,35 +999,111 @@ Rather than looking at the correlation matrix, overall, let's observe whether th
 :::
 
 
-```{r, fig.width=6, fig.height=6}
-res_spatialLIBD = split(data.frame(res$mat), colData(spatial_data_gene_name)$spatialLIBD ) 
-
-lapply(res_spatialLIBD, function(x) plotCorrelationMatrix(as.matrix(x[,-10]))) 
-```
-
-
-
 ::: {.note}
 **Exercise 1.5**
 
-Some of the most positive correlations involve the endothelial cells with Oligodendrocytes and Leptomeningeal cells.
+## Exercise 1.5 (adapted to your current cell types)
 
-Leptomeningeal cells refer to the cells that make up the leptomeninges, which consist of two of the three layers olet's meninges surrounding the brain and spinal cord: the arachnoid mater and the pia mater. These layers play a critical role in protecting the central nervous system and assisting in various physiological processes.
+Some of the most positive correlations in the new matrix are seen between:
 
-Oligodendrocytes are a type of glial cell in the central nervous system (CNS) of vertebrates, including humans and mouse. These cells are crucial for the formation and maintenance of the myelin sheath, a fatty layer that encases the axons of many neurons.
+- **Microglia** and **Neurons**  
+- **Astrocytes** and **Stem.cells**
 
-Let's try to visualise the pixel where these cell types most occur.
+> **Microglia** are the resident immune cells of the central nervous system, constantly surveying the parenchyma and clearing debris.  
+> **Neurons** are the electrically excitable cells that transmit and process information via synaptic connections.  
+> **Astrocytes** are star-shaped glia that support neuronal metabolism, regulate extracellular ions and neurotransmitter uptake.  
+> **Stem.cells** denote undifferentiated progenitors capable of self-renewal and differentiation into multiple neural lineages.
 
+Let us now **visualise** where these pairs of cell types most co-occur in your spatial map. For **each** pair, carry out the following:
 
-- Label pixel that have > 10% (> 0.1) endothelial_cell and leptomeningeal_cell
-- Label pixels that have > 40% (> 0.4) across these two cells
-- Plot pixels colouring by the new label
+1. **Label** any pixel where both cell types exceed 10 % abundance (i.e. > 0.1).  
+2. **Label** any pixel where the _sum_ of their abundances exceeds 40 % (i.e. > 0.4).  
+3. **Plot** the spatial coordinates of all pixels, **colouring** them by this new label (for example:  
+   - `0` = neither condition met  
+   - `1` = both abundances > 0.1  
+   - `2` = summed abundance > 0.4  
+
+You should end up with two analogous visualisations:
+
+- **Microglia + Neurons**  
+- **Astrocytes + Stem.cells**
+
+Feel free to reuse your previous code, simply substituting the cell-type columns and updating the thresholds as above.
 
 :::
 
-```{r}
-mat_df = as.data.frame(res$mat)
+
+
+#### Bonus - Alternative reference from the Human Cell Atlas - using cellNexus
+
+[cellNexus](https://stemangiola.github.io/cellNexus/) is a query interface that allow the programmatic exploration and retrieval of the harmonised, curated and reannotated CELLxGENE single-cell human cell atlas. Data can be retrieved at cell, sample, or dataset levels based on filtering criteria.
+
+Harmonised data is stored in the ARDC Nectar Research Cloud, and most cellNexus functions interact with Nectar via web requests, so a network connection is required for most functionality.
+
+Mangiola et al., 2025 doi [doi.org/10.1101/2023.06.08.542671](https://www.biorxiv.org/content/10.1101/2023.06.08.542671v3)
+
+```{r, echo=FALSE, out.width="700px"}
+knitr::include_graphics(here("inst/images/curated_atlas_query.png"))
 ```
+
+
+```{r, eval = FALSE, message=FALSE, warning=FALSE,  fig.width=3, fig.height=3}
+# Get reference
+library(cellNexus)
+library(HDF5Array)
+
+tmp_file_path = tempfile()
+
+brain_reference =
+  
+  # Query metadata across 30M cells
+  get_metadata() |>
+  
+  # Filter your data of interest
+  dplyr::filter(tissue_groups=="cerebral lobes and cortical areas", disease == "Normal") |> 
+  
+  # Collect pseudobulk as SummarizedExperiment
+  get_pseudobulk() |> 
+  
+  # Normalise for Spotlight
+  scuttle::logNormCounts() |> 
+  
+  # Save for fast reading
+  HDF5Array::saveHDF5SummarizedExperiment(tmp_file_path, replace = TRUE)
+```
+
+```{r, eval = FALSE, message=FALSE}
+library(HDF5Array)
+
+brain_reference = HDF5Array::loadHDF5SummarizedExperiment(tmp_file_path)
+
+my_metadata = colData(brain_reference)
+
+knitr::kable(head(my_metadata), format = "html")
+```
+
+These are the cell types included in our reference, and the number of pseudobulk samples we have for each cell type.
+
+```{r, eval = FALSE}
+
+table(brain_reference$cell_type_harmonised)
+
+```
+
+These are the number of samples we have for each of the three data sets.
+
+```{r, eval = FALSE}
+
+table(brain_reference$dataset_id)
+```
+
+The `collection_id` can be used to gather information on the cell database. e.g. <https://cellxgene.cziscience.com/collections/><collection_id>
+
+```{r, eval = FALSE}
+table(brain_reference$collection_id)
+```
+
+
 
 **Session Information**
 

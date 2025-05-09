@@ -7,6 +7,6 @@ TidyGenomicsTranscriptomicsWorkshop_bioc2023.Rproj
 .DS_Store
 /doc/
 /Meta/
-vignettes/tidySpatialWorkshop2025_cache/
-vignettes/tidySpatialWorkshop2025_files/
-tidySpatialWorkshop2025.Rproj
+vignettes/tidySpatialWorkshop_cache/
+vignettes/tidySpatialWorkshop_files/
+tidySpatialWorkshop.Rproj
