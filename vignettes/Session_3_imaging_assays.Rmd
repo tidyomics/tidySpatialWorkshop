@@ -2,7 +2,7 @@
 title: "Imaging assays (tidy)"
 author:
   - Stefano Mangiola, South Australian immunoGENomics Cancer Institute^[<mangiola.stefano@adelaide.edu.au>], Walter and Eliza Hall Institute^[<mangiola.s at wehi.edu.au>]
-  - Luciano Martellotto, Adelaide Centre for Epigenetics, South Australian immunoGENomics Cancer Institute^[<luciano.martelotto@adelaide.edu.au>]
+  - Malvica Kharbanda, South Australian immunoGENomics Cancer Institute^[<malvika.kharbanda@adelaide.edu.au>]
 output: rmarkdown::html_vignette
 # bibliography: "`r file.path(system.file(package='tidySpatialWorkshop', 'vignettes'), 'tidyomics.bib')`"
 vignette: >

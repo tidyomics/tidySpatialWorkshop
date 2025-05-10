@@ -4,7 +4,7 @@ Version: 0.18.5
 Authors@R: c(
     person("Stefano", "Mangiola", email = "mangiola.s@wehi.edu.au", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-7474-836X")),
-    person("Luciano", "Martelotto", email = "luciano.martelotto@adelaide.edu.au", role = "aut")
+    person("Malvica", "Kharbanda", email = "malvika.kharbanda@adelaide.edu.au", role = "aut")
     )
 Description: Workshop materials for learning tidy analysis of spatial transcriptomics data. 
     Includes example datasets and vignettes demonstrating the use of tidyomics tools for 

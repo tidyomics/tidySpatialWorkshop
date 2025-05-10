@@ -8,7 +8,7 @@
 ## Instructor names and contact information
 
 * Stefano Mangiola <stefano.mangiola at adelaide.edu.au>
-* Luciano Martelotto <luciano.martelotto at adelaide.edu.au>
+* Malvica Kharbanda <malvika.kharbanda at adelaide.edu.au>
 
 ## Syllabus
 

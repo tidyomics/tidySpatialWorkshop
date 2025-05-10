@@ -2,7 +2,6 @@
 title: "Introduction to Spatial omic analyses"
 author:
   - Stefano Mangiola, South Australian immunoGENomics Cancer Institute^[<mangiola.stefano@adelaide.edu.au>], Walter and Eliza Hall Institute^[<mangiola.s at wehi.edu.au>]
-  - Luciano Martellotto, Adelaide Centre for Epigenetics, South Australian immunoGENomics Cancer Institute^[<luciano.martelotto@adelaide.edu.au>]
 output: rmarkdown::html_vignette
 # bibliography: "`r file.path(system.file(package='tidySpatialWorkshop', 'bibliography'), 'bibliography.bib')`"
 vignette: >
@@ -22,14 +21,14 @@ knitr::opts_chunk$set(echo = TRUE, cache = FALSE)
 
 **Dr. Stefano Mangiola** is leading the Computational Cancer immunology group at the South Australian immunoGENomics Cancer Institute (SAiGENCI). He uses single-cell and spatial technologies to investigate the tumor microenvironment and the immune system. Beyong data production, his focus in on the integration and modelling of large-scale single-cell data resources. He is the author of `tidytranscriptiomics` and co-leads the `tidyomics` endevour. 
 
-- BLUESKY: https://bsky.app/profile/stemang.bsky.social
+- BLUESKY: https://bsky.app/profile/stemang.bsky.social South Australian immunoGENomics Cancer Institute (SAiGENCI).
 
 - TWITTER/X: https://x.com/steman_research
 
 
-**Dr. Luciano Martelotto** is a key figure in the field of spatial omics technology. He demonstrated his extensive expertise and significant contributions to the fields of single cell and spatial omics technology. Currently, he heads the Martelotto Lab located at the Adelaide Centre for Epigenetics and the South Australian immunoGENomics Cancer Institute (SAiGENCI). His lab is dedicated to the development and evaluation of new tools and methodologies for single cell and spatial omics. 
+**Malvica Kharbanda** expert of spatial analyses at the . 
 
-- TWITTER/X: https://x.com/LGMartelotto
+- TWITTER/X: https://x.com/Malvikharbanda
 
 ## Workshop partner: Physalia
 
