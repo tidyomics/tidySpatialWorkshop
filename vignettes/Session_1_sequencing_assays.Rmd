@@ -197,7 +197,7 @@ library(ExperimentHub)
 
 # To avoid error for SPE loading 
 # https://support.bioconductor.org/p/9161859/#9161863
-setClassUnion("ExpData", c("matrix", "SummarizedExperiment"))
+setClassUnion("ExpData", c("matrix", "SpatialExperiment"))
 
 spatial_data <- 
   ExperimentHub::ExperimentHub() |> 
