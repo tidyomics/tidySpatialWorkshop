@@ -24,6 +24,7 @@ biocViews:
 Depends:
     R (>= 4.3.0)
 Imports:
+    SummarizedExperiment,
     SpatialExperiment,
     tidySpatialExperiment,
     tidySummarizedExperiment,
