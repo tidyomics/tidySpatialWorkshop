@@ -32,11 +32,11 @@ Bioconductor 3.19.
 ```
 
 # Install workshop package
-#install.packages('BiocManager')
-BiocManager::install("tidyomics/tidySpatialWorkshop", dependencies = TRUE)
+#install.packages('remotes')
+remotes::install_github("tidyomics/tidySpatialWorkshop", dependencies = TRUE)
 
 # Then build the vignettes
-BiocManager::install("tidyomics/tidySpatialWorkshop", build_vignettes = TRUE, force=TRUE)
+remotes::install_github("tidyomics/tidySpatialWorkshop", build_vignettes = TRUE, force=TRUE)
 
 # To view vignette
 library(tidySpatialWorkshop)
