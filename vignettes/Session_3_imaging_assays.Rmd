@@ -2,7 +2,7 @@
 title: "Imaging assays (tidy)"
 author:
   - Stefano Mangiola, South Australian immunoGENomics Cancer Institute^[<mangiola.stefano@adelaide.edu.au>], Walter and Eliza Hall Institute^[<mangiola.s at wehi.edu.au>]
-  - Malvica Kharbanda, South Australian immunoGENomics Cancer Institute^[<malvika.kharbanda@adelaide.edu.au>]
+  - Malvika Kharbanda, South Australian immunoGENomics Cancer Institute^[<malvika.kharbanda@adelaide.edu.au>]
 output: rmarkdown::html_vignette
 # bibliography: "`r file.path(system.file(package='tidySpatialWorkshop', 'vignettes'), 'tidyomics.bib')`"
 vignette: >
@@ -75,6 +75,10 @@ library(scico)
 
 This [data package](https://bioconductor.org/packages/release/data/experiment/html/SubcellularSpatialData.html) contains annotated datasets localized at the sub-cellular level from the STOmics, Xenium, and CosMx platforms, as analyzed in the publication by [Bhuva et al., 2025](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-024-03241-7). It includes raw transcript detections and provides functions to convert these into `SpatialExperiment` objects.
 
+The data in this workshop we will be analyzing is the Xenium Mouse Brain dataset. The dataset has 3 serial sections of fresh frozen mouse brain. Raw transcript level data is provided with region annotations for each detection.
+
+The data is stored in the `ExperimentHub` package, and can be downloaded using the following queries:
+
 ```{r, eval=FALSE}
 
 # To avoid error for SPE loading 
@@ -92,10 +96,13 @@ tx |> filter(sample_id=="Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs") |> nrow(
 
 #### An overview of the data
 
+The data is however very large and thus we will work with a small subset of the data.
 
 ```{r, fig.width=7, fig.height=8, eval=FALSE}
 tx_small =  tx[sample(seq_len(nrow(tx)), size = nrow(tx)/500),]
 ```
+
+However, since the data is very large, for the convenience of the workshop, we will directly download the small subset of the data.
 
 ```{r, echo=FALSE}
 # To avoid error for SPE loading 
@@ -120,7 +127,7 @@ tx_small |>
 )
 ```
 
-We can appreciate how, even subsampling the data 1 in 500, we still have a vast amount of data to visualise.
+This dataset have been annotated for regions. Here we plot the regions in the sample. We can appreciate how, even subsampling the data 1 in 500, we still have a vast amount of data to visualise.
 
 ```{r, fig.width=7, fig.height=8}
 tx_small |>
@@ -132,14 +139,14 @@ tx_small |>
     theme(legend.position = "none")
 ```
 
-This dataset have been annotated for regions. Let's have a look how many regions have been annotated
+Let's have a look how many regions have been annotated
 
 ```{r}
 tx_small |> 
   distinct(region)
 ```
 
-From this large dataset, we select a small reagion for illustrative purposes
+From this large dataset, we select a small reagion for illustrative purposes. 
 
 ```{r, eval=FALSE}
 tx_small_region =
@@ -147,9 +154,9 @@ tx_small_region =
     filter(x |> between(3700, 4200), y |> between(5000, 5500))
 ```
 
-Load the pre-saved data
+If you do not have tx loaded from before, load the pre-saved data:
 
-```{r, echo=FALSE}
+```{r}
 tx_small_region_file = tempfile() 
 utils::download.file("https://zenodo.org/records/11213155/files/tx_small_region.rda?download=1", destfile = tx_small_region_file)
 load(tx_small_region_file)
@@ -157,11 +164,11 @@ load(tx_small_region_file)
 
 ### 2. MoleculeExperiment
 
-The R package MoleculeExperiment includes functions to create and manipulate objects from the newly introduced MoleculeExperiment class, designed for analyzing molecule-based spatial transcriptomics data from platforms such as Xenium by 10X, CosMx SMI by Nanostring, and Merscope by Vizgen, among others.
+The R package MoleculeExperiment includes functions to create and manipulate objects from the newly introduced MoleculeExperiment class, designed for analysing molecule-based spatial transcriptomics data from platforms such as Xenium by 10X, CosMx SMI by Nanostring, and Merscope by Vizgen, among others.
 
-Although in this session we will not use `MoleculeExperiment` class, because of the lack of segmentation boundary information (we rather have cell identifiers), we briefly introduce this package because as an important part of Bioconductor.
+`MoleculeExperiment` class uses cell boundary information instead of cell identifiers. And thus we won't use `MoleculeExperiment` directly. However, as it is an important part of bioconductor we briefly introduce this package.
 
-We show how we would import our table of probe location into a  `MoleculeExperiment`. At the end of the Session, for knowledge, we will navigate the example code given in the [vignette material](https://www.bioconductor.org/packages/release/bioc/vignettes/MoleculeExperiment/inst/doc/MoleculeExperiment.html).
+We show how we would import our table of probe location into a  `MoleculeExperiment`. For this section, we will go through the example code given in the [vignette material](https://www.bioconductor.org/packages/release/bioc/vignettes/MoleculeExperiment/inst/doc/MoleculeExperiment.html).
 
 ```{r, fig.width=7, fig.height=8}
 
@@ -173,7 +180,7 @@ repoDir = paste0(repoDir, "/xenium_V1_FF_Mouse_Brain")
 me = readXenium(repoDir, keepCols = "essential")
 me
 ```
-In this object, besides the single molecule location, we have cell segmentation boundaries. We can use these boudaries to understand subcellular localisation of molecules and to aggregate molecules in cells.
+In this object, besides the single molecule location, we have cell segmentation boundaries. We can use these boundaries to understand subcellular localisation of molecules and to aggregate molecules in cells.
 
 ```{r, fig.width=7, fig.height=8}
 ggplot_me() +
@@ -186,7 +193,7 @@ ggplot_me() +
   )
 ```
 
-In this object we don't only have the cell segmentation but the nucleous segmentation as well. 
+In this object we don't only have the cell segmentation but the nucleus segmentation as well. 
 
 ```{r, fig.width=7, fig.height=8}
 boundaries(me, "nucleus") = readBoundaries(
@@ -224,7 +231,7 @@ rm(me)
 gc()
 ```
 
-We can organise our large data frame containing single molecules into a more efficient `MoleculeExperiment`.
+`MoleculeExperiment` also has functions such as `dataframeToMEList()` and then `MoleculeExperiment()` where we can  organise our large data frame containing single molecules into a more efficient `MoleculeExperiment` object.
 
 ```{r}
 library(MoleculeExperiment)
@@ -269,7 +276,7 @@ gc()
 
 #### A preview of a zoomed in section of the tissue
 
-Now let's try to visualise just a small section. You can appreciate, coloured by cell, single molecules. You cqn also appreciate the difference in density between regions. An aspect to note, is that not all probes are withiin cells. This depends on the segmentation process.
+Now let's try to visualise just a small section, `tx_small_region`, that we downloaded earlier. You can appreciate, single molecules are coloured by cell. You can also appreciate the difference in density between regions. An aspect to note, is that not all probes are within cells. This depends on the segmentation process.
 
 ```{r, fig.width=10, fig.height=10}
 brewer.pal(7, "Set1")
@@ -296,17 +303,11 @@ tx_small_region |>
   filter(is.na(cell)) |> 
   ggplot(aes(x, y, colour = factor(cell))) +
   geom_point(shape=".") +
-  
   facet_wrap(~sample_id, ncol = 2) +
   scale_color_manual(values = sample(colorRampPalette(brewer.pal(8, "Set2"))(1800))) +
   coord_fixed() +
   theme_minimal() +
   theme(legend.position = "none")
-```
-
-```{r}
-rm(tx_small_region)
-gc()
 ```
 
 ::: {.note}
@@ -316,14 +317,20 @@ We want to understand how much data we are discarding, that does not have a cell
 
 - Using base R grammar calculate what is the ratio of outside-cell vs within-cell, probes
 - Reproduce the same calculation with `tidyverse` 
+- Calculate the percentage of probes are within the cytoplasm but outside the nucleus
 
 :::
+
+```{r}
+rm(tx_small_region)
+gc()
+```
 
 ### 3. Aggregation and analysis
 
 We will convert our cell by gene count to a `SpatialExperiment`. This object stores a cell by gene matrix with relative XY coordinates.
 
-`SubcellularSpatialData` has a utility function that aggregated the single molecules in cells, where these cell ID have been identified with segmentation.
+`SubcellularSpatialData` package has a utility function that aggregated the single molecules in cells, where these cell ID have been identified with segmentation.
 
 
 ```{r, eval=FALSE}
@@ -331,8 +338,8 @@ tx_spe = SubcellularSpatialData::tx2spe(tx)
 
  tx_spe = tx_spe |> mutate(in_tissue = TRUE) 
 ```
-
-```{r, echo=FALSE}
+If you do not have tx loaded from before, load the pre-saved data converted to `SpatialExperiment`:
+```{r}
 tx_spe_file = tempfile() 
 utils::download.file("https://zenodo.org/records/11213166/files/tx_spe.rda?download=1", destfile = tx_spe_file)
 # load("~/Downloads/tx_spe.rda")
@@ -351,7 +358,7 @@ Let have a look to the `SpatialExperiment`.
 tx_spe
 ```
 
-A trivial edit to work with `ggspavis.`
+Here we introduce the `ggspavis` package to visualize spatial transcriptomics data. This package requires a column called `in_tissue` to be present in the `SpatialExperiment` object. Here we edit our data include this column.
 
 ```{r}
 tx_spe = tx_spe |> mutate(in_tissue = TRUE) 
@@ -379,7 +386,6 @@ We normalise the `SpatialExperiment` using `scater`.
 ```{r}
 tx_spe = 
   tx_spe |> 
-  
   # Scaling and tranformation
   scater::logNormCounts() 
 ```
@@ -479,7 +485,7 @@ tx_spe_sample_1 =
 tx_spe_sample_1 |> select(.cell, clusters)
 ```
 
-As we have done before, we caculate UMAPs for visualisation purposes.
+As we have done before, we caclculate UMAPs for visualisation purposes.
 
 ::: {.note}
 This step takes long time.
@@ -519,7 +525,7 @@ In the previous sections we have seen how to do gene marker selection for sequen
 :::
 
 
-Too understand whether the cell clusters explain morphology as opposed to merely cell identity, we can color cells according to annotated region. As we can see we have a lot of regions. We have more regions that cell clusters.
+To understand whether the cell clusters explain morphology as opposed to merely cell identity, we can color cells according to annotated region. As we can see we have a lot of regions. We have more regions that cell clusters.
 
 ```{r, fig.width=7, fig.height=8}
 
@@ -572,7 +578,7 @@ Algorithm:
 
 - Cell-level annotations provided by users are used to construct a cell annotation matrix
 
-- Identify cellular neighborhoods uses the SoftMax function, enhanced by a "shape" parameter that governs the "influence radious". This measures probability of a cell type to be found in a neighbour.
+- Identify cellular neighborhoods uses the SoftMax function, enhanced by a "shape" parameter that governs the "influence radius". This measures probability of a cell type to be found in a neighbour.
 
 - The K-means clustering algorithm finds recurring neighbours
 
@@ -610,9 +616,17 @@ hoods[1:2, 1:10]
 
 We plot randomly plot 50 cells to see the output of neighborhood scanning using plotHoodMat. In this plot, each value represent the probability of the each cell (each row) located in each cell type neighborhood. The rowSums of the probability maxtrix will always be 1.
 
-```{r, fig.width=7, fig.height=8}
+```{r, fig.width=6, fig.height=8}
 hoods |> 
-  plotHoodMat(n = 50) 
+  as.data.frame() |>
+  rownames_to_column(var = "cell") |>
+  mutate(
+      cell = str_replace(cell, ".*outs_(\\d+)$", "Xenium_\\1")
+    ) |>
+  column_to_rownames(var = "cell") |> 
+  as.matrix() |>
+  plotHoodMat(n = 50)
+
 ```
 
 We can then merge the neighborhood results with the `SpatialExperiment` object using `mergeHoodSpe` so that we can conduct more neighborhood-related analysis.
@@ -623,7 +637,7 @@ tx_spe_sample_1 =  tx_spe_sample_1 |> mergeHoodSpe(hoods)
 tx_spe_sample_1
 ```
 
-We can see what are the neighborhood distributions look like in each cluster using `plotProbDist.`
+We can see what are the neighborhood distributions look like in each cluster using `plotProbDist`. Here we only plot 10 clusters
 
 ```{r, fig.width=10, fig.height=10}
 tx_spe_sample_1 |> 
@@ -635,6 +649,10 @@ tx_spe_sample_1 |>
     )
 ```
 
+The clusters can then be plot on the tissue using `plotissue`
+```{r fig.width=7, fig.height=5}
+tx_spe_sample_1 |> plotTissue(color = clusters)
+```
 
 
 
