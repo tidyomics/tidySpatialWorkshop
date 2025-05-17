@@ -15,6 +15,27 @@ knitr::opts_chunk$set(echo = TRUE, cache = FALSE)
 
 ```
 
+::: {.note}
+**Exercise 1.0**
+:::
+
+```{r}
+library(dplyr)
+
+spot_counts <- 
+  colData(spatial_data) |>
+  as.data.frame() |>
+  group_by(sample_id) |>
+  summarise(n_spots = n())
+
+spot_counts
+
+spot_counts <- 
+  spot_counts |>
+  mutate(pct_of_lowres = n_spots / 5000 * 100)
+
+spot_counts
+```
 
 ::: {.note}
 **Exercise 1.1**

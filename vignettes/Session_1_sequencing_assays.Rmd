@@ -260,6 +260,12 @@ ggspavis::plotSpots(spatial_data) +
 
 ```
 
+::: {.note}
+**Exercise 1.0**
+
+Calculate how many spots have been profiled, per sample. And calculate what is the % of the total available spots in Visium low resolution.
+:::
+
 We can enhance our understanding by adding layer annotations. In this dataset, layers L1-6 represent different cortical layers, while WM indicates white matter:
 
 ```{r, fig.width=6, fig.height=6}
@@ -1043,7 +1049,7 @@ Harmonised data is stored in the ARDC Nectar Research Cloud, and most cellNexus 
 Mangiola et al., 2025 doi [doi.org/10.1101/2023.06.08.542671](https://www.biorxiv.org/content/10.1101/2023.06.08.542671v3)
 
 ```{r, echo=FALSE, out.width="700px"}
-knitr::include_graphics(here("inst/images/curated_atlas_query.png"))
+knitr::include_graphics(here("inst/images/cellNexus.png"))
 ```
 
 
