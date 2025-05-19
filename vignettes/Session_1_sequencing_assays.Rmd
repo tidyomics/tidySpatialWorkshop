@@ -39,17 +39,23 @@ By the end of this session, participants will be able to:
 
 ## Experimental technologies
 
+Here we briefly describe some of the major technologies. This section is contributed by Dr Luciano Martellotto.
+
 **Spatial-omics** encompasses a suite of powerful methods that reveal not only which genes are active in a tissue but also exactly where those genes are switched on. One widely used strategy involves laying a thin slice of tissue onto a specially prepared glass slide that carries an array of microscopic “spots,” each spot marked with its own unique molecular barcode. As the tissue is gently broken down, the messenger RNA molecules released from each cell adhere to the underlying spots and pick up that spot’s barcode. By sequencing the barcodes together with the captured RNA, researchers can reconstruct a two-dimensional map of gene expression. For example, the Visium platform from 10x Genomics uses this barcoded-surface approach to chart gene activity across tumour biopsies, helping oncologists to identify pockets of treatment-resistant cells within a cancerous mass.
 
 An alternative method, known as **combinatorial FISH** (fluorescence in situ hybridisation), skips the need for physical barcodes by using fluorescent probes that bind directly to RNA molecules within intact tissue. Each probe is tagged with a small coloured label, and by carrying out multiple rounds of staining, imaging and probe removal, a unique sequence of coloured dots is generated for each target gene. It’s akin to reading a barcode of coloured spots: once the entire sequence of images has been captured, computational decoding reveals which gene each pattern corresponds to and pinpoints its exact location. This technique underlies MERFISH (Multiplexed Error-Robust FISH), which neuroscientists often employ to map hundreds of genes simultaneously in brain sections, illuminating the molecular identities of different neuronal subtypes.
 
 **In-situ sequencing** offers yet another route to spatially resolved transcriptomics by performing the sequencing reactions directly within fixed tissue sections. Rather than relying on pre-made probes, this approach uses a series of enzymatic ligation or polymerisation steps to read out the RNA sequence base by base. At each cycle, fluorescently labelled reagents indicate which nucleotide (A, C, G or T) has been incorporated, and repeated imaging across multiple cycles yields short sequence reads in situ. Once these reads are matched to a reference genome, they reveal precisely where specific transcripts lie. Developmental biologists have harnessed this method—pioneered by technologies such as Fluorescent In Situ Sequencing (FISSEQ)—to follow gene expression patterns during embryo formation, tracking how cells differentiate according to their spatial context.
 
+
+
 ```{r, echo=FALSE, out.width="700px"}
 library(here)
 
 knitr::include_graphics(here("inst/images/three_technologies.png"))
 ```
+
+### Visium
 
 The **Visium CytAssist** platform from 10x Genomics brings the power of spatial transcriptomics into a streamlined, sequencing-based workflow. At its heart lies a standard glass slide bearing an 11 mm by 11 mm capture area patterned with roughly 14 000 microscopic spots (or 5 000 spots on a smaller 6.5 mm by 6.5 mm format). Each spot is densely coated with millions of identical oligonucleotides, each bearing a unique spatial barcode, a unique molecular identifier (UMI) and a poly(dT) tail designed to bind the polyadenylated tails of mRNA. When a fresh‐frozen or FFPE tissue section is mounted onto this slide, RNA molecules released during permeabilisation will hybridise to these oligos, effectively “stamping” each transcript with its precise tissue coordinates.
 
@@ -59,21 +65,27 @@ Sequencing libraries are configured so that Read 1 decodes the slide’s spatial
 
 In practice, Visium CytAssist has found widespread use across many fields. Cancer researchers have applied it to map immune cell infiltration and stromal niches within melanoma or breast carcinoma biopsies. Developmental biologists use it to chart gene expression gradients in embryonic tissues, revealing how cells acquire distinct identities in different locations. Even neuroscientists have begun to dissect the molecular architecture of brain regions, linking spatial patterns of gene activity with anatomy and function. By combining a turnkey instrument with a comprehensive probe set and high‐throughput sequencing, Visium offers an accessible route to the spatial “geography” of gene expression in virtually any tissue.
 
+
+
 ```{r, echo=FALSE, out.width="700px"}
 library(here)
 
 knitr::include_graphics(here("inst/images/visium.png"))
 ```
+### Visum HD
 
 The **Visium HD** system represents a next-generation leap in spatial transcriptomics, offering subcellular resolution on a standard CytAssist instrument. Instead of discrete 55 µm spots, the Visium HD slide presents a continuous lawn of capture oligonucleotides across a 6.5 mm × 6.5 mm area, each oligo bearing a unique spatial barcode and UMI. These barcodes are patterned in a fine grid of 2 µm × 2 µm squares, which are digitally binned into 8 µm × 8 µm “pixels” for data analysis. In practice, this means that gene expression can be mapped at roughly one-cell or even subcellular scale—more than a six-fold improvement in resolution compared with the original Visium array.
 
 As with the standard Visium workflow, fresh-frozen or FFPE tissue sections are first stained (H&E or immunofluorescence, if desired) and imaged for morphological context. The CytAssist then automates permeabilisation, RNA digestion and probe‐release steps: a comprehensive probe set tiles the entire transcriptome, binding each target mRNA; released probes are recaptured by the underlying barcoded oligo lawn; and a short extension reaction fuses the probe insert to its spatial barcode and UMI. After denaturation frees these constructs, they undergo library preparation and high-throughput sequencing. Read 1 decodes the spatial barcode and UMI, while Read 2 reads into the probe insert to identify the gene. To cover the full 6.5 mm capture area at HD resolution, Visium HD recommends approximately 275 million read-pairs per run.
+
+
 
 ```{r, echo=FALSE, out.width="700px"}
 library(here)
 
 knitr::include_graphics(here("inst/images/visiumhd.png"))
 ```
+### STOmics 
 
 **BGI’s STOmics** system brings spatial transcriptomics onto DNA nanoball (DNB) patterned chips that can cover areas from a few square millimetres right up to an entire microscope slide, offering both enormous scale and subcellular resolution. The process begins with the creation of a dense array of molecular “nanoballs,” each just 220 nm across and stamped onto the chip in a precise grid. During chip manufacture, each nanoball is endowed with three key elements: a poly-T tail for capturing polyadenylated mRNA, a unique molecular identifier (UMI) to count individual transcripts, and a coordinate identifier (CID) that records its exact X–Y position on the array.
 

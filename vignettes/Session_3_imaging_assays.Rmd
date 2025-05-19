@@ -26,6 +26,51 @@ In this session we will learn the basics of imaging-derived spatial transcriptom
 
 We will maintain the use of `tidyomics` that we learned in `Session 2`. The programming style, in contrast of `Session 1` will make use of the `|>` (pipe) operator.
 
+## Experimental technologies
+
+Here we briefly describe some of the major technologies. This section is contributed by Dr Luciano Martellotto.
+
+### Xenium
+
+The Xenium platform from 10x Genomics translates the principles of padlock-probe chemistry and rolling-circle amplification into a fully automated, imaging-based workflow that delivers subcellular maps of RNA within tissue sections. Each sample is secured in a proprietary glass cassette that holds up to several serial sections in a rigid fiducial frame, ensuring precise registration between fluorescent images and subsequent histological stains. Once loaded, the instrument carries out probe hybridisation and ligation steps in situ, converting each target transcript into a circular DNA molecule that serves as the template for highly localised rolling-circle amplification.
+
+As amplification proceeds, each RNA-derived padlock probe generates a dense bundle of amplified DNA—known as an amplification product dot—at the original site of the transcript. These dots are then illuminated in successive rounds of fluorescent detection and cleavage, producing a unique spatial barcode for each gene target. By capturing high-resolution images after every cycle, Xenium reads out the identity and localisation of hundreds of transcripts at true subcellular resolution (often down to 200 nm), while preserving tissue morphology throughout the experiment.
+
+Following completion of the imaging sequence, sections can undergo immunofluorescence or standard haematoxylin & eosin staining without loss of register, enabling seamless integration of protein, RNA and anatomical data. The accompanying Xenium Explorer software performs automated cell segmentation—typically using DAPI-stained nuclei—and assigns each amplification dot to its host cell, yielding single-cell, spatially resolved gene expression matrices ready for downstream analysis.
+
+```{r, echo=FALSE, out.width="700px"}
+library(here)
+
+knitr::include_graphics(here("inst/images/xenium.png"))
+```
+
+### CoxMx
+
+The CosMx Single Molecular Imager, commercialised by NanoString, brings truly single-molecule mapping of RNA—and even proteins—into intact tissue sections with subcellular precision. In this approach, each target transcript is first recognised by a bespoke in situ hybridisation probe carrying a unique “readout domain” of oligonucleotides. These readout domains each host multiple photocleavable sites. During the experiment, a series of up to sixteen fluorescent reporter sets are sequentially hybridised to the readout domains, imaged in high-resolution three-dimensional fields, then cleaved away and washed off. The presence or absence of fluorescence across the sixteen cycles produces a binary barcode that identifies each individual molecule, while the precise x, y and z coordinates captured by the microscope pin down its location within or between cells.
+
+CosMx is compatible with both fresh-frozen and formalin-fixed paraffin-embedded samples and can scan as much as 300 mm² of tissue by stitching together up to 384 fields of view. Beyond RNA, the same cyclic detection chemistry can be applied to barcoded antibodies for multiplexed protein measurement—in some panels up to 68 different targets in the same section. After imaging, the AtoMx software platform integrates DAPI or membrane-marker images to segment individual cells and assign each molecular dot to its host cell, yielding spatially resolved count matrices at single-cell, subcellular resolution.
+
+```{r, echo=FALSE, out.width="700px"}
+library(here)
+
+knitr::include_graphics(here("inst/images/cosmx.png"))
+```
+
+### MERFISH
+
+The Vizgen MERSCOPE system brings the power of MERFISH (Multiplexed Error-Robust Fluorescence In Situ Hybridisation) into a user-friendly, end-to-end instrument for high-plex, subcellular mapping of RNA within intact tissue sections. In practice, a fixed tissue slice—whether fresh-frozen or formalin-fixed paraffin-embedded—is first permeabilised and then incubated with a library of “encoding” probes. Each encoding probe carries a short, target‐specific sequence that binds to its RNA of interest, followed by a readout sequence that serves as the scaffold for later detection.
+
+Once the probes are hybridised, the MERSCOPE instrument carries out a series of imaging rounds that reveal the unique binary barcode of each transcript. In each cycle, a set of fluorescent “readout” probes is flowed over the sample and allowed to bind to their complementary readout sequences. A high-resolution image is captured, the fluorophores are chemically cleaved and washed away, and the next readout cycle begins. By repeating this process—typically over a dozen or more rounds—each RNA species is assigned a distinct pattern of “on” and “off” signals across the images. Sophisticated error-robust encoding ensures that even if a spot is missed or a signal fluctuates, the correct gene identity can still be recovered.
+
+Following image acquisition, the built-in MERSCOPE Visualizer software aligns the hundreds of image stacks, decodes each fluorescent barcode into a specific RNA identity, and maps thousands of individual molecules back to their precise positions within cells. Researchers can then overlay the decoded RNA map with standard histology or immunofluorescence stains, revealing how gene expression patterns relate to tissue morphology.
+
+```{r, echo=FALSE, out.width="700px"}
+library(here)
+
+knitr::include_graphics(here("inst/images/merfish.png"))
+```
+
+
 ### 1. Working with imaging-based data in Bioconductor with MoleculeExperiment
 
 ```{r, message=FALSE, warning=FALSE}
@@ -392,7 +437,7 @@ tx_spe =
 
 We then visualise what is the relationship between variance and total expression across cells.
 
-```{r, fig.width=3, fig.height=2}
+```{r, fig.width=5, fig.height=5}
 tx_spe |> 
   
   # Gene variance
