@@ -38,6 +38,31 @@ spot_counts
 ```
 
 ::: {.note}
+**Exercise 1.0.1**
+:::
+
+```{r}
+colData(spatial_data) |> 
+  ggplot(aes(subsets_mito_percent)) + 
+  geom_density(aes(linetype = sample_id)) 
+
+colData(spatial_data) |> 
+  ggplot(aes(subsets_mito_percent)) + 
+  geom_density(aes(color = spatialLIBD, linetype = sample_id)) 
+
+
+```
+
+::: {.note}
+**Exercise 1.0.2**
+:::
+
+```{r}
+scater::isOutlier(colData(spatial_data)$subsets_mito_percent, type="higher") |> table()
+colData(spatial_data)$qc_mitochondrial_transcription |> table()
+```
+
+::: {.note}
 **Exercise 1.1**
 :::
 
@@ -232,10 +257,10 @@ spatial_data |>
   filter(in_tissue, sample_id=="151673") |> 
   
   # Gate based on tissue morphology
-  tidySpatialExperiment::gate_spatial(alpha = 0.1) |> 
+  tidySpatialExperiment::gate(alpha = 0.1) |> 
 
   # Plot
-  scater::plotUMAP(colour_by = ".gate")
+  scater::plotUMAP(colour_by = ".gated")
 ```
 
 
@@ -252,22 +277,36 @@ rowData(spatial_data) |>
 gene = "ENSG00000261371"
 
 spatial_data |> 
-
+  
   # Join the feature
-  join_features(gene, shape="wide") |> 
-
+  join_features(gene, shape="wide", assay = "logcounts") |> 
+  
   # Calculate the quantile
-  mutate(my_quantile = quantile(ENSG00000261371, 0.75)) |> 
-
+  mutate(my_quantile = quantile(ENSG00000261371, 0.99)) |> 
+  # mutate(my_quantile = ENSG00000261371 > 0) |> # A possibility
+  
   # Label the pixels
-  mutate(PECAM1_positive = ENSG00000261371 > my_quantile) |> 
-
+  mutate(PECAM1_positive = ENSG00000261371 >= my_quantile) |> 
+  
   # Plot
   ggspavis::plotSpots(annotate = "PECAM1_positive") +
   facet_wrap(~sample_id) 
 
 ```
 
+::: {.note}
+**Exercise 2.2.1**
+:::
+
+```{r}
+spatial_data |> 
+  mutate(qc_mitochondrial_transcription = scater::isOutlier(subsets_mito_percent, type="higher")) |> 
+  count(qc_mitochondrial_transcription) 
+
+spatial_data |> 
+  count(qc_mitochondrial_transcription) 
+
+```
 
 ::: {.note}
 **Excercise 2.3**
@@ -533,3 +572,4 @@ annotate = "region"
     labs(title = "ground truth")
 
 ```
+

@@ -111,8 +111,9 @@ rownames(spatialCoords(spatial_data)) = colnames(spatial_data) # Bug?
 # Display the object
 spatial_data
 ```
+
 ::: {.note}
-If `ExperimentHub` should not work. The `spatial_data` object from the previous code block can be downloaded from [Zenodo - 10.5281/zenodo.11233385](https://zenodo.org/records/11233385/files/tidySpatialWorkshop_spatial_data.rds?download=1)
+If `ExperimentHub` should not work. The `spatial_data` object from the previous code block can be downloaded from [Zenodo - 10.5281/zenodo.11233385](https://zenodo.org/records/11233385/files/tidySpatialWorkshop2024_spatial_data.rds)
 :::
 
 ## Working with tidySpatialExperiment
@@ -180,7 +181,7 @@ spatial_data |> select(.cell, sample_id, in_tissue, spatialLIBD)
 ```
 
 ::: {.note}
-Note that some columns are always displayed no matter whet. These column include special slots in the objects such as reduced dimensions, spatial coordinates (mandatory for `SpatialExperiment`), and sample identifier (mandatory for `SpatialExperiment`). 
+Note that some columns are always displayed no matter what. These column include special slots in the objects such as reduced dimensions, spatial coordinates (mandatory for `SpatialExperiment`), and sample identifier (mandatory for `SpatialExperiment`). 
 :::
 
 Although the select operation can be used as a display tool, to explore our object, it updates the `SpatialExperiment` metadata, subsetting the desired columns.
@@ -277,7 +278,7 @@ spatial_data |>
 We can update the underlying `SpatialExperiment` object, for future analyses. And confirm that the `SpatialExperiment` metadata has been mutated.
 
 ```{r message=FALSE}
-spatial_data = 
+spatial_data <- 
   spatial_data |>
   mutate(spatialLIBD_lower = tolower(spatialLIBD))
 
@@ -313,11 +314,12 @@ Extract specific identifiers from complex data paths, simplifying the dataset by
 ```{r}
 # Create column for sample
 spatial_data <- spatial_data |>
+  
   # Extract sample ID from file path and display the updated data
   tidyr::extract(file_path, "sample_id_from_file_path", "\\.\\./data/single_cell/([0-9]+)/outs/raw_feature_bc_matrix/", remove = FALSE)
 
 # Take a look
-spatial_data |> select(.cell, sample_id_from_file_path, everything())
+spatial_data |> select(.cell, sample_id_from_file_path, file_path, everything())
 ```
 
 #### Unite
@@ -329,7 +331,7 @@ We could use tidyverse `unite` to combine columns, for example to create a new c
 spatial_data <- spatial_data |> unite("sample_subject", sample_id, subject, remove = FALSE)
 
 # Take a look
-spatial_data |> select(.cell, sample_id, sample_subject, subject)
+spatial_data |> select(.cell, sample_id, subject, sample_subject)
 ```
 
 ### 3. Advanced filtering/gating and pseudobulk
@@ -350,8 +352,18 @@ spatial_data =
   # Gate based on tissue morphology
   tidySpatialExperiment::gate(alpha = 0.1, colour = "spatialLIBD") 
 
+spatial_data |> select(.cell, .gated)
+```
+
+```{r, eval=FALSE}
+tidygate_env$gates |> saveRDS("<PATH>")
+```
+
+```{r}
 spatial_data_gated = tidygate_env$gates
 ```
+
+
 
 You can reload a pre-made gate for reproducibility
 
@@ -433,7 +445,7 @@ Join the feature to the metadata
 ```{r}
 spatial_data = 
   spatial_data |> 
-  join_features("ENSG00000131095", shape="wide")
+  join_features("ENSG00000131095", shape="wide", assay = "logcounts")
 
 spatial_data |> 
   select(.cell, ENSG00000131095)
@@ -443,6 +455,7 @@ spatial_data |>
 
 ::: {.note}
 **Exercise 2.2**
+
 Join the endothelial marker PECAM1 (CD31, look for ENSEMBL ID), and plot in space the pixel that are in the 0.75 percentile of EPCAM1 expression. Are the PECAM1-positive pixels (endothelial?) spatially clustered?
 
 - Get the ENSEMBL ID
@@ -450,6 +463,7 @@ Join the endothelial marker PECAM1 (CD31, look for ENSEMBL ID), and plot in spac
 - Calculate the 0.75 quantile across all pixels `mutate()`
 - Label the cells with high PECAM1
 - Plot the slide colouring for the new label 
+
 :::
 
 
@@ -484,7 +498,7 @@ We calculate summary statistics of a subset of data
 
 ```{r}
 spatial_data |> 
-filter(Cluster==1) |> 
+  filter(Cluster==1) |> 
   count(sample_id) |> 
   arrange(desc(n))
 
@@ -589,9 +603,7 @@ spatial_data <-
   addPerCellQC(subsets = list(mito = is_gene_mitochondrial)) |> 
   
   ## Add threshold in colData
-  mutate(
-    qc_mitochondrial_transcription = subsets_mito_percent > 30
-  )
+  mutate( qc_mitochondrial_transcription = subsets_mito_percent > 30 )
 
 spatial_data |> select(.cell, qc_mitochondrial_transcription)
 
@@ -622,6 +634,8 @@ marker_genes =
             scran::getTopHVGs(dec, n = 1000)
           }
   ) 
+
+marker_genes = cbind(marker_genes)
 
 head(unique(unlist(marker_genes)))
 
@@ -726,6 +740,15 @@ spatial_data_filtered =
 **Maintainability:** Fewer and self-explanatory lines of code and no need for intermediate steps make the code easier to maintain and modify, especially when conditions change or additional filters are needed.
 
 
+::: {.note}
+**Exercise 2.2.1**
+
+In Session 1 we showed that a good strategy for QC filtering is outlier detection. With this strategy the baseline distribution of a QC factor (e.g. mitochondrial transcription) will be used to detect anomalous spots/cells. Read the documentation of `scater::isOutlier`, and use it WITH `tidyomics`/`tidyverse` to label outlier spots for mitochondrial transcription.
+
+Then, note which method is the most stringent, between our thresholding and outlier-detection, solely using `tidyomics`/`tidyverse`.
+
+:::
+
 ### 7. Visualisation
 
 Here, we will show how to use ad-hoc spatial visualisation, as well as `ggplot` to explore spatial data we will show how `tidySpatialExperiment` allowed to alternate between tidyverse visualisation, and any visualisation compatible with `SpatialExperiment`. 
@@ -780,9 +803,10 @@ We provide another example of how the use of tidy. Spatial experiment makes cust
 spatial_data_filtered |> 
   ggplot(aes(subsets_mito_percent, sum_gene)) + 
   geom_point(aes(color = spatialLIBD), size=0.2) +  
-  stat_ellipse(aes(group = spatialLIBD), alpha = 0.3) +
+  stat_ellipse(aes(group = spatialLIBD, color = spatialLIBD), alpha = 0.3) +
   scale_color_manual(values = libd_layer_colors |>
   str_remove("ayer")) +
+  geom_smooth(aes(group = spatialLIBD), method="lm") +
   scale_y_log10() +
   theme_bw()
 
@@ -828,7 +852,7 @@ We assume that the cells we filtered as non-alive or damaged, characterised by b
 
 Use `tidyomic`/`tidyverse` tools to label dead cells and perform differential expression within each region. Some of the comments you can use are: `mutate`, `nest`, `map`, `aggregate_cells`, `tidybulk:::test_differential_abundance`, 
 
-A hist:
+A hint:
 
 - spatial_data |> 
   mutate(

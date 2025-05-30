@@ -195,7 +195,7 @@ Maynard and Torres et al., doi: [10.1038/s41593-020-00787-0](https://www.ncbi.nl
 library(spatialLIBD)
 library(ExperimentHub)
 
-# To avoid error for SPE loading 
+# To avoid error for SPE loading
 # https://support.bioconductor.org/p/9161859/#9161863
 setClassUnion("ExpData", c("matrix", "SpatialExperiment"))
 
@@ -217,6 +217,10 @@ spatial_data
 ```
 
 From: <https://bookdown.org/sjcockell/ismb-tutorial-2023/practical-session-2.html>
+
+::: {.note}
+If `ExperimentHub` should not work. The `spatial_data` object from the previous code block can be downloaded from [Zenodo - 10.5281/zenodo.11233385](https://zenodo.org/records/11233385/files/tidySpatialWorkshop2024_spatial_data.rds)
+:::
 
 We shows metadata for each cell, helping understand the dataset's structure.
 
@@ -487,6 +491,23 @@ The final step in data preprocessing involves removing all spots identified as l
 spatial_data = spatial_data[,!colData(spatial_data)$discard ]
 ```
 
+::: {.note}
+**Exercise 1.0.1**
+
+It is good practice to perform quality control independently for each sample and different cell types. This because samples and cell types (or tissue regions) could have a distinct baseline distributions of quality control factors (e.g. mitochondrial transcription).
+
+1) Let's try to plot `subsets_mito_percent` grouping by sample, using `ggplot2`.
+2) Also, let's try to add tissue regions (present in the `colData` as already described) as colors, using `ggplot2`
+:::
+
+::: {.note}
+**Exercise 1.0.2**
+
+Thresholding is a easy-to-understand approach, but often arbitrary. A better strategy is outlier detection. With this strategy the baseline distribution of a QC factor (e.g. mitochondrial transcription) will be used to detect anomalous spots/cells. Read the documentation of `scater::isOutlier`, and use it to label outlier spots for mitochondrial transcription.
+
+Then, note which method is the most stringent, between our thresholding and outlier-detection.
+:::
+
 ### 6. Dimensionality reduction
 
 Dimensionality reduction is essential in spatial transcriptomics due to the high-dimensional nature of the data, which includes vast gene expression profiles across various spatial locations. Techniques such as PCA (Principal Component Analysis) and UMAP (Uniform Manifold Approximation and Projection) are particularly valuable. PCA helps to reduce noise and highlight the most significant variance in the data, making it simpler to uncover underlying patterns and correlations. UMAP, ofen calculated from principal components (and not directly from features) preserves both global and local data structures, enabling more nuanced visualisations of complex cellular landscapes. Together, these methods facilitate a deeper understanding of spatial gene expression, helping to reveal biological insights such as cellular heterogeneity and tissue structure, which are crucial for both basic biological research and clinical applications.
@@ -749,7 +770,7 @@ cluster_metadata =
   colData(spatial_data_list$sample_151673)[, c("clust_M0_lam0.2_k50_res0.7", "clust_M0_lam0.2_k50_res0.7_smooth")]
 
  
-knitr::kable(head(cluster_metadata), format = "html")
+knitr::kable(head(cluster_metadata, 10), format = "html")
 ```
 
 Using cluster comparison metrics like the adjusted Rand index (ARI) we evaluate the performance of our clustering approach. This statistical analysis helps validate the clustering results against known labels or pathologies.
@@ -854,7 +875,7 @@ table(brain_reference$cell_types)
 
 ```
 
-These are the number of samples we have for each of the three data sets.
+These are the number of samples we have.
 
 ```{r}
 
@@ -862,15 +883,12 @@ table(brain_reference$sample)
 ```
 
 
-Now, we identify the variable genes within each dataset, to not capture technical effects, and identify the union of variable genes for further analysis.
+Now, we identify the variable genes, to not capture technical effects, and identify the union of variable genes for further analysis.
 
 ```{r, warning=FALSE}
 genes <- !grepl(pattern = "^Rp[l|s]|Mt", x = rownames(brain_reference))
 
-# Convert to list
-brain_reference_list <- lapply(unique(brain_reference$dataset_id), function(x) brain_reference[, brain_reference$dataset_id == x])
-
-dec = scran::modelGeneVar(brain_reference, subset.row = genes, block = brain_reference$sample_id)
+dec = scran::modelGeneVar(brain_reference, subset.row = genes, block = brain_reference$sample)
 hvg_CAQ = scran::getTopHVGs(dec, n = 1000)
             
 hvg_CAQ = unique( unlist(hvg_CAQ))
@@ -990,6 +1008,7 @@ No, let's look at the correlation matrices to see which cell type are most often
 
 plotCorrelationMatrix(res$mat)
 ```
+
 ```{r}
 mat_df = as.data.frame(res$mat)
 ```
