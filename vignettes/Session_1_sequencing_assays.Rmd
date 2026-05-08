@@ -271,7 +271,7 @@ Spatial transcriptomics data requires specialized visualization approaches to un
 imgData(spatial_data)
 
 # Simple visualization of spatial data
-ggspavis::plotSpots(spatial_data) + 
+ggspavis::plotCoords(spatial_data) + 
   facet_wrap(~sample_id)
 
 ```
@@ -286,7 +286,7 @@ We can enhance our understanding by adding layer annotations. In this dataset, l
 
 ```{r, fig.width=6, fig.height=6}
 # Plot spots with anatomical annotations
-ggspavis::plotSpots(
+ggspavis::plotCoords(
   spatial_data, 
   annotate = "spatialLIBD"
 ) + 
@@ -370,7 +370,7 @@ After applying the QC metrics, it's crucial to visually assess their impact. Thi
 colData(spatial_data)$qc_mitochondrial_transcription <- qc_mitochondrial_transcription
 
 ## Visualize spatial pattern of filtered spots
-plotSpotQC(
+plotObsQC(
   spatial_data, 
   plot_type = "spot",  
   annotate = "qc_mitochondrial_transcription"
@@ -412,7 +412,7 @@ Incorporating Library Size Threshold in Dataset: This step involves adding the l
 colData(spatial_data)$qc_total_counts <- qc_total_counts
 
 ## Check for putative spatial pattern of removed spots
-plotSpotQC(
+plotObsQC(
   spatial_data, 
   plot_type = "spot",  
   annotate = "qc_total_counts", 
@@ -455,7 +455,7 @@ Incorporating Gene Expression Threshold in Dataset: After setting the gene expre
 colData(spatial_data)$qc_detected_genes <- qc_detected_genes
 
 ## Check for putative spatial pattern of removed spots
-plotSpotQC(
+plotObsQC(
   spatial_data, 
   plot_type = "spot",  
   annotate = "qc_detected_genes", 
@@ -488,7 +488,7 @@ After applying all QC filters, this block combines them and stores the results i
 colData(spatial_data)$discard <- qc_total_counts | qc_detected_genes | qc_mitochondrial_transcription
 
 ## Check the spatial pattern of combined set of discarded spots
-plotSpotQC(
+plotObsQC(
   spatial_data, 
   plot_type = "spot",  
   annotate = "discard", 
@@ -628,7 +628,7 @@ Those two clusters group the white matter from the rest of the layers.
 
 ```{r, fig.width=6, fig.height=6}
 ## Plot in tissue map
-ggspavis::plotSpots(spatial_data, annotate = "label") + 
+ggspavis::plotCoords(spatial_data, annotate = "label") + 
   facet_wrap(~sample_id) +
   scale_color_brewer(palette = "Paired")
 ```
@@ -637,7 +637,7 @@ As for comparison, we show the manually annotated regions. We can see that while
 
 ```{r, fig.width=6, fig.height=6}
 ## Plot ground truth in tissue map
-ggspavis::plotSpots(spatial_data, annotate = "spatialLIBD") +
+ggspavis::plotCoords(spatial_data, annotate = "spatialLIBD") +
   facet_wrap(~sample_id) +
   scale_color_manual(values = libd_layer_colors)
 
@@ -811,7 +811,7 @@ pal <- c(
   "#f39c12", "#d35400", "#7f8c8d", "#2ecc71", "#e67e22"
 )
 
- ggspavis::plotSpots(
+ ggspavis::plotCoords(
    do.call(cbind, spatial_data_list), 
    annotate = sprintf("%s_smooth", "clust_M0_lam0.2_k50_res0.7"), 
    pal = pal
@@ -820,7 +820,7 @@ pal <- c(
     theme(legend.position = "none") +
     labs(title = "BANKSY clusters")
  
- ggspavis::plotSpots(
+ ggspavis::plotCoords(
    do.call(cbind, spatial_data_list), 
    annotate = sprintf("%s", "clust_M0_lam0.2_k50_res0.7"), 
    pal = pal
@@ -829,7 +829,7 @@ pal <- c(
     theme(legend.position = "none") +
     labs(title = "BANKSY clusters")
  
-ggspavis::plotSpots(spatial_data, annotate = "spatialLIBD") +
+ggspavis::plotCoords(spatial_data, annotate = "spatialLIBD") +
   facet_wrap(~sample_id) +
   scale_color_manual(values = libd_layer_colors) +
   theme(legend.position = "none") +
@@ -843,7 +843,7 @@ We have applied cluster smoothing using `smoothLabels`. How much do you think th
 
 -   Plot the non smoothed cluster
 -   identify the pixel that have been smoothed, and
--   visualise them using `plotSpotQC` that we have used above.
+-   visualise them using `plotObsQC` that we have used above.
 :::
 
 ### 8. Deconvolution of pixel-based spatial data
@@ -1097,7 +1097,7 @@ brain_reference =
   get_metadata() |>
   
   # Filter your data of interest
-  dplyr::filter(tissue_groups=="cerebral lobes and cortical areas", disease == "Normal") |> 
+  dplyr::filter(tissue_groups=="cerebral lobes and cortical areas", disease == "normal") |> 
   
   # Collect pseudobulk as SummarizedExperiment
   get_pseudobulk() |> 
