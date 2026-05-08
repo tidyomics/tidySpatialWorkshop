@@ -15,13 +15,40 @@ knitr::opts_chunk$set(echo = TRUE, cache = FALSE)
 
 ```
 
+```{r workshop-data, message=FALSE, warning=FALSE}
+library(spatialLIBD)
+library(ExperimentHub)
+library(scater)
+library(ggplot2)
+library(tidySpatialExperiment)
+library(dplyr)
+
+setClassUnion("ExpData", c("matrix", "SpatialExperiment"))
+
+spatial_data <-
+  ExperimentHub::ExperimentHub() |>
+  spatialLIBD::fetch_data(eh = _, type = "spe")
+
+names(libd_layer_colors) <- gsub("ayer", "", names(libd_layer_colors))
+
+reducedDims(spatial_data) <- NULL
+spatial_data <- spatial_data[, spatial_data$sample_id %in% c("151673", "151675", "151676")]
+spatial_data <- spatial_data[, colData(spatial_data)$in_tissue == 1]
+
+is_gene_mitochondrial <- grepl("(^MT-)|(^mt-)", rowData(spatial_data)$gene_name)
+spatial_data <- scater::addPerCellQC(
+  spatial_data,
+  subsets = list(mito = is_gene_mitochondrial)
+)
+qc_mitochondrial_transcription <- colData(spatial_data)$subsets_mito_percent > 30
+colData(spatial_data)$qc_mitochondrial_transcription <- qc_mitochondrial_transcription
+```
+
 ::: {.note}
 **Exercise 1.0**
 :::
 
 ```{r}
-library(dplyr)
-
 spot_counts <- 
   colData(spatial_data) |>
   as.data.frame() |>
@@ -90,7 +117,7 @@ ggspavis::plotVisium(
 spe_joint <- do.call(cbind, spatial_data_list)
 
 
- ggspavis::plotSpots(spe_joint, annotate = sprintf("%s", "clust_M0_lam0.2_k50_res0.7"), pal = pal) +
+ ggspavis::plotCoords(spe_joint, annotate = sprintf("%s", "clust_M0_lam0.2_k50_res0.7"), pal = pal) +
     facet_wrap(~sample_id) +
     theme(legend.position = "none") +
     labs(title = "BANKSY clusters")
@@ -148,7 +175,7 @@ is_microglia_neuron <- mat_df$Microglia > 0.1 &
                        (mat_df$Microglia + mat_df$Neurons) > 0.4
 spatial_data$is_microglia_neuron <- is_microglia_neuron
 
-ggspavis::plotSpots(spatial_data, annotate = "is_microglia_neuron") +
+ggspavis::plotCoords(spatial_data, annotate = "is_microglia_neuron") +
   facet_wrap(~sample_id) +
   scale_color_manual(values = c("TRUE" = "red", "FALSE" = "grey")) +
   theme(legend.position = "none") +
@@ -162,7 +189,7 @@ is_astrocyte_stem <- mat_df$Astrocytes     > 0.1 &
                      (mat_df$Astrocytes + mat_df$`Stem cells`) > 0.4
 spatial_data$is_astrocyte_stem <- is_astrocyte_stem
 
-ggspavis::plotSpots(spatial_data, annotate = "is_astrocyte_stem") +
+ggspavis::plotCoords(spatial_data, annotate = "is_astrocyte_stem") +
   facet_wrap(~sample_id) +
   scale_color_manual(values = c("TRUE" = "blue", "FALSE" = "grey")) +
   theme(legend.position = "none") +
@@ -289,7 +316,7 @@ spatial_data |>
   mutate(PECAM1_positive = ENSG00000261371 >= my_quantile) |> 
   
   # Plot
-  ggspavis::plotSpots(annotate = "PECAM1_positive") +
+  ggspavis::plotCoords(annotate = "PECAM1_positive") +
   facet_wrap(~sample_id) 
 
 ```
@@ -370,7 +397,7 @@ spatial_data_filtered |>
   mutate(amyloid_plaques_signature  = APP + PSEN1 + PSEN2 + CLU + APOE + CD68 + ITGAM + AIF1) |> 
 
 # Plotting
-  ggspavis::plotSpots(
+  ggspavis::plotCoords(
     annotate = "amyloid_plaques_signature"
   ) + 
   facet_wrap(~sample_id)
@@ -542,28 +569,28 @@ Visualising Clusters and Annotations on Spatial Coordinates: We utilise the ggsp
 ```{r multi-sample-spatial, eval=TRUE, fig.width=3, fig.height=3, eval=FALSE}
 # Use scater:::.get_palette('tableau10medium')
 
- ggspavis::plotSpots(
+ ggspavis::plotCoords(
    tx_spe_sample_1_banksy, 
    annotate = "clust_M0_lam0.2_k50_res0.7"
   ) +
     guides(color = "none") +
     labs(title = "BANKSY clusters")
 
- ggspavis::plotSpots(
+ ggspavis::plotCoords(
    tx_spe_sample_1_banksy_smoothed, 
    annotate = "clust_M0_lam0.2_k50_res0.7_smooth"
   ) +
     guides(color = "none") +
     labs(title = "BANKSY clusters smoothed")
  
-# ggspavis::plotSpots(
+# ggspavis::plotCoords(
 #   tx_spe_sample_1_banksy, 
 #   annotate = "clusters"
 #   ) +
 #     guides(color = "none") +
 #     labs(title = "cell clustering")
 
-ggspavis::plotSpots(
+ggspavis::plotCoords(
 tx_spe_sample_1_banksy, 
 annotate = "region"
 ) +

@@ -590,14 +590,17 @@ Plot ground truth in tissue map.
 
 ```{r, fig.width=7, fig.height=8}
 
-tx_spe_sample_1 |> 
-    ggspavis::plotSpots(annotate = "clusters") + 
-    guides(color = "none")
+tx_spe_sample_1 |>
+  ggspavis::plotCoords(annotate = "clusters") +
+  guides(color = "none")
 
-# For comparison the annotated regions
-tx_spe_sample_1 |> 
-  ggspavis::plotSpots(annotate = "region") + 
-      scale_color_manual(values = colorRampPalette( brewer.pal(9,"Set1") )(150) ) +
+```
+
+```{r, fig.width=7, fig.height=8}
+# For comparison the annotated regions (separate chunk so knitr records both figures)
+tx_spe_sample_1 |>
+  ggspavis::plotCoords(annotate = "region") +
+  scale_color_manual(values = colorRampPalette(brewer.pal(9, "Set1"))(150)) +
   guides(color = "none")
 
 ```

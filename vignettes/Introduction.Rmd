@@ -89,7 +89,7 @@ Alternatively download the [git zipped package](https://github.com/tidyomics/tid
 
 # Announcements
 
-Tidyomics is now published in (Nature Methods)[https://www.nature.com/articles/s41592-024-02299-2]. And availabel for (free) here[https://www.biorxiv.org/content/10.1101/2023.09.10.557072v3].
+Tidyomics is now published in (Nature Methods)[https://www.nature.com/articles/s41592-024-02299-2]. And available here[https://www.biorxiv.org/content/10.1101/2023.09.10.557072v3].
 
 # Introduction to Spatial Omics
 

@@ -2,6 +2,7 @@
 title: "Sequencing assays"
 author:
   - Stefano Mangiola, South Australian immunoGENomics Cancer Institute^[<mangiola.stefano@adelaide.edu.au>], Walter and Eliza Hall Institute^[<mangiola.s at wehi.edu.au>]
+  - Luciano Martellotto, BD Biosciences
 output: rmarkdown::html_vignette
 # bibliography: "`r file.path(system.file(package='tidySpatialWorkshop', 'vignettes'), 'tidyomics.bib')`"
 vignette: >
@@ -72,6 +73,7 @@ library(here)
 
 knitr::include_graphics(here("inst/images/visium.png"))
 ```
+
 ### Visum HD
 
 The **Visium HD** system represents a next-generation leap in spatial transcriptomics, offering subcellular resolution on a standard CytAssist instrument. Instead of discrete 55 µm spots, the Visium HD slide presents a continuous lawn of capture oligonucleotides across a 6.5 mm × 6.5 mm area, each oligo bearing a unique spatial barcode and UMI. These barcodes are patterned in a fine grid of 2 µm × 2 µm squares, which are digitally binned into 8 µm × 8 µm “pixels” for data analysis. In practice, this means that gene expression can be mapped at roughly one-cell or even subcellular scale—more than a six-fold improvement in resolution compared with the original Visium array.
@@ -270,9 +272,8 @@ Spatial transcriptomics data requires specialized visualization approaches to un
 # image data
 imgData(spatial_data)
 
-# Simple visualization of spatial data
-ggspavis::plotSpots(spatial_data) + 
-  facet_wrap(~sample_id)
+# Simple visualization of spatial data (one panel per section via sample_id)
+ggspavis::plotCoords(spatial_data, sample_id = "sample_id")
 
 ```
 
@@ -286,11 +287,12 @@ We can enhance our understanding by adding layer annotations. In this dataset, l
 
 ```{r, fig.width=6, fig.height=6}
 # Plot spots with anatomical annotations
-ggspavis::plotSpots(
-  spatial_data, 
-  annotate = "spatialLIBD"
-) + 
-  facet_wrap(~sample_id)
+ggspavis::plotCoords(
+  spatial_data,
+  annotate = "spatialLIBD",
+  sample_id = "sample_id",
+  pal = libd_layer_colors
+)
 ```
 
 Explore additional visualisation features offered by the Visium platform, exposing the H&E (hematoxylin and eosin) image.
@@ -380,18 +382,23 @@ plotSpotQC(
 
 #### Library Size Analysis
 
-This analysis focuses on examining the distribution of library sizes across different spots. It uses a histogram and density plot to visualise the range and commonality of library sizes in the dataset.
+This analysis focuses on examining the distribution of library sizes across different spots. Each curve is coloured by **tissue layer** (`spatialLIBD`), so you can contrast QC metrics across anatomical regions; panels separate the three tissue sections (`sample_id`).
 
-```{r, fig.width=6, fig.height=6}
-## Visualize library size distribution
+```{r, fig.width=7, fig.height=8}
+library(ggplot2)
+
+## Density of library size by cortical layer (spatialLIBD) within each section
 data.frame(colData(spatial_data)) |> 
-  ggplot(aes(x = sum)) +
-  geom_histogram(aes(y = after_stat(density)), bins = 60) +
-  geom_density() +
+  ggplot(aes(x = sum, color = spatialLIBD)) +
+  geom_density(linewidth = 0.7) +
   scale_x_log10() +
-  xlab("Library size") + 
-  ylab("Density") + 
-  theme_classic()
+  scale_color_manual(values = libd_layer_colors, na.value = "grey60") +
+  facet_wrap(~sample_id, ncol = 1, scales = "free_y") +
+  xlab("Library size") +
+  ylab("Density") +
+  labs(color = "Tissue layer") +
+  theme_classic() +
+  theme(legend.position = "bottom")
 ```
 
 Setting Library Size Threshold: After examining the library sizes, a threshold is applied to identify spots with library sizes below 700, which are considered for potential exclusion from further analysis.
@@ -424,18 +431,21 @@ plotSpotQC(
 
 #### Detected genes
 
-This analysis examines how many genes are expressed per spot, using a histogram and density plot to visualise the distribution of gene counts across the dataset.
+This analysis examines how many genes are expressed per spot, using density curves coloured by tissue layer (`spatialLIBD`) and faceted by section (`sample_id`).
 
-```{r, fig.width=6, fig.height=6}
-## Density and histogram of library sizes
-data.frame(colData(spatial_data) ) |> 
-  ggplot(aes(x = detected)) +
-  geom_histogram(aes(y = after_stat(density)), bins = 60) +
-  geom_density() +
+```{r, fig.width=7, fig.height=8}
+## Density of detected genes by tissue layer within each section
+data.frame(colData(spatial_data)) |> 
+  ggplot(aes(x = detected, color = spatialLIBD)) +
+  geom_density(linewidth = 0.7) +
   scale_x_log10() +
-  xlab("Number of genes with > 0 counts") + 
-  ylab("Density") + 
-  theme_classic()
+  scale_color_manual(values = libd_layer_colors, na.value = "grey60") +
+  facet_wrap(~sample_id, ncol = 1, scales = "free_y") +
+  xlab("Number of genes with > 0 counts") +
+  ylab("Density") +
+  labs(color = "Tissue layer") +
+  theme_classic() +
+  theme(legend.position = "bottom")
 ```
 
 
@@ -464,18 +474,22 @@ plotSpotQC(
 
 ```
 
-Exploring the Relationship Between Library Size and Number of Genes Detected: This analysis explores the correlation between library size and the number of genes detected in each spot, providing insights into data quality and sequencing depth.
+Exploring the Relationship Between Library Size and Number of Genes Detected: This scatter plot uses the same tissue-layer colours, so you can see how depth and complexity co-vary with anatomy within each section.
 
-```{r, fig.width=6, fig.height=6}
-## Density and histogram of library sizes
+```{r, fig.width=7, fig.height=8}
+## Library size vs detected genes, coloured by tissue layer
 data.frame(colData(spatial_data)) |> 
-  ggplot(aes(sum, detected)) +
-  geom_point(shape=".") +
+  ggplot(aes(sum, detected, color = spatialLIBD)) +
+  geom_point(shape = 16, size = 0.35, alpha = 0.55) +
   scale_x_log10() +
   scale_y_log10() +
-  xlab("Library size") + 
-  ylab("Number of genes with > 0 counts") + 
-  theme_classic()
+  scale_color_manual(values = libd_layer_colors, na.value = "grey60") +
+  facet_wrap(~sample_id, ncol = 1) +
+  xlab("Library size") +
+  ylab("Number of genes with > 0 counts") +
+  labs(color = "Tissue layer") +
+  theme_classic() +
+  theme(legend.position = "bottom")
 ```
 
 #### Combined filtering
@@ -628,8 +642,7 @@ Those two clusters group the white matter from the rest of the layers.
 
 ```{r, fig.width=6, fig.height=6}
 ## Plot in tissue map
-ggspavis::plotSpots(spatial_data, annotate = "label") + 
-  facet_wrap(~sample_id) +
+ggspavis::plotCoords(spatial_data, annotate = "label", sample_id = "sample_id") +
   scale_color_brewer(palette = "Paired")
 ```
 
@@ -637,9 +650,12 @@ As for comparison, we show the manually annotated regions. We can see that while
 
 ```{r, fig.width=6, fig.height=6}
 ## Plot ground truth in tissue map
-ggspavis::plotSpots(spatial_data, annotate = "spatialLIBD") +
-  facet_wrap(~sample_id) +
-  scale_color_manual(values = libd_layer_colors)
+ggspavis::plotCoords(
+  spatial_data,
+  annotate = "spatialLIBD",
+  sample_id = "sample_id",
+  pal = libd_layer_colors
+)
 
 ```
 
@@ -802,7 +818,9 @@ ari
 
 Visualising Clusters and Annotations on Spatial Coordinates: We utilise the ggspavis package to visually map BANKSY clusters and manual annotations onto the spatial coordinates of the dataset, providing a comprehensive visual overview of spatial and clustering data relationships.
 
-```{r multi-sample-spatial, eval=TRUE, fig.width=6, fig.height=6}
+When using **knitr** (including vignettes), only the **last** ggplot produced in a code chunk is written out by default. If you need several figures from the same narrative block, split them into separate chunks below or wrap each ggplot in `print()`.
+
+```{r multi-sample-spatial-smoothed, eval=TRUE, fig.width=6, fig.height=6}
 # Use scater:::.get_palette('tableau10medium')
 library(cowplot)
 
@@ -811,27 +829,34 @@ pal <- c(
   "#f39c12", "#d35400", "#7f8c8d", "#2ecc71", "#e67e22"
 )
 
- ggspavis::plotSpots(
-   do.call(cbind, spatial_data_list), 
-   annotate = sprintf("%s_smooth", "clust_M0_lam0.2_k50_res0.7"), 
-   pal = pal
-  ) +
-    facet_wrap(~sample_id) +
-    theme(legend.position = "none") +
-    labs(title = "BANKSY clusters")
- 
- ggspavis::plotSpots(
-   do.call(cbind, spatial_data_list), 
-   annotate = sprintf("%s", "clust_M0_lam0.2_k50_res0.7"), 
-   pal = pal
-  ) +
-    facet_wrap(~sample_id) +
-    theme(legend.position = "none") +
-    labs(title = "BANKSY clusters")
- 
-ggspavis::plotSpots(spatial_data, annotate = "spatialLIBD") +
-  facet_wrap(~sample_id) +
-  scale_color_manual(values = libd_layer_colors) +
+ggspavis::plotCoords(
+  do.call(cbind, spatial_data_list),
+  annotate = sprintf("%s_smooth", "clust_M0_lam0.2_k50_res0.7"),
+  pal = pal,
+  sample_id = "sample_id"
+) +
+  theme(legend.position = "none") +
+  labs(title = "BANKSY clusters (smoothed)")
+```
+
+```{r multi-sample-spatial-raw, eval=TRUE, fig.width=6, fig.height=6}
+ggspavis::plotCoords(
+  do.call(cbind, spatial_data_list),
+  annotate = sprintf("%s", "clust_M0_lam0.2_k50_res0.7"),
+  pal = pal,
+  sample_id = "sample_id"
+) +
+  theme(legend.position = "none") +
+  labs(title = "BANKSY clusters")
+```
+
+```{r multi-sample-spatial-libd, eval=TRUE, fig.width=6, fig.height=6}
+ggspavis::plotCoords(
+  spatial_data,
+  annotate = "spatialLIBD",
+  sample_id = "sample_id",
+  pal = libd_layer_colors
+) +
   theme(legend.position = "none") +
   labs(title = "spatialLIBD regions")
 ```

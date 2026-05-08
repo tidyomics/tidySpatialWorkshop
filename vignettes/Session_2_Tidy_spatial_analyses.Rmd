@@ -359,12 +359,6 @@ spatial_data |> select(.cell, .gated)
 tidygate_env$gates |> saveRDS("<PATH>")
 ```
 
-```{r}
-spatial_data_gated = tidygate_env$gates
-```
-
-
-
 You can reload a pre-made gate for reproducibility
 
 ```{r}
@@ -759,7 +753,7 @@ Let's visualise the regions that spatialLIBD labelled across three Visium 10X sa
 
 ```{r, fig.width=7, fig.height=8}
 spatial_data_filtered |> 
-  ggspavis::plotSpots(annotate = "spatialLIBD") +
+  ggspavis::plotCoords(annotate = "spatialLIBD") +
   facet_wrap(~sample_id) +
   scale_color_manual(values = libd_layer_colors |> str_remove("ayer")) +
   theme(legend.position = "none") +
@@ -877,7 +871,7 @@ Although amyloid plaques themselves are extracellular, the presence and formatio
 
 - join_features()
 - mutate() 
-- ggspavis::plotSpots()
+- ggspavis::plotCoords()
 :::
 
 ```{r}
