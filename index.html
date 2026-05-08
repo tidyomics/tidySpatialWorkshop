@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">tidySpatialWorkshop</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.18.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.19.0</span>
       </span>
     </div>
 
@@ -96,7 +96,7 @@
 </h2>
 <ul>
 <li>Stefano Mangiola &lt;stefano.mangiola at adelaide.edu.au&gt;</li>
-<li>Luciano Martelotto &lt;luciano.martelotto at adelaide.edu.au&gt;</li>
+<li>Malvica Kharbanda &lt;malvika.kharbanda at adelaide.edu.au&gt;</li>
 </ul>
 </div>
 <div class="section level2">
@@ -113,29 +113,22 @@
 <div class="section level2">
 <h2 id="workshop-package-installation">Workshop package installation<a class="anchor" aria-label="anchor" href="#workshop-package-installation"></a>
 </h2>
-<p>If you want to install the packages and material post-workshop, the instructions are below. The workshop is designed for R <code>4.4</code> and Bioconductor 3.19.</p>
-<pre><code><span></span>
+<p>If you want to install the packages and material post-workshop, the instructions are below. The workshop is designed for R <code>4.5</code> and Bioconductor 3.21.</p>
+<pre><code><span><span class="co"># Update Bioconductor</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://bioconductor.github.io/BiocManager/" class="external-link">"BiocManager"</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span></span>
+<span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html" class="external-link">install</a></span><span class="op">(</span>version <span class="op">=</span> <span class="st">"3.21"</span><span class="op">)</span></span>
+<span></span>
 <span><span class="co"># Install workshop package</span></span>
-<span><span class="co">#install.packages('BiocManager')</span></span>
-<span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"tidyomics/tidySpatialWorkshop"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># In May 2025, the following packages should be installed from github repositories, to use the latest features. In case you have them pre installed, run the following command</span></span>
-<span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html" class="external-link">install</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lmweber/ggspavis"</span>,</span>
-<span>                       <span class="st">"stemangiola/tidySummarizedExperiment"</span>,</span>
-<span>                       <span class="st">"william-hutchison/tidySpatialExperiment"</span>,</span>
-<span>                       <span class="st">"stemangiola/tidybulk"</span>,</span>
-<span>                       <span class="st">"stemangiola/tidygate"</span>,</span>
-<span>                       <span class="st">"stemangiola/CuratedAtlasQueryR"</span><span class="op">)</span>,</span>
-<span>                     update <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"ggcorrplot"</span><span class="op">)</span></span>
+<span><span class="co">#install.packages('remotes')</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tidyomics/tidySpatialWorkshop"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Then build the vignettes</span></span>
-<span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"tidyomics/tidySpatialWorkshop"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span>, force<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tidyomics/tidySpatialWorkshop"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span>, force<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># To view vignette</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidyomics/tidySpatialWorkshop" class="external-link">tidySpatialWorkshop</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/vignette.html" class="external-link">vignette</a></span><span class="op">(</span><span class="st">"Introduction"</span><span class="op">)</span></span></code></pre>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/vignette.html" class="external-link">vignette</a></span><span class="op">(</span><span class="st">"Session_1_sequencing_assays"</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="interactive-execution-of-the-vignettes">Interactive execution of the vignettes<a class="anchor" aria-label="anchor" href="#interactive-execution-of-the-vignettes"></a>
@@ -228,7 +221,7 @@ git clone git@github.com:tidyomics/tidySpatialWorkshop.git
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Stefano Mangiola <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-7474-836X" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
-<li>Luciano Martelotto <br><small class="roles"> Author </small>   </li>
+<li>Malvica Kharbanda <br><small class="roles"> Author </small>   </li>
 </ul>
 </div>
 
@@ -246,12 +239,12 @@ git clone git@github.com:tidyomics/tidySpatialWorkshop.git
 
       <footer><div class="copyright">
   <p></p>
-<p>Developed by Stefano Mangiola, Luciano Martelotto.</p>
+<p>Developed by Stefano Mangiola, Malvica Kharbanda.</p>
 </div>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer>

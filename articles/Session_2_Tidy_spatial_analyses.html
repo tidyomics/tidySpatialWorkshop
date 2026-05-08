@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidySpatialWorkshop</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.18.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.19.0</span>
       </span>
     </div>
 
@@ -93,7 +93,7 @@ Institute<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
 </h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/tidyomics/tidySpatialWorkshop/blob/improve_vignettes/vignettes/Session_2_Tidy_spatial_analyses.Rmd" class="external-link"><code>vignettes/Session_2_Tidy_spatial_analyses.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tidyomics/tidySpatialWorkshop/blob/devel/vignettes/Session_2_Tidy_spatial_analyses.Rmd" class="external-link"><code>vignettes/Session_2_Tidy_spatial_analyses.Rmd</code></a></small>
       <div class="hidden name"><code>Session_2_Tidy_spatial_analyses.Rmd</code></div>
 
     </div>
@@ -143,27 +143,12 @@ maintainability and long-term Bioconductor support.</p>
 <p><code>tidyomics</code> is presented in “The tidyomics ecosystem:
 Enhancing omic data analyses” <a href="https://www.biorxiv.org/content/10.1101/2023.09.10.557072v1" class="external-link">Hutchison
 and Keyes et al., 2025</a></p>
-<p><img src="../inst/images/tidyomics.png" width="700px"></p>
+<p><img src="../inst/images/tidyomics.png" class="r-plt" alt="" width="700px"></p>
 <p><a href="https://docs.google.com/gview?url=https://raw.githubusercontent.com/tidytranscriptomics-workshops/LoveMangiola2022_tidytranscriptomics/master/inst/LoveMangiola2022_tidytranscriptomics.pdf" class="external-link">Slides</a></p>
 <iframe src="https://docs.google.com/gview?url=https://raw.githubusercontent.com/tidytranscriptomics-workshops/RMedicine2023_tidytranscriptomics/master/inst/RMedicine2023_tidytranscriptomics.pdf&amp;embedded=true" scrolling="yes" style="width:100%; height:600px;" frameborder="0">
 </iframe>
-<div class="section level4">
-<h4 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
-</h4>
-<p>let’s make sure we get the latest packages available on github</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># In May 2025, the following packages should be installed from github repositories, to use the latest features. In case you have them pre installed, run the following command</span></span>
-<span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html" class="external-link">install</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lmweber/ggspavis"</span>, </span>
-<span>                       <span class="st">"stemangiola/tidySummarizedExperiment"</span>, </span>
-<span>                        <span class="st">"stemangiola/tidySingleCellExperiment"</span>, </span>
-<span>                       <span class="st">"william-hutchison/tidySpatialExperiment"</span>, </span>
-<span>                       <span class="st">"stemangiola/tidybulk"</span>, </span>
-<span>                       <span class="st">"stemangiola/tidygate"</span><span class="op">)</span>, </span>
-<span>                     update <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p><strong>Important:</strong> Please restart your R session after
-installation to ensure the updated packages are loaded correctly.</p>
 <p>Let’s load the libraries needed for this session</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/drighelli/SpatialExperiment" class="external-link">SpatialExperiment</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Tidyverse library(tidyverse)</span></span>
@@ -188,10 +173,14 @@ installation to ensure the updated packages are loaded correctly.</p>
 <code>spatialLIBD</code> and <code>ExperimentHub</code> packages to
 gather spatial transcriptomics data.</p>
 <p>doi: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8095368/" class="external-link">10.1038/s41593-020-00787-0</a></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># From https://bioconductor.org/packages/devel/bioc/vignettes/Banksy/inst/doc/multi-sample.html</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/LieberInstitute/spatialLIBD" class="external-link">spatialLIBD</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">ExperimentHub</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Bioconductor/ExperimentHub" class="external-link">ExperimentHub</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># To avoid error for SPE loading </span></span>
+<span><span class="co"># https://support.bioconductor.org/p/9161859/#9161863</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/methods/setClassUnion.html" class="external-link">setClassUnion</a></span><span class="op">(</span><span class="st">"ExpData"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"matrix"</span>, <span class="st">"SummarizedExperiment"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">spatial_data</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="fu">ExperimentHub</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ExperimentHub/man/ExperimentHub-class.html" class="external-link">ExperimentHub</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -224,9 +213,8 @@ gather spatial transcriptomics data.</p>
 <div class="note">
 <p>If <code>ExperimentHub</code> should not work. The
 <code>spatial_data</code> object from the previous code block can be
-downloaded from <a href="https://zenodo.org/records/11233385/files/tidySpatialWorkshop_spatial_data.rds?download=1" class="external-link">Zenodo
+downloaded from <a href="https://zenodo.org/records/11233385/files/tidySpatialWorkshop2024_spatial_data.rds" class="external-link">Zenodo
 - 10.5281/zenodo.11233385</a></p>
-</div>
 </div>
 </div>
 <div class="section level3">
@@ -254,10 +242,18 @@ object as a tidyverse tibble, and provides
 functions.</p>
 <p>If we load the <code>tidySpatialExperiment</code> package and then
 view the single cell data, it now displays as a tibble.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/william-hutchison/tidySpatialExperiment" class="external-link">tidySpatialExperiment</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">spatial_data</span></span></code></pre></div>
+<pre><code><span><span class="co">## Warning: `when()` was deprecated in purrr 1.0.0.</span></span>
+<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Please use `if` instead.</span></span>
+<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> The deprecated feature was likely used in the <span style="color: #0000BB;">tidySpatialExperiment</span> package.</span></span>
+<span><span class="co">##   Please report the issue at</span></span>
+<span><span class="co">##   <span style="color: #0000BB; font-style: italic;">&lt;https://github.com/william-hutchison/tidySpatialExperiment/issues&gt;</span>.</span></span>
+<span><span class="co">## <span style="color: #555555;">This warning is displayed once per session.</span></span></span>
+<span><span class="co">## <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span></span>
+<span><span class="co">## <span style="color: #555555;">generated.</span></span></span></code></pre>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A SpatialExperiment-tibble abstraction: 47,681 × 72</span></span></span>
 <span><span class="co">## <span style="color: #949494;"># </span><span style="color: #555555;">Features = 33538 | Cells = 47681 | Assays = counts, logcounts</span></span></span>
 <span><span class="co">##    .cell           sample_id Cluster sum_umi sum_gene subject position replicate</span></span>
@@ -378,7 +374,7 @@ preprocessing.</p>
 <span><span class="co">## <span style="color: #BCBCBC;">10</span> AAACCC… 151507    TRUE      L3                       <span style="text-decoration: underline;">10</span>075               <span style="text-decoration: underline;">7</span>924</span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 47,671 more rows</span></span></span></code></pre>
 <div class="note">
-<p>Note that some columns are always displayed no matter whet. These
+<p>Note that some columns are always displayed no matter what. These
 column include special slots in the objects such as reduced dimensions,
 spatial coordinates (mandatory for <code>SpatialExperiment</code>), and
 sample identifier (mandatory for <code>SpatialExperiment</code>).</p>
@@ -578,7 +574,7 @@ lower-case version of <code>Phase</code>.</p>
 for future analyses. And confirm that the <code>SpatialExperiment</code>
 metadata has been mutated.</p>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">spatial_data</span> <span class="op">=</span> </span>
+<code class="sourceCode R"><span><span class="va">spatial_data</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="va">spatial_data</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>spatialLIBD_lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/chartr.html" class="external-link">tolower</a></span><span class="op">(</span><span class="va">spatialLIBD</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -663,32 +659,33 @@ organization.</p>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create column for sample</span></span>
 <span><span class="va">spatial_data</span> <span class="op">&lt;-</span> <span class="va">spatial_data</span> <span class="op">|&gt;</span></span>
+<span>  </span>
 <span>  <span class="co"># Extract sample ID from file path and display the updated data</span></span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/extract.html" class="external-link">extract</a></span><span class="op">(</span><span class="va">file_path</span>, <span class="st">"sample_id_from_file_path"</span>, <span class="st">"\\.\\./data/single_cell/([0-9]+)/outs/raw_feature_bc_matrix/"</span>, remove <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Take a look</span></span>
-<span><span class="va">spatial_data</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">.cell</span>, <span class="va">sample_id_from_file_path</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">spatial_data</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">.cell</span>, <span class="va">sample_id_from_file_path</span>, <span class="va">file_path</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A SpatialExperiment-tibble abstraction: 10,691 × 75</span></span></span>
 <span><span class="co">## <span style="color: #949494;"># </span><span style="color: #555555;">Features = 33538 | Cells = 10691 | Assays = counts, logcounts</span></span></span>
-<span><span class="co">##    .cell       sample_id_from_file_…¹ sample_id Cluster sum_umi sum_gene subject</span></span>
-<span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> AAACAAGTAT… 151673                 151673          7    <span style="text-decoration: underline;">8</span>458     <span style="text-decoration: underline;">3</span>586 Br8100 </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> AAACAATCTA… 151673                 151673          4    <span style="text-decoration: underline;">1</span>667     <span style="text-decoration: underline;">1</span>150 Br8100 </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> AAACACCAAT… 151673                 151673          8    <span style="text-decoration: underline;">3</span>769     <span style="text-decoration: underline;">1</span>960 Br8100 </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> AAACAGAGCG… 151673                 151673          6    <span style="text-decoration: underline;">5</span>433     <span style="text-decoration: underline;">2</span>424 Br8100 </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> AAACAGCTTT… 151673                 151673          3    <span style="text-decoration: underline;">4</span>278     <span style="text-decoration: underline;">2</span>264 Br8100 </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> AAACAGGGTC… 151673                 151673          3    <span style="text-decoration: underline;">4</span>004     <span style="text-decoration: underline;">2</span>178 Br8100 </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> AAACAGTGTT… 151673                 151673          8    <span style="text-decoration: underline;">2</span>376     <span style="text-decoration: underline;">1</span>432 Br8100 </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> AAACATTTCC… 151673                 151673          5    <span style="text-decoration: underline;">8</span>171     <span style="text-decoration: underline;">3</span>456 Br8100 </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> AAACCCGAAC… 151673                 151673          7   <span style="text-decoration: underline;">12</span>723     <span style="text-decoration: underline;">4</span>638 Br8100 </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">10</span> AAACCGGGTA… 151673                 151673          1    <span style="text-decoration: underline;">1</span>294      888 Br8100 </span></span>
+<span><span class="co">##    .cell     sample_id_from_file_…¹ file_path sample_id Cluster sum_umi sum_gene</span></span>
+<span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;glue&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> AAACAAGT… 151673                 ../data/… 151673          7    <span style="text-decoration: underline;">8</span>458     <span style="text-decoration: underline;">3</span>586</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> AAACAATC… 151673                 ../data/… 151673          4    <span style="text-decoration: underline;">1</span>667     <span style="text-decoration: underline;">1</span>150</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> AAACACCA… 151673                 ../data/… 151673          8    <span style="text-decoration: underline;">3</span>769     <span style="text-decoration: underline;">1</span>960</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> AAACAGAG… 151673                 ../data/… 151673          6    <span style="text-decoration: underline;">5</span>433     <span style="text-decoration: underline;">2</span>424</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> AAACAGCT… 151673                 ../data/… 151673          3    <span style="text-decoration: underline;">4</span>278     <span style="text-decoration: underline;">2</span>264</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> AAACAGGG… 151673                 ../data/… 151673          3    <span style="text-decoration: underline;">4</span>004     <span style="text-decoration: underline;">2</span>178</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> AAACAGTG… 151673                 ../data/… 151673          8    <span style="text-decoration: underline;">2</span>376     <span style="text-decoration: underline;">1</span>432</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> AAACATTT… 151673                 ../data/… 151673          5    <span style="text-decoration: underline;">8</span>171     <span style="text-decoration: underline;">3</span>456</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> AAACCCGA… 151673                 ../data/… 151673          7   <span style="text-decoration: underline;">12</span>723     <span style="text-decoration: underline;">4</span>638</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">10</span> AAACCGGG… 151673                 ../data/… 151673          1    <span style="text-decoration: underline;">1</span>294      888</span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 10,681 more rows</span></span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ abbreviated name: ¹​sample_id_from_file_path</span></span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 68 more variables: position &lt;chr&gt;, replicate &lt;chr&gt;, subject_position &lt;chr&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   discard &lt;lgl&gt;, key &lt;chr&gt;, cell_count &lt;int&gt;, SNN_k50_k4 &lt;int&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   SNN_k50_k5 &lt;int&gt;, SNN_k50_k6 &lt;int&gt;, SNN_k50_k7 &lt;int&gt;, SNN_k50_k8 &lt;int&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   SNN_k50_k9 &lt;int&gt;, SNN_k50_k10 &lt;int&gt;, SNN_k50_k11 &lt;int&gt;, SNN_k50_k12 &lt;int&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   SNN_k50_k13 &lt;int&gt;, SNN_k50_k14 &lt;int&gt;, SNN_k50_k15 &lt;int&gt;, …</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #949494;"># ℹ 68 more variables: subject &lt;chr&gt;, position &lt;chr&gt;, replicate &lt;chr&gt;,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   subject_position &lt;chr&gt;, discard &lt;lgl&gt;, key &lt;chr&gt;, cell_count &lt;int&gt;,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   SNN_k50_k4 &lt;int&gt;, SNN_k50_k5 &lt;int&gt;, SNN_k50_k6 &lt;int&gt;, SNN_k50_k7 &lt;int&gt;,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   SNN_k50_k8 &lt;int&gt;, SNN_k50_k9 &lt;int&gt;, SNN_k50_k10 &lt;int&gt;, SNN_k50_k11 &lt;int&gt;,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   SNN_k50_k12 &lt;int&gt;, SNN_k50_k13 &lt;int&gt;, SNN_k50_k14 &lt;int&gt;, …</span></span></span></code></pre>
 </div>
 <div class="section level5">
 <h5 id="unite">Unite<a class="anchor" aria-label="anchor" href="#unite"></a>
@@ -700,21 +697,21 @@ subject id (BCB) columns.</p>
 <code class="sourceCode R"><span><span class="va">spatial_data</span> <span class="op">&lt;-</span> <span class="va">spatial_data</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html" class="external-link">unite</a></span><span class="op">(</span><span class="st">"sample_subject"</span>, <span class="va">sample_id</span>, <span class="va">subject</span>, remove <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Take a look</span></span>
-<span><span class="va">spatial_data</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">.cell</span>, <span class="va">sample_id</span>, <span class="va">sample_subject</span>, <span class="va">subject</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">spatial_data</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">.cell</span>, <span class="va">sample_id</span>, <span class="va">subject</span>, <span class="va">sample_subject</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A SpatialExperiment-tibble abstraction: 10,691 × 6</span></span></span>
 <span><span class="co">## <span style="color: #949494;"># </span><span style="color: #555555;">Features = 33538 | Cells = 10691 | Assays = counts, logcounts</span></span></span>
-<span><span class="co">##    .cell  sample_id sample_subject subject pxl_col_in_fullres pxl_row_in_fullres</span></span>
-<span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> AAACA… 151673    151673_Br8100  Br8100                <span style="text-decoration: underline;">9</span>791               <span style="text-decoration: underline;">8</span>468</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> AAACA… 151673    151673_Br8100  Br8100                <span style="text-decoration: underline;">5</span>769               <span style="text-decoration: underline;">2</span>807</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> AAACA… 151673    151673_Br8100  Br8100                <span style="text-decoration: underline;">4</span>068               <span style="text-decoration: underline;">9</span>505</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> AAACA… 151673    151673_Br8100  Br8100                <span style="text-decoration: underline;">9</span>271               <span style="text-decoration: underline;">4</span>151</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> AAACA… 151673    151673_Br8100  Br8100                <span style="text-decoration: underline;">3</span>393               <span style="text-decoration: underline;">7</span>583</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> AAACA… 151673    151673_Br8100  Br8100                <span style="text-decoration: underline;">3</span>665               <span style="text-decoration: underline;">8</span>064</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> AAACA… 151673    151673_Br8100  Br8100                <span style="text-decoration: underline;">5</span>709              <span style="text-decoration: underline;">11</span>194</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> AAACA… 151673    151673_Br8100  Br8100                <span style="text-decoration: underline;">9</span>437               <span style="text-decoration: underline;">9</span>783</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> AAACC… 151673    151673_Br8100  Br8100               <span style="text-decoration: underline;">10</span>690               <span style="text-decoration: underline;">7</span>875</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">10</span> AAACC… 151673    151673_Br8100  Br8100                <span style="text-decoration: underline;">4</span>703               <span style="text-decoration: underline;">7</span>473</span></span>
+<span><span class="co">##    .cell  sample_id subject sample_subject pxl_col_in_fullres pxl_row_in_fullres</span></span>
+<span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> AAACA… 151673    Br8100  151673_Br8100                <span style="text-decoration: underline;">9</span>791               <span style="text-decoration: underline;">8</span>468</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> AAACA… 151673    Br8100  151673_Br8100                <span style="text-decoration: underline;">5</span>769               <span style="text-decoration: underline;">2</span>807</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> AAACA… 151673    Br8100  151673_Br8100                <span style="text-decoration: underline;">4</span>068               <span style="text-decoration: underline;">9</span>505</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> AAACA… 151673    Br8100  151673_Br8100                <span style="text-decoration: underline;">9</span>271               <span style="text-decoration: underline;">4</span>151</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> AAACA… 151673    Br8100  151673_Br8100                <span style="text-decoration: underline;">3</span>393               <span style="text-decoration: underline;">7</span>583</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> AAACA… 151673    Br8100  151673_Br8100                <span style="text-decoration: underline;">3</span>665               <span style="text-decoration: underline;">8</span>064</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> AAACA… 151673    Br8100  151673_Br8100                <span style="text-decoration: underline;">5</span>709              <span style="text-decoration: underline;">11</span>194</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> AAACA… 151673    Br8100  151673_Br8100                <span style="text-decoration: underline;">9</span>437               <span style="text-decoration: underline;">9</span>783</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> AAACC… 151673    Br8100  151673_Br8100               <span style="text-decoration: underline;">10</span>690               <span style="text-decoration: underline;">7</span>875</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">10</span> AAACC… 151673    Br8100  151673_Br8100                <span style="text-decoration: underline;">4</span>703               <span style="text-decoration: underline;">7</span>473</span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 10,681 more rows</span></span></span></code></pre>
 </div>
 </div>
@@ -738,12 +735,15 @@ regions of interest using an intuitive tidy grammar. From <a href="https://bioco
 <span>  <span class="co"># Gate based on tissue morphology</span></span>
 <span>  <span class="fu">tidySpatialExperiment</span><span class="fu">::</span><span class="fu">gate</span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.1</span>, colour <span class="op">=</span> <span class="st">"spatialLIBD"</span><span class="op">)</span> </span>
 <span></span>
+<span><span class="va">spatial_data</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">.cell</span>, <span class="va">.gated</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tidygate_env</span><span class="op">$</span><span class="va">gates</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/saveRDS.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="st">"&lt;PATH&gt;"</span><span class="op">)</span></span>
 <span><span class="va">spatial_data_gated</span> <span class="op">=</span> <span class="va">tidygate_env</span><span class="op">$</span><span class="va">gates</span></span></code></pre></div>
 <p>You can reload a pre-made gate for reproducibility</p>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">spatial_data_gated</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning in data(spatial_data_gated): data set 'spatial_data_gated' not found</span></span></code></pre>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spatial_data</span> <span class="op">=</span> </span>
 <span>  <span class="va">spatial_data</span> <span class="op">|&gt;</span> </span>
 <span>  </span>
@@ -755,7 +755,7 @@ regions of interest using an intuitive tidy grammar. From <a href="https://bioco
 <p><code>tidySpatialExperiment</code> added a <code>.gated</code> column
 to the <code>SpatialExperiment</code> object. We can see this column in
 its tibble abstraction.</p>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spatial_data</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">.cell</span>, <span class="va">.gated</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A SpatialExperiment-tibble abstraction: 3,639 × 5</span></span></span>
 <span><span class="co">## <span style="color: #949494;"># </span><span style="color: #555555;">Features = 33538 | Cells = 3639 | Assays = counts, logcounts</span></span></span>
@@ -774,7 +774,7 @@ its tibble abstraction.</p>
 <span><span class="co">## <span style="color: #949494;"># ℹ 3,629 more rows</span></span></span></code></pre>
 <p>We can count how many pixels we selected with simple
 <code>tidyverse</code> grammar</p>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spatial_data</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">.gated</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## tidySingleCellExperiment says: A data frame is returned for independent data analysis.</span></span></code></pre>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 2 × 2</span></span></span>
@@ -784,13 +784,13 @@ its tibble abstraction.</p>
 <span><span class="co">## <span style="color: #BCBCBC;">2</span> <span style="color: #BB0000;">NA</span>      <span style="text-decoration: underline;">3</span>337</span></span></code></pre>
 <p>To have a visual feedback of our selection we can plot the slide
 annotating by our newly created column.</p>
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spatial_data</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">ggspavis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotVisium.html" class="external-link">plotVisium</a></span><span class="op">(</span>annotate <span class="op">=</span> <span class="st">".gated"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Session_2_Tidy_spatial_analyses_files/figure-html/unnamed-chunk-29-1.png" width="672"></p>
-<p><img src="../inst/images/tidySPE_gate.png" width="300px"></p>
+<p><img src="Session_2_Tidy_spatial_analyses_files/figure-html/unnamed-chunk-29-1.png" class="r-plt" alt="" width="672"></p>
+<p><img src="../inst/images/tidySPE_gate.png" class="r-plt" alt="" width="300px"></p>
 <p>We can also filter, for further analyses</p>
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spatial_data</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">.gated</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A SpatialExperiment-tibble abstraction: 302 × 77</span></span></span>
@@ -842,7 +842,7 @@ to the user.</p>
 or more features of interest to our abstraction.</p>
 <p>Let’s add the astrocyte marker GFAP</p>
 <p>Find out ENSEMBL ID</p>
-<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">rowData</span><span class="op">(</span><span class="va">spatial_data</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span> <span class="va">gene_name</span> <span class="op">==</span> <span class="st">"GFAP"</span><span class="op">)</span></span></code></pre></div>
@@ -852,10 +852,10 @@ or more features of interest to our abstraction.</p>
 <span><span class="co">## <span style="color: #BCBCBC;">1</span> ensembl_havana gene  ENSG0000… 12           GFAP      ensembl_ha… protein_cod…</span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 2 more variables: gene_search &lt;chr&gt;, is_top_hvg &lt;lgl&gt;</span></span></span></code></pre>
 <p>Join the feature to the metadata</p>
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spatial_data</span> <span class="op">=</span> </span>
 <span>  <span class="va">spatial_data</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/ttservice/man/join_features.html" class="external-link">join_features</a></span><span class="op">(</span><span class="st">"ENSG00000131095"</span>, shape<span class="op">=</span><span class="st">"wide"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ttservice/man/join_features.html" class="external-link">join_features</a></span><span class="op">(</span><span class="st">"ENSG00000131095"</span>, shape<span class="op">=</span><span class="st">"wide"</span>, assay <span class="op">=</span> <span class="st">"logcounts"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">spatial_data</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">.cell</span>, <span class="va">ENSG00000131095</span><span class="op">)</span></span></code></pre></div>
@@ -875,10 +875,11 @@ or more features of interest to our abstraction.</p>
 <span><span class="co">## <span style="color: #BCBCBC;">10</span> AAACCGGGTAGG…            1.86 151673                  <span style="text-decoration: underline;">4</span>703               <span style="text-decoration: underline;">7</span>473</span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 3,629 more rows</span></span></span></code></pre>
 <div class="note">
-<p><strong>Exercise 2.2</strong> Join the endothelial marker PECAM1
-(CD31, look for ENSEMBL ID), and plot in space the pixel that are in the
-0.75 percentile of EPCAM1 expression. Are the PECAM1-positive pixels
-(endothelial?) spatially clustered?</p>
+<p><strong>Exercise 2.2</strong></p>
+<p>Join the endothelial marker PECAM1 (CD31, look for ENSEMBL ID), and
+plot in space the pixel that are in the 0.75 percentile of EPCAM1
+expression. Are the PECAM1-positive pixels (endothelial?) spatially
+clustered?</p>
 <ul>
 <li>Get the ENSEMBL ID</li>
 <li>Join the feature to the tidy data abstraction</li>
@@ -897,7 +898,7 @@ or more features of interest to our abstraction.</p>
 <h5 id="distinct">Distinct<a class="anchor" aria-label="anchor" href="#distinct"></a>
 </h5>
 <p>We can quickly explore the elements of a variable with distinct</p>
-<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spatial_data</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">sample_id</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## tidySingleCellExperiment says: A data frame is returned for independent data analysis.</span></span></code></pre>
@@ -906,7 +907,7 @@ or more features of interest to our abstraction.</p>
 <span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">1</span> 151673</span></span></code></pre>
 <p>We can <code>distinct</code> across multiple variables</p>
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spatial_data</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">sample_id</span>, <span class="va">Cluster</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## tidySingleCellExperiment says: A data frame is returned for independent data analysis.</span></span></code></pre>
@@ -927,7 +928,7 @@ or more features of interest to our abstraction.</p>
 </h5>
 <p>We can gather more information counting the instances of a
 variable</p>
-<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spatial_data</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">Cluster</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -944,9 +945,9 @@ variable</p>
 <span><span class="co">## <span style="color: #BCBCBC;">7</span>       7   340</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">8</span>       8   320</span></span></code></pre>
 <p>We calculate summary statistics of a subset of data</p>
-<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spatial_data</span> <span class="op">|&gt;</span> </span>
-<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Cluster</span><span class="op">==</span><span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Cluster</span><span class="op">==</span><span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">sample_id</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## tidySingleCellExperiment says: A data frame is returned for independent data analysis.</span></span></code></pre>
@@ -962,10 +963,10 @@ variable</p>
 with the function <code>aggregate_cells</code>. This also works for
 <code>SingleCellExeriment</code>.We obtain a
 <code>SummarizedExperiment</code>.</p>
-<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spe_regions_aggregated</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">spatial_data</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">aggregate_cells</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">sample_id</span>, <span class="va">spatialLIBD</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ttservice/man/aggregate_cells.html" class="external-link">aggregate_cells</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">sample_id</span>, <span class="va">spatialLIBD</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">spe_regions_aggregated</span></span></code></pre></div>
 <pre><code><span><span class="co">## class: SummarizedExperiment </span></span>
@@ -974,14 +975,15 @@ with the function <code>aggregate_cells</code>. This also works for
 <span><span class="co">## assays(2): counts logcounts</span></span>
 <span><span class="co">## rownames(33538): ENSG00000000003 ENSG00000000005 ... ENSG00000285509</span></span>
 <span><span class="co">##   ENSG00000285513</span></span>
-<span><span class="co">## rowData names(1): feature</span></span>
+<span><span class="co">## rowData names(9): source type ... gene_search is_top_hvg</span></span>
 <span><span class="co">## colnames(8): 151673___L1 151673___L2 ... 151673___NA 151673___WM</span></span>
-<span><span class="co">## colData names(16): sample_id spatialLIBD ... file_path</span></span>
+<span><span class="co">## colData names(16): .aggregated_cells sample_id ... file_path</span></span>
 <span><span class="co">##   sample_id_from_file_path</span></span></code></pre>
 <p><code>tidyomics</code> allows to cross spatial, single-cell
 (Bioconductor and seurat), and bulk keeping a consistent interface.</p>
-<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/stemangiola/tidySummarizedExperiment" class="external-link">tidySummarizedExperiment</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## tidySummarizedExperiment says: Printing is now handled externally. If you want to visualize the data in a tidy way, do library(tidyprint). See https://github.com/tidyomics/tidyprint for more information.</span></span></code></pre>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## Attaching package: 'tidySummarizedExperiment'</span></span></code></pre>
 <pre><code><span><span class="co">## The following object is masked from 'package:tidySingleCellExperiment':</span></span>
@@ -990,53 +992,33 @@ with the function <code>aggregate_cells</code>. This also works for
 <pre><code><span><span class="co">## The following object is masked from 'package:generics':</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">##     tidy</span></span></code></pre>
-<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spe_regions_aggregated</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A SummarizedExperiment-tibble abstraction: 268,304 × 21</span></span></span>
-<span><span class="co">## <span style="color: #949494;"># </span><span style="color: #555555;">Features=33538 | Samples=8 | Assays=counts, logcounts</span></span></span>
-<span><span class="co">##    .feature     .sample counts logcounts sample_id spatialLIBD .aggregated_cells</span></span>
-<span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> ENSG0000000… 151673…      4      6.06 151673    L1                        273</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> ENSG0000000… 151673…      0      0    151673    L1                        273</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> ENSG0000000… 151673…     15     20.6  151673    L1                        273</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> ENSG0000000… 151673…      3      3.24 151673    L1                        273</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> ENSG0000000… 151673…      0      0    151673    L1                        273</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> ENSG0000000… 151673…      1      2.01 151673    L1                        273</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> ENSG0000000… 151673…      7      9.46 151673    L1                        273</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> ENSG0000000… 151673…     11     15.4  151673    L1                        273</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> ENSG0000000… 151673…     10     13.9  151673    L1                        273</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">10</span> ENSG0000000… 151673…      6      9.65 151673    L1                        273</span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 40 more rows</span></span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 14 more variables: sample_subject &lt;chr&gt;, subject &lt;chr&gt;, position &lt;chr&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   replicate &lt;chr&gt;, subject_position &lt;chr&gt;, layer_guess &lt;fct&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   layer_guess_reordered &lt;fct&gt;, layer_guess_reordered_short &lt;fct&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   ManualAnnotation &lt;chr&gt;, in_tissue &lt;lgl&gt;, spatialLIBD_lower &lt;chr&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   file_path &lt;glue&gt;, sample_id_from_file_path &lt;chr&gt;, feature &lt;chr&gt;</span></span></span></code></pre>
+<pre><code><span><span class="co">## class: SummarizedExperiment </span></span>
+<span><span class="co">## dim: 33538 8 </span></span>
+<span><span class="co">## metadata(0):</span></span>
+<span><span class="co">## assays(2): counts logcounts</span></span>
+<span><span class="co">## rownames(33538): ENSG00000000003 ENSG00000000005 ... ENSG00000285509</span></span>
+<span><span class="co">##   ENSG00000285513</span></span>
+<span><span class="co">## rowData names(9): source type ... gene_search is_top_hvg</span></span>
+<span><span class="co">## colnames(8): 151673___L1 151673___L2 ... 151673___NA 151673___WM</span></span>
+<span><span class="co">## colData names(16): .aggregated_cells sample_id ... file_path</span></span>
+<span><span class="co">##   sample_id_from_file_path</span></span></code></pre>
 <p>You will be able to apply the familiar <code>tidyverse</code>
 operations</p>
-<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spe_regions_aggregated</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">sample_id</span> <span class="op">==</span> <span class="st">"151673"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A SummarizedExperiment-tibble abstraction: 268,304 × 21</span></span></span>
-<span><span class="co">## <span style="color: #949494;"># </span><span style="color: #555555;">Features=33538 | Samples=8 | Assays=counts, logcounts</span></span></span>
-<span><span class="co">##    .feature     .sample counts logcounts sample_id spatialLIBD .aggregated_cells</span></span>
-<span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> ENSG0000000… 151673…      4      6.06 151673    L1                        273</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> ENSG0000000… 151673…      0      0    151673    L1                        273</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> ENSG0000000… 151673…     15     20.6  151673    L1                        273</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> ENSG0000000… 151673…      3      3.24 151673    L1                        273</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> ENSG0000000… 151673…      0      0    151673    L1                        273</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> ENSG0000000… 151673…      1      2.01 151673    L1                        273</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> ENSG0000000… 151673…      7      9.46 151673    L1                        273</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> ENSG0000000… 151673…     11     15.4  151673    L1                        273</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> ENSG0000000… 151673…     10     13.9  151673    L1                        273</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">10</span> ENSG0000000… 151673…      6      9.65 151673    L1                        273</span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 40 more rows</span></span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 14 more variables: sample_subject &lt;chr&gt;, subject &lt;chr&gt;, position &lt;chr&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   replicate &lt;chr&gt;, subject_position &lt;chr&gt;, layer_guess &lt;fct&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   layer_guess_reordered &lt;fct&gt;, layer_guess_reordered_short &lt;fct&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   ManualAnnotation &lt;chr&gt;, in_tissue &lt;lgl&gt;, spatialLIBD_lower &lt;chr&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   file_path &lt;glue&gt;, sample_id_from_file_path &lt;chr&gt;, feature &lt;chr&gt;</span></span></span></code></pre>
+<pre><code><span><span class="co">## class: SummarizedExperiment </span></span>
+<span><span class="co">## dim: 33538 8 </span></span>
+<span><span class="co">## metadata(1): latest_filter_scope_report</span></span>
+<span><span class="co">## assays(2): counts logcounts</span></span>
+<span><span class="co">## rownames(33538): ENSG00000000003 ENSG00000000005 ... ENSG00000285509</span></span>
+<span><span class="co">##   ENSG00000285513</span></span>
+<span><span class="co">## rowData names(9): source type ... gene_search is_top_hvg</span></span>
+<span><span class="co">## colnames(8): 151673___L1 151673___L2 ... 151673___NA 151673___WM</span></span>
+<span><span class="co">## colData names(16): .aggregated_cells sample_id ... file_path</span></span>
+<span><span class="co">##   sample_id_from_file_path</span></span></code></pre>
 </div>
 </div>
 <div class="section level4">
@@ -1050,10 +1032,10 @@ improve.</p>
 <h5 id="subset-to-keep-only-on-tissue-spots-">Subset to keep only on-tissue spots.<a class="anchor" aria-label="anchor" href="#subset-to-keep-only-on-tissue-spots-"></a>
 </h5>
 <p><strong>Base R approach:</strong></p>
-<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spatial_data</span> <span class="op">&lt;-</span> <span class="va">spatial_data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">colData</a></span><span class="op">(</span><span class="va">spatial_data</span><span class="op">)</span><span class="op">$</span><span class="va">in_tissue</span> <span class="op">==</span> <span class="fl">1</span><span class="op">]</span></span></code></pre></div>
 <p><strong>Tidyverse Approach:</strong></p>
-<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spatial_data</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="va">spatial_data</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">in_tissue</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span> </span></code></pre></div>
@@ -1088,7 +1070,7 @@ sequencing data, where features are more central.</p>
 feature-manipulation API among our plans. See <a href="https://github.com/orgs/tidyomics/projects/1" class="external-link">tidyomics
 challenges</a></p>
 <p><strong>Base R approach:</strong></p>
-<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">is_gene_mitochondrial</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"(^MT-)|(^mt-)"</span>, <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">rowData</a></span><span class="op">(</span><span class="va">spatial_data</span><span class="op">)</span><span class="op">$</span><span class="va">gene_name</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">rowData</a></span><span class="op">(</span><span class="va">spatial_data</span><span class="op">)</span><span class="op">$</span><span class="va">gene_name</span><span class="op">[</span><span class="va">is_gene_mitochondrial</span><span class="op">]</span></span></code></pre></div>
 <pre><code><span><span class="co">##  [1] "MT-ND1"  "MT-ND2"  "MT-CO1"  "MT-CO2"  "MT-ATP8" "MT-ATP6" "MT-CO3" </span></span>
@@ -1101,14 +1083,14 @@ challenges</a></p>
 mitochondrial content and read/gene count, a common indicator of cell
 health and viability.</p>
 <p><strong>Base R approach:</strong></p>
-<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spatial_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scuttle/man/addPerCellQCMetrics.html" class="external-link">addPerCellQC</a></span><span class="op">(</span><span class="va">spatial_data</span>, subsets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mito <span class="op">=</span> <span class="va">is_gene_mitochondrial</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## Select expressed genes threshold</span></span>
 <span><span class="va">qc_mitochondrial_transcription</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">colData</a></span><span class="op">(</span><span class="va">spatial_data</span><span class="op">)</span><span class="op">$</span><span class="va">subsets_mito_percent</span> <span class="op">&gt;</span> <span class="fl">30</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">colData</a></span><span class="op">(</span><span class="va">spatial_data</span><span class="op">)</span><span class="op">$</span><span class="va">qc_mitochondrial_transcription</span> <span class="op">&lt;-</span> <span class="va">qc_mitochondrial_transcription</span></span></code></pre></div>
 <p><strong>Tidyverse Approach:</strong></p>
-<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spatial_data</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="va">spatial_data</span> <span class="op">|&gt;</span> </span>
 <span>  </span>
@@ -1116,11 +1098,15 @@ health and viability.</p>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/scuttle/man/addPerCellQCMetrics.html" class="external-link">addPerCellQC</a></span><span class="op">(</span>subsets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mito <span class="op">=</span> <span class="va">is_gene_mitochondrial</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  </span>
 <span>  <span class="co">## Add threshold in colData</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
-<span>    qc_mitochondrial_transcription <span class="op">=</span> <span class="va">subsets_mito_percent</span> <span class="op">&gt;</span> <span class="fl">30</span></span>
-<span>  <span class="op">)</span></span>
-<span></span>
-<span><span class="va">spatial_data</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">.cell</span>, <span class="va">qc_mitochondrial_transcription</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span> qc_mitochondrial_transcription <span class="op">=</span> <span class="va">subsets_mito_percent</span> <span class="op">&gt;</span> <span class="fl">30</span> <span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Warning in addPerCellQC(spatial_data, subsets = list(mito = is_gene_mitochondrial)): 'addPerCellQC' is deprecated.</span></span>
+<span><span class="co">## Use 'scrapper::quickRnaQc.se' instead.</span></span>
+<span><span class="co">## See help("Deprecated")</span></span></code></pre>
+<pre><code><span><span class="co">## Warning in .per_cell_qc_metrics(assay(x, assay.type), subsets = subsets, : 'perCellQCMetrics' is deprecated.</span></span>
+<span><span class="co">## Use 'scrapper::computeRnaQcMetrics' instead.</span></span>
+<span><span class="co">## See help("Deprecated")</span></span></code></pre>
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">spatial_data</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">.cell</span>, <span class="va">qc_mitochondrial_transcription</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A SpatialExperiment-tibble abstraction: 3,639 × 5</span></span></span>
 <span><span class="co">## <span style="color: #949494;"># </span><span style="color: #555555;">Features = 33538 | Cells = 3639 | Assays = counts, logcounts</span></span></span>
 <span><span class="co">##    .cell  qc_mitochondrial_tra…¹ sample_id pxl_col_in_fullres pxl_row_in_fullres</span></span>
@@ -1152,7 +1138,7 @@ workflow clarity and execution.</p>
 <h5 id="group-specific-analyses">Group-specific analyses<a class="anchor" aria-label="anchor" href="#group-specific-analyses"></a>
 </h5>
 <p><strong>Base R approach:</strong></p>
-<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># get gene for subset</span></span>
 <span><span class="va">genes</span> <span class="op">&lt;-</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/grep.html" class="external-link">grepl</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"^Rp[l|s]|Mt"</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">spatial_data</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -1168,9 +1154,11 @@ workflow clarity and execution.</p>
 <span>          <span class="op">}</span></span>
 <span>  <span class="op">)</span> </span>
 <span></span>
+<span><span class="va">marker_genes</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">marker_genes</span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">marker_genes</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Tidyverse Approach: group_split</strong></p>
-<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># get gene for subset</span></span>
 <span><span class="va">genes</span> <span class="op">&lt;-</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/grep.html" class="external-link">grepl</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"^Rp[l|s]|Mt"</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">spatial_data</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -1185,13 +1173,21 @@ workflow clarity and execution.</p>
 <span>      <span class="fu">scran</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/scran/man/modelGeneVar.html" class="external-link">modelGeneVar</a></span><span class="op">(</span>subset.row <span class="op">=</span> <span class="va">genes</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>      <span class="fu">scran</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/scran/man/getTopHVGs.html" class="external-link">getTopHVGs</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/reduce.html" class="external-link">reduce</a></span><span class="op">(</span><span class="va">union</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">marker_genes</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/reduce.html" class="external-link">reduce</a></span><span class="op">(</span><span class="va">union</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Warning in scran::getTopHVGs(scran::modelGeneVar(.x, subset.row = genes), : 'scran::getTopHVGs' is deprecated.</span></span>
+<span><span class="co">## Use 'scrapper::chooseHighlyVariableGenes' instead.</span></span>
+<span><span class="co">## See help("Deprecated")</span></span></code></pre>
+<pre><code><span><span class="co">## Warning in fitTrendVar(fm, fv, ...): 'fitTrendVar' is deprecated.</span></span>
+<span><span class="co">## Use 'scrapper::fitVarianceTrend' instead.</span></span>
+<span><span class="co">## See help("Deprecated")</span></span></code></pre>
+<pre><code><span><span class="co">## Warning in combineBlocks(collected, method = method, equiweight = equiweight, : 'combineBlocks' is deprecated.</span></span>
+<span><span class="co">## See help("Deprecated")</span></span></code></pre>
+<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">marker_genes</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] "ENSG00000123560" "ENSG00000197971" "ENSG00000110484" "ENSG00000131095"</span></span>
 <span><span class="co">## [5] "ENSG00000109846" "ENSG00000173786"</span></span></code></pre>
 <p><strong>Tidyverse Approach: nest</strong></p>
-<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spatial_data</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">nest</a></span><span class="op">(</span>sample_data <span class="op">=</span> <span class="op">-</span><span class="va">sample_id</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>marker_genes <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">sample_data</span>, <span class="op">~</span> </span>
@@ -1199,6 +1195,14 @@ workflow clarity and execution.</p>
 <span>      <span class="fu">scran</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/scran/man/modelGeneVar.html" class="external-link">modelGeneVar</a></span><span class="op">(</span>subset.row <span class="op">=</span> <span class="va">genes</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>      <span class="fu">scran</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/scran/man/getTopHVGs.html" class="external-link">getTopHVGs</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span>
 <span>  <span class="op">)</span><span class="op">)</span> </span></code></pre></div>
+<pre><code><span><span class="co">## Warning: There were 3 warnings in `mutate()`.</span></span>
+<span><span class="co">## The first warning was:</span></span>
+<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> In argument: `marker_genes = map(...)`.</span></span>
+<span><span class="co">## Caused by warning in `scran::getTopHVGs()`:</span></span>
+<span><span class="co">## <span style="color: #BBBB00;">!</span> 'scran::getTopHVGs' is deprecated.</span></span>
+<span><span class="co">## Use 'scrapper::chooseHighlyVariableGenes' instead.</span></span>
+<span><span class="co">## See help("Deprecated")</span></span>
+<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Run `dplyr::last_dplyr_warnings()` to see the 2 remaining warnings.</span></span></code></pre>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
 <span><span class="co">##   sample_id sample_data       marker_genes </span></span>
 <span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>       </span></span>
@@ -1217,7 +1221,7 @@ data manipulation workflow, making it part of the data pipeline.</p>
 <h5 id="multi-parameter-filtering">Multi-parameter filtering<a class="anchor" aria-label="anchor" href="#multi-parameter-filtering"></a>
 </h5>
 <p><strong>Base R approach:</strong></p>
-<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## # Mitochondrial transcription</span></span>
 <span><span class="va">qc_mitochondrial_transcription</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">colData</a></span><span class="op">(</span><span class="va">spatial_data</span><span class="op">)</span><span class="op">$</span><span class="va">subsets_mito_percent</span> <span class="op">&gt;</span> <span class="fl">30</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">colData</a></span><span class="op">(</span><span class="va">spatial_data</span><span class="op">)</span><span class="op">$</span><span class="va">qc_mitochondrial_transcription</span> <span class="op">&lt;-</span> <span class="va">qc_mitochondrial_transcription</span></span>
@@ -1236,7 +1240,7 @@ data manipulation workflow, making it part of the data pipeline.</p>
 <span><span class="co"># # Filter</span></span>
 <span><span class="va">spatial_data</span> <span class="op">=</span> <span class="va">spatial_data</span><span class="op">[</span>,<span class="op">!</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">colData</a></span><span class="op">(</span><span class="va">spatial_data</span><span class="op">)</span><span class="op">$</span><span class="va">discard</span> <span class="op">]</span></span></code></pre></div>
 <p><strong>Tidyverse Approach:</strong></p>
-<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spatial_data_filtered</span> <span class="op">=</span> </span>
 <span>  <span class="va">spatial_data</span> <span class="op">|&gt;</span> </span>
 <span></span>
@@ -1272,6 +1276,19 @@ especially for users familiar with the tidyverse syntax.</p>
 code and no need for intermediate steps make the code easier to maintain
 and modify, especially when conditions change or additional filters are
 needed.</p>
+<div class="note">
+<p><strong>Exercise 2.2.1</strong></p>
+<p>In Session 1 we showed that a good strategy for QC filtering is
+outlier detection. With this strategy the baseline distribution of a QC
+factor (e.g. mitochondrial transcription) will be used to detect
+anomalous spots/cells. Read the documentation of
+<code><a href="https://rdrr.io/pkg/scuttle/man/isOutlier.html" class="external-link">scater::isOutlier</a></code>, and use it WITH
+<code>tidyomics</code>/<code>tidyverse</code> to label outlier spots for
+mitochondrial transcription.</p>
+<p>Then, note which method is the most stringent, between our
+thresholding and outlier-detection, solely using
+<code>tidyomics</code>/<code>tidyverse</code>.</p>
+</div>
 </div>
 </div>
 <div class="section level4">
@@ -1287,21 +1304,21 @@ tidyverse visualisation, and any visualisation compatible with
 </h5>
 <p>Let’s visualise the regions that spatialLIBD labelled across three
 Visium 10X samples.</p>
-<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spatial_data_filtered</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">ggspavis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotSpots.html" class="external-link">plotSpots</a></span><span class="op">(</span>annotate <span class="op">=</span> <span class="st">"spatialLIBD"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggspavis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotCoords.html" class="external-link">plotCoords</a></span><span class="op">(</span>annotate <span class="op">=</span> <span class="st">"spatialLIBD"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">sample_id</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">libd_layer_colors</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_remove.html" class="external-link">str_remove</a></span><span class="op">(</span><span class="st">"ayer"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"spatialLIBD regions"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Scale for <span style="color: #00BB00;">colour</span> is already present.</span></span>
 <span><span class="co">## Adding another scale for <span style="color: #00BB00;">colour</span>, which will replace the existing scale.</span></span></code></pre>
-<p><img src="Session_2_Tidy_spatial_analyses_files/figure-html/unnamed-chunk-51-1.png" width="672"></p>
+<p><img src="Session_2_Tidy_spatial_analyses_files/figure-html/unnamed-chunk-51-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level5">
 <h5 id="custom-visualisation-plotting-the-regions">Custom visualisation: Plotting the regions<a class="anchor" aria-label="anchor" href="#custom-visualisation-plotting-the-regions"></a>
 </h5>
-<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spatial_data</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">array_row</span>, <span class="va">array_col</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">spatialLIBD</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -1309,7 +1326,7 @@ Visium 10X samples.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html" class="external-link">coord_fixed</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"spatialLIBD regions"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Session_2_Tidy_spatial_analyses_files/figure-html/unnamed-chunk-52-1.png" width="672"></p>
+<p><img src="Session_2_Tidy_spatial_analyses_files/figure-html/unnamed-chunk-52-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level5">
 <h5 id="custom-visualisation-plotting-rna-output">Custom visualisation: Plotting RNA output<a class="anchor" aria-label="anchor" href="#custom-visualisation-plotting-rna-output"></a>
@@ -1322,7 +1339,7 @@ contrary regions to an L3, characterised by a high RNA output.</p>
 <p>We could conclude that when we use thresholding to filter
 “low-quality” pixels we have to be careful about possible biological and
 spatial effects.</p>
-<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spatial_data_filtered</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">sum_umi</span>, color <span class="op">=</span> <span class="va">spatialLIBD</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html" class="external-link">geom_density</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
@@ -1330,7 +1347,7 @@ spatial effects.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">libd_layer_colors</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_remove.html" class="external-link">str_remove</a></span><span class="op">(</span><span class="st">"ayer"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_log10</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Session_2_Tidy_spatial_analyses_files/figure-html/unnamed-chunk-53-1.png" width="672"></p>
+<p><img src="Session_2_Tidy_spatial_analyses_files/figure-html/unnamed-chunk-53-1.png" class="r-plt" alt="" width="672"></p>
 <p>We provide another example of how the use of tidy. Spatial experiment
 makes custom visualisation, very easy and intuitive, leveraging
 <code>ggplot</code> functionalities. We will observe the relationship
@@ -1338,20 +1355,22 @@ between mitochondrial transcription percentage, and total gene counts.
 We expect this relationship to be inverse as cells with higher
 mitochondrial transcription percentage tent to have a more limited
 transcriptional gene pool (e.g. for dieying or damaged cells).</p>
-<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spatial_data_filtered</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">subsets_mito_percent</span>, <span class="va">sum_gene</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">spatialLIBD</span><span class="op">)</span>, size<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span>  </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_ellipse.html" class="external-link">stat_ellipse</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>group <span class="op">=</span> <span class="va">spatialLIBD</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_ellipse.html" class="external-link">stat_ellipse</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>group <span class="op">=</span> <span class="va">spatialLIBD</span>, color <span class="op">=</span> <span class="va">spatialLIBD</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">libd_layer_colors</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_remove.html" class="external-link">str_remove</a></span><span class="op">(</span><span class="st">"ayer"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">geom_smooth</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>group <span class="op">=</span> <span class="va">spatialLIBD</span><span class="op">)</span>, method<span class="op">=</span><span class="st">"lm"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_log10</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Session_2_Tidy_spatial_analyses_files/figure-html/unnamed-chunk-54-1.png" width="672"></p>
+<pre><code><span><span class="co">## `geom_smooth()` using formula = 'y ~ x'</span></span></code></pre>
+<p><img src="Session_2_Tidy_spatial_analyses_files/figure-html/unnamed-chunk-54-1.png" class="r-plt" alt="" width="672"></p>
 <p>Interestingly, if we plot the correlation between these two
 quantities we observe heterogeneity among regions, with L1 showing a
 very small association.</p>
-<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spatial_data_filtered</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">subsets_mito_percent</span>, <span class="va">sum_gene</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">spatialLIBD</span><span class="op">)</span>, size<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span>  </span>
@@ -1361,11 +1380,11 @@ very small association.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_log10</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## `geom_smooth()` using formula = 'y ~ x'</span></span></code></pre>
-<p><img src="Session_2_Tidy_spatial_analyses_files/figure-html/unnamed-chunk-55-1.png" width="672"></p>
+<p><img src="Session_2_Tidy_spatial_analyses_files/figure-html/unnamed-chunk-55-1.png" class="r-plt" alt="" width="672"></p>
 <p>Let’s take a step further and group the correlations according to
 samples, to see whether different samples show different
 correlations.</p>
-<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spatial_data_filtered</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">subsets_mito_percent</span>, <span class="va">sum_gene</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">spatialLIBD</span><span class="op">)</span>, size<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span>  </span>
@@ -1375,7 +1394,7 @@ correlations.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_log10</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## `geom_smooth()` using formula = 'y ~ x'</span></span></code></pre>
-<p><img src="Session_2_Tidy_spatial_analyses_files/figure-html/unnamed-chunk-56-1.png" width="672"></p>
+<p><img src="Session_2_Tidy_spatial_analyses_files/figure-html/unnamed-chunk-56-1.png" class="r-plt" alt="" width="672"></p>
 <p>As you can appreciate, the relationship between the number of genes,
 probed Purcell and their mitochondrial prescription abundance it’s quite
 consistent.</p>
@@ -1396,7 +1415,7 @@ cells and perform differential expression within each region. Some of
 the comments you can use are: <code>mutate</code>, <code>nest</code>,
 <code>map</code>, <code>aggregate_cells</code>,
 <code>tidybulk:::test_differential_abundance</code>,</p>
-<p>A hist:</p>
+<p>A hint:</p>
 <ul>
 <li><p>spatial_data |&gt; mutate( dead = …</p></li>
 <li><p>Aggregate by sample, dead status, ad annotated region</p></li>
@@ -1424,10 +1443,10 @@ et al., 2021</a>.)</p>
 <ul>
 <li>join_features()</li>
 <li>mutate()</li>
-<li>ggspavis::plotSpots()</li>
+<li>ggspavis::plotCoords()</li>
 </ul>
 </div>
-<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">marker_genes_of_amyloid_plaques</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"APP"</span>, <span class="st">"PSEN1"</span>, <span class="st">"PSEN2"</span>, <span class="st">"CLU"</span>, <span class="st">"APOE"</span>, <span class="st">"CD68"</span>, <span class="st">"ITGAM"</span>, <span class="st">"AIF1"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">spatial_data</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">rowData</a></span><span class="op">(</span><span class="va">spatial_data</span><span class="op">)</span><span class="op">$</span><span class="va">gene_name</span></span></code></pre></div>
@@ -1439,11 +1458,11 @@ et al., 2021</a>.)</p>
 <li><p>Plotting colousing by the signature :::</p></li>
 </ul>
 <p><strong>Session Information</strong></p>
-<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## R version 4.5.0 (2025-04-11)</span></span>
+<pre><code><span><span class="co">## R version 4.6.0 (2026-04-24)</span></span>
 <span><span class="co">## Platform: x86_64-pc-linux-gnu</span></span>
-<span><span class="co">## Running under: Ubuntu 24.04.2 LTS</span></span>
+<span><span class="co">## Running under: Ubuntu 24.04.4 LTS</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Matrix products: default</span></span>
 <span><span class="co">## BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 </span></span>
@@ -1457,7 +1476,7 @@ et al., 2021</a>.)</p>
 <span><span class="co">##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            </span></span>
 <span><span class="co">## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       </span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## time zone: Etc/UTC</span></span>
+<span><span class="co">## time zone: UTC</span></span>
 <span><span class="co">## tzcode source: system (glibc)</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## attached base packages:</span></span>
@@ -1465,98 +1484,99 @@ et al., 2021</a>.)</p>
 <span><span class="co">## [8] base     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## other attached packages:</span></span>
-<span><span class="co">##  [1] tidySummarizedExperiment_1.19.0 tidySpatialExperiment_1.5.0    </span></span>
-<span><span class="co">##  [3] ttservice_0.4.1                 tidySingleCellExperiment_1.19.0</span></span>
-<span><span class="co">##  [5] ExperimentHub_2.99.0            AnnotationHub_3.99.1           </span></span>
-<span><span class="co">##  [7] BiocFileCache_2.99.0            dbplyr_2.5.0                   </span></span>
-<span><span class="co">##  [9] spatialLIBD_1.21.4              scran_1.37.0                   </span></span>
-<span><span class="co">## [11] scater_1.37.0                   scuttle_1.19.0                 </span></span>
-<span><span class="co">## [13] ggspavis_1.15.0                 dittoSeq_1.21.0                </span></span>
-<span><span class="co">## [15] colorspace_2.1-1                stringr_1.5.1                  </span></span>
-<span><span class="co">## [17] glue_1.8.0                      purrr_1.0.4                    </span></span>
-<span><span class="co">## [19] tidyr_1.3.1                     dplyr_1.1.4                    </span></span>
-<span><span class="co">## [21] plotly_4.10.4                   ggplot2_3.5.2                  </span></span>
-<span><span class="co">## [23] SpatialExperiment_1.19.0        SingleCellExperiment_1.31.0    </span></span>
-<span><span class="co">## [25] SummarizedExperiment_1.39.0     Biobase_2.69.0                 </span></span>
-<span><span class="co">## [27] GenomicRanges_1.61.0            GenomeInfoDb_1.45.3            </span></span>
-<span><span class="co">## [29] IRanges_2.43.0                  S4Vectors_0.47.0               </span></span>
-<span><span class="co">## [31] BiocGenerics_0.55.0             generics_0.1.3                 </span></span>
-<span><span class="co">## [33] MatrixGenerics_1.21.0           matrixStats_1.5.0              </span></span>
-<span><span class="co">## [35] here_1.0.1                     </span></span>
+<span><span class="co">##  [1] tidySummarizedExperiment_1.23.0 tidySpatialExperiment_1.9.0    </span></span>
+<span><span class="co">##  [3] tidySingleCellExperiment_1.23.0 ttservice_0.5.3                </span></span>
+<span><span class="co">##  [5] ExperimentHub_3.3.0             AnnotationHub_4.1.0            </span></span>
+<span><span class="co">##  [7] BiocFileCache_3.3.0             dbplyr_2.5.2                   </span></span>
+<span><span class="co">##  [9] spatialLIBD_1.25.0              scran_1.41.0                   </span></span>
+<span><span class="co">## [11] scater_1.41.1                   scuttle_1.23.0                 </span></span>
+<span><span class="co">## [13] ggspavis_1.19.0                 dittoSeq_1.25.0                </span></span>
+<span><span class="co">## [15] colorspace_2.1-2                stringr_1.6.0                  </span></span>
+<span><span class="co">## [17] glue_1.8.1                      purrr_1.2.2                    </span></span>
+<span><span class="co">## [19] tidyr_1.3.2                     dplyr_1.2.1                    </span></span>
+<span><span class="co">## [21] plotly_4.12.0                   ggplot2_4.0.3                  </span></span>
+<span><span class="co">## [23] SpatialExperiment_1.23.0        SingleCellExperiment_1.35.0    </span></span>
+<span><span class="co">## [25] SummarizedExperiment_1.43.0     Biobase_2.73.1                 </span></span>
+<span><span class="co">## [27] GenomicRanges_1.65.0            Seqinfo_1.3.0                  </span></span>
+<span><span class="co">## [29] IRanges_2.47.0                  S4Vectors_0.51.1               </span></span>
+<span><span class="co">## [31] BiocGenerics_0.59.0             generics_0.1.4                 </span></span>
+<span><span class="co">## [33] MatrixGenerics_1.25.0           matrixStats_1.5.0              </span></span>
+<span><span class="co">## [35] here_1.0.2                     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
-<span><span class="co">##   [1] splines_4.5.0              later_1.4.2               </span></span>
-<span><span class="co">##   [3] BiocIO_1.19.0              bitops_1.0-9              </span></span>
-<span><span class="co">##   [5] filelock_1.0.3             tibble_3.2.1              </span></span>
-<span><span class="co">##   [7] XML_3.99-0.18              tidySpatialWorkshop_0.18.5</span></span>
-<span><span class="co">##   [9] lifecycle_1.0.4            httr2_1.1.2               </span></span>
-<span><span class="co">##  [11] edgeR_4.7.2                doParallel_1.0.17         </span></span>
-<span><span class="co">##  [13] rprojroot_2.0.4            MASS_7.3-65               </span></span>
-<span><span class="co">##  [15] lattice_0.22-7             magrittr_2.0.3            </span></span>
-<span><span class="co">##  [17] limma_3.65.0               sass_0.4.10               </span></span>
-<span><span class="co">##  [19] rmarkdown_2.29             jquerylib_0.1.4           </span></span>
-<span><span class="co">##  [21] yaml_2.3.10                metapod_1.17.0            </span></span>
-<span><span class="co">##  [23] httpuv_1.6.16              ggside_0.3.1              </span></span>
-<span><span class="co">##  [25] sessioninfo_1.2.3          cowplot_1.1.3             </span></span>
-<span><span class="co">##  [27] DBI_1.2.3                  RColorBrewer_1.1-3        </span></span>
-<span><span class="co">##  [29] golem_0.5.1                abind_1.4-8               </span></span>
-<span><span class="co">##  [31] RCurl_1.98-1.17            rappdirs_0.3.3            </span></span>
-<span><span class="co">##  [33] circlize_0.4.16            ggrepel_0.9.6             </span></span>
-<span><span class="co">##  [35] irlba_2.3.5.1              pheatmap_1.0.12           </span></span>
-<span><span class="co">##  [37] dqrng_0.4.1                pkgdown_2.1.2             </span></span>
-<span><span class="co">##  [39] codetools_0.2-20           DelayedArray_0.35.1       </span></span>
-<span><span class="co">##  [41] DT_0.33                    tidyselect_1.2.1          </span></span>
-<span><span class="co">##  [43] shape_1.4.6.1              UCSC.utils_1.5.0          </span></span>
-<span><span class="co">##  [45] farver_2.1.2               ScaledMatrix_1.17.0       </span></span>
-<span><span class="co">##  [47] viridis_0.6.5              shinyWidgets_0.9.0        </span></span>
-<span><span class="co">##  [49] GenomicAlignments_1.45.0   jsonlite_2.0.0            </span></span>
-<span><span class="co">##  [51] GetoptLong_1.0.5           BiocNeighbors_2.3.0       </span></span>
-<span><span class="co">##  [53] ellipsis_0.3.2             ggridges_0.5.6            </span></span>
-<span><span class="co">##  [55] iterators_1.0.14           systemfonts_1.2.3         </span></span>
-<span><span class="co">##  [57] foreach_1.5.2              tools_4.5.0               </span></span>
-<span><span class="co">##  [59] ragg_1.4.0                 Rcpp_1.0.14               </span></span>
-<span><span class="co">##  [61] gridExtra_2.3              SparseArray_1.9.0         </span></span>
-<span><span class="co">##  [63] mgcv_1.9-3                 xfun_0.52                 </span></span>
-<span><span class="co">##  [65] withr_3.0.2                BiocManager_1.30.25       </span></span>
-<span><span class="co">##  [67] fastmap_1.2.0              fansi_1.0.6               </span></span>
-<span><span class="co">##  [69] bluster_1.19.0             digest_0.6.37             </span></span>
-<span><span class="co">##  [71] rsvd_1.0.5                 R6_2.6.1                  </span></span>
-<span><span class="co">##  [73] mime_0.13                  textshaping_1.0.1         </span></span>
-<span><span class="co">##  [75] RSQLite_2.3.11             config_0.3.2              </span></span>
-<span><span class="co">##  [77] utf8_1.2.5                 data.table_1.17.0         </span></span>
-<span><span class="co">##  [79] rtracklayer_1.69.0         httr_1.4.7                </span></span>
-<span><span class="co">##  [81] htmlwidgets_1.6.4          S4Arrays_1.9.0            </span></span>
-<span><span class="co">##  [83] pkgconfig_2.0.3            gtable_0.3.6              </span></span>
-<span><span class="co">##  [85] blob_1.2.4                 ComplexHeatmap_2.25.0     </span></span>
-<span><span class="co">##  [87] XVector_0.49.0             htmltools_0.5.8.1         </span></span>
-<span><span class="co">##  [89] clue_0.3-66                scales_1.4.0              </span></span>
-<span><span class="co">##  [91] png_0.1-8                  attempt_0.3.1             </span></span>
-<span><span class="co">##  [93] knitr_1.50                 rjson_0.2.23              </span></span>
-<span><span class="co">##  [95] nlme_3.1-168               curl_6.2.2                </span></span>
-<span><span class="co">##  [97] cachem_1.1.0               GlobalOptions_0.1.2       </span></span>
-<span><span class="co">##  [99] BiocVersion_3.22.0         parallel_4.5.0            </span></span>
-<span><span class="co">## [101] vipor_0.4.7                AnnotationDbi_1.71.0      </span></span>
-<span><span class="co">## [103] restfulr_0.0.15            desc_1.4.3                </span></span>
-<span><span class="co">## [105] pillar_1.10.2              grid_4.5.0                </span></span>
-<span><span class="co">## [107] vctrs_0.6.5                promises_1.3.2            </span></span>
-<span><span class="co">## [109] BiocSingular_1.25.0        beachmat_2.25.0           </span></span>
-<span><span class="co">## [111] xtable_1.8-4               cluster_2.1.8.1           </span></span>
-<span><span class="co">## [113] beeswarm_0.4.0             paletteer_1.6.0           </span></span>
-<span><span class="co">## [115] evaluate_1.0.3             magick_2.8.6              </span></span>
-<span><span class="co">## [117] Rsamtools_2.25.0           cli_3.6.5                 </span></span>
-<span><span class="co">## [119] locfit_1.5-9.12            compiler_4.5.0            </span></span>
-<span><span class="co">## [121] rlang_1.1.6                crayon_1.5.3              </span></span>
-<span><span class="co">## [123] labeling_0.4.3             rematch2_2.1.2            </span></span>
-<span><span class="co">## [125] fs_1.6.6                   ggbeeswarm_0.7.2          </span></span>
-<span><span class="co">## [127] stringi_1.8.7              viridisLite_0.4.2         </span></span>
-<span><span class="co">## [129] BiocParallel_1.43.0        Biostrings_2.77.0         </span></span>
-<span><span class="co">## [131] lazyeval_0.2.2             Matrix_1.7-3              </span></span>
-<span><span class="co">## [133] benchmarkme_1.0.8          bit64_4.6.0-1             </span></span>
-<span><span class="co">## [135] KEGGREST_1.49.0            statmod_1.5.0             </span></span>
-<span><span class="co">## [137] shiny_1.10.0               tidygate_1.0.14           </span></span>
-<span><span class="co">## [139] igraph_2.1.4               memoise_2.0.1             </span></span>
-<span><span class="co">## [141] bslib_0.9.0                benchmarkmeData_1.0.4     </span></span>
-<span><span class="co">## [143] bit_4.6.0</span></span></code></pre>
+<span><span class="co">##   [1] splines_4.6.0              later_1.4.8               </span></span>
+<span><span class="co">##   [3] BiocIO_1.23.3              bitops_1.0-9              </span></span>
+<span><span class="co">##   [5] filelock_1.0.3             tibble_3.3.1              </span></span>
+<span><span class="co">##   [7] XML_3.99-0.23              tidySpatialWorkshop_0.19.0</span></span>
+<span><span class="co">##   [9] lifecycle_1.0.5            httr2_1.2.2               </span></span>
+<span><span class="co">##  [11] edgeR_4.11.0               doParallel_1.0.17         </span></span>
+<span><span class="co">##  [13] rprojroot_2.1.1            MASS_7.3-65               </span></span>
+<span><span class="co">##  [15] lattice_0.22-9             magrittr_2.0.5            </span></span>
+<span><span class="co">##  [17] limma_3.69.0               sass_0.4.10               </span></span>
+<span><span class="co">##  [19] rmarkdown_2.31             jquerylib_0.1.4           </span></span>
+<span><span class="co">##  [21] yaml_2.3.12                metapod_1.21.0            </span></span>
+<span><span class="co">##  [23] httpuv_1.6.17              otel_0.2.0                </span></span>
+<span><span class="co">##  [25] ggside_0.4.1               sessioninfo_1.2.3         </span></span>
+<span><span class="co">##  [27] cowplot_1.2.0              DBI_1.3.0                 </span></span>
+<span><span class="co">##  [29] RColorBrewer_1.1-3         golem_0.5.1               </span></span>
+<span><span class="co">##  [31] abind_1.4-8                RCurl_1.98-1.18           </span></span>
+<span><span class="co">##  [33] rappdirs_0.3.4             circlize_0.4.18           </span></span>
+<span><span class="co">##  [35] ggrepel_0.9.8              irlba_2.3.7               </span></span>
+<span><span class="co">##  [37] pheatmap_1.0.13            dqrng_0.4.1               </span></span>
+<span><span class="co">##  [39] pkgdown_2.2.0              codetools_0.2-20          </span></span>
+<span><span class="co">##  [41] DelayedArray_0.39.1        DT_0.34.0                 </span></span>
+<span><span class="co">##  [43] tidyselect_1.2.1           shape_1.4.6.1             </span></span>
+<span><span class="co">##  [45] farver_2.1.2               ScaledMatrix_1.21.0       </span></span>
+<span><span class="co">##  [47] viridis_0.6.5              shinyWidgets_0.9.1        </span></span>
+<span><span class="co">##  [49] GenomicAlignments_1.49.0   jsonlite_2.0.0            </span></span>
+<span><span class="co">##  [51] GetoptLong_1.1.1           BiocNeighbors_2.7.1       </span></span>
+<span><span class="co">##  [53] ellipsis_0.3.3             ggridges_0.5.7            </span></span>
+<span><span class="co">##  [55] iterators_1.0.14           systemfonts_1.3.2         </span></span>
+<span><span class="co">##  [57] foreach_1.5.2              tools_4.6.0               </span></span>
+<span><span class="co">##  [59] ragg_1.5.2                 Rcpp_1.1.1-1.1            </span></span>
+<span><span class="co">##  [61] BiocBaseUtils_1.15.0       gridExtra_2.3             </span></span>
+<span><span class="co">##  [63] SparseArray_1.13.2         mgcv_1.9-4                </span></span>
+<span><span class="co">##  [65] xfun_0.57                  withr_3.0.2               </span></span>
+<span><span class="co">##  [67] BiocManager_1.30.27        fastmap_1.2.0             </span></span>
+<span><span class="co">##  [69] fansi_1.0.7                bluster_1.23.0            </span></span>
+<span><span class="co">##  [71] digest_0.6.39              rsvd_1.0.5                </span></span>
+<span><span class="co">##  [73] R6_2.6.1                   mime_0.13                 </span></span>
+<span><span class="co">##  [75] textshaping_1.0.5          RSQLite_2.4.6             </span></span>
+<span><span class="co">##  [77] cigarillo_1.3.0            config_0.3.2              </span></span>
+<span><span class="co">##  [79] utf8_1.2.6                 data.table_1.18.4         </span></span>
+<span><span class="co">##  [81] rtracklayer_1.73.0         httr_1.4.8                </span></span>
+<span><span class="co">##  [83] htmlwidgets_1.6.4          S4Arrays_1.13.0           </span></span>
+<span><span class="co">##  [85] pkgconfig_2.0.3            gtable_0.3.6              </span></span>
+<span><span class="co">##  [87] blob_1.3.0                 ComplexHeatmap_2.29.0     </span></span>
+<span><span class="co">##  [89] S7_0.2.2                   XVector_0.53.0            </span></span>
+<span><span class="co">##  [91] htmltools_0.5.9            clue_0.3-68               </span></span>
+<span><span class="co">##  [93] scales_1.4.0               png_0.1-9                 </span></span>
+<span><span class="co">##  [95] attempt_0.3.1              knitr_1.51                </span></span>
+<span><span class="co">##  [97] rjson_0.2.23               nlme_3.1-169              </span></span>
+<span><span class="co">##  [99] curl_7.1.0                 cachem_1.1.0              </span></span>
+<span><span class="co">## [101] GlobalOptions_0.1.4        BiocVersion_3.24.0        </span></span>
+<span><span class="co">## [103] parallel_4.6.0             vipor_0.4.7               </span></span>
+<span><span class="co">## [105] AnnotationDbi_1.75.0       restfulr_0.0.16           </span></span>
+<span><span class="co">## [107] desc_1.4.3                 pillar_1.11.1             </span></span>
+<span><span class="co">## [109] grid_4.6.0                 vctrs_0.7.3               </span></span>
+<span><span class="co">## [111] promises_1.5.0             BiocSingular_1.29.0       </span></span>
+<span><span class="co">## [113] beachmat_2.29.0            xtable_1.8-8              </span></span>
+<span><span class="co">## [115] cluster_2.1.8.2            beeswarm_0.4.0            </span></span>
+<span><span class="co">## [117] paletteer_1.7.0            evaluate_1.0.5            </span></span>
+<span><span class="co">## [119] magick_2.9.1               Rsamtools_2.29.0          </span></span>
+<span><span class="co">## [121] cli_3.6.6                  locfit_1.5-9.12           </span></span>
+<span><span class="co">## [123] compiler_4.6.0             rlang_1.2.0               </span></span>
+<span><span class="co">## [125] crayon_1.5.3               labeling_0.4.3            </span></span>
+<span><span class="co">## [127] rematch2_2.1.2             fs_2.1.0                  </span></span>
+<span><span class="co">## [129] ggbeeswarm_0.7.3           stringi_1.8.7             </span></span>
+<span><span class="co">## [131] viridisLite_0.4.3          BiocParallel_1.47.0       </span></span>
+<span><span class="co">## [133] Biostrings_2.81.1          lazyeval_0.2.3            </span></span>
+<span><span class="co">## [135] Matrix_1.7-5               benchmarkme_1.0.8         </span></span>
+<span><span class="co">## [137] bit64_4.8.0                KEGGREST_1.53.0           </span></span>
+<span><span class="co">## [139] statmod_1.5.1              shiny_1.13.0              </span></span>
+<span><span class="co">## [141] tidygate_1.0.19            igraph_2.3.1              </span></span>
+<span><span class="co">## [143] memoise_2.0.1              bslib_0.10.0              </span></span>
+<span><span class="co">## [145] benchmarkmeData_2.0.0      bit_4.6.0</span></span></code></pre>
 <p><strong>References</strong></p>
 <style type="text/css">
 .note {
@@ -1590,12 +1610,12 @@ et al., 2021</a>.)</p>
 
       <footer><div class="copyright">
   <p></p>
-<p>Developed by Stefano Mangiola, Luciano Martelotto.</p>
+<p>Developed by Stefano Mangiola, Malvica Kharbanda.</p>
 </div>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer>

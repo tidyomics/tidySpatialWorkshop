@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidySpatialWorkshop</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.18.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.19.0</span>
       </span>
     </div>
 
@@ -93,17 +93,99 @@ Institute<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
 </h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/tidyomics/tidySpatialWorkshop/blob/improve_vignettes/vignettes/Solutions.Rmd" class="external-link"><code>vignettes/Solutions.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tidyomics/tidySpatialWorkshop/blob/devel/vignettes/Solutions.Rmd" class="external-link"><code>vignettes/Solutions.Rmd</code></a></small>
       <div class="hidden name"><code>Solutions.Rmd</code></div>
 
     </div>
 
     
     
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/LieberInstitute/spatialLIBD" class="external-link">spatialLIBD</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Bioconductor/ExperimentHub" class="external-link">ExperimentHub</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://bioconductor.org/packages/scater/" class="external-link">scater</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/william-hutchison/tidySpatialExperiment" class="external-link">tidySpatialExperiment</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/methods/setClassUnion.html" class="external-link">setClassUnion</a></span><span class="op">(</span><span class="st">"ExpData"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"matrix"</span>, <span class="st">"SpatialExperiment"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">spatial_data</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu">ExperimentHub</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ExperimentHub/man/ExperimentHub-class.html" class="external-link">ExperimentHub</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">spatialLIBD</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/spatialLIBD/man/fetch_data.html" class="external-link">fetch_data</a></span><span class="op">(</span>eh <span class="op">=</span> <span class="va">_</span>, type <span class="op">=</span> <span class="st">"spe"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">libd_layer_colors</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"ayer"</span>, <span class="st">""</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">libd_layer_colors</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/SingleCellExperiment/man/reducedDims.html" class="external-link">reducedDims</a></span><span class="op">(</span><span class="va">spatial_data</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
+<span><span class="va">spatial_data</span> <span class="op">&lt;-</span> <span class="va">spatial_data</span><span class="op">[</span>, <span class="va">spatial_data</span><span class="op">$</span><span class="va">sample_id</span> <span class="op"><a href="https://rdrr.io/pkg/BiocGenerics/man/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"151673"</span>, <span class="st">"151675"</span>, <span class="st">"151676"</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">spatial_data</span> <span class="op">&lt;-</span> <span class="va">spatial_data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">colData</a></span><span class="op">(</span><span class="va">spatial_data</span><span class="op">)</span><span class="op">$</span><span class="va">in_tissue</span> <span class="op">==</span> <span class="fl">1</span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">is_gene_mitochondrial</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"(^MT-)|(^mt-)"</span>, <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">rowData</a></span><span class="op">(</span><span class="va">spatial_data</span><span class="op">)</span><span class="op">$</span><span class="va">gene_name</span><span class="op">)</span></span>
+<span><span class="va">spatial_data</span> <span class="op">&lt;-</span> <span class="fu">scater</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/scuttle/man/addPerCellQCMetrics.html" class="external-link">addPerCellQC</a></span><span class="op">(</span></span>
+<span>  <span class="va">spatial_data</span>,</span>
+<span>  subsets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mito <span class="op">=</span> <span class="va">is_gene_mitochondrial</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">qc_mitochondrial_transcription</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">colData</a></span><span class="op">(</span><span class="va">spatial_data</span><span class="op">)</span><span class="op">$</span><span class="va">subsets_mito_percent</span> <span class="op">&gt;</span> <span class="fl">30</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">colData</a></span><span class="op">(</span><span class="va">spatial_data</span><span class="op">)</span><span class="op">$</span><span class="va">qc_mitochondrial_transcription</span> <span class="op">&lt;-</span> <span class="va">qc_mitochondrial_transcription</span></span></code></pre></div>
+<div class="note">
+<p><strong>Exercise 1.0</strong></p>
+</div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">spot_counts</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">colData</a></span><span class="op">(</span><span class="va">spatial_data</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">sample_id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>n_spots <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">spot_counts</span></span></code></pre></div>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 3 × 2</span></span></span>
+<span><span class="co">##   sample_id n_spots</span></span>
+<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> 151673       <span style="text-decoration: underline;">3</span>639</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span> 151675       <span style="text-decoration: underline;">3</span>592</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span> 151676       <span style="text-decoration: underline;">3</span>460</span></span></code></pre>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">spot_counts</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="va">spot_counts</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>pct_of_lowres <span class="op">=</span> <span class="va">n_spots</span> <span class="op">/</span> <span class="fl">5000</span> <span class="op">*</span> <span class="fl">100</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">spot_counts</span></span></code></pre></div>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 3 × 3</span></span></span>
+<span><span class="co">##   sample_id n_spots pct_of_lowres</span></span>
+<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> 151673       <span style="text-decoration: underline;">3</span>639          72.8</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span> 151675       <span style="text-decoration: underline;">3</span>592          71.8</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span> 151676       <span style="text-decoration: underline;">3</span>460          69.2</span></span></code></pre>
+<div class="note">
+<p><strong>Exercise 1.0.1</strong></p>
+</div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">colData</a></span><span class="op">(</span><span class="va">spatial_data</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">subsets_mito_percent</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html" class="external-link">geom_density</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>linetype <span class="op">=</span> <span class="va">sample_id</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
+<p><img src="Solutions_files/figure-html/unnamed-chunk-2-1.png" class="r-plt" alt="" width="700"></p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">colData</a></span><span class="op">(</span><span class="va">spatial_data</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">subsets_mito_percent</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html" class="external-link">geom_density</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">spatialLIBD</span>, linetype <span class="op">=</span> <span class="va">sample_id</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
+<p><img src="Solutions_files/figure-html/unnamed-chunk-2-2.png" class="r-plt" alt="" width="700"></p>
+<div class="note">
+<p><strong>Exercise 1.0.2</strong></p>
+</div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">scater</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/scuttle/man/isOutlier.html" class="external-link">isOutlier</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">colData</a></span><span class="op">(</span><span class="va">spatial_data</span><span class="op">)</span><span class="op">$</span><span class="va">subsets_mito_percent</span>, type<span class="op">=</span><span class="st">"higher"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html" class="external-link">table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## </span></span>
+<span><span class="co">## FALSE  TRUE </span></span>
+<span><span class="co">## 10652    39</span></span></code></pre>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">colData</a></span><span class="op">(</span><span class="va">spatial_data</span><span class="op">)</span><span class="op">$</span><span class="va">qc_mitochondrial_transcription</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html" class="external-link">table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## </span></span>
+<span><span class="co">## FALSE  TRUE </span></span>
+<span><span class="co">## 10599    92</span></span></code></pre>
 <div class="note">
 <p><strong>Exercise 1.1</strong></p>
 </div>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Label</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">colData</a></span><span class="op">(</span><span class="va">spatial_data</span><span class="op">)</span><span class="op">$</span><span class="va">macro_cluster</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/SingleCellExperiment/man/reducedDims.html" class="external-link">reducedDim</a></span><span class="op">(</span><span class="va">spatial_data</span>, <span class="st">"UMAP"</span><span class="op">)</span><span class="op">[</span>,<span class="st">"UMAP1"</span><span class="op">]</span> <span class="op">&gt;</span> <span class="op">-</span><span class="fl">2.5</span></span>
 <span></span>
@@ -118,18 +200,18 @@ Institute<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
 <div class="note">
 <p><strong>Exercise 1.2</strong></p>
 </div>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spe_joint</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">cbind</span>, <span class="va">spatial_data_list</span><span class="op">)</span></span>
 <span></span>
 <span></span>
-<span> <span class="fu">ggspavis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotSpots.html" class="external-link">plotSpots</a></span><span class="op">(</span><span class="va">spe_joint</span>, annotate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"%s"</span>, <span class="st">"clust_M0_lam0.2_k50_res0.7"</span><span class="op">)</span>, pal <span class="op">=</span> <span class="va">pal</span><span class="op">)</span> <span class="op">+</span></span>
+<span> <span class="fu">ggspavis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotCoords.html" class="external-link">plotCoords</a></span><span class="op">(</span><span class="va">spe_joint</span>, annotate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"%s"</span>, <span class="st">"clust_M0_lam0.2_k50_res0.7"</span><span class="op">)</span>, pal <span class="op">=</span> <span class="va">pal</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">sample_id</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"BANKSY clusters"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spe_joint</span><span class="op">$</span><span class="va">has_changed</span> <span class="op">=</span>  <span class="op">!</span><span class="va">spe_joint</span><span class="op">$</span><span class="va">clust_M0_lam0.2_k50_res0.7</span> <span class="op">==</span> <span class="va">spe_joint</span><span class="op">$</span><span class="va">clust_M0_lam0.2_k50_res0.7_smooth</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotSpotQC.html" class="external-link">plotSpotQC</a></span><span class="op">(</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotObsQC.html" class="external-link">plotSpotQC</a></span><span class="op">(</span></span>
 <span>  <span class="va">spe_joint</span>, </span>
 <span>  plot_type <span class="op">=</span> <span class="st">"spot"</span>,  </span>
 <span>  annotate <span class="op">=</span> <span class="st">"has_changed"</span>, </span>
@@ -138,28 +220,28 @@ Institute<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
 <div class="note">
 <p><strong>Excercise 1.3</strong></p>
 </div>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">res_spatialLIBD</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/split.html" class="external-link">split</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">mat</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">colData</a></span><span class="op">(</span><span class="va">spatial_data_gene_name</span><span class="op">)</span><span class="op">$</span><span class="va">sample_id</span> <span class="op">)</span> </span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">res_spatialLIBD</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/pkg/SPOTlight/man/plotCorrelationMatrix.html" class="external-link">plotCorrelationMatrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span>,<span class="op">-</span><span class="fl">10</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
 <div class="note">
 <p><strong>Excercise 1.4</strong></p>
 </div>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">res_spatialLIBD</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/split.html" class="external-link">split</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">mat</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">colData</a></span><span class="op">(</span><span class="va">spatial_data_gene_name</span><span class="op">)</span><span class="op">$</span><span class="va">spatialLIBD</span> <span class="op">)</span> </span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">res_spatialLIBD</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/pkg/SPOTlight/man/plotCorrelationMatrix.html" class="external-link">plotCorrelationMatrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span>,<span class="op">-</span><span class="fl">10</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
 <div class="note">
 <p><strong>Excercise 1.5</strong></p>
 </div>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 1. Microglia + Neurons</span></span>
 <span><span class="va">is_microglia_neuron</span> <span class="op">&lt;-</span> <span class="va">mat_df</span><span class="op">$</span><span class="va">Microglia</span> <span class="op">&gt;</span> <span class="fl">0.1</span> <span class="op">&amp;</span></span>
 <span>                       <span class="va">mat_df</span><span class="op">$</span><span class="va">Neurons</span>   <span class="op">&gt;</span> <span class="fl">0.1</span> <span class="op">&amp;</span></span>
 <span>                       <span class="op">(</span><span class="va">mat_df</span><span class="op">$</span><span class="va">Microglia</span> <span class="op">+</span> <span class="va">mat_df</span><span class="op">$</span><span class="va">Neurons</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0.4</span></span>
 <span><span class="va">spatial_data</span><span class="op">$</span><span class="va">is_microglia_neuron</span> <span class="op">&lt;-</span> <span class="va">is_microglia_neuron</span></span>
 <span></span>
-<span><span class="fu">ggspavis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotSpots.html" class="external-link">plotSpots</a></span><span class="op">(</span><span class="va">spatial_data</span>, annotate <span class="op">=</span> <span class="st">"is_microglia_neuron"</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu">ggspavis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotCoords.html" class="external-link">plotCoords</a></span><span class="op">(</span><span class="va">spatial_data</span>, annotate <span class="op">=</span> <span class="st">"is_microglia_neuron"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">sample_id</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TRUE"</span> <span class="op">=</span> <span class="st">"red"</span>, <span class="st">"FALSE"</span> <span class="op">=</span> <span class="st">"grey"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span></span>
@@ -173,13 +255,13 @@ Institute<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
 <span>                     <span class="op">(</span><span class="va">mat_df</span><span class="op">$</span><span class="va">Astrocytes</span> <span class="op">+</span> <span class="va">mat_df</span><span class="op">$</span><span class="va">`Stem cells`</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0.4</span></span>
 <span><span class="va">spatial_data</span><span class="op">$</span><span class="va">is_astrocyte_stem</span> <span class="op">&lt;-</span> <span class="va">is_astrocyte_stem</span></span>
 <span></span>
-<span><span class="fu">ggspavis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotSpots.html" class="external-link">plotSpots</a></span><span class="op">(</span><span class="va">spatial_data</span>, annotate <span class="op">=</span> <span class="st">"is_astrocyte_stem"</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu">ggspavis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotCoords.html" class="external-link">plotCoords</a></span><span class="op">(</span><span class="va">spatial_data</span>, annotate <span class="op">=</span> <span class="st">"is_astrocyte_stem"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">sample_id</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TRUE"</span> <span class="op">=</span> <span class="st">"blue"</span>, <span class="st">"FALSE"</span> <span class="op">=</span> <span class="st">"grey"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Astrocytes + Stem cells"</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Excercise 1.6</strong> :::</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get reference</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">cellNexus</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/HDF5Array" class="external-link">HDF5Array</a></span><span class="op">)</span></span>
@@ -204,7 +286,7 @@ Institute<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
 <span>  </span>
 <span>  <span class="co"># Save for fast reading</span></span>
 <span>  <span class="fu">HDF5Array</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/HDF5Array/man/saveHDF5SummarizedExperiment.html" class="external-link">saveHDF5SummarizedExperiment</a></span><span class="op">(</span><span class="va">tmp_file_path</span>, replace <span class="op">=</span> <span class="cn">TRUE</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/HDF5Array" class="external-link">HDF5Array</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">brain_reference</span> <span class="op">=</span> <span class="fu">HDF5Array</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/HDF5Array/man/saveHDF5SummarizedExperiment.html" class="external-link">loadHDF5SummarizedExperiment</a></span><span class="op">(</span><span class="va">tmp_file_path</span><span class="op">)</span></span>
@@ -214,20 +296,20 @@ Institute<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">my_metadata</span><span class="op">)</span>, format <span class="op">=</span> <span class="st">"html"</span><span class="op">)</span></span></code></pre></div>
 <p>These are the cell types included in our reference, and the number of
 pseudobulk samples we have for each cell type.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">brain_reference</span><span class="op">$</span><span class="va">cell_types</span><span class="op">)</span></span></code></pre></div>
 <p>These are the number of samples we have for each of the three data
 sets.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">brain_reference</span><span class="op">$</span><span class="va">dataset_id</span><span class="op">)</span></span></code></pre></div>
 <p>The <code>collection_id</code> can be used to gather information on
 the cell database. e.g. <a href="https://cellxgene.cziscience.com/collections/" class="external-link uri">https://cellxgene.cziscience.com/collections/</a><collection_id></collection_id></p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">brain_reference</span><span class="op">$</span><span class="va">collection_id</span><span class="op">)</span></span></code></pre></div>
 <div class="note">
 <p><strong>Exercise 2.1</strong></p>
 </div>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get top variable genes </span></span>
 <span><span class="va">genes</span> <span class="op">&lt;-</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/grep.html" class="external-link">grepl</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"^Rp[l|s]|Mt"</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">spatial_data</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">hvg</span> <span class="op">=</span> </span>
@@ -248,14 +330,14 @@ the cell database. e.g. <a href="https://cellxgene.cziscience.com/collections/"
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">in_tissue</span>, <span class="va">sample_id</span><span class="op">==</span><span class="st">"151673"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  </span>
 <span>  <span class="co"># Gate based on tissue morphology</span></span>
-<span>  <span class="fu">tidySpatialExperiment</span><span class="fu">::</span><span class="fu">gate_spatial</span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">tidySpatialExperiment</span><span class="fu">::</span><span class="fu">gate</span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span></span>
 <span>  <span class="co"># Plot</span></span>
-<span>  <span class="fu">scater</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/scater/man/plot_reddim.html" class="external-link">plotUMAP</a></span><span class="op">(</span>colour_by <span class="op">=</span> <span class="st">".gate"</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu">scater</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/scater/man/plot_reddim.html" class="external-link">plotUMAP</a></span><span class="op">(</span>colour_by <span class="op">=</span> <span class="st">".gated"</span><span class="op">)</span></span></code></pre></div>
 <div class="note">
 <p><strong>Exercise 2.2</strong></p>
 </div>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">rowData</a></span><span class="op">(</span><span class="va">spatial_data</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span> <span class="va">gene_name</span> <span class="op">==</span> <span class="st">"PECAM1"</span><span class="op">)</span></span>
@@ -263,23 +345,54 @@ the cell database. e.g. <a href="https://cellxgene.cziscience.com/collections/"
 <span><span class="va">gene</span> <span class="op">=</span> <span class="st">"ENSG00000261371"</span></span>
 <span></span>
 <span><span class="va">spatial_data</span> <span class="op">|&gt;</span> </span>
-<span></span>
+<span>  </span>
 <span>  <span class="co"># Join the feature</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/ttservice/man/join_features.html" class="external-link">join_features</a></span><span class="op">(</span><span class="va">gene</span>, shape<span class="op">=</span><span class="st">"wide"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ttservice/man/join_features.html" class="external-link">join_features</a></span><span class="op">(</span><span class="va">gene</span>, shape<span class="op">=</span><span class="st">"wide"</span>, assay <span class="op">=</span> <span class="st">"logcounts"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  </span>
 <span>  <span class="co"># Calculate the quantile</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>my_quantile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">ENSG00000261371</span>, <span class="fl">0.75</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>my_quantile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">ENSG00000261371</span>, <span class="fl">0.99</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="co"># mutate(my_quantile = ENSG00000261371 &gt; 0) |&gt; # A possibility</span></span>
+<span>  </span>
 <span>  <span class="co"># Label the pixels</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>PECAM1_positive <span class="op">=</span> <span class="va">ENSG00000261371</span> <span class="op">&gt;</span> <span class="va">my_quantile</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>PECAM1_positive <span class="op">=</span> <span class="va">ENSG00000261371</span> <span class="op">&gt;=</span> <span class="va">my_quantile</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  </span>
 <span>  <span class="co"># Plot</span></span>
-<span>  <span class="fu">ggspavis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotSpots.html" class="external-link">plotSpots</a></span><span class="op">(</span>annotate <span class="op">=</span> <span class="st">"PECAM1_positive"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggspavis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotCoords.html" class="external-link">plotCoords</a></span><span class="op">(</span>annotate <span class="op">=</span> <span class="st">"PECAM1_positive"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">sample_id</span><span class="op">)</span> </span></code></pre></div>
+<div class="note">
+<p><strong>Exercise 2.2.1</strong></p>
+</div>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">spatial_data</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>qc_mitochondrial_transcription <span class="op">=</span> <span class="fu">scater</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/scuttle/man/isOutlier.html" class="external-link">isOutlier</a></span><span class="op">(</span><span class="va">subsets_mito_percent</span>, type<span class="op">=</span><span class="st">"higher"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">qc_mitochondrial_transcription</span><span class="op">)</span> </span></code></pre></div>
+<pre><code><span><span class="co">## tidySingleCellExperiment says: A data frame is returned for independent data analysis.</span></span></code></pre>
+<pre><code><span><span class="co">## Warning: `when()` was deprecated in purrr 1.0.0.</span></span>
+<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Please use `if` instead.</span></span>
+<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> The deprecated feature was likely used in the <span style="color: #0000BB;">tidySpatialExperiment</span> package.</span></span>
+<span><span class="co">##   Please report the issue at</span></span>
+<span><span class="co">##   <span style="color: #0000BB; font-style: italic;">&lt;https://github.com/william-hutchison/tidySpatialExperiment/issues&gt;</span>.</span></span>
+<span><span class="co">## <span style="color: #555555;">This warning is displayed once per session.</span></span></span>
+<span><span class="co">## <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span></span>
+<span><span class="co">## <span style="color: #555555;">generated.</span></span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 2 × 2</span></span></span>
+<span><span class="co">##   qc_mitochondrial_transcription     n</span></span>
+<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;otlr.flt&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> FALSE                          <span style="text-decoration: underline;">10</span>652</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span> TRUE                              39</span></span></code></pre>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">spatial_data</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">qc_mitochondrial_transcription</span><span class="op">)</span> </span></code></pre></div>
+<pre><code><span><span class="co">## tidySingleCellExperiment says: A data frame is returned for independent data analysis.</span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 2 × 2</span></span></span>
+<span><span class="co">##   qc_mitochondrial_transcription     n</span></span>
+<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>                          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> FALSE                          <span style="text-decoration: underline;">10</span>599</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span> TRUE                              92</span></span></code></pre>
 <div class="note">
 <p><strong>Excercise 2.3</strong></p>
 </div>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/stemangiola/tidySummarizedExperiment" class="external-link">tidySummarizedExperiment</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">tidybulk</span><span class="op">)</span></span>
 <span>  </span>
@@ -316,7 +429,7 @@ the cell database. e.g. <a href="https://cellxgene.cziscience.com/collections/"
 <div class="note">
 <p><strong>Excercise 2.4</strong></p>
 </div>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">spatial_data_filtered</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">rowData</a></span><span class="op">(</span><span class="va">spatial_data_filtered</span><span class="op">)</span><span class="op">$</span><span class="va">gene_name</span></span>
 <span></span>
 <span><span class="va">marker_genes_of_amyloid_plaques</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"APP"</span>, <span class="st">"PSEN1"</span>, <span class="st">"PSEN2"</span>, <span class="st">"CLU"</span>, <span class="st">"APOE"</span>, <span class="st">"CD68"</span>, <span class="st">"ITGAM"</span>, <span class="st">"AIF1"</span><span class="op">)</span></span>
@@ -333,14 +446,14 @@ the cell database. e.g. <a href="https://cellxgene.cziscience.com/collections/"
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>amyloid_plaques_signature  <span class="op">=</span> <span class="va">APP</span> <span class="op">+</span> <span class="va">PSEN1</span> <span class="op">+</span> <span class="va">PSEN2</span> <span class="op">+</span> <span class="va">CLU</span> <span class="op">+</span> <span class="va">APOE</span> <span class="op">+</span> <span class="va">CD68</span> <span class="op">+</span> <span class="va">ITGAM</span> <span class="op">+</span> <span class="va">AIF1</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span></span>
 <span><span class="co"># Plotting</span></span>
-<span>  <span class="fu">ggspavis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotSpots.html" class="external-link">plotSpots</a></span><span class="op">(</span></span>
+<span>  <span class="fu">ggspavis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotCoords.html" class="external-link">plotCoords</a></span><span class="op">(</span></span>
 <span>    annotate <span class="op">=</span> <span class="st">"amyloid_plaques_signature"</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">sample_id</span><span class="op">)</span></span></code></pre></div>
 <div class="note">
 <p><strong>Exercise 3.2</strong></p>
 </div>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mgs</span> <span class="op">&lt;-</span> <span class="fu">scran</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/scran/man/scoreMarkers.html" class="external-link">scoreMarkers</a></span><span class="op">(</span></span>
 <span>  <span class="va">tx_spe_sample_1</span>, </span>
 <span>  groups <span class="op">=</span> <span class="va">tx_spe_sample_1</span><span class="op">$</span><span class="va">clusters</span>,</span>
@@ -371,9 +484,30 @@ the cell database. e.g. <a href="https://cellxgene.cziscience.com/collections/"
 <span><span class="va">tx_spe_sample_1</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/scater/man/plotReducedDim.html" class="external-link">plotReducedDim</a></span><span class="op">(</span><span class="st">"UMAP"</span>, colour_by<span class="op">=</span><span class="st">"Gjc3"</span><span class="op">)</span></span></code></pre></div>
 <div class="note">
+<p><strong>Exercise 3.1</strong></p>
+</div>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Base R </span></span>
+<span><span class="va">out_in_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html" class="external-link">table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">tx_small_region</span><span class="op">$</span><span class="va">cell</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">ratio_out_in</span> <span class="op">&lt;-</span> <span class="va">out_in_table</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">/</span> <span class="va">out_in_table</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span><span class="va">ratio_out_in</span></span>
+<span></span>
+<span><span class="co"># Tidyverse</span></span>
+<span><span class="va">tx_small_region</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span></span>
+<span>    ratio_out_in <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">cell</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">cell</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="va">tx_small_region</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span></span>
+<span>    cytoplasm <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">overlaps_nucleus</span> <span class="op">==</span> <span class="st">"0"</span> <span class="op">&amp;</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">cell</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    nucleus <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">overlaps_nucleus</span> <span class="op">==</span> <span class="st">"1"</span> <span class="op">&amp;</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">cell</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    cytoplasm_ptc <span class="op">=</span> <span class="va">cytoplasm</span> <span class="op">/</span> <span class="op">(</span><span class="va">cytoplasm</span> <span class="op">+</span> <span class="va">nucleus</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<div class="note">
 <p><strong>Exercise 3.3</strong></p>
 </div>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/prabhakarlab/Banksy" class="external-link">Banksy</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># scale the counts, without log transformation</span></span>
@@ -381,7 +515,7 @@ the cell database. e.g. <a href="https://cellxgene.cziscience.com/collections/"
 <p><strong>Highly-variable genes</strong></p>
 <p>The Banksy documentation, suggest the use of <code>Seurat</code> for
 the detection of highly variable genes.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://satijalab.org/seurat" class="external-link">Seurat</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="st">"NegControl.+|BLANK.+"</span></span>
@@ -408,7 +542,7 @@ the detection of highly variable genes.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">hvgs</span><span class="op">)</span></span></code></pre></div>
 <p>We now split the data by sample, to compute the neighbourhood
 matrices.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Convert to list</span></span>
 <span><span class="va">tx_spe_sample_1_banksy</span> <span class="op">=</span> <span class="va">tx_spe_sample_1</span><span class="op">[</span><span class="va">hvgs</span>,<span class="op">]</span></span>
 <span></span>
@@ -421,7 +555,7 @@ matrices.</p>
 The group argument specifies how to treat different samples, ensuring
 that features are scaled separately per sample group to account for
 variations among them.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tx_spe_sample_1_banksy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Banksy/man/runBanksyPCA.html" class="external-link">runBanksyPCA</a></span><span class="op">(</span> <span class="co"># Run PCA on the Banskly matrix</span></span>
 <span>  <span class="va">tx_spe_sample_1_banksy</span>, </span>
 <span>  lambda <span class="op">=</span> <span class="fl">0.2</span>, <span class="co"># spatial weighting parameter. Larger values (e.g. 0.8) incorporate more spatial neighborhood</span></span>
@@ -430,7 +564,7 @@ variations among them.</p>
 <p>Once the dimensional reduction is complete, we cluster the spots
 across all samples and use <code>connectClusters</code> to visually
 compare these new BANKSY clusters against manual annotations.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tx_spe_sample_1_banksy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Banksy/man/clusterBanksy.html" class="external-link">clusterBanksy</a></span><span class="op">(</span> <span class="co"># clustering on the principal components computed on the BANKSY matrix</span></span>
 <span>  <span class="va">tx_spe_sample_1_banksy</span>, </span>
 <span>  lambda <span class="op">=</span> <span class="fl">0.2</span>, <span class="co"># spatial weighting parameter. Larger values (e.g. 0.8) incorporate more spatial neighborhood</span></span>
@@ -442,7 +576,7 @@ independently, which can enhance the visual coherence of clusters,
 especially in heterogeneous biological samples.</p>
 <p>From SpiceMix paper <a href="https://www.nature.com/articles/s41588-022-01256-z" class="external-link">Chidester et
 al., 2023</a></p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tx_spe_sample_1_banksy_smoothed</span> <span class="op">=</span> <span class="va">tx_spe_sample_1_banksy</span> <span class="op">|&gt;</span> </span>
 <span> <span class="fu"><a href="https://rdrr.io/pkg/Banksy/man/smoothLabels.html" class="external-link">smoothLabels</a></span><span class="op">(</span> </span>
 <span>  cluster_names <span class="op">=</span> <span class="st">"clust_M0_lam0.2_k50_res0.7"</span>,</span>
@@ -457,31 +591,31 @@ utilise the ggspavis package to visually map BANKSY clusters and manual
 annotations onto the spatial coordinates of the dataset, providing a
 comprehensive visual overview of spatial and clustering data
 relationships.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Use scater:::.get_palette('tableau10medium')</span></span>
 <span></span>
-<span> <span class="fu">ggspavis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotSpots.html" class="external-link">plotSpots</a></span><span class="op">(</span></span>
+<span> <span class="fu">ggspavis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotCoords.html" class="external-link">plotCoords</a></span><span class="op">(</span></span>
 <span>   <span class="va">tx_spe_sample_1_banksy</span>, </span>
 <span>   annotate <span class="op">=</span> <span class="st">"clust_M0_lam0.2_k50_res0.7"</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html" class="external-link">guides</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"BANKSY clusters"</span><span class="op">)</span></span>
 <span></span>
-<span> <span class="fu">ggspavis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotSpots.html" class="external-link">plotSpots</a></span><span class="op">(</span></span>
+<span> <span class="fu">ggspavis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotCoords.html" class="external-link">plotCoords</a></span><span class="op">(</span></span>
 <span>   <span class="va">tx_spe_sample_1_banksy_smoothed</span>, </span>
 <span>   annotate <span class="op">=</span> <span class="st">"clust_M0_lam0.2_k50_res0.7_smooth"</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html" class="external-link">guides</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"BANKSY clusters smoothed"</span><span class="op">)</span></span>
 <span> </span>
-<span><span class="co"># ggspavis::plotSpots(</span></span>
+<span><span class="co"># ggspavis::plotCoords(</span></span>
 <span><span class="co">#   tx_spe_sample_1_banksy, </span></span>
 <span><span class="co">#   annotate = "clusters"</span></span>
 <span><span class="co">#   ) +</span></span>
 <span><span class="co">#     guides(color = "none") +</span></span>
 <span><span class="co">#     labs(title = "cell clustering")</span></span>
 <span></span>
-<span><span class="fu">ggspavis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotSpots.html" class="external-link">plotSpots</a></span><span class="op">(</span></span>
+<span><span class="fu">ggspavis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotCoords.html" class="external-link">plotCoords</a></span><span class="op">(</span></span>
 <span><span class="va">tx_spe_sample_1_banksy</span>, </span>
 <span>annotate <span class="op">=</span> <span class="st">"region"</span></span>
 <span><span class="op">)</span> <span class="op">+</span></span>
@@ -507,12 +641,12 @@ relationships.</p>
 
       <footer><div class="copyright">
   <p></p>
-<p>Developed by Stefano Mangiola, Luciano Martelotto.</p>
+<p>Developed by Stefano Mangiola, Malvica Kharbanda.</p>
 </div>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer>
