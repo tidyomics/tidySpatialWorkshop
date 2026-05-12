@@ -51,6 +51,7 @@ Suggests:
     cowplot,
     scRNAseq,
     SPOTlight,
+    nnSVG,
     SubcellularSpatialData,
     forcats,
     tibble,
