@@ -3,7 +3,11 @@ title: "Imaging assays (tidy)"
 author:
   - Stefano Mangiola, South Australian immunoGENomics Cancer Institute^[<mangiola.stefano@adelaide.edu.au>], Walter and Eliza Hall Institute^[<mangiola.s at wehi.edu.au>]
   - Malvika Kharbanda, South Australian immunoGENomics Cancer Institute^[<malvika.kharbanda@adelaide.edu.au>]
-output: rmarkdown::html_vignette
+output:
+  rmarkdown::html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 3
 # bibliography: "`r file.path(system.file(package='tidySpatialWorkshop', 'vignettes'), 'tidyomics.bib')`"
 vignette: >
   %\VignetteIndexEntry{Imaging assays (tidy)}
@@ -156,8 +160,23 @@ setClassUnion("ExpData", c("matrix", "SummarizedExperiment"))
 
 options(timeout = max(300, getOption("timeout")))
 tx_small_file = tempfile() 
-utils:: download.file("https://zenodo.org/records/11213118/files/tx_small.rda?download=1", destfile = tx_small_file)
-load(tx_small_file)
+utils:: download.file(
+  "https://zenodo.org/records/11213118/files/tx_small.rda?download=1",
+  destfile = tx_small_file,
+  mode = "wb"
+)
+tx_small_loaded <- tryCatch({
+  load(tx_small_file)
+  TRUE
+}, error = function(e) {
+  message("Falling back to bundled tx_small_region data: ", conditionMessage(e))
+  FALSE
+})
+
+if (!tx_small_loaded) {
+  data("tx_small_region", package = "tidySpatialWorkshop")
+  tx_small <- tx_small_region
+}
 
 tx_small = tx_small |> as_tibble()
 ```
@@ -203,8 +222,18 @@ If you do not have tx loaded from before, load the pre-saved data:
 
 ```{r}
 tx_small_region_file = tempfile() 
-utils::download.file("https://zenodo.org/records/11213155/files/tx_small_region.rda?download=1", destfile = tx_small_region_file)
-load(tx_small_region_file)
+utils::download.file(
+  "https://zenodo.org/records/11213155/files/tx_small_region.rda?download=1",
+  destfile = tx_small_region_file,
+  mode = "wb"
+)
+tryCatch(
+  load(tx_small_region_file),
+  error = function(e) {
+    message("Falling back to bundled tx_small_region data: ", conditionMessage(e))
+    data("tx_small_region", package = "tidySpatialWorkshop")
+  }
+)
 ```
 
 ### 2. MoleculeExperiment
@@ -386,7 +415,11 @@ tx_spe = SubcellularSpatialData::tx2spe(tx)
 If you do not have tx loaded from before, load the pre-saved data converted to `SpatialExperiment`:
 ```{r}
 tx_spe_file = tempfile() 
-utils::download.file("https://zenodo.org/records/11213166/files/tx_spe.rda?download=1", destfile = tx_spe_file)
+utils::download.file(
+  "https://zenodo.org/records/11213166/files/tx_spe.rda?download=1",
+  destfile = tx_spe_file,
+  mode = "wb"
+)
 # load("~/Downloads/tx_spe.rda")
 load(tx_spe_file)
 ```

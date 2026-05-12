@@ -2,7 +2,11 @@
 title: "Tidy spatial analyses"
 author:
   - Stefano Mangiola, South Australian immunoGENomics Cancer Institute^[<mangiola.stefano@adelaide.edu.au>], Walter and Eliza Hall Institute^[<mangiola.s at wehi.edu.au>]
-output: rmarkdown::html_vignette
+output:
+  rmarkdown::html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 3
 # bibliography: "`r file.path(system.file(package='tidySpatialWorkshop', 'vignettes'), 'tidyomics.bib')`"
 vignette: >
   %\VignetteIndexEntry{Tidy spatial analyses}
@@ -892,6 +896,201 @@ The excercise includes
 
 - Plotting colousing by the signature
 :::
+
+## Deconvolution of pixel-based spatial data
+
+One of the popular algorithms for spatial deconvolution is SPOTlight. [Elosua-Bayes et al., 2021](https://academic.oup.com/nar/article/49/9/e50/6129341).
+
+[Source](https://bioconductor.org/packages/devel/bioc/vignettes/SPOTlight/inst/doc/SPOTlight_kidney.html)
+
+SPOTlight uses a seeded non-negative matrix factorization regression, initialized using cell-type marker genes and non-negative least squares.
+
+### Producing the reference for single-cell databases with [cellNexus](https://cellnexus.org/)
+
+[cellNexus](https://cellnexus.org/) is a query interface that allows programmatic exploration and retrieval of the harmonised, curated and reannotated CELLxGENE single-cell human cell atlas. Data can be retrieved at cell, sample, or dataset levels based on filtering criteria.
+
+Harmonised data is stored in the ARDC Nectar Research Cloud, and most cellNexus functions interact with Nectar via web requests, so a network connection is required for most functionality.
+
+Mangiola et al., 2025 doi [doi.org/10.1101/2023.06.08.542671](https://www.biorxiv.org/content/10.1101/2023.06.08.542671v3)
+
+```{r, echo=FALSE, out.width="700px"}
+knitr::include_graphics(here("inst/images/cellNexus.png"))
+```
+
+
+```{r, eval = FALSE, message=FALSE, warning=FALSE,  fig.width=3, fig.height=3}
+# Get reference
+library(cellNexus)
+library(HDF5Array)
+
+tmp_file_path = tempfile()
+
+brain_reference =
+  
+  # Query metadata across 30M cells
+  get_metadata() |>
+  
+  # Filter your data of interest
+  dplyr::filter(tissue_groups=="cerebral lobes and cortical areas", disease == "normal") |> 
+  
+  # Collect pseudobulk as SummarizedExperiment
+  get_pseudobulk() |> 
+  
+  # Normalise for Spotlight
+  scuttle::logNormCounts() |> 
+  
+  # Save for fast reading
+  HDF5Array::saveHDF5SummarizedExperiment(tmp_file_path, replace = TRUE)
+```
+
+```{r, eval = FALSE, message=FALSE}
+library(HDF5Array)
+
+brain_reference = HDF5Array::loadHDF5SummarizedExperiment(tmp_file_path)
+
+my_metadata = colData(brain_reference)
+
+knitr::kable(head(my_metadata), format = "html")
+```
+
+These are the cell types included in our reference, and the number of pseudobulk samples we have for each cell type.
+
+```{r, eval = FALSE}
+
+table(brain_reference$cell_type_harmonised)
+
+```
+
+These are the number of samples we have for each of the three data sets.
+
+```{r, eval = FALSE}
+
+table(brain_reference$dataset_id)
+```
+
+The `collection_id` can be used to gather information on the cell database. e.g. <https://cellxgene.cziscience.com/collections/><collection_id>
+
+```{r, eval = FALSE}
+table(brain_reference$collection_id)
+```
+
+### Deconvolution with SPOTlight
+
+Once the cellNexus pseudobulk reference has been collected and normalised, we can use it as the single-cell-derived reference for `SPOTlight`. This mirrors the Session 1 workflow, but keeps the spatial data manipulation in the tidyomics style: we prepare the `SpatialExperiment`, identify marker genes from the reference, run deconvolution, and join the estimated cell type proportions back to the tidy spatial object.
+
+```{r, eval = FALSE, message=FALSE, warning=FALSE}
+library(SPOTlight)
+
+spatial_data_deconv =
+  spatial_data_filtered
+
+# SPOTlight expects matching feature identifiers between reference and spatial data.
+# Here we use gene symbols because cellNexus references are commonly exposed by symbol.
+rownames(spatial_data_deconv) =
+  rowData(spatial_data_deconv)$gene_name
+
+# Ensure the spatial object has log-normalised expression.
+spatial_data_deconv =
+  spatial_data_deconv |>
+  scuttle::logNormCounts()
+```
+
+We first identify marker genes in the cellNexus reference. `scran::scoreMarkers()` returns one table per reference cell type; we turn that list into one tidy marker table and keep high-AUC markers.
+
+```{r, eval = FALSE, message=FALSE, warning=FALSE}
+marker_gene_universe =
+  grep("(^MT-)|(^mt-)|(\\.)|(-)", rownames(brain_reference), value = TRUE, invert = TRUE) |>
+  intersect(rownames(spatial_data_deconv))
+
+reference_markers =
+  scran::scoreMarkers(
+    brain_reference,
+    groups = brain_reference$cell_type_harmonised,
+    subset.row = marker_gene_universe
+  )
+
+mgs_df =
+  reference_markers |>
+  purrr::imap_dfr(
+    ~ .x |>
+      as.data.frame() |>
+      tibble::rownames_to_column("gene") |>
+      dplyr::filter(mean.AUC > 0.8) |>
+      dplyr::arrange(dplyr::desc(mean.AUC)) |>
+      dplyr::mutate(cluster = .y)
+  )
+
+mgs_df |>
+  dplyr::select(cluster, gene, mean.AUC) |>
+  head() |>
+  knitr::kable(format = "html")
+```
+
+We also select highly variable genes from the reference as a second input to `SPOTlight`. These genes define the informative expression space used for deconvolution.
+
+```{r, eval = FALSE, message=FALSE, warning=FALSE}
+reference_hvgs =
+  brain_reference |>
+  scran::modelGeneVar(block = brain_reference$dataset_id) |>
+  scran::getTopHVGs(n = 1000)
+```
+
+Now we deconvolve the spatial spots/pixels. `res$mat` contains one row per spatial observation and one column per reference cell type.
+
+```{r, eval = FALSE, message=FALSE, warning=FALSE}
+res =
+  SPOTlight(
+    x = brain_reference |> assay("logcounts"),
+    y = spatial_data_deconv |> assay("logcounts"),
+    groups = brain_reference$cell_type_harmonised,
+    group_id = "cluster",
+    mgs = mgs_df,
+    hvg = intersect(reference_hvgs, rownames(spatial_data_deconv)),
+    weight_id = "mean.AUC",
+    gene_id = "gene"
+  )
+
+cell_type_proportions =
+  res$mat |>
+  as.data.frame() |>
+  tibble::rownames_to_column(".cell")
+
+spatial_data_deconv =
+  spatial_data_deconv |>
+  dplyr::left_join(cell_type_proportions, by = ".cell")
+```
+
+Finally, we visualise the inferred proportions in tissue space. Here we select the most abundant inferred cell types for a compact overview, but the same pattern can be used for any cell type column in `res$mat`.
+
+```{r, eval = FALSE, fig.width=9, fig.height=8}
+cell_types_to_plot =
+  res$mat |>
+  colMeans() |>
+  sort(decreasing = TRUE) |>
+  head(6) |>
+  names()
+
+spatial_data_deconv |>
+  as_tibble() |>
+  dplyr::select(.cell, sample_id, array_row, array_col, dplyr::all_of(cell_types_to_plot)) |>
+  tidyr::pivot_longer(
+    cols = dplyr::all_of(cell_types_to_plot),
+    names_to = "cell_type",
+    values_to = "proportion"
+  ) |>
+  ggplot(aes(array_row, array_col, color = proportion)) +
+  geom_point(size = 0.2) +
+  facet_grid(cell_type ~ sample_id) +
+  coord_fixed() +
+  scale_color_viridis_c() +
+  theme_classic() +
+  theme(
+    axis.title = element_blank(),
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    legend.position = "bottom"
+  )
+```
 
 
 **Session Information**

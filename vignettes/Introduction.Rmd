@@ -2,7 +2,11 @@
 title: "Introduction to Spatial omic analyses"
 author:
   - Stefano Mangiola, South Australian immunoGENomics Cancer Institute^[<mangiola.stefano@adelaide.edu.au>], Walter and Eliza Hall Institute^[<mangiola.s at wehi.edu.au>]
-output: rmarkdown::html_vignette
+output:
+  rmarkdown::html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 3
 # bibliography: "`r file.path(system.file(package='tidySpatialWorkshop', 'bibliography'), 'bibliography.bib')`"
 vignette: >
   %\VignetteIndexEntry{Introduction to Spatial omic analyses}
@@ -54,6 +58,8 @@ knitr::include_graphics(here("inst/images/physalia-min.png"))
 You can view the material at the workshop webpage
 
 [here](https://tidyomics.github.io/tidySpatialWorkshop/index.html).
+
+Useful complementary resource: the Bioconductor book [Orchestrating Spatial Transcriptomics Analysis with Bioconductor (OSTA)](https://bioconductor.org/books/release/OSTA/).
 
 ## Workshop package installation 
 
