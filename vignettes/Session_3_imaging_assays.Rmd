@@ -219,7 +219,13 @@ If you do not have tx loaded from before, load the pre-saved data:
 ```{r}
 tx_small_region_file = tempfile() 
 utils::download.file("https://zenodo.org/records/11213155/files/tx_small_region.rda?download=1", destfile = tx_small_region_file)
-load(tx_small_region_file)
+tryCatch(
+  load(tx_small_region_file),
+  error = function(e) {
+    message("Falling back to bundled tx_small_region data: ", conditionMessage(e))
+    data("tx_small_region", package = "tidySpatialWorkshop")
+  }
+)
 ```
 
 ### 2. MoleculeExperiment
