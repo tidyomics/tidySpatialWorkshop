@@ -614,7 +614,7 @@ One Bioconductor-native approach is [`nnSVG`](https://bioconductor.org/packages/
 
 The nearest-neighbor approximation makes the Gaussian process scalable to thousands of spots, but a full analysis can still take time. For this workshop, we run one tissue section with stringent gene filtering, then use the top genes as a small case study.
 
-```{r spatially-variable-genes-nnsvg, message=FALSE, warning=FALSE, eval=FALSE}
+```{r spatially-variable-genes-nnsvg, message=FALSE, warning=FALSE}
 library(nnSVG)
 
 # Run one section for a clear workshop example
@@ -626,6 +626,14 @@ spatial_data_svg <- nnSVG::filter_genes(
   filter_genes_ncounts = 10,
   filter_genes_pcspots = 5
 )
+
+# Keep the most expressed genes to keep workshop runtime short.
+n_keep <- min(1500, nrow(spatial_data_svg))
+top_gene_idx <- order(
+  rowMeans(assay(spatial_data_svg, "logcounts")),
+  decreasing = TRUE
+)[seq_len(n_keep)]
+spatial_data_svg <- spatial_data_svg[top_gene_idx, ]
 
 # Detect spatially variable genes
 set.seed(123)
@@ -647,7 +655,7 @@ The top ranked genes describe major anatomical and cell-state structure in this 
 
 We can visualise a few top SVGs on the tissue coordinates.
 
-```{r spatially-variable-genes-spatial-plot, fig.width=9, fig.height=7, eval=FALSE}
+```{r spatially-variable-genes-spatial-plot, fig.width=9, fig.height=7}
 svg_case_study_genes <- c("MBP", "PLP1", "CNP", "GFAP", "S100B", "NRGN", "SNAP25", "NEFL")
 svg_case_study_ids <- rownames(spatial_data_svg)[
   match(svg_case_study_genes, rowData(spatial_data_svg)$gene_name)
@@ -674,7 +682,7 @@ ggspavis::plotCoords(
 
 Because the UMAP above was built from transcriptomic similarity rather than physical coordinates, colouring the same SVGs on UMAP asks a slightly different question: do spatial patterns also correspond to expression-defined clusters?
 
-```{r spatially-variable-genes-umap-plot, fig.width=9, fig.height=7, eval=FALSE}
+```{r spatially-variable-genes-umap-plot, fig.width=9, fig.height=7}
 umap_svg_df <- data.frame(
   UMAP1 = rep(reducedDim(spatial_data_svg, "UMAP")[, 1], times = length(svg_case_study_genes)),
   UMAP2 = rep(reducedDim(spatial_data_svg, "UMAP")[, 2], times = length(svg_case_study_genes)),
