@@ -907,7 +907,7 @@ SPOTlight uses a seeded non-negative matrix factorization regression, initialize
 
 ### Producing the reference for single-cell databases with [cellNexus](https://cellnexus.org/)
 
-[cellNexus](https://cellnexus.org/) is a query interface that allow the programmatic exploration and retrieval of the harmonised, curated and reannotated CELLxGENE single-cell human cell atlas. Data can be retrieved at cell, sample, or dataset levels based on filtering criteria.
+[cellNexus](https://cellnexus.org/) is a query interface that allows programmatic exploration and retrieval of the harmonised, curated and reannotated CELLxGENE single-cell human cell atlas. Data can be retrieved at cell, sample, or dataset levels based on filtering criteria.
 
 Harmonised data is stored in the ARDC Nectar Research Cloud, and most cellNexus functions interact with Nectar via web requests, so a network connection is required for most functionality.
 
