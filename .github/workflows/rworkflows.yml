@@ -55,7 +55,8 @@ jobs:
         DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
         runner_os: ${{ runner.os }}
         run_telemetry: ${{ false }}
-        cache_version: cache-v1
+        force_install: ${{ true }}
+        cache_version: cache-v2-scrapper-nnsvg
         docker_registry: ghcr.io
         
   docker-build-and-push:

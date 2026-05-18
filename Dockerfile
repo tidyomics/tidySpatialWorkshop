@@ -8,4 +8,4 @@ RUN Rscript -e "if (!requireNamespace('BiocManager', quietly = TRUE)) install.pa
 
 RUN Rscript -e "options(repos = BiocManager::repositories()); BiocManager::install(c('scrapper', 'nnSVG'), ask = FALSE)"
 
-RUN Rscript -e "options(repos = BiocManager::repositories()); remotes::install_local('.', dependencies = TRUE, build_vignettes = TRUE, upgrade = 'never')"
+RUN Rscript -e "if (!requireNamespace('remotes', quietly = TRUE)) install.packages('remotes'); options(repos = BiocManager::repositories()); remotes::install_local('.', dependencies = TRUE, build_vignettes = TRUE, upgrade = 'never', force = TRUE)"
