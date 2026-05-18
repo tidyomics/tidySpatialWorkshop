@@ -37,10 +37,10 @@ Imports:
     scuttle,
     scater,
     scran,
-    scrapper (>= 1.6.0),
-    nnSVG,
     methods
 Suggests:
+    scrapper (>= 1.6.0),
+    nnSVG,
     plotly,
     colorspace,
     dittoSeq,

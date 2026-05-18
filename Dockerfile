@@ -6,4 +6,6 @@ COPY --chown=rstudio:rstudio . /home/rstudio/
 
 RUN Rscript -e "if (!requireNamespace('BiocManager', quietly = TRUE)) install.packages('BiocManager'); BiocManager::install(version = 'devel', ask = FALSE)"
 
-RUN Rscript -e "options(repos = BiocManager::repositories()); devtools::install('.', dependencies = TRUE, build_vignettes = TRUE)"
+RUN Rscript -e "options(repos = BiocManager::repositories()); BiocManager::install(c('scrapper', 'nnSVG'), ask = FALSE)"
+
+RUN Rscript -e "options(repos = BiocManager::repositories()); remotes::install_local('.', dependencies = TRUE, build_vignettes = TRUE, upgrade = 'never')"
