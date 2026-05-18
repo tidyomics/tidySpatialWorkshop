@@ -71,6 +71,7 @@ Suggests:
     cellNexus
 VignetteBuilder: knitr
 Remotes:
+    github::bioc/assorthead@devel,
     libscran/scrapper,
     alanocallaghan/scater@devel,
     MangiolaLaboratory/cellNexus
