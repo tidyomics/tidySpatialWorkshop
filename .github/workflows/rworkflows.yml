@@ -56,7 +56,7 @@ jobs:
         runner_os: ${{ runner.os }}
         run_telemetry: ${{ false }}
         force_install: ${{ true }}
-        cache_version: cache-v3-scran-scrapper-devel
+        cache_version: cache-v4-libscran-scrapper
         docker_registry: ghcr.io
         
   docker-build-and-push:
