@@ -37,7 +37,7 @@ Imports:
     scuttle,
     scater,
     scran,
-    scrapper (>= 1.7.0),
+    scrapper (>= 1.6.0),
     nnSVG,
     methods
 Suggests:
