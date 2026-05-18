@@ -263,7 +263,7 @@ Institute<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
 <p><strong>Excercise 1.6</strong> :::</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get reference</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">cellNexus</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/MangiolaLaboratory/cellNexus" class="external-link">cellNexus</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/HDF5Array" class="external-link">HDF5Array</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">tmp_file_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -273,13 +273,13 @@ Institute<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
 <span><span class="va">brain_reference</span> <span class="op">=</span></span>
 <span>  </span>
 <span>  <span class="co"># Query metadata across 30M cells</span></span>
-<span>  <span class="fu">get_metadata</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://mangiolalaboratory.github.io/cellNexus/reference/get_metadata.html" class="external-link">get_metadata</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  </span>
 <span>  <span class="co"># Filter your data of interest</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">tissue</span><span class="op">==</span><span class="st">"dorsolateral prefrontal cortex"</span>, <span class="va">disease</span> <span class="op">==</span> <span class="st">"normal"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  </span>
 <span>  <span class="co"># Collect pseudobulk as SummarizedExperiment</span></span>
-<span>  <span class="fu">get_pseudobulk</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://mangiolalaboratory.github.io/cellNexus/reference/get_pseudobulk.html" class="external-link">get_pseudobulk</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  </span>
 <span>  <span class="co"># Normalise for Spotlight</span></span>
 <span>  <span class="fu">scuttle</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/scuttle/man/logNormCounts.html" class="external-link">logNormCounts</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
