@@ -68,8 +68,6 @@ Suggests:
     ggcorrplot,
     cellNexus
 VignetteBuilder: knitr
-Remotes:
-    github::bioc/scrapper@devel,
-    MangiolaLaboratory/cellNexus
+Remotes: MangiolaLaboratory/cellNexus
 URL: https://github.com/tidyomics/tidySpatialWorkshop
 BugReports: https://github.com/tidyomics/tidySpatialWorkshop/issues

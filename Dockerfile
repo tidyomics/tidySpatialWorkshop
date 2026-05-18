@@ -8,4 +8,4 @@ RUN Rscript -e "if (!requireNamespace('BiocManager', quietly = TRUE)) install.pa
 
 RUN Rscript -e "if (!requireNamespace('remotes', quietly = TRUE)) install.packages('remotes'); options(repos = BiocManager::repositories()); BiocManager::install(c('scrapper', 'nnSVG'), ask = FALSE); remotes::install_github('MangiolaLaboratory/cellNexus', build_vignettes = FALSE, upgrade = 'never')"
 
-RUN Rscript -e "options(repos = BiocManager::repositories()); devtools::install('.', dependencies = TRUE, build_vignettes = TRUE, upgrade = 'never')"
+RUN Rscript -e "options(repos = BiocManager::repositories()); devtools::install('.', dependencies = TRUE, build_vignettes = TRUE, upgrade = FALSE)"
