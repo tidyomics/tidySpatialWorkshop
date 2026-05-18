@@ -268,6 +268,7 @@ Here, we perform a preliminary examination of the assay data contained within th
 assay(spatial_data)[1:20, 75:100]
 ```
 
+
 ## Data Visualisation and Manipulation
 
 Spatial transcriptomics data requires specialized visualization approaches to understand both molecular and spatial aspects simultaneously. The `ggspavis` package provides powerful tools for this purpose:
@@ -284,7 +285,9 @@ ggspavis::plotCoords(spatial_data, sample_id = "sample_id")
 ::: {.note}
 **Exercise 1.0**
 
-Calculate how many spots have been profiled, per sample. And calculate what is the % of the total available spots in Visium low resolution.
+1) Calculate how many spots have been profiled, per sample. And calculate what is the % of the total available spots in Visium low resolution.
+
+2) Calculate the sparcity (i.e. percentage of 0s) per sample
 :::
 
 We can enhance our understanding by adding layer annotations. In this dataset, layers L1-6 represent different cortical layers, while WM indicates white matter:
@@ -315,7 +318,7 @@ ggspavis::plotVisium(
   spatial_data, 
   annotate = "spatialLIBD", 
   highlight = "in_tissue", 
-  point_size =0.5
+  point_size =0.5, 
 ) + 
   facet_wrap(~sample_id)
 
@@ -357,13 +360,13 @@ After identifying mitochondrial genes, we apply quality control metrics to furth
 
 ```{r}
 ## Add per-cell QC metrics to spatial data using identified mitochondrial genes
-spatial_data <- scater::addPerCellQC(
+spatial_data <- scrapper::quickRnaQc.se(
   spatial_data, 
   subsets = list(mito = is_gene_mitochondrial)
 )
 
 ## Select expressed genes threshold
-qc_mitochondrial_transcription <- colData(spatial_data)$subsets_mito_percent > 30
+qc_mitochondrial_transcription <- colData(spatial_data)$subset.proportion.mito > 0.3
 
 ## Check how many spots are filtered out
 table(qc_mitochondrial_transcription)
@@ -615,12 +618,10 @@ One Bioconductor-native approach is [`nnSVG`](https://bioconductor.org/packages/
 The nearest-neighbor approximation makes the Gaussian process scalable to thousands of spots, but a full analysis can still take time. For this workshop, we run one tissue section with stringent gene filtering, then use the top genes as a small case study.
 
 ```{r spatially-variable-genes-nnsvg, message=FALSE, warning=FALSE}
-svg_case_study_genes <- c("MBP", "PLP1", "CNP", "GFAP", "S100B", "NRGN", "SNAP25", "NEFL")
 
 # Run one section for a clear workshop example
 spatial_data_svg <- spatial_data[, spatial_data$sample_id == "151673"]
 
-if (requireNamespace("nnSVG", quietly = TRUE)) {
   # Keep only genes with enough expression to make SVG fitting fast and stable
   spatial_data_svg <- nnSVG::filter_genes(
     spatial_data_svg,
@@ -644,16 +645,6 @@ if (requireNamespace("nnSVG", quietly = TRUE)) {
   svg_results <- rowData(spatial_data_svg) |>
     as.data.frame() |>
     dplyr::arrange(rank)
-} else {
-  message("nnSVG is not installed in this environment; using case-study genes only.")
-  svg_results <- data.frame(
-    gene_name = svg_case_study_genes,
-    rank = seq_along(svg_case_study_genes),
-    LR_stat = NA_real_,
-    padj = NA_real_,
-    prop_sv = NA_real_
-  )
-}
 
 svg_results |>
   dplyr::select(gene_name, rank, LR_stat, padj, prop_sv) |>
@@ -666,6 +657,9 @@ The top ranked genes describe major anatomical and cell-state structure in this 
 We can visualise a few top SVGs on the tissue coordinates.
 
 ```{r spatially-variable-genes-spatial-plot, fig.width=9, fig.height=7}
+
+svg_case_study_genes <- c("MBP", "PLP1", "CNP", "GFAP", "S100B", "NRGN", "SNAP25", "NEFL")
+
 svg_case_study_ids <- rownames(spatial_data_svg)[
   match(svg_case_study_genes, rowData(spatial_data_svg)$gene_name)
 ]
@@ -700,10 +694,10 @@ Because the UMAP above was built from transcriptomic similarity rather than phys
 
 ```{r spatially-variable-genes-umap-plot, fig.width=9, fig.height=7}
 umap_svg_df <- data.frame(
-  UMAP1 = rep(reducedDim(spatial_data_svg, "UMAP")[, 1], times = length(svg_case_study_genes)),
-  UMAP2 = rep(reducedDim(spatial_data_svg, "UMAP")[, 2], times = length(svg_case_study_genes)),
-  gene = rep(svg_case_study_genes, each = ncol(spatial_data_svg)),
-  logcounts = as.numeric(t(assay(spatial_data_svg, "logcounts")[svg_case_study_ids, ]))
+  UMAP1 = rep(reducedDim(spatial_data, "UMAP")[, 1], times = length(svg_case_study_genes)),
+  UMAP2 = rep(reducedDim(spatial_data, "UMAP")[, 2], times = length(svg_case_study_genes)),
+  gene = rep(svg_case_study_genes, each = ncol(spatial_data)),
+  logcounts = as.numeric(t(assay(spatial_data, "logcounts")[svg_case_study_ids, ]))
 )
 
 umap_svg_df |>

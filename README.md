@@ -26,14 +26,15 @@ More details on the workshop are below.
 ## Workshop package installation 
 
 If you want to install the packages and material post-workshop, the
-instructions are below. The workshop is designed for R `4.5` and
-Bioconductor 3.21. 
+instructions are below. The workshop is designed for the latest R version and the latest Bioconductor installation.
+Please update both.
+ 
 
 ```
 # Update Bioconductor
 if (!require("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
-BiocManager::install(version = "3.21")
+BiocManager::install(version = "3.23")
 
 # Install workshop package
 #install.packages('remotes')
