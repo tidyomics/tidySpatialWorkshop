@@ -61,6 +61,8 @@ Suggests:
     MoleculeExperiment,
     knitr,
     rmarkdown,
+    BiocStyle,
+    BiocVersion,
     here,
     igraph,
     magick,
