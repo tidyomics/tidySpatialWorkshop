@@ -3288,10 +3288,10 @@ clust_M0_lam0.2_k50_res0.7_smooth
 AAACAAGTATCTCCCA-1
 </td>
 <td style="text-align:left;">
-4
+3
 </td>
 <td style="text-align:left;">
-4
+3
 </td>
 </tr>
 <tr>
@@ -3302,7 +3302,7 @@ AAACAATCTACTAGCA-1
 7
 </td>
 <td style="text-align:left;">
-6
+8
 </td>
 </tr>
 <tr>
@@ -3310,10 +3310,10 @@ AAACAATCTACTAGCA-1
 AAACACCAATAACTGC-1
 </td>
 <td style="text-align:left;">
-2
+5
 </td>
 <td style="text-align:left;">
-2
+5
 </td>
 </tr>
 <tr>
@@ -3321,10 +3321,10 @@ AAACACCAATAACTGC-1
 AAACAGAGCGACTCCT-1
 </td>
 <td style="text-align:left;">
-4
+3
 </td>
 <td style="text-align:left;">
-1
+3
 </td>
 </tr>
 <tr>
@@ -3332,10 +3332,10 @@ AAACAGAGCGACTCCT-1
 AAACAGCTTTCAGAAG-1
 </td>
 <td style="text-align:left;">
-3
+2
 </td>
 <td style="text-align:left;">
-3
+2
 </td>
 </tr>
 <tr>
@@ -3343,10 +3343,10 @@ AAACAGCTTTCAGAAG-1
 AAACAGGGTCTATATT-1
 </td>
 <td style="text-align:left;">
-2
+6
 </td>
 <td style="text-align:left;">
-2
+6
 </td>
 </tr>
 <tr>
@@ -3354,10 +3354,10 @@ AAACAGGGTCTATATT-1
 AAACAGTGTTCCTGGG-1
 </td>
 <td style="text-align:left;">
-2
+5
 </td>
 <td style="text-align:left;">
-2
+5
 </td>
 </tr>
 <tr>
@@ -3365,10 +3365,10 @@ AAACAGTGTTCCTGGG-1
 AAACATTTCCCGGATT-1
 </td>
 <td style="text-align:left;">
-4
+3
 </td>
 <td style="text-align:left;">
-4
+3
 </td>
 </tr>
 <tr>
@@ -3376,10 +3376,10 @@ AAACATTTCCCGGATT-1
 AAACCCGAACGAAATC-1
 </td>
 <td style="text-align:left;">
-4
+3
 </td>
 <td style="text-align:left;">
-4
+3
 </td>
 </tr>
 <tr>
@@ -3387,10 +3387,10 @@ AAACCCGAACGAAATC-1
 AAACCGGGTAGGTACC-1
 </td>
 <td style="text-align:left;">
-3
+6
 </td>
 <td style="text-align:left;">
-3
+2
 </td>
 </tr>
 </tbody>
@@ -3405,12 +3405,12 @@ partitions.</p>
 <div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/Banksy/man/compareClusters.html" class="external-link">compareClusters</a></span><span class="op">(</span><span class="va">spatial_data_list</span><span class="op">$</span><span class="va">sample_151673</span>, func <span class="op">=</span> <span class="st">'ARI'</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##                                   clust_M0_lam0.2_k50_res0.7 clust_annotation</span></span>
-<span><span class="co">## clust_M0_lam0.2_k50_res0.7                             1.000            0.326</span></span>
-<span><span class="co">## clust_annotation                                       0.326            1.000</span></span>
-<span><span class="co">## clust_M0_lam0.2_k50_res0.7_smooth                      0.941            0.323</span></span>
+<span><span class="co">## clust_M0_lam0.2_k50_res0.7                             1.000            0.341</span></span>
+<span><span class="co">## clust_annotation                                       0.341            1.000</span></span>
+<span><span class="co">## clust_M0_lam0.2_k50_res0.7_smooth                      0.902            0.331</span></span>
 <span><span class="co">##                                   clust_M0_lam0.2_k50_res0.7_smooth</span></span>
-<span><span class="co">## clust_M0_lam0.2_k50_res0.7                                    0.941</span></span>
-<span><span class="co">## clust_annotation                                              0.323</span></span>
+<span><span class="co">## clust_M0_lam0.2_k50_res0.7                                    0.902</span></span>
+<span><span class="co">## clust_annotation                                              0.331</span></span>
 <span><span class="co">## clust_M0_lam0.2_k50_res0.7_smooth                             1.000</span></span></code></pre>
 <p>We calculate the ARI for each sample to assess the consistency and
 accuracy of our clustering across different samples.</p>
@@ -3418,7 +3418,7 @@ accuracy of our clustering across different samples.</p>
 <code class="sourceCode R"><span><span class="va">ari</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">spatial_data_list</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/Banksy/man/compareClusters.html" class="external-link">compareClusters</a></span><span class="op">(</span><span class="va">x</span>, func <span class="op">=</span> <span class="st">"ARI"</span><span class="op">)</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>, n <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">ari</span></span></code></pre></div>
 <pre><code><span><span class="co">## sample_151673 sample_151675 sample_151676 </span></span>
-<span><span class="co">##         0.941         0.937         0.923</span></span></code></pre>
+<span><span class="co">##         0.902         0.868         0.890</span></span></code></pre>
 <p>Visualising Clusters and Annotations on Spatial Coordinates: We
 utilise the ggspavis package to visually map BANKSY clusters and manual
 annotations onto the spatial coordinates of the dataset, providing a
