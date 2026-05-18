@@ -361,7 +361,7 @@ After identifying mitochondrial genes, we apply quality control metrics to furth
 ```{r}
 ## Add per-cell QC metrics to spatial data using identified mitochondrial genes
 spatial_data <- scrapper::quickRnaQc.se(
-  spatial_data, 
+  spatial_data,
   subsets = list(mito = is_gene_mitochondrial)
 )
 
@@ -618,33 +618,32 @@ One Bioconductor-native approach is [`nnSVG`](https://bioconductor.org/packages/
 The nearest-neighbor approximation makes the Gaussian process scalable to thousands of spots, but a full analysis can still take time. For this workshop, we run one tissue section with stringent gene filtering, then use the top genes as a small case study.
 
 ```{r spatially-variable-genes-nnsvg, message=FALSE, warning=FALSE}
-
 # Run one section for a clear workshop example
 spatial_data_svg <- spatial_data[, spatial_data$sample_id == "151673"]
 
-  # Keep only genes with enough expression to make SVG fitting fast and stable
-  spatial_data_svg <- nnSVG::filter_genes(
-    spatial_data_svg,
-    filter_genes_ncounts = 10,
-    filter_genes_pcspots = 5
-  )
+# Keep only genes with enough expression to make SVG fitting fast and stable
+spatial_data_svg <- nnSVG::filter_genes(
+  spatial_data_svg,
+  filter_genes_ncounts = 10,
+  filter_genes_pcspots = 5
+)
 
-  # Keep the most expressed genes to keep workshop runtime short.
-  n_keep <- min(1500, nrow(spatial_data_svg))
-  top_gene_idx <- order(
-    rowMeans(assay(spatial_data_svg, "logcounts")),
-    decreasing = TRUE
-  )[seq_len(n_keep)]
-  spatial_data_svg <- spatial_data_svg[top_gene_idx, ]
+# Keep the most expressed genes to keep workshop runtime short.
+n_keep <- min(1500, nrow(spatial_data_svg))
+top_gene_idx <- order(
+  rowMeans(assay(spatial_data_svg, "logcounts")),
+  decreasing = TRUE
+)[seq_len(n_keep)]
+spatial_data_svg <- spatial_data_svg[top_gene_idx, ]
 
-  # Detect spatially variable genes
-  set.seed(123)
-  spatial_data_svg <- nnSVG::nnSVG(spatial_data_svg)
+# Detect spatially variable genes
+set.seed(123)
+spatial_data_svg <- nnSVG::nnSVG(spatial_data_svg)
 
-  # Inspect top-ranked SVGs
-  svg_results <- rowData(spatial_data_svg) |>
-    as.data.frame() |>
-    dplyr::arrange(rank)
+# Inspect top-ranked SVGs
+svg_results <- rowData(spatial_data_svg) |>
+  as.data.frame() |>
+  dplyr::arrange(rank)
 
 svg_results |>
   dplyr::select(gene_name, rank, LR_stat, padj, prop_sv) |>
@@ -657,7 +656,6 @@ The top ranked genes describe major anatomical and cell-state structure in this 
 We can visualise a few top SVGs on the tissue coordinates.
 
 ```{r spatially-variable-genes-spatial-plot, fig.width=9, fig.height=7}
-
 svg_case_study_genes <- c("MBP", "PLP1", "CNP", "GFAP", "S100B", "NRGN", "SNAP25", "NEFL")
 
 svg_case_study_ids <- rownames(spatial_data_svg)[

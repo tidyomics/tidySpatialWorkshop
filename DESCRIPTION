@@ -37,7 +37,8 @@ Imports:
     scuttle,
     scater,
     scran,
-    scrapper,
+    scrapper (>= 1.7.0),
+    nnSVG,
     methods
 Suggests:
     plotly,
@@ -65,9 +66,10 @@ Suggests:
     magick,
     scatterpie,
     ggcorrplot,
-    nnSVG,
     cellNexus
 VignetteBuilder: knitr
-Remotes: MangiolaLaboratory/cellNexus
+Remotes:
+    bioc::scrapper,
+    MangiolaLaboratory/cellNexus
 URL: https://github.com/tidyomics/tidySpatialWorkshop
 BugReports: https://github.com/tidyomics/tidySpatialWorkshop/issues
