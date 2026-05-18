@@ -69,7 +69,7 @@ Suggests:
     cellNexus
 VignetteBuilder: knitr
 Remotes:
-    bioc::scrapper@devel,
+    github::bioc/scrapper@devel,
     MangiolaLaboratory/cellNexus
 URL: https://github.com/tidyomics/tidySpatialWorkshop
 BugReports: https://github.com/tidyomics/tidySpatialWorkshop/issues
