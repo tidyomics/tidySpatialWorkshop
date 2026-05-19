@@ -74,7 +74,6 @@ Suggests:
     AnnotationDbi
 VignetteBuilder: knitr
 Remotes:
-    alanocallaghan/scater@devel,
     MangiolaLaboratory/cellNexus
 URL: https://github.com/tidyomics/tidySpatialWorkshop
 BugReports: https://github.com/tidyomics/tidySpatialWorkshop/issues
