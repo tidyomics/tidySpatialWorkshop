@@ -347,7 +347,7 @@ This capability is powered by `tidygate`. We show how you can visualise your dat
 Let's draw an arbitrary gate interactively
 
 ```{r, eval=FALSE}
-spatial_data = 
+spatial_data_gated = 
   spatial_data |> 
   
   # Filter one sample
@@ -356,20 +356,21 @@ spatial_data =
   # Gate based on tissue morphology
   tidySpatialExperiment::gate(alpha = 0.1, colour = "spatialLIBD") 
 
-spatial_data |> select(.cell, .gated)
+spatial_data_gated |> select(.cell, .gated)
 ```
 
 ```{r, eval=FALSE}
 tidygate_env$gates |> saveRDS("<PATH>")
-spatial_data_gated = tidygate_env$gates
+spatial_data_gates = tidygate_env$gates
 ```
 
 You can reload a pre-made gate for reproducibility
 
 ```{r}
-data(spatial_data_gated)
+library(tidySpatialWorkshop)
+data("spatial_data_gated")
 
-spatial_data = 
+spatial_data_gated = 
   spatial_data |> 
   
   # Filter one sample
@@ -384,19 +385,19 @@ spatial_data =
 
 ```{r}
 
-spatial_data |> select(.cell, .gated)
+spatial_data_gated |> select(.cell, .gated)
 ```
 
 We can count how many pixels we selected with simple `tidyverse` grammar
 
 ```{r}
-spatial_data |> count(.gated)
+spatial_data_gated |> count(.gated)
 ```
 
 To have a visual feedback of our selection we can plot the slide annotating by our newly created column.
 
 ```{r, fig.width=7, fig.height=8}
-spatial_data |> 
+spatial_data_gated |> 
   ggspavis::plotVisium(annotate = ".gated")
 ```
 
@@ -408,7 +409,7 @@ knitr::include_graphics(here("inst/images/tidySPE_gate.png"))
 We can also filter, for further analyses
 
 ```{r}
-spatial_data |> 
+spatial_data_gated |> 
   filter(.gated == 1)
 ```
 
@@ -768,7 +769,7 @@ spatial_data_filtered |>
 #### Custom visualisation: Plotting the regions
 
 ```{r, fig.width=7, fig.height=8}
-spatial_data |> 
+spatial_data_filtered |> 
   ggplot(aes(array_row, array_col)) +
   geom_point(aes(color = spatialLIBD)) +
   facet_wrap(~sample_id) +
@@ -785,11 +786,10 @@ We could conclude that when we use thresholding to filter "low-quality" pixels w
 
 ```{r, fig.width=7, fig.height=4}
 
-spatial_data_filtered |> 
+spatial_data |> 
   ggplot(aes(sum_umi, color = spatialLIBD)) +
   geom_density() + 
   facet_wrap(~sample_id) +
-  scale_color_manual(values = libd_layer_colors |> str_remove("ayer")) +
   scale_x_log10() +
   theme_bw()
 
@@ -803,8 +803,6 @@ spatial_data_filtered |>
   ggplot(aes(subsets_mito_percent, sum_gene)) + 
   geom_point(aes(color = spatialLIBD), size=0.2) +  
   stat_ellipse(aes(group = spatialLIBD, color = spatialLIBD), alpha = 0.3) +
-  scale_color_manual(values = libd_layer_colors |>
-  str_remove("ayer")) +
   geom_smooth(aes(group = spatialLIBD), method="lm") +
   scale_y_log10() +
   theme_bw()
@@ -819,7 +817,6 @@ Interestingly, if we plot the correlation between these two quantities we observ
 spatial_data_filtered |> 
   ggplot(aes(subsets_mito_percent, sum_gene)) + 
   geom_point(aes(color = spatialLIBD), size=0.2) +  
-  scale_color_manual(values = libd_layer_colors |>    str_remove("ayer")) +
   geom_smooth(method="lm") + 
   facet_wrap(~spatialLIBD) + 
   scale_y_log10() +
@@ -833,7 +830,6 @@ Let's take a step further and group the correlations according to samples, to se
 spatial_data_filtered |> 
   ggplot(aes(subsets_mito_percent, sum_gene)) + 
   geom_point(aes(color = spatialLIBD), size=0.2) +  
-  scale_color_manual(values = libd_layer_colors |> str_remove("ayer")) +
   geom_smooth(aes(group = sample_id), method="lm") + 
   facet_wrap(~spatialLIBD) + 
   scale_y_log10() +
@@ -918,59 +914,79 @@ knitr::include_graphics(here("inst/images/cellNexus.png"))
 ```
 
 
-```{r, eval = FALSE, message=FALSE, warning=FALSE,  fig.width=3, fig.height=3}
+```{r, message=FALSE, warning=FALSE,  fig.width=3, fig.height=3}
 # Get reference
 library(cellNexus)
 library(HDF5Array)
 
-tmp_file_path = tempfile()
+
 
 brain_reference =
   
   # Query metadata across 30M cells
   get_metadata() |>
-  
+  join_census_table() |> 
   # Filter your data of interest
   dplyr::filter(tissue_groups=="cerebral lobes and cortical areas", disease == "normal") |> 
+  dplyr::filter(dataset_id == "c2876b1b-06d8-4d96-a56b-5304f815b99a") |> 
   
   # Collect pseudobulk as SummarizedExperiment
   get_pseudobulk() |> 
   
   # Normalise for Spotlight
-  scuttle::logNormCounts() |> 
-  
-  # Save for fast reading
-  HDF5Array::saveHDF5SummarizedExperiment(tmp_file_path, replace = TRUE)
+  scuttle::logNormCounts() 
+
+brain_reference
 ```
+
+For large collection it is convenient (more efficient to query) to repackage the on-disl object in a consolidated file
+
+```{r, eval=FALSE}
+DelayedArray::setAutoBlockSize(size = 1e+09)
+
+
+  tmp_file_path = tempfile()
+
+  brain_reference = 
+    brain_reference  |>
+
+  # Save for fast reading
+  HDF5Array::saveHDF5SummarizedExperiment(
+    tmp_file_path,
+    replace = TRUE,
+    as.sparse = TRUE,
+    verbose = TRUE
+  )
+
+```
+
+FYI, to load the object from disk.
 
 ```{r, eval = FALSE, message=FALSE}
 library(HDF5Array)
 
 brain_reference = HDF5Array::loadHDF5SummarizedExperiment(tmp_file_path)
 
-my_metadata = colData(brain_reference)
-
-knitr::kable(head(my_metadata), format = "html")
 ```
 
 These are the cell types included in our reference, and the number of pseudobulk samples we have for each cell type.
 
-```{r, eval = FALSE}
+```{r, eval = TRUE}
 
-table(brain_reference$cell_type_harmonised)
+table(brain_reference$cell_type_unified_ensemble)
 
 ```
 
 These are the number of samples we have for each of the three data sets.
 
-```{r, eval = FALSE}
+```{r, eval = TRUE}
 
 table(brain_reference$dataset_id)
 ```
 
 The `collection_id` can be used to gather information on the cell database. e.g. <https://cellxgene.cziscience.com/collections/><collection_id>
 
-```{r, eval = FALSE}
+```{r, eval = TRUE}
 table(brain_reference$collection_id)
 ```
 
@@ -978,7 +994,7 @@ table(brain_reference$collection_id)
 
 Once the cellNexus pseudobulk reference has been collected and normalised, we can use it as the single-cell-derived reference for `SPOTlight`. This mirrors the Session 1 workflow, but keeps the spatial data manipulation in the tidyomics style: we prepare the `SpatialExperiment`, identify marker genes from the reference, run deconvolution, and join the estimated cell type proportions back to the tidy spatial object.
 
-```{r, eval = FALSE, message=FALSE, warning=FALSE}
+```{r, eval = TRUE, message=FALSE, warning=FALSE}
 library(SPOTlight)
 
 spatial_data_deconv =
@@ -997,7 +1013,27 @@ spatial_data_deconv =
 
 We first identify marker genes in the cellNexus reference. `scran::scoreMarkers()` returns one table per reference cell type; we turn that list into one tidy marker table and keep high-AUC markers.
 
-```{r, eval = FALSE, message=FALSE, warning=FALSE}
+```{r add-gene-symbol}
+library(org.Hs.eg.db)
+library(AnnotationDbi)
+
+# Add gene symbol and entrez
+rownames(brain_reference) <-
+  mapIds(org.Hs.eg.db,
+                          keys = rownames(brain_reference),
+                          keytype = "ENSEMBL",
+                          column = "SYMBOL",
+                          multiVals = "first"
+)
+
+brain_reference = brain_reference[!rownames(brain_reference) |> is.na(),]
+
+detach("package:org.Hs.eg.db", unload = TRUE)
+detach("package:AnnotationDbi", unload = TRUE)
+```
+
+```{r, eval = TRUE, message=FALSE, warning=FALSE}
+
 marker_gene_universe =
   grep("(^MT-)|(^mt-)|(\\.)|(-)", rownames(brain_reference), value = TRUE, invert = TRUE) |>
   intersect(rownames(spatial_data_deconv))
@@ -1005,7 +1041,7 @@ marker_gene_universe =
 reference_markers =
   scran::scoreMarkers(
     brain_reference,
-    groups = brain_reference$cell_type_harmonised,
+    groups = brain_reference$cell_type_unified_ensemble,
     subset.row = marker_gene_universe
   )
 
@@ -1026,26 +1062,17 @@ mgs_df |>
   knitr::kable(format = "html")
 ```
 
-We also select highly variable genes from the reference as a second input to `SPOTlight`. These genes define the informative expression space used for deconvolution.
-
-```{r, eval = FALSE, message=FALSE, warning=FALSE}
-reference_hvgs =
-  brain_reference |>
-  scran::modelGeneVar(block = brain_reference$dataset_id) |>
-  scran::getTopHVGs(n = 1000)
-```
 
 Now we deconvolve the spatial spots/pixels. `res$mat` contains one row per spatial observation and one column per reference cell type.
 
-```{r, eval = FALSE, message=FALSE, warning=FALSE}
+```{r, eval = TRUE, message=FALSE, warning=FALSE}
 res =
   SPOTlight(
     x = brain_reference |> assay("logcounts"),
     y = spatial_data_deconv |> assay("logcounts"),
-    groups = brain_reference$cell_type_harmonised,
+    groups = brain_reference$cell_type_unified_ensemble,
     group_id = "cluster",
     mgs = mgs_df,
-    hvg = intersect(reference_hvgs, rownames(spatial_data_deconv)),
     weight_id = "mean.AUC",
     gene_id = "gene"
   )
@@ -1055,14 +1082,13 @@ cell_type_proportions =
   as.data.frame() |>
   tibble::rownames_to_column(".cell")
 
-spatial_data_deconv =
-  spatial_data_deconv |>
-  dplyr::left_join(cell_type_proportions, by = ".cell")
+colData(spatial_data_deconv) =
+  colData(spatial_data_deconv) |> cbind(cell_type_proportions[,-1])
 ```
 
 Finally, we visualise the inferred proportions in tissue space. Here we select the most abundant inferred cell types for a compact overview, but the same pattern can be used for any cell type column in `res$mat`.
 
-```{r, eval = FALSE, fig.width=9, fig.height=8}
+```{r, eval = TRUE, fig.width=9, fig.height=8}
 cell_types_to_plot =
   res$mat |>
   colMeans() |>
