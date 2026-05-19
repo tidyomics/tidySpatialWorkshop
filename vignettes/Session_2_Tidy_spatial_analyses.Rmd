@@ -1014,6 +1014,8 @@ spatial_data_deconv =
 We first identify marker genes in the cellNexus reference. `scran::scoreMarkers()` returns one table per reference cell type; we turn that list into one tidy marker table and keep high-AUC markers.
 
 ```{r add-gene-symbol}
+# BiocManager::install(c("org.Hs.eg.db", "AnnotationDbi"))
+
 library(org.Hs.eg.db)
 library(AnnotationDbi)
 
