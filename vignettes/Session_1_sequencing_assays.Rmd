@@ -1033,18 +1033,7 @@ table(brain_reference$sample)
 ```
 
 
-Now, we identify the variable genes, to not capture technical effects, and identify the union of variable genes for further analysis.
 
-```{r, warning=FALSE}
-genes <- !grepl(pattern = "^Rp[l|s]|Mt", x = rownames(brain_reference))
-
-dec = scran::modelGeneVar(brain_reference, subset.row = genes, block = brain_reference$sample)
-hvg_CAQ = scran::getTopHVGs(dec, n = 1000)
-            
-hvg_CAQ = unique( unlist(hvg_CAQ))
-
-head(hvg_CAQ)
-```
 
 Initially, the code prepares the spatial data by setting gene names as row identifiers.
 
@@ -1104,7 +1093,6 @@ res <- SPOTlight(
   groups = brain_reference$cell_types,
   group_id = "cluster",
   mgs = mgs_df,
-  hvg =  intersect(hvg_CAQ, rownames(spatial_data_gene_name)),
   weight_id = "mean.AUC",
   gene_id = "gene"
 )

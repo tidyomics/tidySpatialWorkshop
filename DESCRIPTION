@@ -67,10 +67,13 @@ Suggests:
     magick,
     scatterpie,
     ggcorrplot,
-    cellNexus
+    HDF5Array,
+    DelayedArray,
+    cellNexus,
+    org.Hs.eg.db,
+    AnnotationDbi
 VignetteBuilder: knitr
 Remotes:
-    alanocallaghan/scater@devel,
     MangiolaLaboratory/cellNexus
 URL: https://github.com/tidyomics/tidySpatialWorkshop
 BugReports: https://github.com/tidyomics/tidySpatialWorkshop/issues

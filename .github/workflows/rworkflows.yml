@@ -38,6 +38,20 @@ jobs:
           cont: ~
           rspm: ~
     steps:
+    - uses: grimbough/bioc-actions/setup-bioc@v1
+      if: runner.os != 'Linux'
+      with:
+        bioc-version: ${{ matrix.config.bioc }}
+    - name: Install vignette annotation dependencies
+      if: runner.os != 'Linux'
+      shell: Rscript {0}
+      run: |
+        options(repos = BiocManager::repositories())
+        BiocManager::install(
+          c("org.Hs.eg.db", "AnnotationDbi", "BiocStyle", "BiocVersion"),
+          ask = FALSE,
+          update = FALSE
+        )
     - uses: neurogenomics/rworkflows@master
       with:
         run_bioccheck: ${{ false }}
@@ -56,7 +70,7 @@ jobs:
         runner_os: ${{ runner.os }}
         run_telemetry: ${{ false }}
         force_install: ${{ true }}
-        cache_version: cache-v6-no-scrapper
+        cache_version: cache-v7-orgdb
         docker_registry: ghcr.io
         
   docker-build-and-push:
