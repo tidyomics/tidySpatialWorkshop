@@ -360,13 +360,13 @@ After identifying mitochondrial genes, we apply quality control metrics to furth
 
 ```{r}
 ## Add per-cell QC metrics to spatial data using identified mitochondrial genes
-spatial_data <- scrapper::quickRnaQc.se(
+spatial_data <- scater::addPerCellQC(
   spatial_data,
   subsets = list(mito = is_gene_mitochondrial)
 )
 
 ## Select expressed genes threshold
-qc_mitochondrial_transcription <- colData(spatial_data)$subset.proportion.mito > 0.3
+qc_mitochondrial_transcription <- colData(spatial_data)$subsets_mito_percent > 30
 
 ## Check how many spots are filtered out
 table(qc_mitochondrial_transcription)
