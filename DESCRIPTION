@@ -22,7 +22,7 @@ biocViews:
     Software,
     Visualization
 Depends:
-    R (>= 4.3.0)
+    R (>= 4.4.0)
 Imports:
     SpatialExperiment,
     tidySpatialExperiment,
