@@ -95,7 +95,7 @@ Institute<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
 Martellotto, BD Biosciences</h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/tidyomics/tidySpatialWorkshop/blob/devel/vignettes/Session_1_sequencing_assays.Rmd" class="external-link"><code>vignettes/Session_1_sequencing_assays.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tidyomics/tidySpatialWorkshop/blob/update-session-2/vignettes/Session_1_sequencing_assays.Rmd" class="external-link"><code>vignettes/Session_1_sequencing_assays.Rmd</code></a></small>
       <div class="hidden name"><code>Session_1_sequencing_assays.Rmd</code></div>
 
     </div>
@@ -3294,10 +3294,10 @@ clust_M0_lam0.2_k50_res0.7_smooth
 AAACAAGTATCTCCCA-1
 </td>
 <td style="text-align:left;">
-3
+4
 </td>
 <td style="text-align:left;">
-3
+4
 </td>
 </tr>
 <tr>
@@ -3308,7 +3308,7 @@ AAACAATCTACTAGCA-1
 7
 </td>
 <td style="text-align:left;">
-8
+6
 </td>
 </tr>
 <tr>
@@ -3316,10 +3316,10 @@ AAACAATCTACTAGCA-1
 AAACACCAATAACTGC-1
 </td>
 <td style="text-align:left;">
-5
+2
 </td>
 <td style="text-align:left;">
-5
+2
 </td>
 </tr>
 <tr>
@@ -3327,10 +3327,10 @@ AAACACCAATAACTGC-1
 AAACAGAGCGACTCCT-1
 </td>
 <td style="text-align:left;">
-3
+4
 </td>
 <td style="text-align:left;">
-3
+1
 </td>
 </tr>
 <tr>
@@ -3338,10 +3338,10 @@ AAACAGAGCGACTCCT-1
 AAACAGCTTTCAGAAG-1
 </td>
 <td style="text-align:left;">
-2
+3
 </td>
 <td style="text-align:left;">
-2
+3
 </td>
 </tr>
 <tr>
@@ -3349,10 +3349,10 @@ AAACAGCTTTCAGAAG-1
 AAACAGGGTCTATATT-1
 </td>
 <td style="text-align:left;">
-6
+2
 </td>
 <td style="text-align:left;">
-6
+2
 </td>
 </tr>
 <tr>
@@ -3360,10 +3360,10 @@ AAACAGGGTCTATATT-1
 AAACAGTGTTCCTGGG-1
 </td>
 <td style="text-align:left;">
-5
+2
 </td>
 <td style="text-align:left;">
-5
+2
 </td>
 </tr>
 <tr>
@@ -3371,10 +3371,10 @@ AAACAGTGTTCCTGGG-1
 AAACATTTCCCGGATT-1
 </td>
 <td style="text-align:left;">
-3
+4
 </td>
 <td style="text-align:left;">
-3
+4
 </td>
 </tr>
 <tr>
@@ -3382,10 +3382,10 @@ AAACATTTCCCGGATT-1
 AAACCCGAACGAAATC-1
 </td>
 <td style="text-align:left;">
-3
+4
 </td>
 <td style="text-align:left;">
-3
+4
 </td>
 </tr>
 <tr>
@@ -3393,10 +3393,10 @@ AAACCCGAACGAAATC-1
 AAACCGGGTAGGTACC-1
 </td>
 <td style="text-align:left;">
-6
+3
 </td>
 <td style="text-align:left;">
-2
+3
 </td>
 </tr>
 </tbody>
@@ -3411,12 +3411,12 @@ partitions.</p>
 <div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/Banksy/man/compareClusters.html" class="external-link">compareClusters</a></span><span class="op">(</span><span class="va">spatial_data_list</span><span class="op">$</span><span class="va">sample_151673</span>, func <span class="op">=</span> <span class="st">'ARI'</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##                                   clust_M0_lam0.2_k50_res0.7 clust_annotation</span></span>
-<span><span class="co">## clust_M0_lam0.2_k50_res0.7                             1.000            0.341</span></span>
-<span><span class="co">## clust_annotation                                       0.341            1.000</span></span>
-<span><span class="co">## clust_M0_lam0.2_k50_res0.7_smooth                      0.902            0.331</span></span>
+<span><span class="co">## clust_M0_lam0.2_k50_res0.7                             1.000            0.326</span></span>
+<span><span class="co">## clust_annotation                                       0.326            1.000</span></span>
+<span><span class="co">## clust_M0_lam0.2_k50_res0.7_smooth                      0.941            0.323</span></span>
 <span><span class="co">##                                   clust_M0_lam0.2_k50_res0.7_smooth</span></span>
-<span><span class="co">## clust_M0_lam0.2_k50_res0.7                                    0.902</span></span>
-<span><span class="co">## clust_annotation                                              0.331</span></span>
+<span><span class="co">## clust_M0_lam0.2_k50_res0.7                                    0.941</span></span>
+<span><span class="co">## clust_annotation                                              0.323</span></span>
 <span><span class="co">## clust_M0_lam0.2_k50_res0.7_smooth                             1.000</span></span></code></pre>
 <p>We calculate the ARI for each sample to assess the consistency and
 accuracy of our clustering across different samples.</p>
@@ -3424,7 +3424,7 @@ accuracy of our clustering across different samples.</p>
 <code class="sourceCode R"><span><span class="va">ari</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">spatial_data_list</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/Banksy/man/compareClusters.html" class="external-link">compareClusters</a></span><span class="op">(</span><span class="va">x</span>, func <span class="op">=</span> <span class="st">"ARI"</span><span class="op">)</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>, n <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">ari</span></span></code></pre></div>
 <pre><code><span><span class="co">## sample_151673 sample_151675 sample_151676 </span></span>
-<span><span class="co">##         0.902         0.868         0.890</span></span></code></pre>
+<span><span class="co">##         0.941         0.937         0.923</span></span></code></pre>
 <p>Visualising Clusters and Annotations on Spatial Coordinates: We
 utilise the ggspavis package to visually map BANKSY clusters and manual
 annotations onto the spatial coordinates of the dataset, providing a
@@ -3846,22 +3846,9 @@ pseudobulk samples we have for each cell type.</p>
 <span><span class="co">##            5            6            5            5            5            6 </span></span>
 <span><span class="co">##  GW26_PFC1_7  GW26_PFC1_8  GW26_PFC1_9 </span></span>
 <span><span class="co">##            5            6            5</span></span></code></pre>
-<p>Now, we identify the variable genes, to not capture technical
-effects, and identify the union of variable genes for further
-analysis.</p>
-<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">genes</span> <span class="op">&lt;-</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/grep.html" class="external-link">grepl</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"^Rp[l|s]|Mt"</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">brain_reference</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">dec</span> <span class="op">=</span> <span class="fu">scran</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/scran/man/modelGeneVar.html" class="external-link">modelGeneVar</a></span><span class="op">(</span><span class="va">brain_reference</span>, subset.row <span class="op">=</span> <span class="va">genes</span>, block <span class="op">=</span> <span class="va">brain_reference</span><span class="op">$</span><span class="va">sample</span><span class="op">)</span></span>
-<span><span class="va">hvg_CAQ</span> <span class="op">=</span> <span class="fu">scran</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/scran/man/getTopHVGs.html" class="external-link">getTopHVGs</a></span><span class="op">(</span><span class="va">dec</span>, n <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span>
-<span>            </span>
-<span><span class="va">hvg_CAQ</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/unique.html" class="external-link">unique</a></span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">hvg_CAQ</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">hvg_CAQ</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "OLIG1"  "C3"     "CX3CR1" "NUSAP1" "CENPF"  "SST"</span></span></code></pre>
 <p>Initially, the code prepares the spatial data by setting gene names
 as row identifiers.</p>
-<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spatial_data_gene_name</span> <span class="op">=</span> <span class="va">spatial_data</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">spatial_data_gene_name</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu">rowData</span><span class="op">(</span><span class="va">spatial_data_gene_name</span><span class="op">)</span><span class="op">$</span><span class="va">gene_name</span></span>
 <span><span class="va">spatial_data_gene_name</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/scuttle/man/logNormCounts.html" class="external-link">logNormCounts</a></span><span class="op">(</span><span class="va">spatial_data_gene_name</span><span class="op">)</span></span></code></pre></div>
@@ -3889,7 +3876,7 @@ while the groups themselves are defined from the data. Thus, by
 discarding the p-values, we can simplify our marker selection by
 focusing only on the effect sizes between groups.</p>
 </div>
-<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mgs</span> <span class="op">&lt;-</span> <span class="fu">scran</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/scran/man/scoreMarkers.html" class="external-link">scoreMarkers</a></span><span class="op">(</span></span>
 <span>  <span class="va">brain_reference</span>, </span>
 <span>  groups <span class="op">=</span> <span class="va">brain_reference</span><span class="op">$</span><span class="va">cell_types</span>,</span>
@@ -3955,7 +3942,7 @@ focusing only on the effect sizes between groups.</p>
 <span><span class="co">## Warning in computeMinRank(res[[i]][[j]]): 'computeMinRank' is deprecated.</span></span>
 <span><span class="co">## Use 'scrapper::summarizeEffects' instead.</span></span>
 <span><span class="co">## See help("Deprecated")</span></span></code></pre>
-<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Select the most informative markers</span></span>
 <span><span class="va">mgs_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">mgs</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">mgs</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span></span>
@@ -4015,7 +4002,7 @@ result is visualised through a scatter pie plot, which provides a
 graphical representation of the spatial distribution of cell types
 within a let’sfic sample. This visualisation aids in understanding the
 spatial heterogeneity.</p>
-<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/MarcElosua/SPOTlight" class="external-link">SPOTlight</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/SPOTlight/man/SPOTlight.html" class="external-link">SPOTlight</a></span><span class="op">(</span></span>
@@ -4024,31 +4011,30 @@ spatial heterogeneity.</p>
 <span>  groups <span class="op">=</span> <span class="va">brain_reference</span><span class="op">$</span><span class="va">cell_types</span>,</span>
 <span>  group_id <span class="op">=</span> <span class="st">"cluster"</span>,</span>
 <span>  mgs <span class="op">=</span> <span class="va">mgs_df</span>,</span>
-<span>  hvg <span class="op">=</span>  <span class="fu"><a href="https://generics.r-lib.org/reference/setops.html" class="external-link">intersect</a></span><span class="op">(</span><span class="va">hvg_CAQ</span>, <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">spatial_data_gene_name</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  weight_id <span class="op">=</span> <span class="st">"mean.AUC"</span>,</span>
 <span>  gene_id <span class="op">=</span> <span class="st">"gene"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## iter |      tol </span></span>
 <span><span class="co">## ---------------</span></span>
-<span><span class="co">##    1 | 3.85e-01</span></span>
-<span><span class="co">##    2 | 1.97e-02</span></span>
-<span><span class="co">##    3 | 6.59e-03</span></span>
-<span><span class="co">##    4 | 4.78e-03</span></span>
-<span><span class="co">##    5 | 1.26e-02</span></span>
-<span><span class="co">##    6 | 1.73e-02</span></span>
-<span><span class="co">##    7 | 5.96e-03</span></span>
-<span><span class="co">##    8 | 1.74e-03</span></span>
-<span><span class="co">##    9 | 5.08e-04</span></span>
-<span><span class="co">##   10 | 1.84e-04</span></span>
-<span><span class="co">##   11 | 8.30e-05</span></span>
-<span><span class="co">##   12 | 4.57e-05</span></span>
-<span><span class="co">##   13 | 2.93e-05</span></span>
-<span><span class="co">##   14 | 2.01e-05</span></span>
-<span><span class="co">##   15 | 1.42e-05</span></span>
-<span><span class="co">##   16 | 1.06e-05</span></span>
-<span><span class="co">##   17 | 8.14e-06</span></span></code></pre>
-<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
+<span><span class="co">##    1 | 3.51e-01</span></span>
+<span><span class="co">##    2 | 1.67e-02</span></span>
+<span><span class="co">##    3 | 6.16e-03</span></span>
+<span><span class="co">##    4 | 4.62e-03</span></span>
+<span><span class="co">##    5 | 1.04e-02</span></span>
+<span><span class="co">##    6 | 1.03e-02</span></span>
+<span><span class="co">##    7 | 4.00e-03</span></span>
+<span><span class="co">##    8 | 1.20e-03</span></span>
+<span><span class="co">##    9 | 4.73e-04</span></span>
+<span><span class="co">##   10 | 2.38e-04</span></span>
+<span><span class="co">##   11 | 1.30e-04</span></span>
+<span><span class="co">##   12 | 7.58e-05</span></span>
+<span><span class="co">##   13 | 4.57e-05</span></span>
+<span><span class="co">##   14 | 2.74e-05</span></span>
+<span><span class="co">##   15 | 1.70e-05</span></span>
+<span><span class="co">##   16 | 1.11e-05</span></span>
+<span><span class="co">##   17 | 7.60e-06</span></span></code></pre>
+<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cell_first_sample</span> <span class="op">=</span> <span class="fu">colData</span><span class="op">(</span><span class="va">spatial_data_gene_name</span><span class="op">)</span><span class="op">$</span><span class="va">sample_id</span><span class="op">==</span><span class="st">"151673"</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/SPOTlight/man/plotSpatialScatterpie.html" class="external-link">plotSpatialScatterpie</a></span><span class="op">(</span></span>
@@ -4059,10 +4045,10 @@ spatial heterogeneity.</p>
 <span>  scatterpie_alpha <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  pie_scale <span class="op">=</span> <span class="fl">0.4</span></span>
 <span><span class="op">)</span> </span></code></pre></div>
-<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-55-1.png" class="r-plt" alt="" width="576"></p>
+<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-54-1.png" class="r-plt" alt="" width="576"></p>
 <p>Let’s visualise without pit’syte_cell and endothelial cells, which
 oclet’sa lot of the visual spectrum.</p>
-<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/SPOTlight/man/plotSpatialScatterpie.html" class="external-link">plotSpatialScatterpie</a></span><span class="op">(</span></span>
 <span>  x <span class="op">=</span> <span class="va">spatial_data_gene_name</span><span class="op">[</span>,<span class="va">cell_first_sample</span><span class="op">]</span>,</span>
 <span>  y <span class="op">=</span> <span class="va">res</span><span class="op">$</span><span class="va">mat</span><span class="op">[</span><span class="va">cell_first_sample</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">9</span><span class="op">)</span><span class="op">]</span>,</span>
@@ -4073,10 +4059,10 @@ oclet’sa lot of the visual spectrum.</p>
 <span><span class="op">)</span> </span></code></pre></div>
 <pre><code><span><span class="co">## Found more than one class "package_version" in cache; using the first, from namespace 'SeuratObject'</span></span></code></pre>
 <pre><code><span><span class="co">## Also defined by 'alabaster.base'</span></span></code></pre>
-<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-56-1.png" class="r-plt" alt="" width="576"></p>
+<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-55-1.png" class="r-plt" alt="" width="576"></p>
 <p>Let’s also exclude without muscle_cell, which occupy a lot of the
 visual spectrum.</p>
-<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/SPOTlight/man/plotSpatialScatterpie.html" class="external-link">plotSpatialScatterpie</a></span><span class="op">(</span></span>
 <span>  x <span class="op">=</span> <span class="va">spatial_data_gene_name</span><span class="op">[</span>,<span class="va">cell_first_sample</span><span class="op">]</span>,</span>
 <span>  y <span class="op">=</span> <span class="va">res</span><span class="op">$</span><span class="va">mat</span><span class="op">[</span><span class="va">cell_first_sample</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">9</span>, <span class="fl">5</span><span class="op">)</span><span class="op">]</span>,</span>
@@ -4087,11 +4073,11 @@ visual spectrum.</p>
 <span><span class="op">)</span> </span></code></pre></div>
 <pre><code><span><span class="co">## Found more than one class "package_version" in cache; using the first, from namespace 'SeuratObject'</span></span></code></pre>
 <pre><code><span><span class="co">## Also defined by 'alabaster.base'</span></span></code></pre>
-<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-57-1.png" class="r-plt" alt="" width="576"></p>
+<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-56-1.png" class="r-plt" alt="" width="576"></p>
 <p>No, let’s look at the correlation matrices to see which cell type are
 most often occurring rather than mutually exclusive within our data
 set.</p>
-<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/SPOTlight/man/plotCorrelationMatrix.html" class="external-link">plotCorrelationMatrix</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">mat</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning: `aes_string()` was deprecated in ggplot2 3.0.0.</span></span>
 <span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Please use tidy evaluation idioms with `aes()`.</span></span>
@@ -4101,8 +4087,8 @@ set.</p>
 <span><span class="co">## <span style="color: #555555;">This warning is displayed once per session.</span></span></span>
 <span><span class="co">## <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span></span>
 <span><span class="co">## <span style="color: #555555;">generated.</span></span></span></code></pre>
-<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-58-1.png" class="r-plt" alt="" width="576"></p>
-<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
+<p><img src="Session_1_sequencing_assays_files/figure-html/unnamed-chunk-57-1.png" class="r-plt" alt="" width="576"></p>
+<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mat_df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">mat</span><span class="op">)</span></span></code></pre></div>
 <div class="section level5">
 <h5 id="excercise">Excercise<a class="anchor" aria-label="anchor" href="#excercise"></a>
@@ -4177,7 +4163,7 @@ cell-type columns and updating the thresholds as above.</p>
 </div>
 </div>
 <p><strong>Session Information</strong></p>
-<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## R version 4.6.0 (2026-04-24)</span></span>
 <span><span class="co">## Platform: x86_64-pc-linux-gnu</span></span>
