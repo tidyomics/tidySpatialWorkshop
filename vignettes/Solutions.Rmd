@@ -148,9 +148,9 @@ plotSpotQC(
 
 ```{r, fig.width=7, fig.height=8, eval=FALSE}
 
-res_spatialLIBD = split(data.frame(res$mat), colData(spatial_data_gene_name)$sample_id ) 
+res_spatialLIBD = split(data.frame(res$mat), spatial_data_gene_name$sample_id, drop = TRUE ) 
 
-lapply(res_spatialLIBD, function(x) plotCorrelationMatrix(as.matrix(x[,-10]))) 
+lapply(res_spatialLIBD, function(x) plotCorrelationMatrix(as.matrix(x))) 
 
 ```
 
@@ -288,7 +288,7 @@ spatial_data |>
   filter(in_tissue, sample_id=="151673") |> 
   
   # Gate based on tissue morphology
-  tidySpatialExperiment::gate(alpha = 0.1) |> 
+  tidySpatialExperiment::gate(alpha = 0.1,colour = "spatialLIBD") |> 
 
   # Plot
   scater::plotUMAP(colour_by = ".gated")
