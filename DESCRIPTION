@@ -51,6 +51,7 @@ Suggests:
     Seurat,
     cowplot,
     scRNAseq,
+    SingleR,
     SPOTlight,
     SubcellularSpatialData,
     forcats,
