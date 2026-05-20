@@ -520,6 +520,8 @@ The selected subset of genes can then be passed to the subset.row argument (or e
 ```{r}
 tx_spe_sample_1 =  
   tx_spe_sample_1 |> 
+  
+  # We use fixed PCA as we have a limited number of features
   fixedPCA( subset.row=top.hvgs )
 ```
 
@@ -545,7 +547,7 @@ cluster_labels =
   tx_spe_sample_1 |> 
    scran::clusterCells(
      use.dimred="PCA", 
-     BLUSPARAM=bluster::NNGraphParam(k=20, cluster.fun="louvain")
+     BLUSPARAM=bluster::NNGraphParam(k=30, cluster.fun="louvain")
     ) |> 
    as.character()
 
@@ -558,9 +560,9 @@ Now we add this cluster column to our `SpatialExperiment`
 ```{r}
 tx_spe_sample_1 = 
   tx_spe_sample_1 |> 
-  mutate(clusters = cluster_labels)
+  mutate(my_clusters = cluster_labels)
 
-tx_spe_sample_1 |> select(.cell, clusters)
+tx_spe_sample_1 |> select(.cell, my_clusters)
 ```
 
 As we have done before, we caclculate UMAPs for visualisation purposes.
@@ -575,11 +577,11 @@ tx_spe_sample_1 =
   tx_spe_sample_1 |>
   runUMAP() 
 ```
-Now, let's visualise the clusters in UMAP space.
+Now, let's visualise the my_clusters in UMAP space.
 
 ```{r, fig.width=7, fig.height=8}
 tx_spe_sample_1 |> 
-  plotUMAP(colour_by = "clusters") +
+  plotUMAP(colour_by = "my_clusters") +
   scale_color_discrete(
     colorRampPalette(brewer.pal(9, "Set1"))(30)
   )
@@ -624,7 +626,7 @@ Plot ground truth in tissue map.
 ```{r, fig.width=7, fig.height=8}
 
 tx_spe_sample_1 |>
-  ggspavis::plotCoords(annotate = "clusters") +
+  ggspavis::plotCoords(annotate = "my_clusters") +
   guides(color = "none")
 
 ```
@@ -645,6 +647,9 @@ tx_spe_sample_1 |>
 :::
 
 
+
+
+
 ### 4. Neighborhood analyses
 
 hoodscanR [Liu et al., 2025](https://www.bioconductor.org/packages/release/bioc/vignettes/hoodscanR/inst/doc/Quick_start.html)
@@ -663,12 +668,73 @@ Algorithm:
 
 - The K-means clustering algorithm finds recurring neighbours
 
+
+Before we scan cellular neighborhoods, each cell needs a biological label rather than an unsupervised cluster ID. We annotate cells with `SingleR`, using the human prefrontal cortex reference prepared in Session 1. Our Xenium panel reports mouse gene symbols, whereas the Zhong reference uses human symbols; for this workshop we harmonise identifiers by converting both to upper case so that orthologous symbols in the panel can be matched. In your own analyses, use a reference matched to the species and tissue under study.
+
+```{r, message=FALSE, warning=FALSE}
+library(scRNAseq)
+library(SingleR)
+
+# Get reference (same workflow as Session 1)
+brain_reference <- fetchDataset("zhong-prefrontal-2018", "2023-12-22")
+
+brain_reference =
+  brain_reference |>
+  scuttle::aggregateAcrossCells(ids = paste(brain_reference$sample, brain_reference$cell_types, sep = "_"))
+
+brain_reference = brain_reference[, brain_reference |> assay() |> colSums() > 0]
+brain_reference = brain_reference[, !brain_reference$cell_types |> is.na()]
+
+brain_reference =
+  brain_reference |>
+  logNormCounts()
+```
+
+Prepare the imaging data for annotation, as we did for the spatial data in Session 1.
+
+```{r, message=FALSE, warning=FALSE}
+tx_spe_sample_1_annot =
+  tx_spe_sample_1[
+    !grepl("NegControl.+|BLANK.+", rownames(tx_spe_sample_1)),
+  ]
+rownames(tx_spe_sample_1_annot) <- toupper(rownames(tx_spe_sample_1_annot))
+tx_spe_sample_1_annot <- logNormCounts(tx_spe_sample_1_annot)
+
+rownames(brain_reference) <- toupper(rownames(brain_reference))
+
+genes_for_annotation <-
+  grep("(^MT-)|(^mt-)|(\\.)|(-)", rownames(brain_reference), value = TRUE, invert = TRUE) |>
+  intersect(rownames(tx_spe_sample_1_annot))
+```
+
+
+We can now annotate each cell with `SingleR`. With a targeted Xenium panel we only use genes present in both datasets (`genes_for_annotation`). In `SingleR`, the `genes` argument does **not** take a character vector of gene names: it must be `"de"` (automatic marker detection within the reference) or a **named list** of markers per cell type. To limit analysis to the panel, pass those genes via row subsetting and/or `restrict`.
+
+```{r, message=FALSE, warning=FALSE}
+singler_pred <- SingleR(
+  test = tx_spe_sample_1_annot[genes_for_annotation, ],
+  ref = brain_reference[genes_for_annotation, ],
+  labels = brain_reference$cell_types,
+  genes = "de",
+  de.method = "wilcox",
+  hint.sce = FALSE
+)
+```
+
+```{r}
+tx_spe_sample_1 =
+  tx_spe_sample_1 |>
+  mutate(cell_type = singler_pred$labels)
+
+tx_spe_sample_1 |> select(.cell, my_clusters, cell_type)
+```
+
 In order to perform neighborhood scanning, we need to firstly identify k (in this example, k = 100) nearest cells for each cells. The searching algorithm is based on Approximate Near Neighbor (ANN) C++ library from the RANN package.
 
 ```{r}
 tx_spe_neighbours = 
   tx_spe_sample_1 |> 
-  readHoodData(anno_col = "clusters") |> 
+  readHoodData(anno_col = "cell_type") |> 
   findNearCells(k = 100)
 
 ```
@@ -689,9 +755,9 @@ We can then perform neighborhood analysis using the function scanHoods. This fun
 pm <- scanHoods(tx_spe_neighbours$distance)
 
  # We can then merge the probabilities by the cell types of the 100 nearest cells. We get the probability distribution of each cell all each neighborhood. 
-hoods <- mergeByGroup(pm, tx_spe_neighbours$cells)
+hoods <- mergeByGroup(pm, group_df = tx_spe_neighbours$cells)
 
-hoods[1:2, 1:10]
+hoods[1:2, ]
 ```
 
 
@@ -715,10 +781,27 @@ We can then merge the neighborhood results with the `SpatialExperiment` object u
 ```{r}
 tx_spe_sample_1 =  tx_spe_sample_1 |> mergeHoodSpe(hoods)
 
+tx_spe_sample_1 <- calcMetrics(tx_spe_sample_1, pm_cols = colnames(hoods))
+
+# Entropy and perplexity statistics are added to the object
 tx_spe_sample_1
 ```
 
-We can see what are the neighborhood distributions look like in each cluster using `plotProbDist`. Here we only plot 10 clusters
+Perplexity of 1 means the cell is located in a very distinct neighborhood, perplexity of 2 means the cell is located in a mixed neighborhood, and the probability is about 50% to 50%.
+
+```{r}
+plotTissue(tx_spe_sample_1, size = 1.5, color = perplexity) +
+  scale_color_scico(palette = "tokyo")
+```
+k-means algorithm based on neighbour composition
+
+```{r}
+tx_spe_sample_1 <- clustByHood(tx_spe_sample_1, pm_cols = colnames(hoods), k = 10)
+```
+
+
+
+We can see what are the neighborhood distributions look like in each cluster using `plotProbDist`. 
 
 ```{r, fig.width=10, fig.height=10}
 tx_spe_sample_1 |> 
@@ -726,8 +809,10 @@ tx_spe_sample_1 |>
     pm_cols = colnames(hoods),
     by_cluster = TRUE, 
     plot_all = TRUE, 
-    show_clusters = as.character(seq(10))
+    show_clusters = as.character(seq(99))
     )
+
+
 ```
 
 The clusters can then be plot on the tissue using `plotissue`

@@ -359,6 +359,8 @@ spatial_data_gated =
 spatial_data_gated |> select(.cell, .gated)
 ```
 
+This is not meant to be executed. It is an example of how to save a gate to a file.
+
 ```{r, eval=FALSE}
 tidygate_env$gates |> saveRDS("<PATH>")
 spatial_data_gates = tidygate_env$gates
@@ -520,7 +522,7 @@ spe_regions_aggregated
 
 ```{r}
 library(tidySummarizedExperiment)
-
+library(tidyprint)
 spe_regions_aggregated
 
 ```
@@ -845,7 +847,7 @@ To to practice the use of `tidyomics` on spatial data, we propose a few exercise
 
 We assume that the cells we filtered as non-alive or damaged, characterised by being enriched uniquely for mitochondrial, genes, and genes, linked to up apoptosis. It is good practice to check these assumption. This exercise aims to estimate what genes are differentially expressed between filtered and unfiltered cells. Then visualise the results.
 
-Use `tidyomic`/`tidyverse` tools to label dead cells and perform differential expression within each region. Some of the comments you can use are: `mutate`, `nest`, `map`, `aggregate_cells`, `tidybulk:::test_differential_abundance`, 
+Use `tidyomic`/`tidyverse` tools to label dead cells and perform differential expression within each region. Some of the commands you can use are: `mutate`, `nest`, `map`, `aggregate_cells`, `tidybulk:::test_differential_expression`, 
 
 A hint:
 
