@@ -921,8 +921,6 @@ knitr::include_graphics(here("inst/images/cellNexus.png"))
 library(cellNexus)
 library(HDF5Array)
 
-
-
 brain_reference =
   
   # Query metadata across 30M cells
@@ -941,7 +939,7 @@ brain_reference =
 brain_reference
 ```
 
-For large collection it is convenient (more efficient to query) to repackage the on-disl object in a consolidated file
+DON'T RUN: For large collection it is convenient (more efficient to query) to repackage the on-disl object in a consolidated file
 
 ```{r, eval=FALSE}
 DelayedArray::setAutoBlockSize(size = 1e+09)
