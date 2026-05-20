@@ -925,16 +925,15 @@ brain_reference =
   
   # Query metadata across 30M cells
   get_metadata() |>
-  join_census_table() |> 
   # Filter your data of interest
-  dplyr::filter(tissue_groups=="cerebral lobes and cortical areas", disease == "normal") |> 
+  dplyr::filter(tissue_groups=="cerebral lobes and cortical areas") |> 
+  
+  join_census_table() |> 
+  filter(disease == "normal") |> 
   dplyr::filter(dataset_id == "c2876b1b-06d8-4d96-a56b-5304f815b99a") |> 
   
   # Collect pseudobulk as SummarizedExperiment
-  get_pseudobulk() |> 
-  
-  # Normalise for Spotlight
-  scuttle::logNormCounts() 
+  get_pseudobulk() 
 
 brain_reference
 ```

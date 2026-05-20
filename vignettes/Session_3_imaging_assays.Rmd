@@ -116,7 +116,7 @@ library(tidySpatialExperiment)
 # Niche analysis
 library(hoodscanR)
 library(scico)
-
+library(SingleR)
 
 ```
 
@@ -464,6 +464,7 @@ We normalise the `SpatialExperiment` using `scater`.
 ```{r}
 tx_spe = 
   tx_spe |> 
+  
   # Scaling and tranformation
   scater::logNormCounts() 
 ```
@@ -643,7 +644,7 @@ tx_spe_sample_1 |>
 ::: {.note}
 **Exercise 3.3**
 
-**Spatial-aware clustering:** Apply the spatial aware clustering method BANKSY. Taking as example the code run for session 2.
+**Spatial-aware clustering:** Apply the spatial aware clustering method BANKSY. Taking as example the code run for Session 1.
 :::
 
 
@@ -790,7 +791,7 @@ tx_spe_sample_1
 Perplexity of 1 means the cell is located in a very distinct neighborhood, perplexity of 2 means the cell is located in a mixed neighborhood, and the probability is about 50% to 50%.
 
 ```{r}
-plotTissue(tx_spe_sample_1, size = 1.5, color = perplexity) +
+plotTissue(tx_spe_sample_1, size = 0.5, color = perplexity) +
   scale_color_scico(palette = "tokyo")
 ```
 k-means algorithm based on neighbour composition

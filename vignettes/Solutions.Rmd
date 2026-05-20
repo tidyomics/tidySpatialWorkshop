@@ -408,6 +408,31 @@ spatial_data_filtered |>
 
 ```
 
+::: {.note}
+**Exercise 3.1** 
+:::
+
+```{r, eval=FALSE}
+# Base R 
+out_in_table <- table(is.na(tx_small_region$cell))
+ratio_out_in <- out_in_table[2] / c(out_in_table[1] + out_in_table[2])
+ratio_out_in
+
+# Tidyverse
+tx_small_region |> 
+  summarise(
+    ratio_out_in = sum(is.na(cell)) / n()
+  )
+
+tx_small_region |> 
+  summarise(
+    cytoplasm = count(overlaps_nucleus == "0" & !is.na(cell)),
+    nucleus = count(overlaps_nucleus == "1" & !is.na(cell)),
+    cytoplasm_ptc = cytoplasm / (cytoplasm + nucleus) * 100
+  )
+```
+
+
 
 ::: {.note}
 **Exercise 3.2** 
@@ -420,7 +445,7 @@ mgs <- scran::scoreMarkers(
   
   # Omit mitochondrial genes and keep all the genes in spatial
   subset.row = 
-    grep("NegControl.+|BLANK.+", rownames(tx_spe_sample_1), value=TRUE, invert=TRUE) 
+    grep("NegControl.+|BLANK.+", top.hvgs, value=TRUE, invert=TRUE) 
 )
 
 # Select the most informative markers
@@ -444,30 +469,6 @@ head(mgs_df[[1]])
 tx_spe_sample_1 |> 
   plotReducedDim("UMAP", colour_by="Gjc3")
   
-```
-
-::: {.note}
-**Exercise 3.1** 
-:::
-
-```{r, eval=FALSE}
-# Base R 
-out_in_table <- table(is.na(tx_small_region$cell))
-ratio_out_in <- out_in_table[2] / out_in_table[1]
-ratio_out_in
-
-# Tidyverse
-tx_small_region |> 
-  summarise(
-    ratio_out_in = sum(is.na(cell)) / sum(!is.na(cell))
-  )
-
-tx_small_region |> 
-  summarise(
-    cytoplasm = count(overlaps_nucleus == "0" & !is.na(cell)),
-    nucleus = count(overlaps_nucleus == "1" & !is.na(cell)),
-    cytoplasm_ptc = cytoplasm / (cytoplasm + nucleus) * 100
-  )
 ```
 
 
