@@ -2,7 +2,11 @@
 title: "Introduction to Spatial omic analyses"
 author:
   - Stefano Mangiola, South Australian immunoGENomics Cancer Institute^[<mangiola.stefano@adelaide.edu.au>], Walter and Eliza Hall Institute^[<mangiola.s at wehi.edu.au>]
-output: rmarkdown::html_vignette
+output:
+  rmarkdown::html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 3
 # bibliography: "`r file.path(system.file(package='tidySpatialWorkshop', 'bibliography'), 'bibliography.bib')`"
 vignette: >
   %\VignetteIndexEntry{Introduction to Spatial omic analyses}
@@ -33,7 +37,8 @@ knitr::opts_chunk$set(echo = TRUE, cache = FALSE)
 ## Workshop partner: Physalia
 
 ```{r, echo=FALSE, out.width="700px"}
-knitr::include_graphics(system.file("images/physalia-min.png", package = "tidySpatialWorkshop"))
+library(here)
+knitr::include_graphics(here("inst/images/physalia-min.png"))
 ```
 
 ## Workshop goals and objectives

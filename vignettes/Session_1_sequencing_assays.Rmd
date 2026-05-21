@@ -3,7 +3,11 @@ title: "Sequencing assays"
 author:
   - Stefano Mangiola, South Australian immunoGENomics Cancer Institute^[<mangiola.stefano@adelaide.edu.au>], Walter and Eliza Hall Institute^[<mangiola.s at wehi.edu.au>]
   - Luciano Martellotto, BD Biosciences
-output: rmarkdown::html_vignette
+output:
+  rmarkdown::html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 3
 # bibliography: "`r file.path(system.file(package='tidySpatialWorkshop', 'vignettes'), 'tidyomics.bib')`"
 vignette: >
   %\VignetteIndexEntry{Sequencing assays}
@@ -51,7 +55,9 @@ An alternative method, known as **combinatorial FISH** (fluorescence in situ hyb
 
 
 ```{r, echo=FALSE, out.width="700px"}
-knitr::include_graphics(system.file("images/three_technologies.png", package = "tidySpatialWorkshop"))
+library(here)
+
+knitr::include_graphics(here("inst/images/three_technologies.png"))
 ```
 
 ### Visium
@@ -67,7 +73,9 @@ In practice, Visium CytAssist has found widespread use across many fields. Cance
 
 
 ```{r, echo=FALSE, out.width="700px"}
-knitr::include_graphics(system.file("images/visium.png", package = "tidySpatialWorkshop"))
+library(here)
+
+knitr::include_graphics(here("inst/images/visium.png"))
 ```
 
 ### Visum HD
@@ -79,7 +87,9 @@ As with the standard Visium workflow, fresh-frozen or FFPE tissue sections are f
 
 
 ```{r, echo=FALSE, out.width="700px"}
-knitr::include_graphics(system.file("images/visiumhd.png", package = "tidySpatialWorkshop"))
+library(here)
+
+knitr::include_graphics(here("inst/images/visiumhd.png"))
 ```
 ### STOmics 
 
@@ -90,7 +100,9 @@ Once a freshly frozen or paraformaldehyde-fixed tissue section has been mounted 
 The sheer density of the DNB pattern—over 25 000 spots per 100 µm² in the highest-resolution formats—means that STOmics can detect transcripts at nearly subcellular scale, revealing fine-grained differences in gene activity within single cells or across tiny tissue niches. At the same time, chip formats up to 174 cm² in area allow researchers to profile entire organs or large tissue biopsies in one run, without stitching together multiple fields of view. In practice, developmental biologists have used this platform to survey gene expression across whole zebrafish embryos, while tumour biologists have mapped the spatial organisation of immune infiltrates in large cancer resections. By marrying nanometre-scale resolution with slide-wide coverage, BGI’s STOmics empowers scientists to explore biological landscapes from the level of subcellular compartments all the way up to entire tissue architectures.
 
 ```{r, echo=FALSE, out.width="700px"}
-knitr::include_graphics(system.file("images/stomics.png", package = "tidySpatialWorkshop"))
+library(here)
+
+knitr::include_graphics(here("inst/images/stomics.png"))
 ```
 
 
@@ -143,7 +155,9 @@ The `SpatialExperiment` package provides a robust framework for handling spatial
 Righelli et al. doi: [10.1093/bioinformatics/btac299](https://academic.oup.com/bioinformatics/article/38/11/3128/6575443?login=false)
 
 ```{r, echo=FALSE, out.width="700px"}
-knitr::include_graphics(system.file("images/spatialExperimentClass.png", package = "tidySpatialWorkshop"))
+library(here)
+
+knitr::include_graphics(here("inst/images/spatialExperimentClass.png"))
 ```
 
 ```{r, eval=FALSE}
@@ -203,28 +217,17 @@ library(ExperimentHub)
 # https://support.bioconductor.org/p/9161859/#9161863
 setClassUnion("ExpData", c("matrix", "SpatialExperiment"))
 
-spatial_data <- tryCatch({
-  ExperimentHub::ExperimentHub() |>
-    spatialLIBD::fetch_data(eh = _, type = "spe")
-}, error = function(e) {
-  message("ExperimentHub failed, using Zenodo fallback: ", conditionMessage(e))
-  options(timeout = max(300, getOption("timeout")))
-  tmp <- tempfile(fileext = ".rds")
-  utils::download.file(
-    "https://zenodo.org/records/11233385/files/tidySpatialWorkshop2024_spatial_data.rds",
-    destfile = tmp,
-    mode = "wb"
-  )
-  readRDS(tmp)
-})
+spatial_data <- 
+  ExperimentHub::ExperimentHub() |> 
+  spatialLIBD::fetch_data( eh = _, type = "spe")
 
 names(libd_layer_colors) = gsub("ayer", "", names(libd_layer_colors))
 
 # Clear the reductions
-reducedDims(spatial_data) = NULL
+reducedDims(spatial_data) = NULL 
 
 # Select only 3 samples
-spatial_data = spatial_data[, spatial_data$sample_id %in% c("151673", "151675", "151676")]
+spatial_data = spatial_data[,spatial_data$sample_id %in% c("151673", "151675", "151676")]
 
 # Display the object
 spatial_data
@@ -795,7 +798,7 @@ Overview of the algorithm
 
 [Material source](https://bioconductor.org/packages/release/bioc/vignettes/Banksy/inst/doc/multi-sample.html)
 
-```{r, eval=FALSE, message=FALSE, warning=FALSE}
+```{r, eval=TRUE, message=FALSE, warning=FALSE}
 library(Banksy)
 
 # scale the counts, without log transformation
@@ -806,7 +809,7 @@ spatial_data = spatial_data |> logNormCounts(log=FALSE, name = "normcounts")
 
 The Banksy documentation, suggest the use of `Seurat` for the detection of highly variable genes.
 
-```{r, eval=FALSE, message=FALSE, warning=FALSE}
+```{r, message=FALSE, warning=FALSE}
 library(Seurat)
 
 # Convert to list
@@ -832,7 +835,7 @@ rowData(spatial_data[head(hvgs),])[,c("gene_id", "gene_name")]
 
 We now split the data by sample, to compute the neighbourhood matrices.
 
-```{r, eval=FALSE, message=FALSE, warning=FALSE}
+```{r, message=FALSE, warning=FALSE}
 # Convert to list
 spatial_data_list <- lapply(unique(spatial_data$sample_id), function(x) 
   spatial_data[
@@ -857,7 +860,7 @@ Here, we perform PCA using the BANKSY algorithm on the joint dataset. The group 
 Note: this step takes long time
 :::
 
-```{r, eval=FALSE, message=FALSE, warning=FALSE}
+```{r, eval=TRUE, message=FALSE, warning=FALSE}
 spe_joint <- runBanksyPCA( # Run PCA on the Banskly matrix
   spe_joint, 
   lambda = 0.2, # spatial weighting parameter. Larger values (e.g. 0.8) incorporate more spatial neighborhood
@@ -868,7 +871,7 @@ spe_joint <- runBanksyPCA( # Run PCA on the Banskly matrix
 
 Once the dimensional reduction is complete, we cluster the spots across all samples and use `connectClusters` to visually compare these new BANKSY clusters against manual annotations.
 
-```{r, eval=FALSE, message=FALSE, warning=FALSE}
+```{r, eval=TRUE, message=FALSE, warning=FALSE}
 spe_joint <- clusterBanksy( # clustering on the principal components computed on the BANKSY matrix
   spe_joint, 
   lambda = 0.2, # spatial weighting parameter. Larger values (e.g. 0.8) incorporate more spatial neighborhood
@@ -884,7 +887,7 @@ As an optional step, we smooth the cluster labels for each sample independently,
 
 From SpiceMix paper [Chidester et al., 2023](https://www.nature.com/articles/s41588-022-01256-z)
 
-```{r, eval=FALSE, message=FALSE, warning=FALSE}
+```{r, eval=TRUE, message=FALSE, warning=FALSE}
 spatial_data_list <- lapply(
   unique(spe_joint$sample_id), 
   function(x) 
@@ -903,7 +906,7 @@ names(spatial_data_list) <- paste0("sample_", unique(spe_joint$sample_id))
 
 The raw and smoothed cluster labels are stored in the `colData` slot of each `SingleCellExperiment` or `SpatialExperiment` object.
 
-```{r, eval=FALSE}
+```{r, eval=TRUE}
 cluster_metadata = 
   colData(spatial_data_list$sample_151673)[, c("clust_M0_lam0.2_k50_res0.7", "clust_M0_lam0.2_k50_res0.7_smooth")]
 
@@ -915,13 +918,13 @@ Using cluster comparison metrics like the adjusted Rand index (ARI) we evaluate 
 
 The Adjusted Rand Index (ARI) is a measure of the similarity between two data clusterings. Measures degree of overlapping between two partitions.
 
-```{r, eval=FALSE}
+```{r, eval=TRUE}
 compareClusters(spatial_data_list$sample_151673, func = 'ARI')
 ```
 
 We calculate the ARI for each sample to assess the consistency and accuracy of our clustering across different samples.
 
-```{r, eval=FALSE}
+```{r, eval=TRUE}
 ari <- sapply(spatial_data_list, function(x) as.numeric(tail(compareClusters(x, func = "ARI")[, 1], n = 1)))
 ari
 ```
@@ -930,7 +933,7 @@ Visualising Clusters and Annotations on Spatial Coordinates: We utilise the ggsp
 
 When using **knitr** (including vignettes), only the **last** ggplot produced in a code chunk is written out by default. If you need several figures from the same narrative block, split them into separate chunks below or wrap each ggplot in `print()`.
 
-```{r multi-sample-spatial-smoothed, eval=FALSE, fig.width=6, fig.height=6}
+```{r multi-sample-spatial-smoothed, eval=TRUE, fig.width=6, fig.height=6}
 # Use scater:::.get_palette('tableau10medium')
 library(cowplot)
 
@@ -949,7 +952,7 @@ ggspavis::plotCoords(
   labs(title = "BANKSY clusters (smoothed)")
 ```
 
-```{r multi-sample-spatial-raw, eval=FALSE, fig.width=6, fig.height=6}
+```{r multi-sample-spatial-raw, eval=TRUE, fig.width=6, fig.height=6}
 ggspavis::plotCoords(
   do.call(cbind, spatial_data_list),
   annotate = sprintf("%s", "clust_M0_lam0.2_k50_res0.7"),
@@ -960,7 +963,7 @@ ggspavis::plotCoords(
   labs(title = "BANKSY clusters")
 ```
 
-```{r multi-sample-spatial-libd, eval=FALSE, fig.width=6, fig.height=6}
+```{r multi-sample-spatial-libd, eval=TRUE, fig.width=6, fig.height=6}
 ggspavis::plotCoords(
   spatial_data,
   annotate = "spatialLIBD",

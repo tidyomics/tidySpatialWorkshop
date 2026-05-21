@@ -73,9 +73,7 @@ Suggests:
     cellNexus,
     org.Hs.eg.db,
     AnnotationDbi,
-    h5mread,
-    tidyprint,
-    scrapper
+    tidyprint
 VignetteBuilder: knitr
 Remotes:
     MangiolaLaboratory/cellNexus

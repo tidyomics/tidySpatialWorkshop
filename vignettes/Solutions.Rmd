@@ -2,7 +2,11 @@
 title: "Solutions to exercises"
 author:
   - Stefano Mangiola, South Australian immunoGENomics Cancer Institute^[<mangiola.stefano@adelaide.edu.au>], Walter and Eliza Hall Institute^[<mangiola.s at wehi.edu.au>]
-output: rmarkdown::html_vignette
+output:
+  rmarkdown::html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 3
 # bibliography: "`r file.path(system.file(package='tidySpatialWorkshop', 'vignettes'), 'tidyomics.bib')`"
 vignette: >
   %\VignetteIndexEntry{Solutions to exercises}
