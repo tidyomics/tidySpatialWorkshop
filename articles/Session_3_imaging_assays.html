@@ -148,7 +148,7 @@ automated cell segmentation—typically using DAPI-stained nuclei—and
 assigns each amplification dot to its host cell, yielding single-cell,
 spatially resolved gene expression matrices ready for downstream
 analysis.</p>
-<p><img src="../inst/images/xenium.png" class="r-plt" alt="" width="700px"></p>
+<p><img src="../../../_temp/Library/tidySpatialWorkshop/images/xenium.png" class="r-plt" alt="" width="700px"></p>
 </div>
 <div class="section level4">
 <h4 id="coxmx">CoxMx<a class="anchor" aria-label="anchor" href="#coxmx"></a>
@@ -175,7 +175,7 @@ targets in the same section. After imaging, the AtoMx software platform
 integrates DAPI or membrane-marker images to segment individual cells
 and assign each molecular dot to its host cell, yielding spatially
 resolved count matrices at single-cell, subcellular resolution.</p>
-<p><img src="../inst/images/cosmx.png" class="r-plt" alt="" width="700px"></p>
+<p><img src="../../../_temp/Library/tidySpatialWorkshop/images/cosmx.png" class="r-plt" alt="" width="700px"></p>
 </div>
 <div class="section level4">
 <h4 id="merfish">MERFISH<a class="anchor" aria-label="anchor" href="#merfish"></a>
@@ -207,7 +207,7 @@ molecules back to their precise positions within cells. Researchers can
 then overlay the decoded RNA map with standard histology or
 immunofluorescence stains, revealing how gene expression patterns relate
 to tissue morphology.</p>
-<p><img src="../inst/images/merfish.png" class="r-plt" alt="" width="700px"></p>
+<p><img src="../../../_temp/Library/tidySpatialWorkshop/images/merfish.png" class="r-plt" alt="" width="700px"></p>
 </div>
 <div class="section level4">
 <h4 id="working-with-imaging-based-data-in-bioconductor-with-moleculeexperiment">1. Working with imaging-based data in Bioconductor with
@@ -236,13 +236,9 @@ MoleculeExperiment<a class="anchor" aria-label="anchor" href="#working-with-imag
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/lmweber/ggspavis" class="external-link">ggspavis</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Analysis</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">scuttle</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/LTLA/scuttle" class="external-link">scuttle</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://bioconductor.org/packages/scater/" class="external-link">scater</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/MarioniLab/scran/" class="external-link">scran</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Data download</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Bioconductor/ExperimentHub" class="external-link">ExperimentHub</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://davislaboratory.github.io/SubcellularSpatialData" class="external-link">SubcellularSpatialData</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Tidyomics</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/stemangiola/tidySingleCellExperiment" class="external-link">tidySingleCellExperiment</a></span><span class="op">)</span></span>
@@ -251,7 +247,8 @@ MoleculeExperiment<a class="anchor" aria-label="anchor" href="#working-with-imag
 <span></span>
 <span><span class="co"># Niche analysis</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/DavisLaboratory/hoodscanR" class="external-link">hoodscanR</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/thomasp85/scico" class="external-link">scico</a></span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/thomasp85/scico" class="external-link">scico</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/SingleR-inc/SingleR" class="external-link">SingleR</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level5">
 <h5 id="subcellularspatialdata">SubcellularSpatialData<a class="anchor" aria-label="anchor" href="#subcellularspatialdata"></a>
 </h5>
@@ -278,7 +275,7 @@ be downloaded using the following queries:</p>
 <span></span>
 <span><span class="co"># Brain Mouse data</span></span>
 <span><span class="va">tx</span> <span class="op">=</span> <span class="va">eh</span><span class="op">[[</span><span class="st">"EH8230"</span><span class="op">]</span><span class="op">]</span></span>
-<span><span class="va">tx</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">sample_id</span><span class="op">==</span><span class="st">"Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">tx</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">sample_id</span><span class="op">==</span><span class="st">"Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co"># 62,744,602</span></span></code></pre></div>
 </div>
 <div class="section level5">
@@ -287,7 +284,7 @@ be downloaded using the following queries:</p>
 <p>The data is however very large and thus we will work with a small
 subset of the data.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">tx_small</span> <span class="op">=</span>  <span class="va">tx</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">tx</span><span class="op">)</span><span class="op">)</span>, size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">tx</span><span class="op">)</span><span class="op">/</span><span class="fl">500</span><span class="op">)</span>,<span class="op">]</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tx_small</span> <span class="op">=</span>  <span class="va">tx</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">tx</span><span class="op">)</span><span class="op">)</span>, size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">tx</span><span class="op">)</span><span class="op">/</span><span class="fl">500</span><span class="op">)</span>,<span class="op">]</span></span></code></pre></div>
 <p>However, since the data is very large, for the convenience of the
 workshop, we will directly download the small subset of the data.</p>
 <p>Let’s preview the object. The data is contained in a simple data
@@ -1278,8 +1275,8 @@ nucleus segmentation as well.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span><span class="va">me</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/gc.html" class="external-link">gc</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##            used  (Mb) gc trigger   (Mb) max used  (Mb)</span></span>
-<span><span class="co">## Ncells 12366337 660.5   22182307 1184.7 17400248 929.3</span></span>
-<span><span class="co">## Vcells 47110745 359.5   74209978  566.2 60565316 462.1</span></span></code></pre>
+<span><span class="co">## Ncells 11301643 603.6   20123925 1074.8 15425935 823.9</span></span>
+<span><span class="co">## Vcells 45298102 345.6   66994829  511.2 55759668 425.5</span></span></code></pre>
 <p><code>MoleculeExperiment</code> also has functions such as
 <code><a href="https://rdrr.io/pkg/MoleculeExperiment/man/dataframeToMEList.html" class="external-link">dataframeToMEList()</a></code> and then
 <code><a href="https://rdrr.io/pkg/MoleculeExperiment/man/MoleculeExperiment.html" class="external-link">MoleculeExperiment()</a></code> where we can organise our large data
@@ -1342,8 +1339,8 @@ data frame</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span><span class="va">tx_small_me</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/gc.html" class="external-link">gc</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##            used  (Mb) gc trigger   (Mb) max used  (Mb)</span></span>
-<span><span class="co">## Ncells 12368266 660.6   22182307 1184.7 17400248 929.3</span></span>
-<span><span class="co">## Vcells 38071248 290.5   74209978  566.2 66344168 506.2</span></span></code></pre>
+<span><span class="co">## Ncells 11303581 603.7   20123925 1074.8 15425935 823.9</span></span>
+<span><span class="co">## Vcells 36258616 276.7   66994829  511.2 64531492 492.4</span></span></code></pre>
 <div class="section level5">
 <h5 id="a-preview-of-a-zoomed-in-section-of-the-tissue">A preview of a zoomed in section of the tissue<a class="anchor" aria-label="anchor" href="#a-preview-of-a-zoomed-in-section-of-the-tissue"></a>
 </h5>
@@ -1398,9 +1395,9 @@ outside the nucleus</li>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span><span class="va">tx_small_region</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/gc.html" class="external-link">gc</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##            used  (Mb) gc trigger   (Mb) max used  (Mb)</span></span>
-<span><span class="co">## Ncells 12391764 661.8   22182307 1184.7 17400248 929.3</span></span>
-<span><span class="co">## Vcells 23305379 177.9   74209978  566.2 74208312 566.2</span></span></code></pre>
+<pre><code><span><span class="co">##            used (Mb) gc trigger   (Mb) max used  (Mb)</span></span>
+<span><span class="co">## Ncells 11327338  605   20123925 1074.8 15425935 823.9</span></span>
+<span><span class="co">## Vcells 21493359  164   66994829  511.2 66989641 511.1</span></span></code></pre>
 </div>
 </div>
 <div class="section level4">
@@ -1496,6 +1493,7 @@ region</p>
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tx_spe</span> <span class="op">=</span> </span>
 <span>  <span class="va">tx_spe</span> <span class="op">|&gt;</span> </span>
+<span>  </span>
 <span>  <span class="co"># Scaling and tranformation</span></span>
 <span>  <span class="fu">scater</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/scuttle/man/logNormCounts.html" class="external-link">logNormCounts</a></span><span class="op">(</span><span class="op">)</span> </span></code></pre></div>
 <pre><code><span><span class="co">## Warning in .library_size_factors(assay(x, assay.type), ...): 'librarySizeFactors' is deprecated.</span></span>
@@ -1599,6 +1597,8 @@ argument (or equivalent) in downstream steps.</p>
 <div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tx_spe_sample_1</span> <span class="op">=</span>  </span>
 <span>  <span class="va">tx_spe_sample_1</span> <span class="op">|&gt;</span> </span>
+<span>  </span>
+<span>  <span class="co"># We use fixed PCA as we have a limited number of features</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/scran/man/fixedPCA.html" class="external-link">fixedPCA</a></span><span class="op">(</span> subset.row<span class="op">=</span><span class="va">top.hvgs</span> <span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning in fixedPCA(tx_spe_sample_1, subset.row = top.hvgs): 'fixedPCA' is deprecated.</span></span>
 <span><span class="co">## Use 'scrapper::runPca.se' instead.</span></span>
@@ -1630,10 +1630,10 @@ et al., 2008</a></p>
 <span>  <span class="va">tx_spe_sample_1</span> <span class="op">|&gt;</span> </span>
 <span>   <span class="fu">scran</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/scran/man/clusterCells.html" class="external-link">clusterCells</a></span><span class="op">(</span></span>
 <span>     use.dimred<span class="op">=</span><span class="st">"PCA"</span>, </span>
-<span>     BLUSPARAM<span class="op">=</span><span class="fu">bluster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bluster/man/NNGraphParam-class.html" class="external-link">NNGraphParam</a></span><span class="op">(</span>k<span class="op">=</span><span class="fl">20</span>, cluster.fun<span class="op">=</span><span class="st">"louvain"</span><span class="op">)</span></span>
+<span>     BLUSPARAM<span class="op">=</span><span class="fu">bluster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bluster/man/NNGraphParam-class.html" class="external-link">NNGraphParam</a></span><span class="op">(</span>k<span class="op">=</span><span class="fl">30</span>, cluster.fun<span class="op">=</span><span class="st">"louvain"</span><span class="op">)</span></span>
 <span>    <span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>   <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning in scran::clusterCells(tx_spe_sample_1, use.dimred = "PCA", BLUSPARAM = bluster::NNGraphParam(k = 20, : 'clusterCells' is deprecated.</span></span>
+<pre><code><span><span class="co">## Warning in scran::clusterCells(tx_spe_sample_1, use.dimred = "PCA", BLUSPARAM = bluster::NNGraphParam(k = 30, : 'clusterCells' is deprecated.</span></span>
 <span><span class="co">## Use 'bluster::clusterRows' instead.</span></span>
 <span><span class="co">## See help("Deprecated")</span></span></code></pre>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
@@ -1645,23 +1645,23 @@ et al., 2008</a></p>
 <div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tx_spe_sample_1</span> <span class="op">=</span> </span>
 <span>  <span class="va">tx_spe_sample_1</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>clusters <span class="op">=</span> <span class="va">cluster_labels</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>my_clusters <span class="op">=</span> <span class="va">cluster_labels</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">tx_spe_sample_1</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">.cell</span>, <span class="va">clusters</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">tx_spe_sample_1</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">.cell</span>, <span class="va">my_clusters</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A SpatialExperiment-tibble abstraction: 31,938 × 10</span></span></span>
 <span><span class="co">## <span style="color: #949494;"># </span><span style="color: #555555;">Features = 541 | Cells = 31938 | Assays = counts, logcounts</span></span></span>
-<span><span class="co">##    .cell        clusters sample_id     x     y   PC1    PC2    PC3    PC4    PC5</span></span>
-<span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> Xenium_V1_F… 1        1         <span style="text-decoration: underline;">2</span>654. <span style="text-decoration: underline;">5</span>443. -<span style="color: #BB0000;">2.30</span>  0.426 -<span style="color: #BB0000;">4.56</span>   2.59   2.54 </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> Xenium_V1_F… 2        1         <span style="text-decoration: underline;">7</span>424. <span style="text-decoration: underline;">4</span>891.  7.97  0.783 -<span style="color: #BB0000;">5.36</span>   2.46  -<span style="color: #BB0000;">0.397</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> Xenium_V1_F… 3        1         <span style="text-decoration: underline;">4</span>546. <span style="text-decoration: underline;">6</span>732.  3.84 -<span style="color: #BB0000;">5.78</span>   1.65  -<span style="color: #BB0000;">2.54</span>   2.63 </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> Xenium_V1_F… 2        1         <span style="text-decoration: underline;">2</span>457. <span style="text-decoration: underline;">3</span>507.  9.59 -<span style="color: #BB0000;">1.23</span>  -<span style="color: #BB0000;">3.60</span>  -<span style="color: #BB0000;">0.854</span>  4.77 </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> Xenium_V1_F… 4        1         <span style="text-decoration: underline;">9</span>549. <span style="text-decoration: underline;">2</span>918. -<span style="color: #BB0000;">6.51</span>  0.629 -<span style="color: #BB0000;">0.224</span> -<span style="color: #BB0000;">1.54</span>   1.67 </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> Xenium_V1_F… 5        1         <span style="text-decoration: underline;">4</span>503.  849.  5.80 -<span style="color: #BB0000;">1.18</span>   5.03  -<span style="color: #BB0000;">0.503</span> -<span style="color: #BB0000;">1.89</span> </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> Xenium_V1_F… 6        1         <span style="text-decoration: underline;">4</span>842. <span style="text-decoration: underline;">4</span>963. -<span style="color: #BB0000;">5.59</span> -<span style="color: #BB0000;">1.25</span>  -<span style="color: #BB0000;">2.43</span>   1.78   1.61 </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> Xenium_V1_F… 4        1         <span style="text-decoration: underline;">8</span>846. <span style="text-decoration: underline;">4</span>544. -<span style="color: #BB0000;">5.09</span> -<span style="color: #BB0000;">3.93</span>   3.33   2.35   2.66 </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> Xenium_V1_F… 7        1         <span style="text-decoration: underline;">2</span>550. <span style="text-decoration: underline;">5</span>421. -<span style="color: #BB0000;">4.75</span> -<span style="color: #BB0000;">1.96</span>  -<span style="color: #BB0000;">2.86</span>  -<span style="color: #BB0000;">1.23</span>   0.419</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">10</span> Xenium_V1_F… 2        1         <span style="text-decoration: underline;">3</span>460. <span style="text-decoration: underline;">1</span>581.  8.70  2.90  -<span style="color: #BB0000;">4.57</span>   1.56  -<span style="color: #BB0000;">0.919</span></span></span>
+<span><span class="co">##    .cell     my_clusters sample_id     x     y   PC1    PC2    PC3    PC4    PC5</span></span>
+<span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> Xenium_V… 1           1         <span style="text-decoration: underline;">2</span>654. <span style="text-decoration: underline;">5</span>443. -<span style="color: #BB0000;">2.30</span>  0.426 -<span style="color: #BB0000;">4.56</span>   2.59   2.54 </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> Xenium_V… 2           1         <span style="text-decoration: underline;">7</span>424. <span style="text-decoration: underline;">4</span>891.  7.97  0.783 -<span style="color: #BB0000;">5.36</span>   2.46  -<span style="color: #BB0000;">0.397</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> Xenium_V… 3           1         <span style="text-decoration: underline;">4</span>546. <span style="text-decoration: underline;">6</span>732.  3.84 -<span style="color: #BB0000;">5.78</span>   1.65  -<span style="color: #BB0000;">2.54</span>   2.63 </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> Xenium_V… 2           1         <span style="text-decoration: underline;">2</span>457. <span style="text-decoration: underline;">3</span>507.  9.59 -<span style="color: #BB0000;">1.23</span>  -<span style="color: #BB0000;">3.60</span>  -<span style="color: #BB0000;">0.854</span>  4.77 </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> Xenium_V… 4           1         <span style="text-decoration: underline;">9</span>549. <span style="text-decoration: underline;">2</span>918. -<span style="color: #BB0000;">6.51</span>  0.629 -<span style="color: #BB0000;">0.224</span> -<span style="color: #BB0000;">1.54</span>   1.67 </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> Xenium_V… 5           1         <span style="text-decoration: underline;">4</span>503.  849.  5.80 -<span style="color: #BB0000;">1.18</span>   5.03  -<span style="color: #BB0000;">0.503</span> -<span style="color: #BB0000;">1.89</span> </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> Xenium_V… 6           1         <span style="text-decoration: underline;">4</span>842. <span style="text-decoration: underline;">4</span>963. -<span style="color: #BB0000;">5.59</span> -<span style="color: #BB0000;">1.25</span>  -<span style="color: #BB0000;">2.43</span>   1.78   1.61 </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> Xenium_V… 7           1         <span style="text-decoration: underline;">8</span>846. <span style="text-decoration: underline;">4</span>544. -<span style="color: #BB0000;">5.09</span> -<span style="color: #BB0000;">3.93</span>   3.33   2.35   2.66 </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> Xenium_V… 1           1         <span style="text-decoration: underline;">2</span>550. <span style="text-decoration: underline;">5</span>421. -<span style="color: #BB0000;">4.75</span> -<span style="color: #BB0000;">1.96</span>  -<span style="color: #BB0000;">2.86</span>  -<span style="color: #BB0000;">1.23</span>   0.419</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">10</span> Xenium_V… 2           1         <span style="text-decoration: underline;">3</span>460. <span style="text-decoration: underline;">1</span>581.  8.70  2.90  -<span style="color: #BB0000;">4.57</span>   1.56  -<span style="color: #BB0000;">0.919</span></span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 31,928 more rows</span></span></span></code></pre>
 <p>As we have done before, we caclculate UMAPs for visualisation
 purposes.</p>
@@ -1673,10 +1673,10 @@ purposes.</p>
 <span><span class="va">tx_spe_sample_1</span> <span class="op">=</span> </span>
 <span>  <span class="va">tx_spe_sample_1</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/scater/man/runUMAP.html" class="external-link">runUMAP</a></span><span class="op">(</span><span class="op">)</span> </span></code></pre></div>
-<p>Now, let’s visualise the clusters in UMAP space.</p>
+<p>Now, let’s visualise the my_clusters in UMAP space.</p>
 <div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tx_spe_sample_1</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/scater/man/plot_reddim.html" class="external-link">plotUMAP</a></span><span class="op">(</span>colour_by <span class="op">=</span> <span class="st">"clusters"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/scater/man/plot_reddim.html" class="external-link">plotUMAP</a></span><span class="op">(</span>colour_by <span class="op">=</span> <span class="st">"my_clusters"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_colour_discrete.html" class="external-link">scale_color_discrete</a></span><span class="op">(</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/grDevices/colorRamp.html" class="external-link">colorRampPalette</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html" class="external-link">brewer.pal</a></span><span class="op">(</span><span class="fl">9</span>, <span class="st">"Set1"</span><span class="op">)</span><span class="op">)</span><span class="op">(</span><span class="fl">30</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
@@ -1723,7 +1723,7 @@ clusters in space.</p>
 <p>Plot ground truth in tissue map.</p>
 <div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tx_spe_sample_1</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">ggspavis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotCoords.html" class="external-link">plotCoords</a></span><span class="op">(</span>annotate <span class="op">=</span> <span class="st">"clusters"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggspavis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggspavis/man/plotCoords.html" class="external-link">plotCoords</a></span><span class="op">(</span>annotate <span class="op">=</span> <span class="st">"my_clusters"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html" class="external-link">guides</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Session_3_imaging_assays_files/figure-html/unnamed-chunk-41-1.png" class="r-plt" alt="" width="672"></p>
 <div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
@@ -1738,8 +1738,8 @@ clusters in space.</p>
 <div class="note">
 <p><strong>Exercise 3.3</strong></p>
 <p><strong>Spatial-aware clustering:</strong> Apply the spatial aware
-clustering method BANKSY. Taking as example the code run for session
-2.</p>
+clustering method BANKSY. Taking as example the code run for Session
+1.</p>
 </div>
 </div>
 <div class="section level4">
@@ -1763,75 +1763,154 @@ neighbour.</p></li>
 <li><p>The K-means clustering algorithm finds recurring
 neighbours</p></li>
 </ul>
+<p>Before we scan cellular neighborhoods, each cell needs a biological
+label rather than an unsupervised cluster ID. We annotate cells with
+<code>SingleR</code>, using the human prefrontal cortex reference
+prepared in Session 1. Our Xenium panel reports mouse gene symbols,
+whereas the Zhong reference uses human symbols; for this workshop we
+harmonise identifiers by converting both to upper case so that
+orthologous symbols in the panel can be matched. In your own analyses,
+use a reference matched to the species and tissue under study.</p>
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">scRNAseq</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/SingleR-inc/SingleR" class="external-link">SingleR</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Get reference (same workflow as Session 1)</span></span>
+<span><span class="va">brain_reference</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scRNAseq/man/fetchDataset.html" class="external-link">fetchDataset</a></span><span class="op">(</span><span class="st">"zhong-prefrontal-2018"</span>, <span class="st">"2023-12-22"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">brain_reference</span> <span class="op">=</span></span>
+<span>  <span class="va">brain_reference</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">scuttle</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/scuttle/man/aggregateAcrossCells.html" class="external-link">aggregateAcrossCells</a></span><span class="op">(</span>ids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">brain_reference</span><span class="op">$</span><span class="va">sample</span>, <span class="va">brain_reference</span><span class="op">$</span><span class="va">cell_types</span>, sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">brain_reference</span> <span class="op">=</span> <span class="va">brain_reference</span><span class="op">[</span>, <span class="va">brain_reference</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">assay</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">colSums</span><span class="op">(</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">]</span></span>
+<span><span class="va">brain_reference</span> <span class="op">=</span> <span class="va">brain_reference</span><span class="op">[</span>, <span class="op">!</span><span class="va">brain_reference</span><span class="op">$</span><span class="va">cell_types</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="op">)</span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">brain_reference</span> <span class="op">=</span></span>
+<span>  <span class="va">brain_reference</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/scuttle/man/logNormCounts.html" class="external-link">logNormCounts</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>Prepare the imaging data for annotation, as we did for the spatial
+data in Session 1.</p>
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tx_spe_sample_1_annot</span> <span class="op">=</span></span>
+<span>  <span class="va">tx_spe_sample_1</span><span class="op">[</span></span>
+<span>    <span class="op">!</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"NegControl.+|BLANK.+"</span>, <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">tx_spe_sample_1</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  <span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">tx_spe_sample_1_annot</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/chartr.html" class="external-link">toupper</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">tx_spe_sample_1_annot</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">tx_spe_sample_1_annot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scuttle/man/logNormCounts.html" class="external-link">logNormCounts</a></span><span class="op">(</span><span class="va">tx_spe_sample_1_annot</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">brain_reference</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/chartr.html" class="external-link">toupper</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">brain_reference</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">genes_for_annotation</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="st">"(^MT-)|(^mt-)|(\\.)|(-)"</span>, <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">brain_reference</span><span class="op">)</span>, value <span class="op">=</span> <span class="cn">TRUE</span>, invert <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://generics.r-lib.org/reference/setops.html" class="external-link">intersect</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">tx_spe_sample_1_annot</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>We can now annotate each cell with <code>SingleR</code>. With a
+targeted Xenium panel we only use genes present in both datasets
+(<code>genes_for_annotation</code>). In <code>SingleR</code>, the
+<code>genes</code> argument does <strong>not</strong> take a character
+vector of gene names: it must be <code>"de"</code> (automatic marker
+detection within the reference) or a <strong>named list</strong> of
+markers per cell type. To limit analysis to the panel, pass those genes
+via row subsetting and/or <code>restrict</code>.</p>
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">singler_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/SingleR/man/SingleR.html" class="external-link">SingleR</a></span><span class="op">(</span></span>
+<span>  test <span class="op">=</span> <span class="va">tx_spe_sample_1_annot</span><span class="op">[</span><span class="va">genes_for_annotation</span>, <span class="op">]</span>,</span>
+<span>  ref <span class="op">=</span> <span class="va">brain_reference</span><span class="op">[</span><span class="va">genes_for_annotation</span>, <span class="op">]</span>,</span>
+<span>  labels <span class="op">=</span> <span class="va">brain_reference</span><span class="op">$</span><span class="va">cell_types</span>,</span>
+<span>  genes <span class="op">=</span> <span class="st">"de"</span>,</span>
+<span>  de.method <span class="op">=</span> <span class="st">"wilcox"</span>,</span>
+<span>  hint.sce <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tx_spe_sample_1</span> <span class="op">=</span></span>
+<span>  <span class="va">tx_spe_sample_1</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>cell_type <span class="op">=</span> <span class="va">singler_pred</span><span class="op">$</span><span class="va">labels</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">tx_spe_sample_1</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">.cell</span>, <span class="va">my_clusters</span>, <span class="va">cell_type</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A SpatialExperiment-tibble abstraction: 31,938 × 13</span></span></span>
+<span><span class="co">## <span style="color: #949494;"># </span><span style="color: #555555;">Features = 541 | Cells = 31938 | Assays = counts, logcounts</span></span></span>
+<span><span class="co">##    .cell  my_clusters cell_type sample_id     x     y   PC1    PC2    PC3    PC4</span></span>
+<span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> Xeniu… 1           OPC       1         <span style="text-decoration: underline;">2</span>654. <span style="text-decoration: underline;">5</span>443. -<span style="color: #BB0000;">2.30</span>  0.426 -<span style="color: #BB0000;">4.56</span>   2.59 </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> Xeniu… 2           Astrocyt… 1         <span style="text-decoration: underline;">7</span>424. <span style="text-decoration: underline;">4</span>891.  7.97  0.783 -<span style="color: #BB0000;">5.36</span>   2.46 </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> Xeniu… 3           Microglia 1         <span style="text-decoration: underline;">4</span>546. <span style="text-decoration: underline;">6</span>732.  3.84 -<span style="color: #BB0000;">5.78</span>   1.65  -<span style="color: #BB0000;">2.54</span> </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> Xeniu… 2           OPC       1         <span style="text-decoration: underline;">2</span>457. <span style="text-decoration: underline;">3</span>507.  9.59 -<span style="color: #BB0000;">1.23</span>  -<span style="color: #BB0000;">3.60</span>  -<span style="color: #BB0000;">0.854</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> Xeniu… 4           Neurons   1         <span style="text-decoration: underline;">9</span>549. <span style="text-decoration: underline;">2</span>918. -<span style="color: #BB0000;">6.51</span>  0.629 -<span style="color: #BB0000;">0.224</span> -<span style="color: #BB0000;">1.54</span> </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> Xeniu… 5           Astrocyt… 1         <span style="text-decoration: underline;">4</span>503.  849.  5.80 -<span style="color: #BB0000;">1.18</span>   5.03  -<span style="color: #BB0000;">0.503</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> Xeniu… 6           Stem cel… 1         <span style="text-decoration: underline;">4</span>842. <span style="text-decoration: underline;">4</span>963. -<span style="color: #BB0000;">5.59</span> -<span style="color: #BB0000;">1.25</span>  -<span style="color: #BB0000;">2.43</span>   1.78 </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> Xeniu… 7           Neurons   1         <span style="text-decoration: underline;">8</span>846. <span style="text-decoration: underline;">4</span>544. -<span style="color: #BB0000;">5.09</span> -<span style="color: #BB0000;">3.93</span>   3.33   2.35 </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> Xeniu… 1           OPC       1         <span style="text-decoration: underline;">2</span>550. <span style="text-decoration: underline;">5</span>421. -<span style="color: #BB0000;">4.75</span> -<span style="color: #BB0000;">1.96</span>  -<span style="color: #BB0000;">2.86</span>  -<span style="color: #BB0000;">1.23</span> </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">10</span> Xeniu… 2           Astrocyt… 1         <span style="text-decoration: underline;">3</span>460. <span style="text-decoration: underline;">1</span>581.  8.70  2.90  -<span style="color: #BB0000;">4.57</span>   1.56 </span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 31,928 more rows</span></span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 3 more variables: PC5 &lt;dbl&gt;, UMAP1 &lt;dbl&gt;, UMAP2 &lt;dbl&gt;</span></span></span></code></pre>
 <p>In order to perform neighborhood scanning, we need to firstly
 identify k (in this example, k = 100) nearest cells for each cells. The
 searching algorithm is based on Approximate Near Neighbor (ANN) C++
 library from the RANN package.</p>
-<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tx_spe_neighbours</span> <span class="op">=</span> </span>
 <span>  <span class="va">tx_spe_sample_1</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://davislaboratory.github.io/hoodscanR/reference/readHoodData.html" class="external-link">readHoodData</a></span><span class="op">(</span>anno_col <span class="op">=</span> <span class="st">"clusters"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://davislaboratory.github.io/hoodscanR/reference/readHoodData.html" class="external-link">readHoodData</a></span><span class="op">(</span>anno_col <span class="op">=</span> <span class="st">"cell_type"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://davislaboratory.github.io/hoodscanR/reference/findNearCells.html" class="external-link">findNearCells</a></span><span class="op">(</span>k <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></code></pre></div>
 <p>The output of findNearCells function includes two matrix, an
 annotation matrix and a distance matrix.</p>
-<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tx_spe_neighbours</span><span class="op">$</span><span class="va">cells</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span></code></pre></div>
-<pre><code><span><span class="co">##                                                     nearest_cell_1</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_125137              7</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_5000               11</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_67843               3</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_134051              3</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_93903              17</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_11074               9</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_44945               6</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_160596              4</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_125886             17</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_30417               2</span></span>
-<span><span class="co">##                                                     nearest_cell_2</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_125137              7</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_5000                2</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_67843              18</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_134051              2</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_93903               4</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_11074               9</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_44945               6</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_160596              4</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_125886              7</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_30417               2</span></span>
+<pre><code><span><span class="co">##                                                        nearest_cell_1</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_125137           Neurons</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_5000          Astrocytes</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_67843         Astrocytes</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_134051               OPC</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_93903  GABAergic neurons</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_11074         Astrocytes</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_44945            Neurons</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_160596           Neurons</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_125886               OPC</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_30417                OPC</span></span>
+<span><span class="co">##                                                        nearest_cell_2</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_125137           Neurons</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_5000                 OPC</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_67843         Astrocytes</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_134051        Astrocytes</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_93903            Neurons</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_11074  GABAergic neurons</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_44945            Neurons</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_160596           Neurons</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_125886               OPC</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_30417                OPC</span></span>
 <span><span class="co">##                                                     nearest_cell_3</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_125137              7</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_5000                2</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_67843               5</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_134051              2</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_93903              17</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_11074               9</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_44945               6</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_160596              4</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_125886             18</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_30417               5</span></span>
-<span><span class="co">##                                                     nearest_cell_4</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_125137              7</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_5000               11</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_67843              18</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_134051              3</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_93903              16</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_11074               9</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_44945               6</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_160596              5</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_125886             18</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_30417               2</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_125137        Neurons</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_5000       Astrocytes</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_67843      Astrocytes</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_134051            OPC</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_93903      Stem cells</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_11074       Microglia</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_44945      Astrocytes</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_160596        Neurons</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_125886     Astrocytes</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_30417      Astrocytes</span></span>
+<span><span class="co">##                                                        nearest_cell_4</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_125137           Neurons</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_5000          Astrocytes</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_67843         Astrocytes</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_134051               OPC</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_93903          Microglia</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_11074  GABAergic neurons</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_44945            Neurons</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_160596         Microglia</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_125886        Astrocytes</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_30417         Astrocytes</span></span>
 <span><span class="co">##                                                     nearest_cell_5</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_125137              7</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_5000               11</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_67843              18</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_134051              2</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_93903              17</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_11074               9</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_44945               5</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_160596              4</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_125886              7</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_30417               5</span></span></code></pre>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_125137     Stem cells</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_5000       Astrocytes</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_67843      Astrocytes</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_134051     Astrocytes</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_93903         Neurons</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_11074         Neurons</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_44945       Microglia</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_160596        Neurons</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_125886     Stem cells</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_30417      Astrocytes</span></span></code></pre>
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tx_spe_neighbours</span><span class="op">$</span><span class="va">distance</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span></code></pre></div>
 <pre><code><span><span class="co">##                                                     nearest_cell_1</span></span>
 <span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_125137      10.636020</span></span>
@@ -1892,33 +1971,33 @@ annotation matrix and a distance matrix.</p>
 scanHoods. This function incldue the modified softmax algorithm, aimming
 to genereate a matrix with the probability of each cell associating with
 their 100 nearest cells.</p>
-<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span>  <span class="co"># Calculate neighbours</span></span>
 <span><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://davislaboratory.github.io/hoodscanR/reference/scanHoods.html" class="external-link">scanHoods</a></span><span class="op">(</span><span class="va">tx_spe_neighbours</span><span class="op">$</span><span class="va">distance</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Tau is set to: 4438.4017021899</span></span></code></pre>
-<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span> <span class="co"># We can then merge the probabilities by the cell types of the 100 nearest cells. We get the probability distribution of each cell all each neighborhood. </span></span>
-<span><span class="va">hoods</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://davislaboratory.github.io/hoodscanR/reference/mergeByGroup.html" class="external-link">mergeByGroup</a></span><span class="op">(</span><span class="va">pm</span>, <span class="va">tx_spe_neighbours</span><span class="op">$</span><span class="va">cells</span><span class="op">)</span></span>
+<span><span class="va">hoods</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://davislaboratory.github.io/hoodscanR/reference/mergeByGroup.html" class="external-link">mergeByGroup</a></span><span class="op">(</span><span class="va">pm</span>, group_df <span class="op">=</span> <span class="va">tx_spe_neighbours</span><span class="op">$</span><span class="va">cells</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">hoods</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></span></code></pre></div>
-<pre><code><span><span class="co">##                                                                1 10        11</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_125137 0.0929860829  0 0.0000000</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_5000   0.0003965392  0 0.4624211</span></span>
-<span><span class="co">##                                                     12 13 14           15</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_125137  0  0  0 5.728793e-05</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_5000    0  0  0 0.000000e+00</span></span>
-<span><span class="co">##                                                               16         17</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_125137 9.357974e-03 0.08720725</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_5000   5.114630e-06 0.00393386</span></span>
-<span><span class="co">##                                                               18</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_125137 5.051919e-02</span></span>
-<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_5000   3.461015e-05</span></span></code></pre>
+<span><span class="va">hoods</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span></span></code></pre></div>
+<pre><code><span><span class="co">##                                                     Astrocytes</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_125137  0.1842660</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_5000    0.7079263</span></span>
+<span><span class="co">##                                                     GABAergic neurons</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_125137       0.062339866</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_5000         0.003945369</span></span>
+<span><span class="co">##                                                       Microglia      Neurons</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_125137 0.009357974 0.4496487630</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_5000   0.066820667 0.0000402472</span></span>
+<span><span class="co">##                                                           OPC   Stem cells</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_125137 0.0190000 0.2753873935</span></span>
+<span><span class="co">## Xenium_V1_FF_Mouse_Brain_MultiSection_1_outs_5000   0.2204696 0.0007978026</span></span></code></pre>
 <p>We plot randomly plot 50 cells to see the output of neighborhood
 scanning using plotHoodMat. In this plot, each value represent the
 probability of the each cell (each row) located in each cell type
 neighborhood. The rowSums of the probability maxtrix will always be
 1.</p>
-<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hoods</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">rownames_to_column</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"cell"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -1928,15 +2007,18 @@ neighborhood. The rowSums of the probability maxtrix will always be
 <span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">column_to_rownames</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"cell"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://davislaboratory.github.io/hoodscanR/reference/plotHoodMat.html" class="external-link">plotHoodMat</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Session_3_imaging_assays_files/figure-html/unnamed-chunk-46-1.png" class="r-plt" alt="" width="576"></p>
+<p><img src="Session_3_imaging_assays_files/figure-html/unnamed-chunk-50-1.png" class="r-plt" alt="" width="576"></p>
 <p>We can then merge the neighborhood results with the
 <code>SpatialExperiment</code> object using <code>mergeHoodSpe</code> so
 that we can conduct more neighborhood-related analysis.</p>
-<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tx_spe_sample_1</span> <span class="op">=</span>  <span class="va">tx_spe_sample_1</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://davislaboratory.github.io/hoodscanR/reference/mergeHoodSpe.html" class="external-link">mergeHoodSpe</a></span><span class="op">(</span><span class="va">hoods</span><span class="op">)</span></span>
 <span></span>
+<span><span class="va">tx_spe_sample_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://davislaboratory.github.io/hoodscanR/reference/calcMetrics.html" class="external-link">calcMetrics</a></span><span class="op">(</span><span class="va">tx_spe_sample_1</span>, pm_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">hoods</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Entropy and perplexity statistics are added to the object</span></span>
 <span><span class="va">tx_spe_sample_1</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A SpatialExperiment-tibble abstraction: 31,938 × 40</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A SpatialExperiment-tibble abstraction: 31,938 × 27</span></span></span>
 <span><span class="co">## <span style="color: #949494;"># </span><span style="color: #555555;">Features = 541 | Cells = 31938 | Assays = counts, logcounts</span></span></span>
 <span><span class="co">##    .cell       sample_id cell_id transcript_id    qv region in_tissue sizeFactor</span></span>
 <span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
@@ -1951,31 +2033,40 @@ that we can conduct more neighborhood-related analysis.</p>
 <span><span class="co">## <span style="color: #BCBCBC;"> 9</span> Xenium_V1_… 1         125886        2.82<span style="color: #949494;">e</span>14  32.6 SSp-b… TRUE           0.228</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">10</span> Xenium_V1_… 1         30417         2.82<span style="color: #949494;">e</span>14  34.5 int    TRUE           0.868</span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 31,928 more rows</span></span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 32 more variables: clusters &lt;chr&gt;, X1 &lt;dbl&gt;, X10 &lt;dbl&gt;, X11 &lt;dbl&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   X12 &lt;dbl&gt;, X13 &lt;dbl&gt;, X14 &lt;dbl&gt;, X15 &lt;dbl&gt;, X16 &lt;dbl&gt;, X17 &lt;dbl&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   X18 &lt;dbl&gt;, X19 &lt;dbl&gt;, X2 &lt;dbl&gt;, X20 &lt;dbl&gt;, X21 &lt;dbl&gt;, X22 &lt;dbl&gt;, X3 &lt;dbl&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   X4 &lt;dbl&gt;, X5 &lt;dbl&gt;, X6 &lt;dbl&gt;, X7 &lt;dbl&gt;, X8 &lt;dbl&gt;, X9 &lt;dbl&gt;, x &lt;dbl&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   y &lt;dbl&gt;, PC1 &lt;dbl&gt;, PC2 &lt;dbl&gt;, PC3 &lt;dbl&gt;, PC4 &lt;dbl&gt;, PC5 &lt;dbl&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   UMAP1 &lt;dbl&gt;, UMAP2 &lt;dbl&gt;</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #949494;"># ℹ 19 more variables: my_clusters &lt;chr&gt;, cell_type &lt;chr&gt;, Astrocytes &lt;dbl&gt;,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   GABAergic.neurons &lt;dbl&gt;, Microglia &lt;dbl&gt;, Neurons &lt;dbl&gt;, OPC &lt;dbl&gt;,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   Stem.cells &lt;dbl&gt;, entropy &lt;dbl&gt;, perplexity &lt;dbl&gt;, x &lt;dbl&gt;, y &lt;dbl&gt;,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   PC1 &lt;dbl&gt;, PC2 &lt;dbl&gt;, PC3 &lt;dbl&gt;, PC4 &lt;dbl&gt;, PC5 &lt;dbl&gt;, UMAP1 &lt;dbl&gt;,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   UMAP2 &lt;dbl&gt;</span></span></span></code></pre>
+<p>Perplexity of 1 means the cell is located in a very distinct
+neighborhood, perplexity of 2 means the cell is located in a mixed
+neighborhood, and the probability is about 50% to 50%.</p>
+<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://davislaboratory.github.io/hoodscanR/reference/plotTissue.html" class="external-link">plotTissue</a></span><span class="op">(</span><span class="va">tx_spe_sample_1</span>, size <span class="op">=</span> <span class="fl">0.5</span>, color <span class="op">=</span> <span class="va">perplexity</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/scico/man/ggplot2-scales.html" class="external-link">scale_color_scico</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"tokyo"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Session_3_imaging_assays_files/figure-html/unnamed-chunk-52-1.png" class="r-plt" alt="" width="700">
+k-means algorithm based on neighbour composition</p>
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tx_spe_sample_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://davislaboratory.github.io/hoodscanR/reference/clustByHood.html" class="external-link">clustByHood</a></span><span class="op">(</span><span class="va">tx_spe_sample_1</span>, pm_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">hoods</span><span class="op">)</span>, k <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Warning: Quick-TRANSfer stage steps exceeded maximum (= 1596900)</span></span></code></pre>
 <p>We can see what are the neighborhood distributions look like in each
-cluster using <code>plotProbDist</code>. Here we only plot 10
-clusters</p>
-<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
+cluster using <code>plotProbDist</code>.</p>
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tx_spe_sample_1</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://davislaboratory.github.io/hoodscanR/reference/plotProbDist.html" class="external-link">plotProbDist</a></span><span class="op">(</span></span>
 <span>    pm_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">hoods</span><span class="op">)</span>,</span>
 <span>    by_cluster <span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>    plot_all <span class="op">=</span> <span class="cn">TRUE</span>, </span>
-<span>    show_clusters <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
+<span>    show_clusters <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">99</span><span class="op">)</span><span class="op">)</span></span>
 <span>    <span class="op">)</span></span></code></pre></div>
-<p><img src="Session_3_imaging_assays_files/figure-html/unnamed-chunk-48-1.png" class="r-plt" alt="" width="960"></p>
+<p><img src="Session_3_imaging_assays_files/figure-html/unnamed-chunk-54-1.png" class="r-plt" alt="" width="960"></p>
 <p>The clusters can then be plot on the tissue using
 <code>plotissue</code></p>
-<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tx_spe_sample_1</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://davislaboratory.github.io/hoodscanR/reference/plotTissue.html" class="external-link">plotTissue</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">clusters</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Session_3_imaging_assays_files/figure-html/unnamed-chunk-49-1.png" class="r-plt" alt="" width="672"></p>
+<p><img src="Session_3_imaging_assays_files/figure-html/unnamed-chunk-55-1.png" class="r-plt" alt="" width="672"></p>
 <p><strong>Session Information</strong></p>
-<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## R version 4.6.0 (2026-04-24)</span></span>
 <span><span class="co">## Platform: x86_64-pc-linux-gnu</span></span>
@@ -2001,74 +2092,82 @@ clusters</p>
 <span><span class="co">## [8] base     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## other attached packages:</span></span>
-<span><span class="co">##  [1] MoleculeExperiment_1.13.0       scico_1.5.0                    </span></span>
-<span><span class="co">##  [3] hoodscanR_1.11.0                tidySpatialExperiment_1.9.0    </span></span>
-<span><span class="co">##  [5] SpatialExperiment_1.23.0        tidySummarizedExperiment_1.23.0</span></span>
-<span><span class="co">##  [7] tidySingleCellExperiment_1.23.0 ttservice_0.5.3                </span></span>
-<span><span class="co">##  [9] SubcellularSpatialData_1.9.0    ExperimentHub_3.3.0            </span></span>
-<span><span class="co">## [11] AnnotationHub_4.1.0             BiocFileCache_3.3.0            </span></span>
-<span><span class="co">## [13] dbplyr_2.5.2                    scran_1.41.0                   </span></span>
-<span><span class="co">## [15] scater_1.41.1                   scuttle_1.23.0                 </span></span>
-<span><span class="co">## [17] SingleCellExperiment_1.35.1     SummarizedExperiment_1.43.0    </span></span>
-<span><span class="co">## [19] Biobase_2.73.1                  GenomicRanges_1.65.0           </span></span>
-<span><span class="co">## [21] Seqinfo_1.3.0                   IRanges_2.47.1                 </span></span>
-<span><span class="co">## [23] S4Vectors_0.51.2                BiocGenerics_0.59.2            </span></span>
-<span><span class="co">## [25] generics_0.1.4                  MatrixGenerics_1.25.0          </span></span>
-<span><span class="co">## [27] matrixStats_1.5.0               RColorBrewer_1.1-3             </span></span>
-<span><span class="co">## [29] ggspavis_1.19.0                 dittoSeq_1.25.0                </span></span>
-<span><span class="co">## [31] colorspace_2.1-2                tibble_3.3.1                   </span></span>
-<span><span class="co">## [33] forcats_1.0.1                   stringr_1.6.0                  </span></span>
-<span><span class="co">## [35] glue_1.8.1                      purrr_1.2.2                    </span></span>
-<span><span class="co">## [37] tidyr_1.3.2                     dplyr_1.2.1                    </span></span>
-<span><span class="co">## [39] plotly_4.12.0                   ggplot2_4.0.3                  </span></span>
-<span><span class="co">## [41] here_1.0.2                     </span></span>
+<span><span class="co">##  [1] scRNAseq_2.27.0                 MoleculeExperiment_1.13.0      </span></span>
+<span><span class="co">##  [3] SingleR_2.15.0                  scico_1.5.0                    </span></span>
+<span><span class="co">##  [5] hoodscanR_1.11.0                tidySpatialExperiment_1.9.0    </span></span>
+<span><span class="co">##  [7] SpatialExperiment_1.23.0        tidySummarizedExperiment_1.23.0</span></span>
+<span><span class="co">##  [9] tidySingleCellExperiment_1.23.0 ttservice_0.5.3                </span></span>
+<span><span class="co">## [11] scran_1.41.0                    scater_1.41.1                  </span></span>
+<span><span class="co">## [13] scuttle_1.23.1                  SingleCellExperiment_1.35.1    </span></span>
+<span><span class="co">## [15] SummarizedExperiment_1.43.0     Biobase_2.73.1                 </span></span>
+<span><span class="co">## [17] GenomicRanges_1.65.0            Seqinfo_1.3.0                  </span></span>
+<span><span class="co">## [19] IRanges_2.47.1                  S4Vectors_0.51.2               </span></span>
+<span><span class="co">## [21] BiocGenerics_0.59.2             generics_0.1.4                 </span></span>
+<span><span class="co">## [23] MatrixGenerics_1.25.0           matrixStats_1.5.0              </span></span>
+<span><span class="co">## [25] RColorBrewer_1.1-3              ggspavis_1.19.0                </span></span>
+<span><span class="co">## [27] dittoSeq_1.25.0                 colorspace_2.1-2               </span></span>
+<span><span class="co">## [29] tibble_3.3.1                    forcats_1.0.1                  </span></span>
+<span><span class="co">## [31] stringr_1.6.0                   glue_1.8.1                     </span></span>
+<span><span class="co">## [33] purrr_1.2.2                     tidyr_1.3.2                    </span></span>
+<span><span class="co">## [35] dplyr_1.2.1                     plotly_4.12.0                  </span></span>
+<span><span class="co">## [37] ggplot2_4.0.3                  </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
-<span><span class="co">##   [1] RcppAnnoy_0.0.23         splines_4.6.0            later_1.4.8             </span></span>
-<span><span class="co">##   [4] bitops_1.0-9             filelock_1.0.3           lifecycle_1.0.5         </span></span>
-<span><span class="co">##   [7] httr2_1.2.2              doParallel_1.0.17        edgeR_4.11.0            </span></span>
-<span><span class="co">##  [10] rprojroot_2.1.1          lattice_0.22-9           magrittr_2.0.5          </span></span>
-<span><span class="co">##  [13] limma_3.69.0             sass_0.4.10              rmarkdown_2.31          </span></span>
-<span><span class="co">##  [16] jquerylib_0.1.4          yaml_2.3.12              metapod_1.21.0          </span></span>
-<span><span class="co">##  [19] httpuv_1.6.17            otel_0.2.0               ggside_0.4.1            </span></span>
-<span><span class="co">##  [22] cowplot_1.2.0            DBI_1.3.0                abind_1.4-8             </span></span>
-<span><span class="co">##  [25] RCurl_1.98-1.18          rappdirs_0.3.4           circlize_0.4.18         </span></span>
-<span><span class="co">##  [28] ggrepel_0.9.8            irlba_2.3.7              terra_1.9-27            </span></span>
-<span><span class="co">##  [31] pheatmap_1.0.13          RSpectra_0.16-2          dqrng_0.4.1             </span></span>
-<span><span class="co">##  [34] pkgdown_2.2.0            codetools_0.2-20         DelayedArray_0.39.2     </span></span>
-<span><span class="co">##  [37] shape_1.4.6.1            tidyselect_1.2.1         farver_2.1.2            </span></span>
-<span><span class="co">##  [40] ScaledMatrix_1.21.0      viridis_0.6.5            jsonlite_2.0.0          </span></span>
-<span><span class="co">##  [43] GetoptLong_1.1.1         BiocNeighbors_2.7.2      ellipsis_0.3.3          </span></span>
-<span><span class="co">##  [46] iterators_1.0.14         ggridges_0.5.7           systemfonts_1.3.2       </span></span>
-<span><span class="co">##  [49] foreach_1.5.2            tools_4.6.0              ragg_1.5.2              </span></span>
-<span><span class="co">##  [52] Rcpp_1.1.1-1.1           gridExtra_2.3            SparseArray_1.13.2      </span></span>
-<span><span class="co">##  [55] xfun_0.57                mgcv_1.9-4               EBImage_4.55.0          </span></span>
-<span><span class="co">##  [58] withr_3.0.2              BiocManager_1.30.27      fastmap_1.2.0           </span></span>
-<span><span class="co">##  [61] bluster_1.23.0           fansi_1.0.7              digest_0.6.39           </span></span>
-<span><span class="co">##  [64] rsvd_1.0.5               R6_2.6.1                 mime_0.13               </span></span>
-<span><span class="co">##  [67] textshaping_1.0.5        Cairo_1.7-0              jpeg_0.1-11             </span></span>
-<span><span class="co">##  [70] RSQLite_3.52.0           utf8_1.2.6               data.table_1.18.4       </span></span>
-<span><span class="co">##  [73] httr_1.4.8               htmlwidgets_1.6.4        S4Arrays_1.13.0         </span></span>
-<span><span class="co">##  [76] uwot_0.2.4               pkgconfig_2.0.3          gtable_0.3.6            </span></span>
-<span><span class="co">##  [79] blob_1.3.0               ComplexHeatmap_2.29.0    S7_0.2.2                </span></span>
-<span><span class="co">##  [82] XVector_0.53.0           htmltools_0.5.9          fftwtools_0.9-11        </span></span>
-<span><span class="co">##  [85] clue_0.3-68              scales_1.4.0             png_0.1-9               </span></span>
-<span><span class="co">##  [88] knitr_1.51               rjson_0.2.23             nlme_3.1-169            </span></span>
-<span><span class="co">##  [91] curl_7.1.0               GlobalOptions_0.1.4      cachem_1.1.0            </span></span>
-<span><span class="co">##  [94] BiocVersion_3.24.0       parallel_4.6.0           vipor_0.4.7             </span></span>
-<span><span class="co">##  [97] AnnotationDbi_1.75.0     desc_1.4.3               pillar_1.11.1           </span></span>
-<span><span class="co">## [100] grid_4.6.0               vctrs_0.7.3              RANN_2.6.2              </span></span>
-<span><span class="co">## [103] promises_1.5.0           BiocSingular_1.29.0      beachmat_2.29.0         </span></span>
-<span><span class="co">## [106] xtable_1.8-8             cluster_2.1.8.2          beeswarm_0.4.0          </span></span>
-<span><span class="co">## [109] evaluate_1.0.5           magick_2.9.1             cli_3.6.6               </span></span>
-<span><span class="co">## [112] locfit_1.5-9.12          compiler_4.6.0           rlang_1.2.0             </span></span>
-<span><span class="co">## [115] crayon_1.5.3             labeling_0.4.3           fs_2.1.0                </span></span>
-<span><span class="co">## [118] ggbeeswarm_0.7.3         stringi_1.8.7            viridisLite_0.4.3       </span></span>
-<span><span class="co">## [121] BiocParallel_1.47.0      Biostrings_2.81.1        lazyeval_0.2.3          </span></span>
-<span><span class="co">## [124] tiff_0.1-12              Matrix_1.7-5             sparseMatrixStats_1.25.0</span></span>
-<span><span class="co">## [127] bit64_4.8.0              KEGGREST_1.53.0          statmod_1.5.2           </span></span>
-<span><span class="co">## [130] shiny_1.13.0             tidygate_1.0.19          igraph_2.3.1            </span></span>
-<span><span class="co">## [133] memoise_2.0.1            bslib_0.11.0             bit_4.6.0</span></span></code></pre>
+<span><span class="co">##   [1] fs_2.1.0                 ProtGenerics_1.45.0      bitops_1.0-9            </span></span>
+<span><span class="co">##   [4] EBImage_4.55.0           doParallel_1.0.17        httr_1.4.8              </span></span>
+<span><span class="co">##   [7] tools_4.6.0              alabaster.base_1.13.0    utf8_1.2.6              </span></span>
+<span><span class="co">##  [10] R6_2.6.1                 HDF5Array_1.41.0         lazyeval_0.2.3          </span></span>
+<span><span class="co">##  [13] uwot_0.2.4               mgcv_1.9-4               GetoptLong_1.1.1        </span></span>
+<span><span class="co">##  [16] rhdf5filters_1.25.0      withr_3.0.2              gridExtra_2.3           </span></span>
+<span><span class="co">##  [19] cli_3.6.6                textshaping_1.0.5        Cairo_1.7-0             </span></span>
+<span><span class="co">##  [22] alabaster.se_1.13.0      labeling_0.4.3           sass_0.4.10             </span></span>
+<span><span class="co">##  [25] S7_0.2.2                 ggridges_0.5.7           pkgdown_2.2.0           </span></span>
+<span><span class="co">##  [28] Rsamtools_2.29.0         systemfonts_1.3.2        limma_3.69.1            </span></span>
+<span><span class="co">##  [31] RSQLite_3.52.0           shape_1.4.6.1            BiocIO_1.23.3           </span></span>
+<span><span class="co">##  [34] scrapper_1.7.3           Matrix_1.7-5             ggbeeswarm_0.7.3        </span></span>
+<span><span class="co">##  [37] fansi_1.0.7              abind_1.4-8              terra_1.9-27            </span></span>
+<span><span class="co">##  [40] lifecycle_1.0.5          yaml_2.3.12              edgeR_4.11.0            </span></span>
+<span><span class="co">##  [43] tidygate_1.0.19          rhdf5_2.57.0             SparseArray_1.13.2      </span></span>
+<span><span class="co">##  [46] BiocFileCache_3.3.0      grid_4.6.0               blob_1.3.0              </span></span>
+<span><span class="co">##  [49] promises_1.5.0           dqrng_0.4.1              ExperimentHub_3.3.0     </span></span>
+<span><span class="co">##  [52] crayon_1.5.3             lattice_0.22-9           beachmat_2.29.0         </span></span>
+<span><span class="co">##  [55] cowplot_1.2.0            GenomicFeatures_1.65.0   cigarillo_1.3.0         </span></span>
+<span><span class="co">##  [58] KEGGREST_1.53.0          magick_2.9.1             ComplexHeatmap_2.29.0   </span></span>
+<span><span class="co">##  [61] pillar_1.11.1            knitr_1.51               metapod_1.21.0          </span></span>
+<span><span class="co">##  [64] rjson_0.2.23             codetools_0.2-20         data.table_1.18.4       </span></span>
+<span><span class="co">##  [67] vctrs_0.7.3              png_0.1-9                gypsum_1.9.0            </span></span>
+<span><span class="co">##  [70] gtable_0.3.6             cachem_1.1.0             xfun_0.57               </span></span>
+<span><span class="co">##  [73] S4Arrays_1.13.0          mime_0.13                ggside_0.4.1            </span></span>
+<span><span class="co">##  [76] pheatmap_1.0.13          iterators_1.0.14         statmod_1.5.2           </span></span>
+<span><span class="co">##  [79] bluster_1.23.0           ellipsis_0.3.3           nlme_3.1-169            </span></span>
+<span><span class="co">##  [82] bit64_4.8.2              alabaster.ranges_1.13.0  filelock_1.0.3          </span></span>
+<span><span class="co">##  [85] RcppAnnoy_0.0.23         GenomeInfoDb_1.49.0      bslib_0.11.0            </span></span>
+<span><span class="co">##  [88] irlba_2.3.7              vipor_0.4.7              otel_0.2.0              </span></span>
+<span><span class="co">##  [91] DBI_1.3.0                tidyselect_1.2.1         bit_4.6.0               </span></span>
+<span><span class="co">##  [94] compiler_4.6.0           curl_7.1.0               httr2_1.2.2             </span></span>
+<span><span class="co">##  [97] BiocNeighbors_2.7.2      h5mread_1.5.0            desc_1.4.3              </span></span>
+<span><span class="co">## [100] DelayedArray_0.39.2      rtracklayer_1.73.0       scales_1.4.0            </span></span>
+<span><span class="co">## [103] rappdirs_0.3.4           tiff_0.1-12              digest_0.6.39           </span></span>
+<span><span class="co">## [106] fftwtools_0.9-11         alabaster.matrix_1.13.0  rmarkdown_2.31          </span></span>
+<span><span class="co">## [109] XVector_0.53.0           htmltools_0.5.9          pkgconfig_2.0.3         </span></span>
+<span><span class="co">## [112] jpeg_0.1-11              sparseMatrixStats_1.25.0 dbplyr_2.5.2            </span></span>
+<span><span class="co">## [115] fastmap_1.2.0            ensembldb_2.37.0         GlobalOptions_0.1.4     </span></span>
+<span><span class="co">## [118] rlang_1.2.0              htmlwidgets_1.6.4        UCSC.utils_1.9.0        </span></span>
+<span><span class="co">## [121] shiny_1.13.0             farver_2.1.2             jquerylib_0.1.4         </span></span>
+<span><span class="co">## [124] jsonlite_2.0.0           BiocParallel_1.47.0      BiocSingular_1.29.0     </span></span>
+<span><span class="co">## [127] RCurl_1.98-1.18          magrittr_2.0.5           Rhdf5lib_2.1.0          </span></span>
+<span><span class="co">## [130] Rcpp_1.1.1-1.1           viridis_0.6.5            stringi_1.8.7           </span></span>
+<span><span class="co">## [133] alabaster.schemas_1.13.0 AnnotationHub_4.3.0      parallel_4.6.0          </span></span>
+<span><span class="co">## [136] ggrepel_0.9.8            Biostrings_2.81.1        splines_4.6.0           </span></span>
+<span><span class="co">## [139] circlize_0.4.18          locfit_1.5-9.12          igraph_2.3.1            </span></span>
+<span><span class="co">## [142] ScaledMatrix_1.21.0      BiocVersion_3.24.0       XML_3.99-0.23           </span></span>
+<span><span class="co">## [145] evaluate_1.0.5           BiocManager_1.30.27      foreach_1.5.2           </span></span>
+<span><span class="co">## [148] httpuv_1.6.17            RANN_2.6.2               clue_0.3-68             </span></span>
+<span><span class="co">## [151] alabaster.sce_1.13.0     BiocBaseUtils_1.15.1     rsvd_1.0.5              </span></span>
+<span><span class="co">## [154] xtable_1.8-8             restfulr_0.0.16          AnnotationFilter_1.37.0 </span></span>
+<span><span class="co">## [157] RSpectra_0.16-2          later_1.4.8              viridisLite_0.4.3       </span></span>
+<span><span class="co">## [160] ragg_1.5.2               memoise_2.0.1            beeswarm_0.4.0          </span></span>
+<span><span class="co">## [163] AnnotationDbi_1.75.0     GenomicAlignments_1.49.0 cluster_2.1.8.2</span></span></code></pre>
 <p><strong>References</strong></p>
 <style type="text/css">
 .note {
