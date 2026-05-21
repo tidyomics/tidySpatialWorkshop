@@ -72,7 +72,9 @@ Suggests:
     DelayedArray,
     cellNexus,
     org.Hs.eg.db,
-    AnnotationDbi
+    AnnotationDbi,
+    h5mread,
+    tidyprint
 VignetteBuilder: knitr
 Remotes:
     MangiolaLaboratory/cellNexus

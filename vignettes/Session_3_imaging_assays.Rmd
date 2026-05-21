@@ -3,11 +3,7 @@ title: "Imaging assays (tidy)"
 author:
   - Stefano Mangiola, South Australian immunoGENomics Cancer Institute^[<mangiola.stefano@adelaide.edu.au>], Walter and Eliza Hall Institute^[<mangiola.s at wehi.edu.au>]
   - Malvika Kharbanda, South Australian immunoGENomics Cancer Institute^[<malvika.kharbanda@adelaide.edu.au>]
-output:
-  rmarkdown::html_document:
-    toc: true
-    toc_float: true
-    toc_depth: 3
+output: rmarkdown::html_vignette
 # bibliography: "`r file.path(system.file(package='tidySpatialWorkshop', 'vignettes'), 'tidyomics.bib')`"
 vignette: >
   %\VignetteIndexEntry{Imaging assays (tidy)}
@@ -20,8 +16,6 @@ editor_options:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, cache = FALSE)
-
-library(here)
 ```
 
 # Session 3 – Spatial analyses of imaging data
@@ -43,9 +37,7 @@ As amplification proceeds, each RNA-derived padlock probe generates a dense bund
 Following completion of the imaging sequence, sections can undergo immunofluorescence or standard haematoxylin & eosin staining without loss of register, enabling seamless integration of protein, RNA and anatomical data. The accompanying Xenium Explorer software performs automated cell segmentation—typically using DAPI-stained nuclei—and assigns each amplification dot to its host cell, yielding single-cell, spatially resolved gene expression matrices ready for downstream analysis.
 
 ```{r, echo=FALSE, out.width="700px"}
-library(here)
-
-knitr::include_graphics(here("inst/images/xenium.png"))
+knitr::include_graphics(system.file("images/xenium.png", package = "tidySpatialWorkshop"))
 ```
 
 ### CoxMx
@@ -55,9 +47,7 @@ The CosMx Single Molecular Imager, commercialised by NanoString, brings truly si
 CosMx is compatible with both fresh-frozen and formalin-fixed paraffin-embedded samples and can scan as much as 300 mm² of tissue by stitching together up to 384 fields of view. Beyond RNA, the same cyclic detection chemistry can be applied to barcoded antibodies for multiplexed protein measurement—in some panels up to 68 different targets in the same section. After imaging, the AtoMx software platform integrates DAPI or membrane-marker images to segment individual cells and assign each molecular dot to its host cell, yielding spatially resolved count matrices at single-cell, subcellular resolution.
 
 ```{r, echo=FALSE, out.width="700px"}
-library(here)
-
-knitr::include_graphics(here("inst/images/cosmx.png"))
+knitr::include_graphics(system.file("images/cosmx.png", package = "tidySpatialWorkshop"))
 ```
 
 ### MERFISH
@@ -69,9 +59,7 @@ Once the probes are hybridised, the MERSCOPE instrument carries out a series of 
 Following image acquisition, the built-in MERSCOPE Visualizer software aligns the hundreds of image stacks, decodes each fluorescent barcode into a specific RNA identity, and maps thousands of individual molecules back to their precise positions within cells. Researchers can then overlay the decoded RNA map with standard histology or immunofluorescence stains, revealing how gene expression patterns relate to tissue morphology.
 
 ```{r, echo=FALSE, out.width="700px"}
-library(here)
-
-knitr::include_graphics(here("inst/images/merfish.png"))
+knitr::include_graphics(system.file("images/merfish.png", package = "tidySpatialWorkshop"))
 ```
 
 
@@ -103,10 +91,6 @@ library(ggspavis)
 library(scuttle)
 library(scater)
 library(scran)
-
-# Data download
-library(ExperimentHub)
-library(SubcellularSpatialData)
 
 # Tidyomics
 library(tidySingleCellExperiment)

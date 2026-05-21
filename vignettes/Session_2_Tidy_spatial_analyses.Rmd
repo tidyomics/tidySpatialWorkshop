@@ -2,11 +2,7 @@
 title: "Tidy spatial analyses"
 author:
   - Stefano Mangiola, South Australian immunoGENomics Cancer Institute^[<mangiola.stefano@adelaide.edu.au>], Walter and Eliza Hall Institute^[<mangiola.s at wehi.edu.au>]
-output:
-  rmarkdown::html_document:
-    toc: true
-    toc_float: true
-    toc_depth: 3
+output: rmarkdown::html_vignette
 # bibliography: "`r file.path(system.file(package='tidySpatialWorkshop', 'vignettes'), 'tidyomics.bib')`"
 vignette: >
   %\VignetteIndexEntry{Tidy spatial analyses}
@@ -49,7 +45,7 @@ The ecosystem includes several specialized packages:
 `tidyomics` is presented in "The tidyomics ecosystem: Enhancing omic data analyses" [Hutchison and Keyes et al., 2025](https://www.biorxiv.org/content/10.1101/2023.09.10.557072v1)
 
 ```{r, echo=FALSE, out.width="700px"}
-knitr::include_graphics(here("inst/images/tidyomics.png"))
+knitr::include_graphics(system.file("images/tidyomics.png", package = "tidySpatialWorkshop"))
 ```
 
 [Slides](https://docs.google.com/gview?url=https://raw.githubusercontent.com/tidytranscriptomics-workshops/LoveMangiola2022_tidytranscriptomics/master/inst/LoveMangiola2022_tidytranscriptomics.pdf)
@@ -101,16 +97,30 @@ library(ExperimentHub)
 # https://support.bioconductor.org/p/9161859/#9161863
 setClassUnion("ExpData", c("matrix", "SummarizedExperiment"))
 
-spatial_data <- 
-  ExperimentHub::ExperimentHub() |> 
-  spatialLIBD::fetch_data( eh = _, type = "spe")
+spatial_data <- tryCatch({
+  ExperimentHub::ExperimentHub() |>
+    spatialLIBD::fetch_data(eh = _, type = "spe")
+}, error = function(e) {
+  message("ExperimentHub failed, using Zenodo fallback: ", conditionMessage(e))
+  options(timeout = max(300, getOption("timeout")))
+  tmp <- tempfile(fileext = ".rds")
+  utils::download.file(
+    "https://zenodo.org/records/11233385/files/tidySpatialWorkshop2024_spatial_data.rds",
+    destfile = tmp,
+    mode = "wb"
+  )
+  readRDS(tmp)
+})
 
 # Clear the reductions
-reducedDims(spatial_data) = NULL 
+reducedDims(spatial_data) = NULL
 
 # Make cell ID unique
-colnames(spatial_data)  = paste0(colnames(spatial_data), colData(spatial_data)$sample_id)
+colnames(spatial_data) = paste0(colnames(spatial_data), colData(spatial_data)$sample_id)
 rownames(spatialCoords(spatial_data)) = colnames(spatial_data) # Bug?
+
+# Add log-normalised counts for join_features and downstream analyses
+spatial_data = scuttle::logNormCounts(spatial_data)
 
 # Display the object
 spatial_data
@@ -405,7 +415,7 @@ spatial_data_gated |>
 
 
 ```{r, echo=FALSE, out.width="300px"}
-knitr::include_graphics(here("inst/images/tidySPE_gate.png"))
+knitr::include_graphics(system.file("images/tidySPE_gate.png", package = "tidySpatialWorkshop"))
 ```
 
 We can also filter, for further analyses
@@ -912,11 +922,11 @@ Harmonised data is stored in the ARDC Nectar Research Cloud, and most cellNexus 
 Mangiola et al., 2025 doi [doi.org/10.1101/2023.06.08.542671](https://www.biorxiv.org/content/10.1101/2023.06.08.542671v3)
 
 ```{r, echo=FALSE, out.width="700px"}
-knitr::include_graphics(here("inst/images/cellNexus.png"))
+knitr::include_graphics(system.file("images/cellNexus.png", package = "tidySpatialWorkshop"))
 ```
 
 
-```{r, message=FALSE, warning=FALSE,  fig.width=3, fig.height=3}
+```{r, eval=FALSE, message=FALSE, warning=FALSE,  fig.width=3, fig.height=3}
 # Get reference
 library(cellNexus)
 library(HDF5Array)
@@ -970,7 +980,7 @@ brain_reference = HDF5Array::loadHDF5SummarizedExperiment(tmp_file_path)
 
 These are the cell types included in our reference, and the number of pseudobulk samples we have for each cell type.
 
-```{r, eval = TRUE}
+```{r, eval = FALSE}
 
 table(brain_reference$cell_type_unified_ensemble)
 
@@ -978,14 +988,14 @@ table(brain_reference$cell_type_unified_ensemble)
 
 These are the number of samples we have for each of the three data sets.
 
-```{r, eval = TRUE}
+```{r, eval = FALSE}
 
 table(brain_reference$dataset_id)
 ```
 
 The `collection_id` can be used to gather information on the cell database. e.g. <https://cellxgene.cziscience.com/collections/><collection_id>
 
-```{r, eval = TRUE}
+```{r, eval = FALSE}
 table(brain_reference$collection_id)
 ```
 
@@ -993,7 +1003,7 @@ table(brain_reference$collection_id)
 
 Once the cellNexus pseudobulk reference has been collected and normalised, we can use it as the single-cell-derived reference for `SPOTlight`. This mirrors the Session 1 workflow, but keeps the spatial data manipulation in the tidyomics style: we prepare the `SpatialExperiment`, identify marker genes from the reference, run deconvolution, and join the estimated cell type proportions back to the tidy spatial object.
 
-```{r, eval = TRUE, message=FALSE, warning=FALSE}
+```{r, eval = FALSE, message=FALSE, warning=FALSE}
 library(SPOTlight)
 
 spatial_data_deconv =
@@ -1012,7 +1022,7 @@ spatial_data_deconv =
 
 We first identify marker genes in the cellNexus reference. `scran::scoreMarkers()` returns one table per reference cell type; we turn that list into one tidy marker table and keep high-AUC markers.
 
-```{r add-gene-symbol}
+```{r add-gene-symbol, eval=FALSE}
 # BiocManager::install(c("org.Hs.eg.db", "AnnotationDbi"))
 
 library(org.Hs.eg.db)
@@ -1033,7 +1043,7 @@ detach("package:org.Hs.eg.db", unload = TRUE)
 detach("package:AnnotationDbi", unload = TRUE)
 ```
 
-```{r, eval = TRUE, message=FALSE, warning=FALSE}
+```{r, eval = FALSE, message=FALSE, warning=FALSE}
 
 marker_gene_universe =
   grep("(^MT-)|(^mt-)|(\\.)|(-)", rownames(brain_reference), value = TRUE, invert = TRUE) |>
@@ -1066,7 +1076,7 @@ mgs_df |>
 
 Now we deconvolve the spatial spots/pixels. `res$mat` contains one row per spatial observation and one column per reference cell type.
 
-```{r, eval = TRUE, message=FALSE, warning=FALSE}
+```{r, eval = FALSE, message=FALSE, warning=FALSE}
 res =
   SPOTlight(
     x = brain_reference |> assay("logcounts"),
@@ -1089,7 +1099,7 @@ colData(spatial_data_deconv) =
 
 Finally, we visualise the inferred proportions in tissue space. Here we select the most abundant inferred cell types for a compact overview, but the same pattern can be used for any cell type column in `res$mat`.
 
-```{r, eval = TRUE, fig.width=9, fig.height=8}
+```{r, eval = FALSE, fig.width=9, fig.height=8}
 cell_types_to_plot =
   res$mat |>
   colMeans() |>

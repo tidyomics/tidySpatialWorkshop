@@ -6,6 +6,6 @@ COPY --chown=rstudio:rstudio . /home/rstudio/
 
 RUN Rscript -e "if (!requireNamespace('BiocManager', quietly = TRUE)) install.packages('BiocManager'); BiocManager::install(version = 'devel', ask = FALSE)"
 
-RUN Rscript -e "if (!requireNamespace('remotes', quietly = TRUE)) install.packages('remotes'); options(repos = BiocManager::repositories()); BiocManager::install(c('scater', 'nnSVG', 'BiocStyle', 'BiocVersion', 'org.Hs.eg.db', 'AnnotationDbi'), ask = FALSE); remotes::install_github('MangiolaLaboratory/cellNexus', build_vignettes = FALSE, upgrade = 'never')"
+RUN Rscript -e "if (!requireNamespace('remotes', quietly = TRUE)) install.packages('remotes'); options(repos = BiocManager::repositories()); BiocManager::install(c('scater', 'nnSVG', 'BiocStyle', 'BiocVersion', 'org.Hs.eg.db', 'AnnotationDbi', 'h5mread', 'tidyprint', 'here'), ask = FALSE); remotes::install_github('MangiolaLaboratory/cellNexus', build_vignettes = FALSE, upgrade = 'never')"
 
-RUN Rscript -e "options(repos = BiocManager::repositories()); devtools::install('.', dependencies = TRUE, build_vignettes = TRUE, upgrade = FALSE)"
+RUN Rscript -e "options(repos = BiocManager::repositories()); devtools::install('.', dependencies = TRUE, build_vignettes = FALSE, upgrade = FALSE)"
