@@ -27,30 +27,16 @@ jobs:
           r: auto
           cont: ghcr.io/bioconductor/bioconductor_docker:devel
           rspm: ~
-        - os: macOS-latest
-          bioc: devel
-          r: auto
-          cont: ~
-          rspm: ~
-        - os: windows-latest
-          bioc: devel
-          r: auto
-          cont: ~
-          rspm: ~
     steps:
-    - uses: grimbough/bioc-actions/setup-bioc@v1
-      if: runner.os != 'Linux'
-      with:
-        bioc-version: ${{ matrix.config.bioc }}
     - name: Install vignette dependencies
-      if: runner.os != 'Linux'
+      if: runner.os == 'Linux'
       shell: Rscript {0}
       run: |
         options(repos = BiocManager::repositories())
         BiocManager::install(
           c(
             "org.Hs.eg.db", "AnnotationDbi", "BiocStyle", "BiocVersion",
-            "h5mread", "tidyprint", "here"
+            "h5mread", "tidyprint", "here", "scrapper"
           ),
           ask = FALSE,
           update = FALSE
